@@ -2596,9 +2596,8 @@
 <p><strong>Basis encoding</strong> is the most direct and simplest technique for mapping classical binary data onto a quantum state. It establishes a one-to-one correspondence between the classical bit string and the computational basis states of a quantum register.</p>
 <div class="admonition tip">
 <p class="admonition-title">Simplicity at a Cost</p>
+<p>Basis encoding is the quantum equivalent of one-hot encoding—straightforward to implement but informationally sparse. It's ideal for representing discrete labels or indices, not continuous numerical features [3].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Basis encoding is the quantum equivalent of one-hot encoding—straightforward to implement but informationally sparse. It&#39;s ideal for representing discrete labels or indices, not continuous numerical features [3].
-</span></code></pre></div>
 <h3 id="mathematical-formulation-and-mechanism"><strong>Mathematical Formulation and Mechanism</strong></h3>
 <hr />
 <p>Basis encoding represents a classical binary vector by directly translating each bit into the corresponding state of a qubit.</p>
@@ -2613,29 +2612,25 @@
 <p>To represent <span class="arithmatex">\(N\)</span> distinct classical values (e.g., indices or categorical labels), this method requires the minimum number of qubits, <span class="arithmatex">\(n = \log_2(N)\)</span>.</p>
 <div class="admonition example">
 <p class="admonition-title">Basis Encoding in Action</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Encoding the 3-bit string `101` requires three qubits, resulting in the state $|101\rangle$. This state has an amplitude of 1 for the index $5$ ($|101\rangle$) and 0 for all other indices.
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Circuit implementation:
-</span></code></pre></div>
+<p>Encoding the 3-bit string <code>101</code> requires three qubits, resulting in the state <span class="arithmatex">\(|101\rangle\)</span>. This state has an amplitude of 1 for the index <span class="arithmatex">\(5\)</span> (<span class="arithmatex">\(|101\rangle\)</span>) and 0 for all other indices.</p>
+<p>Circuit implementation:
 |0⟩ ──X──  → |1⟩
 |0⟩ ─────  → |0⟩<br />
 |0⟩ ──X──  → |1⟩
-Result: |101⟩
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>
-</span></code></pre></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Basis_Encoding</span><span class="p">(</span><span class="n">binary_string</span><span class="p">):</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Initialize n-qubit register to |0⟩⊗ⁿ</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="c1"># Apply X gate where bit is 1</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">if</span> <span class="n">binary_string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">Apply_X</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="c1"># Result: |b₀b₁...bₙ₋₁⟩</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="k">return</span> <span class="n">qubits</span>
-</span></code></pre></div></p>
+Result: |101⟩</p>
+<p>```python
+Basis_Encoding(binary_string):
+    # Initialize n-qubit register to |0⟩⊗ⁿ
+    qubits = Initialize_Register(n)</p>
+<div class="language-text highlight"><pre><span></span><code># Apply X gate where bit is 1
+for i in range(n):
+    if binary_string[i] == &#39;1&#39;:
+        Apply_X(qubits[i])
+
+# Result: |b₀b₁...bₙ₋₁⟩
+return qubits
+</code></pre></div>
+</div>
 <hr />
 <h3 id="advantages-and-suitability"><strong>Advantages and Suitability</strong></h3>
 <hr />
@@ -2653,17 +2648,17 @@ Result: |101⟩
 <p>When encoding the <strong>features</strong> of a dataset (rather than indices), basis encoding requires <strong>one qubit per feature bit</strong>. For high-dimensional datasets with many features, this linear scaling quickly exhausts the available qubits on current hardware.</p>
 <details class="question">
 <summary>When would you prefer basis encoding over amplitude encoding?</summary>
+<p>Use basis encoding when your data represents discrete categories or indices (e.g., classifying images into 10 categories requires only 4 qubits: <span class="arithmatex">\(\log_2(10) \approx 4\)</span>), when you need extremely shallow circuits, or when the numerical magnitude relationships between values are irrelevant to your algorithm.</p>
 </details>
-<h2 id="use-basis-encoding-when-your-data-represents-discrete-categories-or-indices-eg-classifying-images-into-10-categories-requires-only-4-qubits-log_210-approx-4-when-you-need-extremely-shallow-circuits-or-when-the-numerical-magnitude-relationships-between-values-are-irrelevant-to-your-algorithm"><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Use basis encoding when your data represents discrete categories or indices (e.g., classifying images into 10 categories requires only 4 qubits: $\log_2(10) \approx 4$), when you need extremely shallow circuits, or when the numerical magnitude relationships between values are irrelevant to your algorithm.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="92-amplitude-encoding"><strong>9.2 Amplitude Encoding</strong></h2>
 <hr />
 <p><strong>Amplitude encoding</strong> is the most <strong>compact</strong> method for mapping classical data onto a quantum state. It achieves an exponential level of data compression by storing classical values in the <strong>probability amplitudes</strong> of the quantum state vector.</p>
 <div class="admonition tip">
 <p class="admonition-title">Exponential Compression</p>
+<p>Amplitude encoding is the holy grail of quantum data compression: <span class="arithmatex">\(n\)</span> qubits can store <span class="arithmatex">\(2^n\)</span> classical values. But like all holy grails, it's incredibly difficult to obtain—the state preparation problem is the bottleneck [4].</p>
 </div>
-<h2 id="amplitude-encoding-is-the-holy-grail-of-quantum-data-compression-n-qubits-can-store-2n-classical-values-but-like-all-holy-grails-its-incredibly-difficult-to-obtainthe-state-preparation-problem-is-the-bottleneck-4"><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Amplitude encoding is the holy grail of quantum data compression: $n$ qubits can store $2^n$ classical values. But like all holy grails, it&#39;s incredibly difficult to obtain—the state preparation problem is the bottleneck [4].
-</span></code></pre></div></h2>
+<hr />
 <h3 id="mathematical-formulation-and-mechanism_1"><strong>Mathematical Formulation and Mechanism</strong></h3>
 <hr />
 <p>Basis encoding represents a classical binary vector by directly translating each bit into the corresponding state of a qubit.</p>
@@ -2697,9 +2692,8 @@ Result: |101⟩
 <p><strong>Amplitude encoding</strong> is the most <strong>compact</strong> method for mapping classical data onto a quantum state. It achieves an exponential level of data compression by storing classical values in the <strong>probability amplitudes</strong> of the quantum state vector.</p>
 <div class="admonition tip">
 <p class="admonition-title">Exponential Compression</p>
+<p>Amplitude encoding is the holy grail of data compression—store <span class="arithmatex">\(2^{10} = 1024\)</span> values in just 10 qubits! But preparing this exponentially compressed state is the bottleneck that makes or breaks quantum advantage [3].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Amplitude encoding is the holy grail of data compression—store $2^{10} = 1024$ values in just 10 qubits! But preparing this exponentially compressed state is the bottleneck that makes or breaks quantum advantage [3].
-</span></code></pre></div>
 <h3 id="mathematical-formulation-and-compression"><strong>Mathematical Formulation and Compression</strong></h3>
 <hr />
 <p>Amplitude encoding stores a classical data vector <span class="arithmatex">\(\mathbf{x}\)</span> of dimension <span class="arithmatex">\(N\)</span> in a quantum state <span class="arithmatex">\(|\psi\rangle\)</span> using only <span class="arithmatex">\(n = \log_2(N)\)</span> qubits.</p>
@@ -2732,43 +2726,42 @@ Result: |101⟩
 <p>Amplitude encoding is most effective when the data has a specific, simple <strong>structure</strong> that allows the state to be prepared in polynomial (<span class="arithmatex">\(O(\text{poly}(n))\)</span>) time, or when the cost of subsequent quantum processing is so high that it justifies the exponential setup cost.</p>
 <div class="admonition example">
 <p class="admonition-title">The Bottleneck in Practice</p>
+<p>Consider encoding a 1024-dimensional vector (10 qubits):
+- <strong>Compression:</strong> 1024 classical values → 10 qubits (exponential compression!)
+- <strong>Preparation cost:</strong> <span class="arithmatex">\(O(2^{10}) = 1024\)</span> quantum gates for arbitrary data
+- <strong>Subsequent algorithm:</strong> HHL solves linear system in <span class="arithmatex">\(O(100)\)</span> gates
+- <strong>Net result:</strong> Total cost dominated by 1024-gate preparation, not 100-gate algorithm</p>
+<p>The quantum speedup is negated unless data has structure enabling <span class="arithmatex">\(O(\text{poly}(10))\)</span> preparation.</p>
 </div>
-<h2 id="consider-encoding-a-1024-dimensional-vector-10-qubits-compression-1024-classical-values-10-qubits-exponential-compression-preparation-cost-o210-1024-quantum-gates-for-arbitrary-data-subsequent-algorithm-hhl-solves-linear-system-in-o100-gates-net-result-total-cost-dominated-by-1024-gate-preparation-not-100-gate-algorithm-the-quantum-speedup-is-negated-unless-data-has-structure-enabling-otextpoly10-preparation"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Consider encoding a 1024-dimensional vector (10 qubits):
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>- **Compression:** 1024 classical values → 10 qubits (exponential compression!)
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>- **Preparation cost:** $O(2^{10}) = 1024$ quantum gates for arbitrary data
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>- **Subsequent algorithm:** HHL solves linear system in $O(100)$ gates
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>- **Net result:** Total cost dominated by 1024-gate preparation, not 100-gate algorithm
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>The quantum speedup is negated unless data has structure enabling $O(\text{poly}(10))$ preparation.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="challenges"><strong>Challenges</strong></h3>
 <hr />
 <p><strong>Noise Sensitivity</strong></p>
 <p>Amplitude-encoded states are highly sensitive to noise, as small errors in the complex amplitudes can significantly impact the encoded data and final results.</p>
 <p><strong>Readout Problem</strong></p>
 <p>Retrieving all <span class="arithmatex">\(N\)</span> data points <span class="arithmatex">\((x_0, \ldots, x_{N-1})\)</span> from the quantum state <span class="arithmatex">\(|\psi\rangle\)</span> requires quantum tomography, which scales exponentially and negates the speedup. QML algorithms must be designed to extract only the final, required <strong>result</strong> (e.g., a classification label or an expectation value), not the raw data itself.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Amplitude_Encoding_Structured</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">structure_type</span><span class="p">):</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="c1"># For structured data that enables efficient preparation</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">log</span><span class="err">₂</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">if</span> <span class="n">structure_type</span> <span class="o">==</span> <span class="s2">&quot;uniform&quot;</span><span class="p">:</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="c1"># Uniform superposition: O(n) Hadamard gates</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>            <span class="n">Apply_H</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="k">elif</span> <span class="n">structure_type</span> <span class="o">==</span> <span class="s2">&quot;sparse&quot;</span><span class="p">:</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="c1"># Sparse data: only encode non-zero entries</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>            <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>                <span class="n">Prepare_Basis_State</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>                <span class="n">Apply_Amplitude_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
-</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Arbitrary data - expensive!</span>
-</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>        <span class="c1"># Requires O(2^n) complexity</span>
-</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>        <span class="n">Apply_Arbitrary_State_Preparation</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
-</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>    <span class="k">return</span> <span class="n">qubits</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Amplitude_Encoding_Structured</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">structure_type</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># For structured data that enables efficient preparation</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">log</span><span class="err">₂</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">if</span> <span class="n">structure_type</span> <span class="o">==</span> <span class="s2">&quot;uniform&quot;</span><span class="p">:</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="c1"># Uniform superposition: O(n) Hadamard gates</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="n">Apply_H</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">elif</span> <span class="n">structure_type</span> <span class="o">==</span> <span class="s2">&quot;sparse&quot;</span><span class="p">:</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="c1"># Sparse data: only encode non-zero entries</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                <span class="n">Prepare_Basis_State</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                <span class="n">Apply_Amplitude_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Arbitrary data - expensive!</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="c1"># Requires O(2^n) complexity</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="n">Apply_Arbitrary_State_Preparation</span><span class="p">(</span><span class="n">qubits</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">return</span> <span class="n">qubits</span>
 </span></code></pre></div>
 <p>Amplitude encoding remains crucial because it underpins the potential for exponential speedups in algorithms like HHL (Harrow-Hassidim-Lloyd) and qPCA (Quantum Principal Component Analysis), but its use is constrained by the difficulty of state preparation on current NISQ hardware.</p>
 <hr />
@@ -2777,9 +2770,8 @@ Result: |101⟩
 <p><strong>Angle encoding</strong>, also known as <strong>parametric rotation encoding</strong>, is the simplest and most common method used in current <strong>Variational Quantum Circuits (VQCs)</strong>. It maps classical numerical features directly onto the <strong>rotation angle</strong> of a single-qubit gate.</p>
 <div class="admonition tip">
 <p class="admonition-title">NISQ-Era Workhorse</p>
+<p>Angle encoding sacrifices the exponential compression of amplitude encoding for shallow circuits that actually work on noisy quantum hardware. It's the pragmatic choice for variational quantum algorithms [5].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Angle encoding sacrifices the exponential compression of amplitude encoding for shallow circuits that actually work on noisy quantum hardware. It&#39;s the pragmatic choice for variational quantum algorithms [5].
-</span></code></pre></div>
 <h3 id="mathematical-formulation-and-mechanism_2"><strong>Mathematical Formulation and Mechanism</strong></h3>
 <hr />
 <p>Angle encoding represents a scalar feature <span class="arithmatex">\(x_i\)</span> by setting it proportional to the angle of a rotation gate, typically <span class="arithmatex">\(R_x(x_i)\)</span>, <span class="arithmatex">\(R_y(x_i)\)</span>, or <span class="arithmatex">\(R_z(x_i)\)</span>.</p>
@@ -2797,15 +2789,13 @@ Result: |101⟩
 \]</div>
 <div class="admonition example">
 <p class="admonition-title">Angle Encoding a 3D Feature Vector</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>For the feature vector $\vec{x} = (0.5, 1.2, 2.0)$:
-</span></code></pre></div>
-Qubit 0: |0⟩ ─ R_y(0.5) ─ → cos(0.25)|0⟩ + sin(0.25)|1⟩
+<p>For the feature vector <span class="arithmatex">\(\vec{x} = (0.5, 1.2, 2.0)\)</span>:</p>
+<p>Qubit 0: |0⟩ ─ R_y(0.5) ─ → cos(0.25)|0⟩ + sin(0.25)|1⟩
 Qubit 1: |0⟩ ─ R_y(1.2) ─ → cos(0.6)|0⟩ + sin(0.6)|1⟩
-Qubit 2: |0⟩ ─ R_y(2.0) ─ → cos(1.0)|0⟩ + sin(1.0)|1⟩
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Circuit depth: 1 (just rotation layer)
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Qubits required: 3 (one per feature)
-</span></code></pre></div></p>
+Qubit 2: |0⟩ ─ R_y(2.0) ─ → cos(1.0)|0⟩ + sin(1.0)|1⟩</p>
+<p>Circuit depth: 1 (just rotation layer)
+Qubits required: 3 (one per feature)</p>
+</div>
 <hr />
 <h3 id="advantages-and-trade-offs"><strong>Advantages and Trade-offs</strong></h3>
 <hr />
@@ -2822,44 +2812,42 @@ Qubit 2: |0⟩ ─ R_y(2.0) ─ → cos(1.0)|0⟩ + sin(1.0)|1⟩
 <p>The precision with which the feature <span class="arithmatex">\(x_i\)</span> is encoded is limited by the physical <strong>fidelity</strong> of the quantum gates on the hardware. High noise or gate infidelity can lead to errors in the encoded angle.</p>
 <p><strong>Feature Scaling</strong></p>
 <p>Classical data must be carefully <strong>normalized</strong> and scaled before being used as an angle to avoid exceeding the <span class="arithmatex">\(2\pi\)</span> range of the rotation, which would result in information loss.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">Angle_Encoding_VQC</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">):</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="c1"># x is D-dimensional feature vector</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="c1"># Layer 1: Initial angle encoding</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        <span class="c1"># Normalize feature to [0, 2π] range</span>
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="n">normalized_x</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">normalized_x</span><span class="p">)</span>
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="c1"># Additional variational layers with entanglement</span>
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
-</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        <span class="c1"># Entangling layer</span>
-</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
-</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>        <span class="c1"># Parametric rotation layer</span>
-</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
-</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">layer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>
-</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    <span class="k">return</span> <span class="n">qubits</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Angle_Encoding_VQC</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># x is D-dimensional feature vector</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="c1"># Layer 1: Initial angle encoding</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="c1"># Normalize feature to [0, 2π] range</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">normalized_x</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">normalized_x</span><span class="p">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="c1"># Additional variational layers with entanglement</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="c1"># Entangling layer</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="c1"># Parametric rotation layer</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">layer</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="k">return</span> <span class="n">qubits</span>
 </span></code></pre></div>
 <details class="question">
 <summary>Why use <span class="arithmatex">\(R_y\)</span> instead of <span class="arithmatex">\(R_x\)</span> or <span class="arithmatex">\(R_z\)</span> for angle encoding?</summary>
+<p><span class="arithmatex">\(R_y\)</span> rotations are preferred because they create superpositions of <span class="arithmatex">\(|0\rangle\)</span> and <span class="arithmatex">\(|1\rangle\)</span> with real-valued amplitudes, avoiding the phase complexities of <span class="arithmatex">\(R_z\)</span> and providing more direct geometric interpretability than <span class="arithmatex">\(R_x\)</span>. Additionally, <span class="arithmatex">\(R_y\)</span> naturally produces probability distributions that are smooth functions of the input angle.</p>
+<p>Angle encoding is often combined with two-qubit entangling gates (like CNOT) to form the basic layers of a parameterized VQC, enabling the subsequent creation of expressive <strong>Quantum Feature Maps</strong> (Section 9.5).</p>
 </details>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$R_y$ rotations are preferred because they create superpositions of $|0\rangle$ and $|1\rangle$ with real-valued amplitudes, avoiding the phase complexities of $R_z$ and providing more direct geometric interpretability than $R_x$. Additionally, $R_y$ naturally produces probability distributions that are smooth functions of the input angle.
-</span></code></pre></div>
-Angle encoding is often combined with two-qubit entangling gates (like CNOT) to form the basic layers of a parameterized VQC, enabling the subsequent creation of expressive <strong>Quantum Feature Maps</strong> (Section 9.5).</p>
 <hr />
 <h2 id="94-hamiltonian-encoding"><strong>9.4 Hamiltonian Encoding</strong></h2>
 <hr />
 <p><strong>Hamiltonian encoding</strong> (or dynamics encoding) embeds classical data not as an instantaneous state, but as a parameter within the system's <strong>evolution operator</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Physics-Inspired Encoding</p>
+<p>Hamiltonian encoding is the natural choice when your data describes a physical system or when you want to exploit the rich structure of quantum dynamics. It's quantum simulation meeting machine learning [6].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Hamiltonian encoding is the natural choice when your data describes a physical system or when you want to exploit the rich structure of quantum dynamics. It&#39;s quantum simulation meeting machine learning [6].
-</span></code></pre></div>
 <h3 id="mechanism-and-structural-encoding"><strong>Mechanism and Structural Encoding</strong></h3>
 <hr />
 <p>In Hamiltonian encoding, the classical data <span class="arithmatex">\(\vec{x} = (x_0, x_1, \ldots, x_{D-1})\)</span> is encoded into the parameters of a Hamiltonian <span class="arithmatex">\(H(\vec{x})\)</span>. The quantum state is then evolved under this Hamiltonian for a time <span class="arithmatex">\(t\)</span>, resulting in the unitary transformation:</p>
@@ -2890,32 +2878,32 @@ H(\vec{x}) = x_0 Z_0 + x_1 Z_1 + x_2 Z_2
 <p>The main drawback is the <strong>circuit depth</strong> required to accurately implement the time-evolution operator <span class="arithmatex">\(e^{-iHt}\)</span>. Even for simple Hamiltonians, Trotterization can require deep circuits, limiting its applicability on current NISQ devices.</p>
 <p><strong>Natural for Physical Data</strong></p>
 <p>This encoding method is ideal when the classical data describes a physical system (e.g., molecular structures, material properties) because the Hamiltonian <span class="arithmatex">\(H(\vec{x})\)</span> can directly represent the system's energy operator.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">Hamiltonian_Encoding</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">time_steps</span><span class="p">,</span> <span class="n">evolution_time</span><span class="p">):</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="c1"># x is D-dimensional feature vector</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="c1"># Construct data-dependent Hamiltonian H(x)</span>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="n">H</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
-</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>        <span class="c1"># Pauli-Z weighted by feature x[i]</span>
-</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>        <span class="n">H</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">Pauli_Z</span><span class="p">(</span><span class="n">qubit</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
-</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
-</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>    <span class="c1"># Time evolution via Trotterization</span>
-</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>    <span class="n">dt</span> <span class="o">=</span> <span class="n">evolution_time</span> <span class="o">/</span> <span class="n">time_steps</span>
-</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>
-</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_steps</span><span class="p">):</span>
-</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>        <span class="c1"># Apply exp(-i H dt) via Trotter decomposition</span>
-</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
-</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>            <span class="n">angle</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">dt</span>  <span class="c1"># Z rotation angle</span>
-</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>            <span class="n">Apply_R_z</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">angle</span><span class="p">)</span>
-</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>
-</span><span id="__span-15-21"><a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>        <span class="c1"># Optional: add entangling terms</span>
-</span><span id="__span-15-22"><a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-15-23"><a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>            <span class="c1"># Two-qubit interaction: X_i X_{i+1}</span>
-</span><span id="__span-15-24"><a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>            <span class="n">Apply_XX_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
-</span><span id="__span-15-25"><a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
-</span><span id="__span-15-26"><a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>    <span class="k">return</span> <span class="n">qubits</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Hamiltonian_Encoding</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">time_steps</span><span class="p">,</span> <span class="n">evolution_time</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># x is D-dimensional feature vector</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="c1"># Construct data-dependent Hamiltonian H(x)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">H</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="c1"># Pauli-Z weighted by feature x[i]</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="n">H</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">Pauli_Z</span><span class="p">(</span><span class="n">qubit</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="c1"># Time evolution via Trotterization</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">dt</span> <span class="o">=</span> <span class="n">evolution_time</span> <span class="o">/</span> <span class="n">time_steps</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_steps</span><span class="p">):</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="c1"># Apply exp(-i H dt) via Trotter decomposition</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>            <span class="n">angle</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">dt</span>  <span class="c1"># Z rotation angle</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>            <span class="n">Apply_R_z</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">angle</span><span class="p">)</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="c1"># Optional: add entangling terms</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>            <span class="c1"># Two-qubit interaction: X_i X_{i+1}</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>            <span class="n">Apply_XX_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">dt</span><span class="p">)</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="k">return</span> <span class="n">qubits</span>
 </span></code></pre></div>
 <p>Hamiltonian encoding is the foundation for many <strong>quantum simulation algorithms</strong> and <strong>quantum kernel methods</strong> used in QML.</p>
 <hr />
@@ -2924,9 +2912,8 @@ H(\vec{x}) = x_0 Z_0 + x_1 Z_1 + x_2 Z_2
 <p><strong>Quantum Feature Maps</strong> are the most general and powerful encoding method. They map classical data <span class="arithmatex">\(\vec{x}\)</span> to a high-dimensional quantum state <span class="arithmatex">\(|\phi(\vec{x})\rangle\)</span> in a Hilbert space, explicitly designed to enable <strong>quantum kernels</strong> for classification and regression tasks.</p>
 <div class="admonition tip">
 <p class="admonition-title">The Power of Kernels</p>
+<p>Quantum feature maps are quantum computing's answer to the kernel trick in classical machine learning. By mapping data to an exponentially large Hilbert space, they can discover patterns invisible to classical polynomial kernels [8].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Quantum feature maps are quantum computing&#39;s answer to the kernel trick in classical machine learning. By mapping data to an exponentially large Hilbert space, they can discover patterns invisible to classical polynomial kernels [8].
-</span></code></pre></div>
 <h3 id="mechanism-and-mathematical-formalism"><strong>Mechanism and Mathematical Formalism</strong></h3>
 <hr />
 <p>A quantum feature map <span class="arithmatex">\(\phi\)</span> is defined as a unitary operation <span class="arithmatex">\(U_{\phi}(\vec{x})\)</span> parameterized by the classical data <span class="arithmatex">\(\vec{x}\)</span>:</p>
@@ -2968,17 +2955,20 @@ K(\vec{x}_1, \vec{x}_2) = |\langle \phi(\vec{x}_1) | \phi(\vec{x}_2) \rangle|^2
 <p>The quantum kernel <span class="arithmatex">\(K(\vec{x}_1, \vec{x}_2)\)</span> corresponds to a feature map in an exponentially large Hilbert space (dimension <span class="arithmatex">\(2^n\)</span> for <span class="arithmatex">\(n\)</span> qubits). This allows quantum feature maps to implicitly compute kernel functions that are intractable for classical computers [9].</p>
 <div class="admonition example">
 <p class="admonition-title">Quantum Kernel SVM Workflow</p>
+<p>Given dataset <span class="arithmatex">\(\{(\vec{x}_1, y_1), \ldots, (\vec{x}_M, y_M)\}\)</span> where <span class="arithmatex">\(y_i \in \{-1, +1\}\)</span>:</p>
+<ol>
+<li><strong>Encode each data point</strong> on quantum computer: <span class="arithmatex">\(|\phi(\vec{x}_i)\rangle = U_{\phi}(\vec{x}_i)|0\rangle^{\otimes n}\)</span></li>
+<li><strong>Compute kernel matrix</strong> <span class="arithmatex">\(K_{ij} = |\langle\phi(\vec{x}_i)|\phi(\vec{x}_j)\rangle|^2\)</span> for all pairs <span class="arithmatex">\((i,j)\)</span></li>
+<li><strong>Train classical SVM</strong> using kernel matrix <span class="arithmatex">\(K\)</span></li>
+<li><strong>Predict new point</strong> <span class="arithmatex">\(\vec{x}_{\text{new}}\)</span>:<ul>
+<li>Encode <span class="arithmatex">\(|\phi(\vec{x}_{\text{new}})\rangle\)</span> on quantum computer</li>
+<li>Compute kernel <span class="arithmatex">\(K(\vec{x}_{\text{new}}, \vec{x}_i)\)</span> for all training points</li>
+<li>Use SVM decision function: <span class="arithmatex">\(f(\vec{x}_{\text{new}}) = \sum_i \alpha_i y_i K(\vec{x}_{\text{new}}, \vec{x}_i) + b\)</span></li>
+</ul>
+</li>
+</ol>
 </div>
-<h2 id="given-dataset-vecx_1-y_1-ldots-vecx_m-y_m-where-y_i-in-1-1-1-encode-each-data-point-on-quantum-computer-phivecx_irangle-u_phivecx_i0rangleotimes-n-2-compute-kernel-matrix-k_ij-langlephivecx_iphivecx_jrangle2-for-all-pairs-ij-3-train-classical-svm-using-kernel-matrix-k-4-predict-new-point-vecx_textnew-encode-phivecx_textnewrangle-on-quantum-computer-compute-kernel-kvecx_textnew-vecx_i-for-all-training-points-use-svm-decision-function-fvecx_textnew-sum_i-alpha_i-y_i-kvecx_textnew-vecx_i-b"><div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Given dataset $\{(\vec{x}_1, y_1), \ldots, (\vec{x}_M, y_M)\}$ where $y_i \in \{-1, +1\}$:
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>1. **Encode each data point** on quantum computer: $|\phi(\vec{x}_i)\rangle = U_{\phi}(\vec{x}_i)|0\rangle^{\otimes n}$
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>2. **Compute kernel matrix** $K_{ij} = |\langle\phi(\vec{x}_i)|\phi(\vec{x}_j)\rangle|^2$ for all pairs $(i,j)$
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>3. **Train classical SVM** using kernel matrix $K$
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>4. **Predict new point** $\vec{x}_{\text{new}}$:
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    - Encode $|\phi(\vec{x}_{\text{new}})\rangle$ on quantum computer
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    - Compute kernel $K(\vec{x}_{\text{new}}, \vec{x}_i)$ for all training points
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    - Use SVM decision function: $f(\vec{x}_{\text{new}}) = \sum_i \alpha_i y_i K(\vec{x}_{\text{new}}, \vec{x}_i) + b$
-</span></code></pre></div></h2>
+<hr />
 <h3 id="advantages-for-classification"><strong>Advantages for Classification</strong></h3>
 <hr />
 <p><strong>Exponential Feature Space</strong></p>
@@ -2987,44 +2977,43 @@ K(\vec{x}_1, \vec{x}_2) = |\langle \phi(\vec{x}_1) | \phi(\vec{x}_2) \rangle|^2
 <p>The structure of <span class="arithmatex">\(U_{\phi}\)</span> can be <strong>designed</strong> or <strong>optimized</strong> (via variational methods) to match the specific geometry of the data, potentially providing advantages over fixed classical kernels.</p>
 <p><strong>Integration with VQCs</strong></p>
 <p>Feature maps serve as the encoding layer in <strong>variational quantum classifiers (VQCs)</strong>, which combine encoding with trainable parameterized gates to maximize classification accuracy.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">Quantum_Feature_Map_ZZFeatureMap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">):</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="c1"># x is D-dimensional feature vector</span>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>        <span class="c1"># Data encoding layer: single-qubit rotations</span>
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>            <span class="n">Apply_H</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Hadamard for superposition</span>
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>            <span class="n">Apply_R_z</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>        <span class="c1"># Entangling layer: ZZ interactions for feature products</span>
-</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>                <span class="c1"># Two-qubit ZZ rotation: encodes x[i]*x[j]</span>
-</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>                <span class="n">angle</span> <span class="o">=</span> <span class="p">(</span><span class="n">π</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">π</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>                <span class="n">Apply_ZZ_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">angle</span><span class="p">)</span>
-</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>
-</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>    <span class="k">return</span> <span class="n">qubits</span>
-</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>
-</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="n">Compute_Quantum_Kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">feature_map</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
-</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>    <span class="c1"># Prepare |φ(x1)⟩</span>
-</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>    <span class="n">state1</span> <span class="o">=</span> <span class="n">feature_map</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-</span><span id="__span-18-24"><a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>
-</span><span id="__span-18-25"><a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>    <span class="c1"># Prepare |φ(x2)⟩</span>
-</span><span id="__span-18-26"><a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>    <span class="n">state2</span> <span class="o">=</span> <span class="n">feature_map</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
-</span><span id="__span-18-27"><a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>
-</span><span id="__span-18-28"><a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>    <span class="c1"># Compute overlap |⟨φ(x1)|φ(x2)⟩|² using SWAP test</span>
-</span><span id="__span-18-29"><a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>    <span class="n">kernel_value</span> <span class="o">=</span> <span class="n">SWAP_Test</span><span class="p">(</span><span class="n">state1</span><span class="p">,</span> <span class="n">state2</span><span class="p">)</span>
-</span><span id="__span-18-30"><a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>
-</span><span id="__span-18-31"><a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>    <span class="k">return</span> <span class="n">kernel_value</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Quantum_Feature_Map_ZZFeatureMap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># x is D-dimensional feature vector</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="c1"># Data encoding layer: single-qubit rotations</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="n">Apply_H</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Hadamard for superposition</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="n">Apply_R_z</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="c1"># Entangling layer: ZZ interactions for feature products</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">D</span><span class="p">):</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>                <span class="c1"># Two-qubit ZZ rotation: encodes x[i]*x[j]</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                <span class="n">angle</span> <span class="o">=</span> <span class="p">(</span><span class="n">π</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">π</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>                <span class="n">Apply_ZZ_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">angle</span><span class="p">)</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="k">return</span> <span class="n">qubits</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="n">Compute_Quantum_Kernel</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">feature_map</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="c1"># Prepare |φ(x1)⟩</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>    <span class="n">state1</span> <span class="o">=</span> <span class="n">feature_map</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="c1"># Prepare |φ(x2)⟩</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>    <span class="n">state2</span> <span class="o">=</span> <span class="n">feature_map</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="c1"># Compute overlap |⟨φ(x1)|φ(x2)⟩|² using SWAP test</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    <span class="n">kernel_value</span> <span class="o">=</span> <span class="n">SWAP_Test</span><span class="p">(</span><span class="n">state1</span><span class="p">,</span> <span class="n">state2</span><span class="p">)</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    <span class="k">return</span> <span class="n">kernel_value</span>
 </span></code></pre></div>
 <details class="question">
 <summary>How do quantum feature maps relate to the classical kernel trick?</summary>
+<p>Both quantum feature maps and the classical kernel trick compute inner products in high-dimensional spaces without explicitly constructing feature vectors. The quantum advantage comes from the exponential dimensionality (<span class="arithmatex">\(2^n\)</span>) of the Hilbert space, which allows quantum kernels to potentially capture correlations that are computationally hard for classical polynomial kernels to represent.</p>
+<p>Quantum feature maps are the cornerstone of <strong>quantum kernel methods</strong> and serve as the encoding foundation for <strong>quantum neural networks (QNNs)</strong> used in supervised and unsupervised learning tasks.</p>
 </details>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Both quantum feature maps and the classical kernel trick compute inner products in high-dimensional spaces without explicitly constructing feature vectors. The quantum advantage comes from the exponential dimensionality ($2^n$) of the Hilbert space, which allows quantum kernels to potentially capture correlations that are computationally hard for classical polynomial kernels to represent.
-</span></code></pre></div>
-Quantum feature maps are the cornerstone of <strong>quantum kernel methods</strong> and serve as the encoding foundation for <strong>quantum neural networks (QNNs)</strong> used in supervised and unsupervised learning tasks.</p>
 <hr />
 <h3 id="summary-comparison-of-quantum-data-encoding-techniques"><strong>Summary: Comparison of Quantum Data Encoding Techniques</strong></h3>
 <hr />

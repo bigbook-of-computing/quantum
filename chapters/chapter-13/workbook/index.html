@@ -1701,17 +1701,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-client-asks-why-you-would-use-a-pqc-to-model-an-rl-policy-instead-of-a-standard-neural-network-what-is-the-core-theoretical-advantage-you-would-cite-info-answer-strategy-the-core-theoretical-advantage-is-the-potentially-superior-expressive-power-of-a-parameterized-quantum-circuit-pqc-1-access-to-a-larger-state-space-a-pqc-operates-in-an-exponentially-large-hilbert-space-this-allows-it-to-represent-far-more-complex-functions-and-strategies-than-a-classical-neural-network-of-a-comparable-size-2-modeling-complex-correlations-by-leveraging-quantum-entanglement-a-pqc-can-naturally-capture-intricate-non-local-correlations-within-the-environments-state-space-a-classical-network-might-require-a-much-larger-and-deeper-architecture-to-model-these-same-relationships-if-it-can-at-all-in-essence-you-are-giving-the-agent-a-more-powerful-brain-to-find-more-sophisticated-and-effective-policies-especially-in-environments-with-complex-quantum-like-structures" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A client asks why you would use a PQC to model an RL policy instead of a standard neural network. What is the core theoretical advantage you would cite? ???+ info &quot;Answer Strategy&quot; The core theoretical advantage is the potentially superior **expressive power** of a Parameterized Quantum Circuit (PQC). 1. **Access to a Larger State Space:** A PQC operates in an exponentially large Hilbert space. This allows it to represent far more complex functions and strategies than a classical neural network of a comparable size. 2. **Modeling Complex Correlations:** By leveraging quantum entanglement, a PQC can naturally capture intricate, non-local correlations within the environment&#39;s state space. A classical network might require a much larger and deeper architecture to model these same relationships, if it can at all. In essence, you are giving the agent a more powerful &quot;brain&quot; to find more sophisticated and effective policies, especially in environments with complex, quantum-like structures.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#132-quantum-policy-gradient-methods" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1744,23 +1733,6 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#explain-the-intuition-behind-the-policy-gradient-update-rule-nabla_theta-jtheta-propto-nabla_theta-log-pi_thetaas-cdot-g_t-why-the-logarithm-info-answer-strategy-the-intuition-is-simple-if-an-action-led-to-a-good-outcome-make-it-more-likely-if-it-led-to-a-bad-outcome-make-it-less-likely-1-the-outcome-signal-g_t-the-return-g_t-is-the-goodness-signal-a-large-positive-g_t-means-the-action-was-beneficial-while-a-negative-g_t-means-it-was-detrimental-2-the-directional-pointer-nabla_theta-log-pi_thetaas-this-term-the-score-function-tells-us-which-way-to-adjust-the-parameters-theta-to-increase-the-probability-of-the-specific-action-we-just-took-3-why-the-logarithm-the-logarithm-is-a-mathematical-tool-the-log-derivative-trick-that-makes-the-gradient-calculable-it-converts-the-gradient-of-the-policy-into-a-form-that-can-be-estimated-by-sampling-without-it-calculating-the-gradient-would-require-knowing-the-full-often-intractable-dynamics-of-the-environment-it-allows-us-to-estimate-the-gradient-using-only-the-agents-own-experience" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Explain the intuition behind the policy gradient update rule $\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t$. Why the logarithm? ???+ info &quot;Answer Strategy&quot; The intuition is simple: **&quot;If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely.&quot;** 1. **The Outcome Signal ($G_t$):** The return, $G_t$, is the &quot;goodness&quot; signal. A large positive $G_t$ means the action was beneficial, while a negative $G_t$ means it was detrimental. 2. **The Directional Pointer ($\nabla_\theta \log \pi_\theta(a|s)$):** This term, the score function, tells us which way to adjust the parameters $\theta$ to increase the probability of the specific action we just took. 3. **Why the Logarithm?** The logarithm is a mathematical tool (the &quot;log-derivative trick&quot;) that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent&#39;s own experience.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Explain the intuition behind the policy gradient update rule $\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t$. Why the logarithm? ???+ info &#34;Answer Strategy&#34; The intuition is simple: **&#34;If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely.&#34;** 1. **The Outcome Signal ($G_t$):** The return, $G_t$, is the &#34;goodness&#34; signal. A large positive $G_t$ means the action was beneficial, while a negative $G_t$ means it was detrimental. 2. **The Directional Pointer ($\nabla_\theta \log \pi_\theta(a|s)$):** This term, the score function, tells us which way to adjust the parameters $\theta$ to increase the probability of the specific action we just took. 3. **Why the Logarithm?** The logarithm is a mathematical tool (the &#34;log-derivative trick&#34;) that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent&#39;s own experience.">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#hands-on-projects" class="md-nav__link">
@@ -1850,23 +1822,6 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-fundamental-difference-in-what-is-being-learned-in-a-policy-gradient-method-versus-a-value-iteration-method-info-answer-strategy-the-fundamental-difference-is-what-each-method-chooses-to-model-and-learn-directly-1-policy-gradient-direct-policy-learning-what-it-learns-the-policy-itself-pi_thetaas-how-it-works-it-directly-adjusts-the-parameters-of-the-policy-to-favor-actions-that-lead-to-higher-rewards-it-answers-the-question-in-this-state-what-is-the-best-action-to-take-2-value-iteration-indirect-policy-learning-what-it-learns-the-action-value-function-qs-a-how-it-works-it-learns-the-expected-long-term-reward-the-value-of-taking-any-action-in-any-state-the-policy-is-then-derived-from-these-values-eg-by-always-picking-the-action-with-the-highest-q-value-it-answers-the-question-in-this-state-how-good-is-it-to-take-this-action-in-short-policy-gradient-methods-learn-a-strategy-directly-while-value-iteration-methods-learn-a-map-of-values-and-then-derive-the-strategy-from-that-map" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method? ???+ info &quot;Answer Strategy&quot; The fundamental difference is what each method chooses to model and learn directly. 1. **Policy Gradient (Direct Policy Learning):** * **What it learns:** The policy itself, $\pi_\theta(a|s)$. * **How it works:** It directly adjusts the parameters of the policy to favor actions that lead to higher rewards. * **It answers the question:** &quot;In this state, what is the best action to take?&quot; 2. **Value Iteration (Indirect Policy Learning):** * **What it learns:** The action-value function, $Q(s, a)$. * **How it works:** It learns the expected long-term reward (the &quot;value&quot;) of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value). * **It answers the question:** &quot;In this state, how good is it to take this action?&quot; In short, policy gradient methods learn a **strategy** directly, while value iteration methods learn a **map of values** and then derive the strategy from that map.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method? ???+ info &#34;Answer Strategy&#34; The fundamental difference is what each method chooses to model and learn directly. 1. **Policy Gradient (Direct Policy Learning):** * **What it learns:** The policy itself, $\pi_\theta(a|s)$. * **How it works:** It directly adjusts the parameters of the policy to favor actions that lead to higher rewards. * **It answers the question:** &#34;In this state, what is the best action to take?&#34; 2. **Value Iteration (Indirect Policy Learning):** * **What it learns:** The action-value function, $Q(s, a)$. * **How it works:** It learns the expected long-term reward (the &#34;value&#34;) of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value). * **It answers the question:** &#34;In this state, how good is it to take this action?&#34; In short, policy gradient methods learn a **strategy** directly, while value iteration methods learn a **map of values** and then derive the strategy from that map.">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#hands-on-projects_1" class="md-nav__link">
@@ -1959,17 +1914,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#explain-what-coherent-exploration-means-and-why-its-fundamentally-different-from-epsilon-greedy-exploration-info-answer-strategy-the-difference-is-between-a-random-memoryless-search-and-a-structured-parallel-search-1-classical-epsilon-greedy-incoherent-search-this-is-a-purely-probabilistic-strategy-the-decision-to-explore-is-like-an-independent-coin-flip-at-each-step-there-is-no-memory-or-structure-to-the-exploration-the-agent-simply-jumps-to-a-random-action-its-a-memoryless-point-by-point-search-2-quantum-coherent-exploration-wave-like-search-this-strategy-uses-quantum-superposition-to-explore-many-possible-paths-simultaneously-the-agents-state-is-a-wave-that-evolves-through-the-state-space-the-different-paths-maintain-phase-relationships-and-can-interfere-with-each-other-constructive-interference-amplifies-paths-leading-to-high-reward-regions-destructive-interference-cancels-out-paths-leading-to-low-reward-regions-analogy-epsilon-greedy-is-like-a-person-in-a-maze-randomly-trying-one-door-at-a-time-coherent-exploration-is-like-a-flood-of-water-that-spreads-through-the-entire-maze-at-once-with-the-flow-naturally-concentrating-towards-the-exit-its-a-deterministic-highly-parallel-and-structured-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Explain what &quot;coherent exploration&quot; means and why it&#39;s fundamentally different from $\epsilon$-greedy exploration. ???+ info &quot;Answer Strategy&quot; The difference is between a random, memoryless search and a structured, parallel search. 1. **Classical $\epsilon$-greedy (Incoherent Search):** This is a purely probabilistic strategy. The decision to explore is like an independent coin flip at each step. There is no memory or structure to the exploration; the agent simply &quot;jumps&quot; to a random action. It&#39;s a memoryless, point-by-point search. 2. **Quantum Coherent Exploration (Wave-like Search):** This strategy uses quantum superposition to explore many possible paths simultaneously. The agent&#39;s state is a wave that evolves through the state space. The different paths maintain phase relationships and can interfere with each other. * **Constructive Interference:** Amplifies paths leading to high-reward regions. * **Destructive Interference:** Cancels out paths leading to low-reward regions. **Analogy:** $\epsilon$-greedy is like a person in a maze randomly trying one door at a time. Coherent exploration is like a flood of water that spreads through the entire maze at once, with the flow naturally concentrating towards the exit. It&#39;s a deterministic, highly parallel, and structured search.
-      
-    </span>
-  </a>
   
 </li>
       
@@ -2951,17 +2895,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-client-asks-why-you-would-use-a-pqc-to-model-an-rl-policy-instead-of-a-standard-neural-network-what-is-the-core-theoretical-advantage-you-would-cite-info-answer-strategy-the-core-theoretical-advantage-is-the-potentially-superior-expressive-power-of-a-parameterized-quantum-circuit-pqc-1-access-to-a-larger-state-space-a-pqc-operates-in-an-exponentially-large-hilbert-space-this-allows-it-to-represent-far-more-complex-functions-and-strategies-than-a-classical-neural-network-of-a-comparable-size-2-modeling-complex-correlations-by-leveraging-quantum-entanglement-a-pqc-can-naturally-capture-intricate-non-local-correlations-within-the-environments-state-space-a-classical-network-might-require-a-much-larger-and-deeper-architecture-to-model-these-same-relationships-if-it-can-at-all-in-essence-you-are-giving-the-agent-a-more-powerful-brain-to-find-more-sophisticated-and-effective-policies-especially-in-environments-with-complex-quantum-like-structures" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A client asks why you would use a PQC to model an RL policy instead of a standard neural network. What is the core theoretical advantage you would cite? ???+ info &quot;Answer Strategy&quot; The core theoretical advantage is the potentially superior **expressive power** of a Parameterized Quantum Circuit (PQC). 1. **Access to a Larger State Space:** A PQC operates in an exponentially large Hilbert space. This allows it to represent far more complex functions and strategies than a classical neural network of a comparable size. 2. **Modeling Complex Correlations:** By leveraging quantum entanglement, a PQC can naturally capture intricate, non-local correlations within the environment&#39;s state space. A classical network might require a much larger and deeper architecture to model these same relationships, if it can at all. In essence, you are giving the agent a more powerful &quot;brain&quot; to find more sophisticated and effective policies, especially in environments with complex, quantum-like structures.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#132-quantum-policy-gradient-methods" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2994,23 +2927,6 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#explain-the-intuition-behind-the-policy-gradient-update-rule-nabla_theta-jtheta-propto-nabla_theta-log-pi_thetaas-cdot-g_t-why-the-logarithm-info-answer-strategy-the-intuition-is-simple-if-an-action-led-to-a-good-outcome-make-it-more-likely-if-it-led-to-a-bad-outcome-make-it-less-likely-1-the-outcome-signal-g_t-the-return-g_t-is-the-goodness-signal-a-large-positive-g_t-means-the-action-was-beneficial-while-a-negative-g_t-means-it-was-detrimental-2-the-directional-pointer-nabla_theta-log-pi_thetaas-this-term-the-score-function-tells-us-which-way-to-adjust-the-parameters-theta-to-increase-the-probability-of-the-specific-action-we-just-took-3-why-the-logarithm-the-logarithm-is-a-mathematical-tool-the-log-derivative-trick-that-makes-the-gradient-calculable-it-converts-the-gradient-of-the-policy-into-a-form-that-can-be-estimated-by-sampling-without-it-calculating-the-gradient-would-require-knowing-the-full-often-intractable-dynamics-of-the-environment-it-allows-us-to-estimate-the-gradient-using-only-the-agents-own-experience" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Explain the intuition behind the policy gradient update rule $\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t$. Why the logarithm? ???+ info &quot;Answer Strategy&quot; The intuition is simple: **&quot;If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely.&quot;** 1. **The Outcome Signal ($G_t$):** The return, $G_t$, is the &quot;goodness&quot; signal. A large positive $G_t$ means the action was beneficial, while a negative $G_t$ means it was detrimental. 2. **The Directional Pointer ($\nabla_\theta \log \pi_\theta(a|s)$):** This term, the score function, tells us which way to adjust the parameters $\theta$ to increase the probability of the specific action we just took. 3. **Why the Logarithm?** The logarithm is a mathematical tool (the &quot;log-derivative trick&quot;) that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent&#39;s own experience.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Explain the intuition behind the policy gradient update rule $\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t$. Why the logarithm? ???+ info &#34;Answer Strategy&#34; The intuition is simple: **&#34;If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely.&#34;** 1. **The Outcome Signal ($G_t$):** The return, $G_t$, is the &#34;goodness&#34; signal. A large positive $G_t$ means the action was beneficial, while a negative $G_t$ means it was detrimental. 2. **The Directional Pointer ($\nabla_\theta \log \pi_\theta(a|s)$):** This term, the score function, tells us which way to adjust the parameters $\theta$ to increase the probability of the specific action we just took. 3. **Why the Logarithm?** The logarithm is a mathematical tool (the &#34;log-derivative trick&#34;) that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent&#39;s own experience.">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#hands-on-projects" class="md-nav__link">
@@ -3100,23 +3016,6 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-fundamental-difference-in-what-is-being-learned-in-a-policy-gradient-method-versus-a-value-iteration-method-info-answer-strategy-the-fundamental-difference-is-what-each-method-chooses-to-model-and-learn-directly-1-policy-gradient-direct-policy-learning-what-it-learns-the-policy-itself-pi_thetaas-how-it-works-it-directly-adjusts-the-parameters-of-the-policy-to-favor-actions-that-lead-to-higher-rewards-it-answers-the-question-in-this-state-what-is-the-best-action-to-take-2-value-iteration-indirect-policy-learning-what-it-learns-the-action-value-function-qs-a-how-it-works-it-learns-the-expected-long-term-reward-the-value-of-taking-any-action-in-any-state-the-policy-is-then-derived-from-these-values-eg-by-always-picking-the-action-with-the-highest-q-value-it-answers-the-question-in-this-state-how-good-is-it-to-take-this-action-in-short-policy-gradient-methods-learn-a-strategy-directly-while-value-iteration-methods-learn-a-map-of-values-and-then-derive-the-strategy-from-that-map" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method? ???+ info &quot;Answer Strategy&quot; The fundamental difference is what each method chooses to model and learn directly. 1. **Policy Gradient (Direct Policy Learning):** * **What it learns:** The policy itself, $\pi_\theta(a|s)$. * **How it works:** It directly adjusts the parameters of the policy to favor actions that lead to higher rewards. * **It answers the question:** &quot;In this state, what is the best action to take?&quot; 2. **Value Iteration (Indirect Policy Learning):** * **What it learns:** The action-value function, $Q(s, a)$. * **How it works:** It learns the expected long-term reward (the &quot;value&quot;) of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value). * **It answers the question:** &quot;In this state, how good is it to take this action?&quot; In short, policy gradient methods learn a **strategy** directly, while value iteration methods learn a **map of values** and then derive the strategy from that map.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method? ???+ info &#34;Answer Strategy&#34; The fundamental difference is what each method chooses to model and learn directly. 1. **Policy Gradient (Direct Policy Learning):** * **What it learns:** The policy itself, $\pi_\theta(a|s)$. * **How it works:** It directly adjusts the parameters of the policy to favor actions that lead to higher rewards. * **It answers the question:** &#34;In this state, what is the best action to take?&#34; 2. **Value Iteration (Indirect Policy Learning):** * **What it learns:** The action-value function, $Q(s, a)$. * **How it works:** It learns the expected long-term reward (the &#34;value&#34;) of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value). * **It answers the question:** &#34;In this state, how good is it to take this action?&#34; In short, policy gradient methods learn a **strategy** directly, while value iteration methods learn a **map of values** and then derive the strategy from that map.">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#hands-on-projects_1" class="md-nav__link">
@@ -3213,17 +3112,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#explain-what-coherent-exploration-means-and-why-its-fundamentally-different-from-epsilon-greedy-exploration-info-answer-strategy-the-difference-is-between-a-random-memoryless-search-and-a-structured-parallel-search-1-classical-epsilon-greedy-incoherent-search-this-is-a-purely-probabilistic-strategy-the-decision-to-explore-is-like-an-independent-coin-flip-at-each-step-there-is-no-memory-or-structure-to-the-exploration-the-agent-simply-jumps-to-a-random-action-its-a-memoryless-point-by-point-search-2-quantum-coherent-exploration-wave-like-search-this-strategy-uses-quantum-superposition-to-explore-many-possible-paths-simultaneously-the-agents-state-is-a-wave-that-evolves-through-the-state-space-the-different-paths-maintain-phase-relationships-and-can-interfere-with-each-other-constructive-interference-amplifies-paths-leading-to-high-reward-regions-destructive-interference-cancels-out-paths-leading-to-low-reward-regions-analogy-epsilon-greedy-is-like-a-person-in-a-maze-randomly-trying-one-door-at-a-time-coherent-exploration-is-like-a-flood-of-water-that-spreads-through-the-entire-maze-at-once-with-the-flow-naturally-concentrating-towards-the-exit-its-a-deterministic-highly-parallel-and-structured-search" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Explain what &quot;coherent exploration&quot; means and why it&#39;s fundamentally different from $\epsilon$-greedy exploration. ???+ info &quot;Answer Strategy&quot; The difference is between a random, memoryless search and a structured, parallel search. 1. **Classical $\epsilon$-greedy (Incoherent Search):** This is a purely probabilistic strategy. The decision to explore is like an independent coin flip at each step. There is no memory or structure to the exploration; the agent simply &quot;jumps&quot; to a random action. It&#39;s a memoryless, point-by-point search. 2. **Quantum Coherent Exploration (Wave-like Search):** This strategy uses quantum superposition to explore many possible paths simultaneously. The agent&#39;s state is a wave that evolves through the state space. The different paths maintain phase relationships and can interfere with each other. * **Constructive Interference:** Amplifies paths leading to high-reward regions. * **Destructive Interference:** Cancels out paths leading to low-reward regions. **Analogy:** $\epsilon$-greedy is like a person in a maze randomly trying one door at a time. Coherent exploration is like a flood of water that spreads through the entire maze at once, with the flow naturally concentrating towards the exit. It&#39;s a deterministic, highly parallel, and structured search.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#135-quantum-agent-architectures" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3295,7 +3183,7 @@
   
 
 
-<h1 id="chapter-13-quantum-reinforcement-learning-workbook"><strong>Chapter 13: Quantum Reinforcement Learning () () (Workbook)</strong></h1>
+<h1 id="chapter-13-quantum-reinforcement-learning-workbook"><strong>Chapter 13: Quantum Reinforcement Learning (Workbook)</strong></h1>
 <hr />
 <blockquote>
 <p><strong>Summary:</strong> This chapter introduces Quantum Reinforcement Learning (QRL), a hybrid field that integrates quantum computing with classical reinforcement learning to tackle exponentially complex environments. We explore how QRL leverages Parameterized Quantum Circuits (PQCs) to represent policies and value functions, potentially offering richer function approximation due to the vastness of quantum Hilbert space. The chapter examines core QRL paradigms, including quantum policy gradient methods and quantum value iteration, and discusses novel exploration strategies like quantum random walks. This provides a foundation for understanding how quantum computation may enhance an agent's ability to learn optimal strategies in high-dimensional problem spaces.</p>
@@ -3322,29 +3210,30 @@ G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k+1}
 <h3 id="comprehension-check"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>In the classical RL setup, which quantity is the agent's primary goal to maximize?</li>
-<li>In QRL, what quantum computational structure is typically used to approximate the policy or value functions?</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  In the classical RL setup, which quantity is the agent&#39;s primary goal to maximize?
+2.  In QRL, what quantum computational structure is typically used to approximate the policy or value functions?
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    1.  The **expected return $G_t$** (cumulative discounted rewards).
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    2.  A **Parameterized Quantum Circuit (PQC)** or a related quantum model.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>1.  The **expected return $G_t$** (cumulative discounted rewards).
+2.  A **Parameterized Quantum Circuit (PQC)** or a related quantum model.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>A client asks why you would use a PQC to model an RL policy instead of a standard neural network. What is the core theoretical advantage you would cite?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The core theoretical advantage is the potentially superior <strong>expressive power</strong> of a Parameterized Quantum Circuit (PQC).</p>
+<ol>
+<li><strong>Access to a Larger State Space:</strong> A PQC operates in an exponentially large Hilbert space. This allows it to represent far more complex functions and strategies than a classical neural network of a comparable size.</li>
+<li><strong>Modeling Complex Correlations:</strong> By leveraging quantum entanglement, a PQC can naturally capture intricate, non-local correlations within the environment's state space. A classical network might require a much larger and deeper architecture to model these same relationships, if it can at all.</li>
+</ol>
+<p>In essence, you are giving the agent a more powerful "brain" to find more sophisticated and effective policies, especially in environments with complex, quantum-like structures.</p>
+</details>
 </div>
-<h2 id="a-client-asks-why-you-would-use-a-pqc-to-model-an-rl-policy-instead-of-a-standard-neural-network-what-is-the-core-theoretical-advantage-you-would-cite-info-answer-strategy-the-core-theoretical-advantage-is-the-potentially-superior-expressive-power-of-a-parameterized-quantum-circuit-pqc-1-access-to-a-larger-state-space-a-pqc-operates-in-an-exponentially-large-hilbert-space-this-allows-it-to-represent-far-more-complex-functions-and-strategies-than-a-classical-neural-network-of-a-comparable-size-2-modeling-complex-correlations-by-leveraging-quantum-entanglement-a-pqc-can-naturally-capture-intricate-non-local-correlations-within-the-environments-state-space-a-classical-network-might-require-a-much-larger-and-deeper-architecture-to-model-these-same-relationships-if-it-can-at-all-in-essence-you-are-giving-the-agent-a-more-powerful-brain-to-find-more-sophisticated-and-effective-policies-especially-in-environments-with-complex-quantum-like-structures"><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>A client asks why you would use a PQC to model an RL policy instead of a standard neural network. What is the core theoretical advantage you would cite?
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    The core theoretical advantage is the potentially superior **expressive power** of a Parameterized Quantum Circuit (PQC).
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    1.  **Access to a Larger State Space:** A PQC operates in an exponentially large Hilbert space. This allows it to represent far more complex functions and strategies than a classical neural network of a comparable size.
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    2.  **Modeling Complex Correlations:** By leveraging quantum entanglement, a PQC can naturally capture intricate, non-local correlations within the environment&#39;s state space. A classical network might require a much larger and deeper architecture to model these same relationships, if it can at all.
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    In essence, you are giving the agent a more powerful &quot;brain&quot; to find more sophisticated and effective policies, especially in environments with complex, quantum-like structures.
-</span></code></pre></div></h2>
+<hr />
 <h2 class="heading-with-pill" id="132-quantum-policy-gradient-methods"><strong>13.2 Quantum Policy Gradient Methods</strong></h2>
 <blockquote>
 <p><strong>Difficulty:</strong> ★★★☆☆</p>
@@ -3365,28 +3254,30 @@ G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k+1}
 <h3 id="comprehension-check_1"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>What is the role of the term <span class="arithmatex">\(\nabla_\theta \log \pi_\theta(a|s)\)</span> in the policy gradient update rule?</li>
-<li>In the quantum formulation, what quantum property is often cited as a way to enhance the search process?</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  What is the role of the term $\nabla_\theta \log \pi_\theta(a|s)$ in the policy gradient update rule?
+2.  In the quantum formulation, what quantum property is often cited as a way to enhance the search process?
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    1.  It is the **score function**, which acts as a directional indicator. It tells the optimizer how to change the parameters $\theta$ to make the chosen action more (or less) likely.
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    2.  **Superposition**, which can be used for more effective and potentially parallel exploration of the state space.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>1.  It is the **score function**, which acts as a directional indicator. It tells the optimizer how to change the parameters $\theta$ to make the chosen action more (or less) likely.
+2.  **Superposition**, which can be used for more effective and potentially parallel exploration of the state space.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>Explain the intuition behind the policy gradient update rule <span class="arithmatex">\(\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t\)</span>. Why the logarithm?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The intuition is simple: <strong>"If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely."</strong></p>
+<ol>
+<li><strong>The Outcome Signal (<span class="arithmatex">\(G_t\)</span>):</strong> The return, <span class="arithmatex">\(G_t\)</span>, is the "goodness" signal. A large positive <span class="arithmatex">\(G_t\)</span> means the action was beneficial, while a negative <span class="arithmatex">\(G_t\)</span> means it was detrimental.</li>
+<li><strong>The Directional Pointer (<span class="arithmatex">\(\nabla_\theta \log \pi_\theta(a|s)\)</span>):</strong> This term, the score function, tells us which way to adjust the parameters <span class="arithmatex">\(\theta\)</span> to increase the probability of the specific action we just took.</li>
+<li><strong>Why the Logarithm?</strong> The logarithm is a mathematical tool (the "log-derivative trick") that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent's own experience.</li>
+</ol>
+</details>
 </div>
-<h2 id="explain-the-intuition-behind-the-policy-gradient-update-rule-nabla_theta-jtheta-propto-nabla_theta-log-pi_thetaas-cdot-g_t-why-the-logarithm-info-answer-strategy-the-intuition-is-simple-if-an-action-led-to-a-good-outcome-make-it-more-likely-if-it-led-to-a-bad-outcome-make-it-less-likely-1-the-outcome-signal-g_t-the-return-g_t-is-the-goodness-signal-a-large-positive-g_t-means-the-action-was-beneficial-while-a-negative-g_t-means-it-was-detrimental-2-the-directional-pointer-nabla_theta-log-pi_thetaas-this-term-the-score-function-tells-us-which-way-to-adjust-the-parameters-theta-to-increase-the-probability-of-the-specific-action-we-just-took-3-why-the-logarithm-the-logarithm-is-a-mathematical-tool-the-log-derivative-trick-that-makes-the-gradient-calculable-it-converts-the-gradient-of-the-policy-into-a-form-that-can-be-estimated-by-sampling-without-it-calculating-the-gradient-would-require-knowing-the-full-often-intractable-dynamics-of-the-environment-it-allows-us-to-estimate-the-gradient-using-only-the-agents-own-experience"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Explain the intuition behind the policy gradient update rule $\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t$. Why the logarithm?
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    The intuition is simple: **&quot;If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely.&quot;**
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    1.  **The Outcome Signal ($G_t$):** The return, $G_t$, is the &quot;goodness&quot; signal. A large positive $G_t$ means the action was beneficial, while a negative $G_t$ means it was detrimental.
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    2.  **The Directional Pointer ($\nabla_\theta \log \pi_\theta(a|s)$):** This term, the score function, tells us which way to adjust the parameters $\theta$ to increase the probability of the specific action we just took.
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    3.  **Why the Logarithm?** The logarithm is a mathematical tool (the &quot;log-derivative trick&quot;) that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent&#39;s own experience.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="hands-on-projects"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
 <h4 id="project-blueprint-policy-gradient-update-calculation"><strong>Project Blueprint: Policy Gradient Update Calculation</strong></h4>
 <table>
@@ -3425,55 +3316,55 @@ G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k+1}
 </table>
 <hr />
 <h4 id="python-implementation"><strong>Python Implementation</strong></h4>
-<p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">Statevector</span><span class="p">,</span> <span class="n">SparsePauliOp</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Project 1: Policy Gradient Update Calculation (Quantum Policy)</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">quantum_policy</span><span class="p">(</span><span class="n">state_encoding</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameterized policy: qubit rotation based on state + theta.&quot;&quot;&quot;</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">state_encoding</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># encode state</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>           <span class="c1"># trainable parameter</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="k">return</span> <span class="n">qc</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">action_prob</span><span class="p">(</span><span class="n">state_enc</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Probability of action=1 (measuring |1&gt;).&quot;&quot;&quot;</span>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="n">sv</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">quantum_policy</span><span class="p">(</span><span class="n">state_enc</span><span class="p">,</span> <span class="n">theta</span><span class="p">))</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="c1"># Simple bandit: reward for choosing action 1 when state &gt; 0.5</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="n">states</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="n">rewards</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">states</span><span class="p">]</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">policy_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">rewards</span><span class="p">):</span>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>        <span class="n">p1</span> <span class="o">=</span> <span class="n">action_prob</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
-</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>        <span class="n">log_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p1</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">)</span>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>        <span class="n">loss</span> <span class="o">-=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">log_p</span>  <span class="c1"># REINFORCE objective</span>
-</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>    <span class="k">return</span> <span class="n">loss</span>
-</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>
-</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">policy_loss</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;COBYLA&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;maxiter&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">})</span>
-</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="n">theta_opt</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
-</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantum Policy Gradient – learned action probabilities:&quot;</span><span class="p">)</span>
-</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">rewards</span><span class="p">):</span>
-</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>    <span class="n">p</span> <span class="o">=</span> <span class="n">action_prob</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">theta_opt</span><span class="p">)</span>
-</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  s=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> reward=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> P(action=1)=</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">Statevector</span><span class="p">,</span> <span class="n">SparsePauliOp</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Project 1: Policy Gradient Update Calculation (Quantum Policy)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">quantum_policy</span><span class="p">(</span><span class="n">state_encoding</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameterized policy: qubit rotation based on state + theta.&quot;&quot;&quot;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">state_encoding</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># encode state</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>           <span class="c1"># trainable parameter</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">qc</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">action_prob</span><span class="p">(</span><span class="n">state_enc</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Probability of action=1 (measuring |1&gt;).&quot;&quot;&quot;</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">sv</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">quantum_policy</span><span class="p">(</span><span class="n">state_enc</span><span class="p">,</span> <span class="n">theta</span><span class="p">))</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="c1"># Simple bandit: reward for choosing action 1 when state &gt; 0.5</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">states</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="n">rewards</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">states</span><span class="p">]</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">policy_loss</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">rewards</span><span class="p">):</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="n">p1</span> <span class="o">=</span> <span class="n">action_prob</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="n">log_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p1</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">)</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="n">loss</span> <span class="o">-=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">log_p</span>  <span class="c1"># REINFORCE objective</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="k">return</span> <span class="n">loss</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">policy_loss</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;COBYLA&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;maxiter&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">})</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="n">theta_opt</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quantum Policy Gradient – learned action probabilities:&quot;</span><span class="p">)</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">rewards</span><span class="p">):</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="n">p</span> <span class="o">=</span> <span class="n">action_prob</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">theta_opt</span><span class="p">)</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  s=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> reward=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2"> P(action=1)=</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <strong>Sample Output:</strong>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Quantum</span> <span class="n">Policy</span> <span class="n">Gradient</span> <span class="err">–</span> <span class="n">learned</span> <span class="n">action</span> <span class="n">probabilities</span><span class="p">:</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.2</span> <span class="n">reward</span><span class="o">=</span><span class="mi">0</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.345</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.8</span> <span class="n">reward</span><span class="o">=</span><span class="mi">1</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">1.000</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.3</span> <span class="n">reward</span><span class="o">=</span><span class="mi">0</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.500</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.9</span> <span class="n">reward</span><span class="o">=</span><span class="mi">1</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.976</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.1</span> <span class="n">reward</span><span class="o">=</span><span class="mi">0</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.206</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.7</span> <span class="n">reward</span><span class="o">=</span><span class="mi">1</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.976</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Quantum</span> <span class="n">Policy</span> <span class="n">Gradient</span> <span class="err">–</span> <span class="n">learned</span> <span class="n">action</span> <span class="n">probabilities</span><span class="p">:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.2</span> <span class="n">reward</span><span class="o">=</span><span class="mi">0</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.345</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.8</span> <span class="n">reward</span><span class="o">=</span><span class="mi">1</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">1.000</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.3</span> <span class="n">reward</span><span class="o">=</span><span class="mi">0</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.500</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.9</span> <span class="n">reward</span><span class="o">=</span><span class="mi">1</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.976</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.1</span> <span class="n">reward</span><span class="o">=</span><span class="mi">0</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.206</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  <span class="n">s</span><span class="o">=</span><span class="mf">0.7</span> <span class="n">reward</span><span class="o">=</span><span class="mi">1</span> <span class="n">P</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="mf">0.976</span>
 </span></code></pre></div></p>
 <h4 id="outcome-and-interpretation"><strong>Outcome and Interpretation</strong></h4>
 <p>The weighted gradient is <span class="arithmatex">\(2.0 \times 5.0 = 10.0\)</span>. The parameter update is <span class="arithmatex">\(\Delta\theta = 0.1 \times 10.0 = 1.0\)</span>. This means the policy parameter <span class="arithmatex">\(\theta\)</span> would be increased by <span class="arithmatex">\(1.0\)</span>. This calculation demonstrates the core feedback loop of policy gradient methods: a positive outcome (<span class="arithmatex">\(G_t=5.0\)</span>) leads to a significant, positive adjustment to the policy parameters, making the preceding action more probable in the future.</p>
@@ -3506,36 +3397,44 @@ Q^*(s, a) = \mathbb{E} \left[ r_{t+1} + \gamma \max_{a'} Q^*(s_{t+1}, a') \right
 <h3 id="comprehension-check_2"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>In value-based QRL, what function is approximated by the PQC?</li>
-<li>The loss function in Quantum Value Iteration aims to minimize what quantity?</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  In value-based QRL, what function is approximated by the PQC?
+2.  The loss function in Quantum Value Iteration aims to minimize what quantity?
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    1.  The **action-value function $Q(s, a)$**.
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    2.  The **temporal-difference (TD) error**, which is the squared difference between the current Q-value estimate and the TD target.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>1.  The **action-value function $Q(s, a)$**.
+2.  The **temporal-difference (TD) error**, which is the squared difference between the current Q-value estimate and the TD target.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The fundamental difference is what each method chooses to model and learn directly.</p>
+<ol>
+<li>
+<p><strong>Policy Gradient (Direct Policy Learning):</strong></p>
+<ul>
+<li><strong>What it learns:</strong> The policy itself, <span class="arithmatex">\(\pi_\theta(a|s)\)</span>.</li>
+<li><strong>How it works:</strong> It directly adjusts the parameters of the policy to favor actions that lead to higher rewards.</li>
+<li><strong>It answers the question:</strong> "In this state, what is the best action to take?"</li>
+</ul>
+</li>
+<li>
+<p><strong>Value Iteration (Indirect Policy Learning):</strong></p>
+<ul>
+<li><strong>What it learns:</strong> The action-value function, <span class="arithmatex">\(Q(s, a)\)</span>.</li>
+<li><strong>How it works:</strong> It learns the expected long-term reward (the "value") of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value).</li>
+<li><strong>It answers the question:</strong> "In this state, how good is it to take this action?"</li>
+</ul>
+</li>
+</ol>
+<p>In short, policy gradient methods learn a <strong>strategy</strong> directly, while value iteration methods learn a <strong>map of values</strong> and then derive the strategy from that map.</p>
+</details>
 </div>
-<h2 id="what-is-the-fundamental-difference-in-what-is-being-learned-in-a-policy-gradient-method-versus-a-value-iteration-method-info-answer-strategy-the-fundamental-difference-is-what-each-method-chooses-to-model-and-learn-directly-1-policy-gradient-direct-policy-learning-what-it-learns-the-policy-itself-pi_thetaas-how-it-works-it-directly-adjusts-the-parameters-of-the-policy-to-favor-actions-that-lead-to-higher-rewards-it-answers-the-question-in-this-state-what-is-the-best-action-to-take-2-value-iteration-indirect-policy-learning-what-it-learns-the-action-value-function-qs-a-how-it-works-it-learns-the-expected-long-term-reward-the-value-of-taking-any-action-in-any-state-the-policy-is-then-derived-from-these-values-eg-by-always-picking-the-action-with-the-highest-q-value-it-answers-the-question-in-this-state-how-good-is-it-to-take-this-action-in-short-policy-gradient-methods-learn-a-strategy-directly-while-value-iteration-methods-learn-a-map-of-values-and-then-derive-the-strategy-from-that-map"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method?
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    The fundamental difference is what each method chooses to model and learn directly.
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    1.  **Policy Gradient (Direct Policy Learning):**
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        *   **What it learns:** The policy itself, $\pi_\theta(a|s)$.
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        *   **How it works:** It directly adjusts the parameters of the policy to favor actions that lead to higher rewards.
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        *   **It answers the question:** &quot;In this state, what is the best action to take?&quot;
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    2.  **Value Iteration (Indirect Policy Learning):**
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        *   **What it learns:** The action-value function, $Q(s, a)$.
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        *   **How it works:** It learns the expected long-term reward (the &quot;value&quot;) of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value).
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        *   **It answers the question:** &quot;In this state, how good is it to take this action?&quot;
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    In short, policy gradient methods learn a **strategy** directly, while value iteration methods learn a **map of values** and then derive the strategy from that map.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="hands-on-projects_1"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
 <h4 id="project-blueprint-value-iteration-loss-calculation"><strong>Project Blueprint: Value Iteration Loss Calculation</strong></h4>
 <table>
@@ -3574,45 +3473,45 @@ Q^*(s, a) = \mathbb{E} \left[ r_{t+1} + \gamma \max_{a'} Q^*(s_{t+1}, a') \right
 </table>
 <hr />
 <h4 id="python-implementation_1"><strong>Python Implementation</strong></h4>
-<p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Project 2: Value Iteration Loss Calculation</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># Simple 4-state MDP: V* via Bellman update</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>          <span class="c1"># reward at each state</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>                          <span class="c1"># transition matrix P[s][s&#39;]</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="p">])</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value Iteration:&quot;</span><span class="p">)</span>
-</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>    <span class="n">V_new</span> <span class="o">=</span> <span class="n">R</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">V</span><span class="p">)</span>
-</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>    <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">V_new</span> <span class="o">-</span> <span class="n">V</span><span class="p">))</span>
-</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    <span class="n">V</span> <span class="o">=</span> <span class="n">V_new</span>
-</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">iteration</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  iter </span><span class="si">{</span><span class="n">iteration</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">: V = </span><span class="si">{</span><span class="n">V</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">  Δ=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>    <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span> <span class="k">break</span>
-</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>
-</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Converged V* = </span><span class="si">{</span><span class="n">V</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Project 2: Value Iteration Loss Calculation</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Simple 4-state MDP: V* via Bellman update</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>          <span class="c1"># reward at each state</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>                          <span class="c1"># transition matrix P[s][s&#39;]</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="p">])</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value Iteration:&quot;</span><span class="p">)</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="n">V_new</span> <span class="o">=</span> <span class="n">R</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span> <span class="o">@</span> <span class="n">V</span><span class="p">)</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">V_new</span> <span class="o">-</span> <span class="n">V</span><span class="p">))</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="n">V</span> <span class="o">=</span> <span class="n">V_new</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">or</span> <span class="n">iteration</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  iter </span><span class="si">{</span><span class="n">iteration</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">: V = </span><span class="si">{</span><span class="n">V</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">  Δ=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">:</span> <span class="k">break</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Converged V* = </span><span class="si">{</span><span class="n">V</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <strong>Sample Output:</strong>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">Value</span> <span class="n">Iteration</span><span class="p">:</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  <span class="nb">iter</span>   <span class="mi">0</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1.</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">1.00e+00</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  <span class="nb">iter</span>   <span class="mi">1</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span>   <span class="mf">0.</span>   <span class="mf">0.45</span> <span class="mf">1.9</span> <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">9.00e-01</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  <span class="nb">iter</span>   <span class="mi">2</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span>     <span class="mf">0.162</span>  <span class="mf">1.0575</span> <span class="mf">2.71</span>  <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">8.10e-01</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  <span class="nb">iter</span>   <span class="mi">3</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0437</span> <span class="mf">0.4682</span> <span class="mf">1.6954</span> <span class="mf">3.439</span> <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">7.29e-01</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>  <span class="nb">iter</span>   <span class="mi">4</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.154</span>  <span class="mf">0.8632</span> <span class="mf">2.3105</span> <span class="mf">4.0951</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">6.56e-01</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  <span class="nb">iter</span>   <span class="mi">5</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.33</span>   <span class="mf">1.2979</span> <span class="mf">2.8825</span> <span class="mf">4.6856</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">5.90e-01</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  <span class="nb">iter</span>  <span class="mi">10</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.6667</span> <span class="mf">3.2763</span> <span class="mf">5.044</span>  <span class="mf">6.8619</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">3.49e-01</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  <span class="nb">iter</span>  <span class="mi">15</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.8345</span> <span class="mf">4.5507</span> <span class="mf">6.3288</span> <span class="mf">8.147</span> <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">2.06e-01</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">Converged</span> <span class="n">V</span><span class="o">*</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.4593</span> <span class="mf">5.1874</span> <span class="mf">6.9661</span> <span class="mf">8.7842</span><span class="p">]</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Value</span> <span class="n">Iteration</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="nb">iter</span>   <span class="mi">0</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1.</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">1.00e+00</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="nb">iter</span>   <span class="mi">1</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span>   <span class="mf">0.</span>   <span class="mf">0.45</span> <span class="mf">1.9</span> <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">9.00e-01</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="nb">iter</span>   <span class="mi">2</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span>     <span class="mf">0.162</span>  <span class="mf">1.0575</span> <span class="mf">2.71</span>  <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">8.10e-01</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  <span class="nb">iter</span>   <span class="mi">3</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0437</span> <span class="mf">0.4682</span> <span class="mf">1.6954</span> <span class="mf">3.439</span> <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">7.29e-01</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  <span class="nb">iter</span>   <span class="mi">4</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.154</span>  <span class="mf">0.8632</span> <span class="mf">2.3105</span> <span class="mf">4.0951</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">6.56e-01</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  <span class="nb">iter</span>   <span class="mi">5</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.33</span>   <span class="mf">1.2979</span> <span class="mf">2.8825</span> <span class="mf">4.6856</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">5.90e-01</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  <span class="nb">iter</span>  <span class="mi">10</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.6667</span> <span class="mf">3.2763</span> <span class="mf">5.044</span>  <span class="mf">6.8619</span><span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">3.49e-01</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  <span class="nb">iter</span>  <span class="mi">15</span><span class="p">:</span> <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.8345</span> <span class="mf">4.5507</span> <span class="mf">6.3288</span> <span class="mf">8.147</span> <span class="p">]</span>  <span class="n">Δ</span><span class="o">=</span><span class="mf">2.06e-01</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">Converged</span> <span class="n">V</span><span class="o">*</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.4593</span> <span class="mf">5.1874</span> <span class="mf">6.9661</span> <span class="mf">8.7842</span><span class="p">]</span>
 </span></code></pre></div></p>
 <h4 id="outcome-and-interpretation_1"><strong>Outcome and Interpretation</strong></h4>
 <p>The TD Target is <span class="arithmatex">\(1.0 + (0.9 \times 6.0) = 1.0 + 5.4 = 6.4\)</span>. The TD Error is <span class="arithmatex">\(6.4 - 5.5 = 0.9\)</span>. The final loss is <span class="arithmatex">\(\mathcal{L} = 0.9^2 = 0.81\)</span>. This loss value of <span class="arithmatex">\(0.81\)</span> represents the magnitude of the "Bellman error" for this transition. A classical optimizer would now compute the gradient of this loss with respect to the PQC parameters <span class="arithmatex">\(\theta\)</span> and update them to make the <code>current_Q</code> estimate of <span class="arithmatex">\(5.5\)</span> closer to the more accurate <code>td_target</code> of <span class="arithmatex">\(6.4\)</span>.</p>
@@ -3639,32 +3538,38 @@ Q^*(s, a) = \mathbb{E} \left[ r_{t+1} + \gamma \max_{a'} Q^*(s_{t+1}, a') \right
 <h3 id="comprehension-check_3"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>What is the name for the RL dilemma of choosing between known good actions and trying new ones?</li>
-<li>How does a quantum random walk differ from a classical one?</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  What is the name for the RL dilemma of choosing between known good actions and trying new ones?
+2.  How does a quantum random walk differ from a classical one?
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    1.  The **exploration-exploitation trade-off**.
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    2.  A quantum random walk evolves a **superposition** of states, allowing it to explore many paths at once and use **interference** to amplify promising directions. A classical random walk follows a single, probabilistic path.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>1.  The **exploration-exploitation trade-off**.
+2.  A quantum random walk evolves a **superposition** of states, allowing it to explore many paths at once and use **interference** to amplify promising directions. A classical random walk follows a single, probabilistic path.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>Explain what "coherent exploration" means and why it's fundamentally different from <span class="arithmatex">\(\epsilon\)</span>-greedy exploration.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The difference is between a random, memoryless search and a structured, parallel search.</p>
+<ol>
+<li>
+<p><strong>Classical <span class="arithmatex">\(\epsilon\)</span>-greedy (Incoherent Search):</strong> This is a purely probabilistic strategy. The decision to explore is like an independent coin flip at each step. There is no memory or structure to the exploration; the agent simply "jumps" to a random action. It's a memoryless, point-by-point search.</p>
+</li>
+<li>
+<p><strong>Quantum Coherent Exploration (Wave-like Search):</strong> This strategy uses quantum superposition to explore many possible paths simultaneously. The agent's state is a wave that evolves through the state space. The different paths maintain phase relationships and can interfere with each other.</p>
+<ul>
+<li><strong>Constructive Interference:</strong> Amplifies paths leading to high-reward regions.</li>
+<li><strong>Destructive Interference:</strong> Cancels out paths leading to low-reward regions.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Analogy:</strong> <span class="arithmatex">\(\epsilon\)</span>-greedy is like a person in a maze randomly trying one door at a time. Coherent exploration is like a flood of water that spreads through the entire maze at once, with the flow naturally concentrating towards the exit. It's a deterministic, highly parallel, and structured search.</p>
+</details>
 </div>
-<h2 id="explain-what-coherent-exploration-means-and-why-its-fundamentally-different-from-epsilon-greedy-exploration-info-answer-strategy-the-difference-is-between-a-random-memoryless-search-and-a-structured-parallel-search-1-classical-epsilon-greedy-incoherent-search-this-is-a-purely-probabilistic-strategy-the-decision-to-explore-is-like-an-independent-coin-flip-at-each-step-there-is-no-memory-or-structure-to-the-exploration-the-agent-simply-jumps-to-a-random-action-its-a-memoryless-point-by-point-search-2-quantum-coherent-exploration-wave-like-search-this-strategy-uses-quantum-superposition-to-explore-many-possible-paths-simultaneously-the-agents-state-is-a-wave-that-evolves-through-the-state-space-the-different-paths-maintain-phase-relationships-and-can-interfere-with-each-other-constructive-interference-amplifies-paths-leading-to-high-reward-regions-destructive-interference-cancels-out-paths-leading-to-low-reward-regions-analogy-epsilon-greedy-is-like-a-person-in-a-maze-randomly-trying-one-door-at-a-time-coherent-exploration-is-like-a-flood-of-water-that-spreads-through-the-entire-maze-at-once-with-the-flow-naturally-concentrating-towards-the-exit-its-a-deterministic-highly-parallel-and-structured-search"><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Explain what &quot;coherent exploration&quot; means and why it&#39;s fundamentally different from $\epsilon$-greedy exploration.
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    The difference is between a random, memoryless search and a structured, parallel search.
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    1.  **Classical $\epsilon$-greedy (Incoherent Search):** This is a purely probabilistic strategy. The decision to explore is like an independent coin flip at each step. There is no memory or structure to the exploration; the agent simply &quot;jumps&quot; to a random action. It&#39;s a memoryless, point-by-point search.
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    2.  **Quantum Coherent Exploration (Wave-like Search):** This strategy uses quantum superposition to explore many possible paths simultaneously. The agent&#39;s state is a wave that evolves through the state space. The different paths maintain phase relationships and can interfere with each other.
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>        *   **Constructive Interference:** Amplifies paths leading to high-reward regions.
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>        *   **Destructive Interference:** Cancels out paths leading to low-reward regions.
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    **Analogy:** $\epsilon$-greedy is like a person in a maze randomly trying one door at a time. Coherent exploration is like a flood of water that spreads through the entire maze at once, with the flow naturally concentrating towards the exit. It&#39;s a deterministic, highly parallel, and structured search.
-</span></code></pre></div></h2>
+<hr />
 <h2 class="heading-with-pill" id="135-quantum-agent-architectures"><strong>13.5 Quantum Agent Architectures</strong></h2>
 <blockquote>
 <p><strong>Concept:</strong> Hybrid Quantum-Classical Agent Design • <strong>Difficulty:</strong> ★★★☆☆</p>
@@ -3685,36 +3590,42 @@ Q^*(s, a) = \mathbb{E} \left[ r_{t+1} + \gamma \max_{a'} Q^*(s_{t+1}, a') \right
 <h3 id="comprehension-check_4"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>In a hybrid QRL agent, which component is typically handled by a classical optimizer like Adam?</li>
-<li>What futuristic quantum technology is proposed for advanced agent memory?</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  In a hybrid QRL agent, which component is typically handled by a classical optimizer like Adam?
+2.  What futuristic quantum technology is proposed for advanced agent memory?
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    1.  The **learning/optimization** step (i.e., updating the parameters $\theta$).
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    2.  **Quantum Random Access Memory (QRAM)**.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>1.  The **learning/optimization** step (i.e., updating the parameters $\theta$).
+2.  **Quantum Random Access Memory (QRAM)**.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>Describe a scenario where the "environment" in a QRL setup is itself a quantum system. What are the state, action, and reward?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>This describes a powerful application where a QRL agent acts as an "autonomous physicist," learning to control a quantum experiment.</p>
+<ul>
+<li>
+<p><strong>Scenario:</strong> An agent is tasked with creating a high-fidelity three-qubit GHZ state in a trapped-ion experiment.</p>
+</li>
+<li>
+<p><strong>State (<span class="arithmatex">\(s_t\)</span>):</strong> The state is a classical description of the outcome of the previous attempt. This could be a vector containing the measured populations of the 8 basis states (e.g., <span class="arithmatex">\(|000\rangle, |001\rangle, \dots\)</span>) and the coherences between them, obtained via quantum state tomography.</p>
+</li>
+<li>
+<p><strong>Action (<span class="arithmatex">\(a_t\)</span>):</strong> The action is a set of classical control parameters for the experimental apparatus. For instance, it could be a vector specifying the duration, intensity, and frequency of the laser pulses applied to the ions.</p>
+</li>
+<li>
+<p><strong>Reward (<span class="arithmatex">\(r_{t+1}\)</span>):</strong> The reward is a single number quantifying the success of the experiment. The most direct reward is the <strong>fidelity</strong> of the created state <span class="arithmatex">\(|\psi_{\text{actual}}\rangle\)</span> with respect to the ideal GHZ state <span class="arithmatex">\(|\psi_{\text{GHZ}}\rangle\)</span>:
+    $$
+    r_{t+1} = F = |\langle \psi_{\text{GHZ}} | \psi_{\text{actual}} \rangle|^2
+    $$
+    The agent's goal is to learn the sequence of actions (laser pulses) that maximizes this fidelity, thereby discovering the optimal control protocol for the experiment.</p>
+</li>
+</ul>
+</details>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Describe a scenario where the &quot;environment&quot; in a QRL setup is itself a quantum system. What are the state, action, and reward?
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    This describes a powerful application where a QRL agent acts as an &quot;autonomous physicist,&quot; learning to control a quantum experiment.
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    *   **Scenario:** An agent is tasked with creating a high-fidelity three-qubit GHZ state in a trapped-ion experiment.
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    *   **State ($s_t$):** The state is a classical description of the outcome of the previous attempt. This could be a vector containing the measured populations of the 8 basis states (e.g., $|000\rangle, |001\rangle, \dots$) and the coherences between them, obtained via quantum state tomography.
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    *   **Action ($a_t$):** The action is a set of classical control parameters for the experimental apparatus. For instance, it could be a vector specifying the duration, intensity, and frequency of the laser pulses applied to the ions.
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>    *   **Reward ($r_{t+1}$):** The reward is a single number quantifying the success of the experiment. The most direct reward is the **fidelity** of the created state $|\psi_{\text{actual}}\rangle$ with respect to the ideal GHZ state $|\psi_{\text{GHZ}}\rangle$:
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>        $$
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>        r_{t+1} = F = |\langle \psi_{\text{GHZ}} | \psi_{\text{actual}} \rangle|^2
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>        $$
-</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>        The agent&#39;s goal is to learn the sequence of actions (laser pulses) that maximizes this fidelity, thereby discovering the optimal control protocol for the experiment.
-</span></code></pre></div>
 
 
 

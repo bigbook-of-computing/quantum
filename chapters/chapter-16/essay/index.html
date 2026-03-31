@@ -2592,9 +2592,8 @@
 <p>Before running experiments on costly and noisy quantum hardware, researchers use <strong>classical quantum simulators</strong> — software that exactly or approximately simulates quantum circuit execution. Understanding the capabilities and limitations of each simulation strategy is essential for managing the quantum development workflow.</p>
 <div class="admonition tip">
 <p class="admonition-title">Simulator vs Hardware Decision Rule</p>
+<p>Use classical simulators for algorithm development and debugging (<span class="arithmatex">\(n \leq 30\)</span> qubits). Move to noisy simulation (FakeBackend, noise models) for NISQ algorithm validation (<span class="arithmatex">\(n \leq 20\)</span>). Use real quantum hardware only for experiments that specifically require authentic noise characteristics or exceed classical simulator capacity.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Use classical simulators for algorithm development and debugging ($n \leq 30$ qubits). Move to noisy simulation (FakeBackend, noise models) for NISQ algorithm validation ($n \leq 20$). Use real quantum hardware only for experiments that specifically require authentic noise characteristics or exceed classical simulator capacity.
-</span></code></pre></div>
 <h3 id="types-of-classical-quantum-simulators"><strong>Types of Classical Quantum Simulators</strong></h3>
 <hr />
 <table>
@@ -2641,27 +2640,26 @@
 <h3 id="noise-emulated-simulation-fakebackend"><strong>Noise-Emulated Simulation: FakeBackend</strong></h3>
 <hr />
 <p>Qiskit's <code>FakeBackend</code> family (e.g., <code>FakeNairobi</code>, <code>FakeMontreal</code>) replays calibration data from real IBM devices, injecting gate errors, readout errors, and decoherence (T1/T2) into simulation:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer</span><span class="w"> </span><span class="kn">import</span> <span class="n">AerSimulator</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer.noise</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoiseModel</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.providers.fake_provider</span><span class="w"> </span><span class="kn">import</span> <span class="n">FakeMontreal</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">backend</span> <span class="o">=</span> <span class="n">FakeMontreal</span><span class="p">()</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">noise_model</span> <span class="o">=</span> <span class="n">NoiseModel</span><span class="o">.</span><span class="n">from_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">(</span><span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer</span><span class="w"> </span><span class="kn">import</span> <span class="n">AerSimulator</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer.noise</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoiseModel</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.providers.fake_provider</span><span class="w"> </span><span class="kn">import</span> <span class="n">FakeMontreal</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">backend</span> <span class="o">=</span> <span class="n">FakeMontreal</span><span class="p">()</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">noise_model</span> <span class="o">=</span> <span class="n">NoiseModel</span><span class="o">.</span><span class="n">from_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">sim</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">(</span><span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
 </span></code></pre></div>
 <p>This allows NISQ algorithm testing with realistic noise floors before consuming costly hardware shots.</p>
 <div class="admonition example">
 <p class="admonition-title">Fidelity Degradation under Depolarising Noise</p>
+<p>A 3-qubit GHZ state ideally has fidelity 1. Under depolarising noise rate <span class="arithmatex">\(p = 0.01\)</span> per CNOT, fidelity degrades as:
+<span class="arithmatex">\(F \approx (1-p)^{N_{\text{CNOT}}} \approx (0.99)^2 = 0.98\)</span>
+Under realistic FakeBackend noise (including T1/T2, readout errors), measured GHZ fidelity drops to ~0.85 for even this simple 2-CNOT circuit.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>A 3-qubit GHZ state ideally has fidelity 1. Under depolarising noise rate $p = 0.01$ per CNOT, fidelity degrades as:
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>$F \approx (1-p)^{N_{\text{CNOT}}} \approx (0.99)^2 = 0.98$
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Under realistic FakeBackend noise (including T1/T2, readout errors), measured GHZ fidelity drops to ~0.85 for even this simple 2-CNOT circuit.
-</span></code></pre></div>
 <details class="question">
 <summary>Why does MPS simulation fail for highly entangled states even at small qubit counts?</summary>
+<p>MPS simulation works by representing the quantum state as a tensor network with limited <strong>bond dimension</strong> <span class="arithmatex">\(\chi\)</span>. States with low entanglement (area-law states) are compressed accurately. But for volume-law entangled states — common in quantum chaos, QFT, and random circuits — the exact representation requires exponentially large <span class="arithmatex">\(\chi\)</span>, negating the classical simulation advantage.</p>
 </details>
-<h2 id="mps-simulation-works-by-representing-the-quantum-state-as-a-tensor-network-with-limited-bond-dimension-chi-states-with-low-entanglement-area-law-states-are-compressed-accurately-but-for-volume-law-entangled-states-common-in-quantum-chaos-qft-and-random-circuits-the-exact-representation-requires-exponentially-large-chi-negating-the-classical-simulation-advantage"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>MPS simulation works by representing the quantum state as a tensor network with limited **bond dimension** $\chi$. States with low entanglement (area-law states) are compressed accurately. But for volume-law entangled states — common in quantum chaos, QFT, and random circuits — the exact representation requires exponentially large $\chi$, negating the classical simulation advantage.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="162-trotterization-and-time-evolution"><strong>16.2 Trotterization and Time Evolution</strong></h2>
 <hr />
 <p>Simulating the real-time evolution <span class="arithmatex">\(|\psi(t)\rangle = e^{-iHt}|\psi(0)\rangle\)</span> of a quantum system is the paradigmatic quantum simulation problem. When <span class="arithmatex">\(H = \sum_k H_k\)</span> is a sum of non-commuting terms <span class="arithmatex">\([H_i, H_j] \neq 0\)</span>, <span class="arithmatex">\(e^{-iHt}\)</span> cannot be computed as a product <span class="arithmatex">\(\prod_k e^{-iH_k t}\)</span> exactly. <strong>Trotterization</strong> (product formula decomposition) approximates this evolution with controllable error.</p>
@@ -2715,19 +2713,17 @@ e^{-iHt} \approx \left(\prod_{k=1}^{L} e^{-iH_k \delta t/2} \cdot \prod_{k=L}^{1
 </table>
 <div class="admonition tip">
 <p class="admonition-title">Trotter Step Count vs Circuit Depth</p>
+<p>Increasing Trotter steps <span class="arithmatex">\(r\)</span> improves accuracy but increases circuit depth proportionally. On NISQ hardware, excessive depth causes decoherence errors that can outweigh Trotter approximation errors. The optimal <span class="arithmatex">\(r\)</span> balances these two error sources and is hardware-dependent.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Increasing Trotter steps $r$ improves accuracy but increases circuit depth proportionally. On NISQ hardware, excessive depth causes decoherence errors that can outweigh Trotter approximation errors. The optimal $r$ balances these two error sources and is hardware-dependent.
-</span></code></pre></div>
 <div class="admonition example">
 <p class="admonition-title">Ising Model Trotter Circuit</p>
+<p>For a 1D transverse-field Ising model <span class="arithmatex">\(H = J\sum_i Z_i Z_{i+1} + h\sum_i X_i\)</span>, each Trotter step alternates between ZZ-interaction layers (implemented with <code>RZZ</code> gates) and transverse-field layers (single-qubit <code>RX</code> gates). The per-step circuit depth for <span class="arithmatex">\(n\)</span> qubits is <span class="arithmatex">\(O(n)\)</span>, giving total depth <span class="arithmatex">\(O(nrt)\)</span>.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>For a 1D transverse-field Ising model $H = J\sum_i Z_i Z_{i+1} + h\sum_i X_i$, each Trotter step alternates between ZZ-interaction layers (implemented with `RZZ` gates) and transverse-field layers (single-qubit `RX` gates). The per-step circuit depth for $n$ qubits is $O(n)$, giving total depth $O(nrt)$.
-</span></code></pre></div>
 <details class="question">
 <summary>What makes Trotterization unsuitable for fault-tolerant quantum simulation of chemistry?</summary>
+<p>For accurate quantum chemistry simulation, Trotter error must be controlled to chemical accuracy (~1 mHartree). Achieving this requires <span class="arithmatex">\(r \sim 10^8\)</span>–<span class="arithmatex">\(10^{10}\)</span> Trotter steps for realistic molecular Hamiltonians, making the circuit depth astronomically large. Alternative methods (LCU, QSVT) achieve exponentially better scaling.</p>
 </details>
-<h2 id="for-accurate-quantum-chemistry-simulation-trotter-error-must-be-controlled-to-chemical-accuracy-1-mhartree-achieving-this-requires-r-sim-1081010-trotter-steps-for-realistic-molecular-hamiltonians-making-the-circuit-depth-astronomically-large-alternative-methods-lcu-qsvt-achieve-exponentially-better-scaling"><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>For accurate quantum chemistry simulation, Trotter error must be controlled to chemical accuracy (~1 mHartree). Achieving this requires $r \sim 10^8$–$10^{10}$ Trotter steps for realistic molecular Hamiltonians, making the circuit depth astronomically large. Alternative methods (LCU, QSVT) achieve exponentially better scaling.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="163-hamiltonian-simulation-methods"><strong>16.3 Hamiltonian Simulation Methods</strong></h2>
 <hr />
 <p>Beyond Trotterization, several advanced methods achieve provably better asymptotic scaling for the Hamiltonian simulation problem:</p>
@@ -2749,9 +2745,9 @@ e^{-iHt} = \sum_j \alpha_j U_j
 <p>QSVT reduces Hamiltonian simulation to polynomial approximation theory: simulate <span class="arithmatex">\(e^{-iHt}\)</span> by applying a degree-<span class="arithmatex">\(d\)</span> Chebyshev polynomial to <span class="arithmatex">\(H\)</span>'s eigenvalues, where <span class="arithmatex">\(d = O(t + \log(1/\epsilon))\)</span> — optimal in both evolution time and precision.</p>
 <div class="admonition tip">
 <p class="admonition-title">QSVT for Fault-Tolerant Simulations</p>
+<p>QSVT provides the best-known gate complexity for Hamiltonian simulation: <span class="arithmatex">\(O\left((t \|H\|_{\text{max}} + \frac{\log 1/\epsilon}{\log \log 1/\epsilon})\right)\)</span> gates. It is the preferred method for fault-tolerant quantum simulation of chemistry and materials, where <span class="arithmatex">\(\|H\|\)</span> can be large but <span class="arithmatex">\(t\)</span> is small.</p>
 </div>
-<h2 id="qsvt-provides-the-best-known-gate-complexity-for-hamiltonian-simulation-oleftt-h_textmax-fraclog-1epsilonlog-log-1epsilonright-gates-it-is-the-preferred-method-for-fault-tolerant-quantum-simulation-of-chemistry-and-materials-where-h-can-be-large-but-t-is-small"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>QSVT provides the best-known gate complexity for Hamiltonian simulation: $O\left((t \|H\|_{\text{max}} + \frac{\log 1/\epsilon}{\log \log 1/\epsilon})\right)$ gates. It is the preferred method for fault-tolerant quantum simulation of chemistry and materials, where $\|H\|$ can be large but $t$ is small.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="164-fermionic-systems-and-qubit-encoding"><strong>16.4 Fermionic Systems and Qubit Encoding</strong></h2>
 <hr />
 <p>Electronic structure problems — computing molecular energies, reaction barriers, and material properties — are naturally described by <strong>fermionic operators</strong> satisfying anti-commutation relations. Since quantum computers use <strong>qubits</strong> (which are bosonic-like two-level systems), fermionic operators must be <strong>mapped to qubit operators</strong> before circuit simulation.</p>
@@ -2769,8 +2765,32 @@ H = \sum_{pq} h_{pq} a_p^\dagger a_q + \frac{1}{2}\sum_{pqrs} g_{pqrs} a_p^\dagg
 <h3 id="jordan-wigner-transformation"><strong>Jordan-Wigner Transformation</strong></h3>
 <hr />
 <p>The <strong>Jordan-Wigner (JW)</strong> transformation maps fermionic operators to qubit operators by encoding occupation numbers in qubit states and using Pauli Z strings to enforce anti-commutation:</p>
-<p>$$
-a_p^\dagger \mapsto \left(\bigotimes_{k</p>
+<div class="arithmatex">\[
+a_p^\dagger \mapsto \left(\bigotimes_{k&lt;p} Z_k\right) \otimes \frac{X_p - iY_p}{2}
+\]</div>
+<p>The long Pauli strings (of length <span class="arithmatex">\(O(n)\)</span>) make JW-mapped operators non-local, leading to <span class="arithmatex">\(O(n)\)</span>-qubit Pauli strings and <span class="arithmatex">\(O(n)\)</span>-depth circuits for each Hamiltonian term.</p>
+<div class="admonition example">
+<p class="admonition-title">H₂ Molecule in Jordan-Wigner Encoding</p>
+<p>The hydrogen molecule in a minimal (STO-3G) basis requires 4 spin-orbitals → 4 qubits. After JW mapping and symmetry reduction, the Hamiltonian simplifies to:
+$<span class="arithmatex">\(H = c_0 I + c_1 Z_0 + c_2 Z_1 + c_3 Z_0 Z_1 + c_4 (X_0 X_1 + Y_0 Y_1)\)</span>$
+This 5-term Hamiltonian is directly measurable on a 2-qubit system after additional symmetry reduction.</p>
+</div>
+<h3 id="bravyi-kitaev-transformation"><strong>Bravyi-Kitaev Transformation</strong></h3>
+<hr />
+<p>The <strong>Bravyi-Kitaev (BK)</strong> transformation reduces the average Pauli string length from <span class="arithmatex">\(O(n)\)</span> (JW) to <span class="arithmatex">\(O(\log n)\)</span> by encoding both occupation and parity information hierarchically. For a system with <span class="arithmatex">\(n\)</span> molecular orbitals, BK achieves <span class="arithmatex">\(O(n \log n)\)</span> total Pauli weight vs JW's <span class="arithmatex">\(O(n^2)\)</span>, translating directly to shallower circuits [3].</p>
+<div class="admonition tip">
+<p class="admonition-title">When to Use Which Mapping</p>
+<p>JW is simpler to implement and debug, making it the default for small molecules. For larger molecules (<span class="arithmatex">\(n &gt; 20\)</span> orbitals) where circuit depth is critical, BK's logarithmic Pauli-string scaling offers meaningful depth reductions. The <strong>parity mapping</strong> is another option that symmetrically balances locality at <span class="arithmatex">\(O(\sqrt{n})\)</span> string length.</p>
+</div>
+<details class="question">
+<summary>Why is the fermion-to-qubit mapping a fundamental bottleneck for quantum chemistry simulations?</summary>
+<p>The Hamiltonian term count scales as <span class="arithmatex">\(O(n^4)\)</span> in the number of spin-orbitals. Even with BK's logarithmic locality improvement, measuring all terms in the Hamiltonian requires <span class="arithmatex">\(O(n^4)\)</span> circuit evaluations per energy estimation step. For industrial molecules with <span class="arithmatex">\(n = 100\)</span>–<span class="arithmatex">\(1000\)</span> spin-orbitals, this represents the dominant cost in VQE-based quantum chemistry simulations.</p>
+</details>
+<hr />
+<h2 id="references"><strong>References</strong></h2>
+<p>[1] Feynman, R. P. (1982). <em>Simulating physics with computers</em>. International Journal of Theoretical Physics, 21(6–7), 467–488.</p>
+<p>[2] Childs, A. M., et al. (2021). <em>Theory of Trotter error with commutator scaling</em>. Physical Review X, 11(1), 011020.</p>
+<p>[3] Seeley, J. T., et al. (2012). <em>The Bravyi-Kitaev transformation for quantum computation of electronic structure</em>. Journal of Chemical Physics, 137(22), 224109.</p>
 
 
 

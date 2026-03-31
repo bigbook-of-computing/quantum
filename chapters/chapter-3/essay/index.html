@@ -2602,50 +2602,49 @@
 <p>Single-qubit quantum gates are the elementary <span class="arithmatex">\(2 \times 2\)</span> unitary matrices that act on the two-dimensional Hilbert space of a single qubit, <span class="arithmatex">\(|\psi\rangle = \alpha|0\rangle + \beta|1\rangle\)</span>. Geometrically, these operations correspond to <strong>rotations</strong> or <strong>reflections</strong> of the qubit state vector on the Bloch sphere.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Every single-qubit gate represents a geometric transformation on the Bloch sphere—either a rotation around an axis or a reflection through a plane. This geometric visualization makes gate composition intuitive.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Every single-qubit gate represents a geometric transformation on the Bloch sphere—either a rotation around an axis or a reflection through a plane. This geometric visualization makes gate composition intuitive.
-</span></code></pre></div>
 <h3 id="the-pauli-gates"><strong>The Pauli Gates</strong></h3>
 <p>The three <strong>Pauli gates</strong> are the most fundamental single-qubit gates. They are often referred to as <span class="arithmatex">\(\sigma_x\)</span>, <span class="arithmatex">\(\sigma_y\)</span>, and <span class="arithmatex">\(\sigma_z\)</span> in physics literature and represent <span class="arithmatex">\(\pi\)</span> radian rotations around the respective <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, and <span class="arithmatex">\(z\)</span> axes of the Bloch sphere. All three are both <strong>unitary</strong> (<span class="arithmatex">\(U^\dagger U = I\)</span>) and <strong>Hermitian</strong> (<span class="arithmatex">\(M = M^\dagger\)</span>).</p>
 <ul>
 <li><strong>Pauli X Gate (Bit-flip/NOT):</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>The $X$ gate is the quantum analogue of the classical NOT gate; it performs a **bit-flip**.
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$$
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>X|0\rangle = |1\rangle, \quad X|1\rangle = |0\rangle
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>$$
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>$$
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>X = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>The $X$ gate is the quantum analogue of the classical NOT gate; it performs a **bit-flip**.
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$$
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>X|0\rangle = |1\rangle, \quad X|1\rangle = |0\rangle
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>$$
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>$$
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>X = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>$$
 </span></code></pre></div></li>
 <li><strong>Pauli Z Gate (Phase-flip):</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>The $Z$ gate is the canonical **phase-flip** gate. It leaves the $|0\rangle$ component unchanged but applies a $\pi$ phase shift (a factor of $-1$) to the $|1\rangle$ component. This manipulation of the relative phase is crucial for quantum interference.
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>$$
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Z|0\rangle = |0\rangle, \quad Z|1\rangle = -|1\rangle
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>$$
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>$$
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Z = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix}
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>The $Z$ gate is the canonical **phase-flip** gate. It leaves the $|0\rangle$ component unchanged but applies a $\pi$ phase shift (a factor of $-1$) to the $|1\rangle$ component. This manipulation of the relative phase is crucial for quantum interference.
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$$
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Z|0\rangle = |0\rangle, \quad Z|1\rangle = -|1\rangle
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>$$
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>$$
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Z = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix}
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>$$
 </span></code></pre></div></li>
 <li><strong>Pauli Y Gate (Bit and Phase-flip):</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>The $Y$ gate simultaneously performs a **bit-flip** and a **phase-flip**.
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>$$
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Y|0\rangle = i|1\rangle, \quad Y|1\rangle = -i|0\rangle
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>$$
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>$$
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Y = \begin{bmatrix} 0 &amp; -i \\ i &amp; 0 \end{bmatrix}
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>The $Y$ gate simultaneously performs a **bit-flip** and a **phase-flip**.
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>$$
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Y|0\rangle = i|1\rangle, \quad Y|1\rangle = -i|0\rangle
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>$$
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>$$
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Y = \begin{bmatrix} 0 &amp; -i \\ i &amp; 0 \end{bmatrix}
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>$$
 </span></code></pre></div></li>
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Pauli Gate Properties</p>
+<p>All Pauli gates are:</p>
+<ul>
+<li><strong>Self-inverse</strong>: <span class="arithmatex">\(X^2 = Y^2 = Z^2 = I\)</span></li>
+<li><strong>Hermitian</strong>: <span class="arithmatex">\(X^\dagger = X\)</span>, <span class="arithmatex">\(Y^\dagger = Y\)</span>, <span class="arithmatex">\(Z^\dagger = Z\)</span></li>
+<li><strong>Unitary</strong>: They preserve state normalization</li>
+<li><strong>Anticommutative</strong>: <span class="arithmatex">\(XY = -YX\)</span>, <span class="arithmatex">\(YZ = -ZY\)</span>, <span class="arithmatex">\(ZX = -XZ\)</span></li>
+</ul>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>All Pauli gates are:
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>- **Self-inverse**: $X^2 = Y^2 = Z^2 = I$
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>- **Hermitian**: $X^\dagger = X$, $Y^\dagger = Y$, $Z^\dagger = Z$
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>- **Unitary**: They preserve state normalization
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>- **Anticommutative**: $XY = -YX$, $YZ = -ZY$, $ZX = -XZ$
-</span></code></pre></div>
 <h3 id="the-hadamard-gate"><strong>The Hadamard Gate</strong></h3>
 <p>The <strong>Hadamard (<span class="arithmatex">\(H\)</span>) gate</strong> is essential for creating <strong>superposition</strong> states from basis states. Geometrically, it performs a reflection about the plane bisecting the <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> axes.</p>
 <p>Applying <span class="arithmatex">\(H\)</span> to the basis states yields equal superpositions:
@@ -2661,41 +2660,39 @@ H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 &amp; 1 \ 1 &amp; -1 \end{bmatrix}
 $$</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>The Hadamard gate is the <strong>primary tool for creating superposition</strong> from computational basis states. It's the first gate in most quantum algorithms, enabling quantum parallelism.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>The Hadamard gate is the **primary tool for creating superposition** from computational basis states. It&#39;s the first gate in most quantum algorithms, enabling quantum parallelism.
-</span></code></pre></div>
 <h3 id="phase-gates"><strong>Phase Gates</strong></h3>
 <p>The <span class="arithmatex">\(S\)</span> and <span class="arithmatex">\(T\)</span> gates are critical for fine-tuning the <strong>phase</strong> of a qubit state, a capability necessary for building complex quantum algorithms like the Quantum Fourier Transform. They are specific examples of the general <span class="arithmatex">\(R_z(\theta)\)</span> rotation around the <span class="arithmatex">\(Z\)</span>-axis.</p>
 <ul>
 <li><strong>Phase Gate (<span class="arithmatex">\(S\)</span>):</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Also known as the $\sqrt{Z}$ gate, the $S$ gate applies a $\pi/2$ phase shift to the $|1\rangle$ component. This corresponds to a $\pi/2$ rotation around the $Z$-axis.
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>$$
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>S = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; i \end{bmatrix}
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>$$
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Note that $S^2 = Z$.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Also known as the $\sqrt{Z}$ gate, the $S$ gate applies a $\pi/2$ phase shift to the $|1\rangle$ component. This corresponds to a $\pi/2$ rotation around the $Z$-axis.
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>$$
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>S = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; i \end{bmatrix}
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>$$
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Note that $S^2 = Z$.
 </span></code></pre></div></li>
 <li><strong>T Gate (<span class="arithmatex">\(\pi/8\)</span> Gate):</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>The $T$ gate applies a smaller, eighth-circle phase shift ($\pi/4$) to the $|1\rangle$ component.
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>$$
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>T = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; e^{i\pi/4} \end{bmatrix}
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>$$
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>The $T$ gate is non-Clifford (unlike $X, Y, Z, H, S$) and is crucial because the set $\{H, T\}$ can generate arbitrary single-qubit rotations, making it essential for the universal gate set when combined with a two-qubit gate.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>The $T$ gate applies a smaller, eighth-circle phase shift ($\pi/4$) to the $|1\rangle$ component.
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>$$
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>T = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; e^{i\pi/4} \end{bmatrix}
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>$$
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>The $T$ gate is non-Clifford (unlike $X, Y, Z, H, S$) and is crucial because the set $\{H, T\}$ can generate arbitrary single-qubit rotations, making it essential for the universal gate set when combined with a two-qubit gate.
 </span></code></pre></div></li>
 </ul>
 <details class="question">
 <summary>Why are Clifford gates not sufficient for quantum advantage?</summary>
+<p>Clifford gates (<span class="arithmatex">\(X, Y, Z, H, S\)</span>, CNOT) can be efficiently simulated classically using the Gottesman-Knill theorem. Quantum advantage requires non-Clifford gates like <span class="arithmatex">\(T\)</span>, which introduce the complexity needed to escape classical simulation.</p>
 </details>
-<h2 id="clifford-gates-x-y-z-h-s-cnot-can-be-efficiently-simulated-classically-using-the-gottesman-knill-theorem-quantum-advantage-requires-non-clifford-gates-like-t-which-introduce-the-complexity-needed-to-escape-classical-simulation"><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Clifford gates ($X, Y, Z, H, S$, CNOT) can be efficiently simulated classically using the Gottesman-Knill theorem. Quantum advantage requires non-Clifford gates like $T$, which introduce the complexity needed to escape classical simulation.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="32-multi-qubit-gates-cnot-cz-swap-toffoli"><strong>3.2 Multi-Qubit Gates (CNOT, CZ, SWAP, Toffoli)</strong></h2>
 <hr />
 <hr />
 <p>Multi-qubit gates are fundamental to quantum computation as they facilitate <strong>conditional logic</strong> and, most critically, <strong>entanglement</strong> between qubits. These gates are represented by unitary matrices of size <span class="arithmatex">\(2^N \times 2^N\)</span>, where <span class="arithmatex">\(N\)</span> is the number of qubits involved (typically <span class="arithmatex">\(N=2\)</span> or <span class="arithmatex">\(N=3\)</span>).</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Multi-qubit gates are essential for quantum advantage. Without them, quantum computers would be no more powerful than classical probabilistic computers—it's entanglement that provides the exponential computational speedup.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Multi-qubit gates are essential for quantum advantage. Without them, quantum computers would be no more powerful than classical probabilistic computers—it&#39;s entanglement that provides the exponential computational speedup.
-</span></code></pre></div>
 <h3 id="the-controlled-not-cnot-gate"><strong>The Controlled-NOT (CNOT) Gate</strong></h3>
 <p>The <strong>CNOT</strong> (Controlled-X) gate is the workhorse of quantum computing and the most common two-qubit gate, enabling the generation of maximally entangled states like the Bell states.</p>
 <ul>
@@ -2716,15 +2713,11 @@ $$</p>
 \]</div>
 <div class="admonition example">
 <p class="admonition-title">Creating a Bell State with CNOT</p>
+<p>Starting from <span class="arithmatex">\(|00\rangle\)</span>, apply Hadamard to the first qubit then CNOT:</p>
+<div class="arithmatex">\[H \otimes I |00\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)\]</div>
+<div class="arithmatex">\[\text{CNOT} \left[\frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)\right] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) = |\Phi^+\rangle\]</div>
+<p>This is a maximally entangled Bell state—measuring one qubit instantly determines the other.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Starting from $|00\rangle$, apply Hadamard to the first qubit then CNOT:
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>$$H \otimes I |00\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)$$
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>$$\text{CNOT} \left[\frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)\right] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) = |\Phi^+\rangle$$
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>This is a maximally entangled Bell state—measuring one qubit instantly determines the other.
-</span></code></pre></div>
 <h3 id="controlled-z-cz-gate"><strong>Controlled-Z (CZ) Gate</strong></h3>
 <p>The <strong>Controlled-Z (CZ)</strong> gate is another two-qubit conditional gate, performing a phase manipulation instead of a bit flip.</p>
 <ul>
@@ -2756,9 +2749,8 @@ $$</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>SWAP gates are often not physical operations but are <strong>synthesized</strong> from three CNOT gates. On real hardware with limited connectivity, SWAP insertion is a major source of circuit depth increase during compilation.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>SWAP gates are often not physical operations but are **synthesized** from three CNOT gates. On real hardware with limited connectivity, SWAP insertion is a major source of circuit depth increase during compilation.
-</span></code></pre></div>
 <h3 id="the-toffoli-ccnot-gate"><strong>The Toffoli (CCNOT) Gate</strong></h3>
 <p>The <strong>Toffoli</strong> gate, or <strong>Controlled-Controlled-NOT (CCNOT)</strong>, is a three-qubit gate that introduces a higher degree of control.</p>
 <ul>
@@ -2768,17 +2760,16 @@ $$</li>
 </ul>
 <details class="question">
 <summary>Can we implement Toffoli gates on current hardware?</summary>
+<p>Most quantum hardware doesn't have native three-qubit gates. Toffoli gates are decomposed into sequences of single-qubit and CNOT gates, typically requiring 6-15 CNOTs depending on the decomposition method and hardware constraints. This makes them expensive on NISQ devices.</p>
 </details>
-<h2 id="most-quantum-hardware-doesnt-have-native-three-qubit-gates-toffoli-gates-are-decomposed-into-sequences-of-single-qubit-and-cnot-gates-typically-requiring-6-15-cnots-depending-on-the-decomposition-method-and-hardware-constraints-this-makes-them-expensive-on-nisq-devices"><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Most quantum hardware doesn&#39;t have native three-qubit gates. Toffoli gates are decomposed into sequences of single-qubit and CNOT gates, typically requiring 6-15 CNOTs depending on the decomposition method and hardware constraints. This makes them expensive on NISQ devices.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="33-parameterized-gates"><strong>3.3 Parameterized Gates</strong></h2>
 <hr />
 <p>Parameterized gates are essential for modern quantum computation, particularly in the Noisy Intermediate-Scale Quantum (NISQ) era, as they introduce <strong>tunable, continuous parameters</strong> (<span class="arithmatex">\(\theta\)</span>) into quantum circuits. Unlike fixed gates (like <span class="arithmatex">\(X\)</span> or <span class="arithmatex">\(H\)</span>), these gates enable <strong>arbitrary state preparation</strong> and form the basis of hybrid classical-quantum optimization algorithms.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Parameterized gates transform quantum circuits from fixed algorithms into <strong>trainable ansätze</strong>, enabling hybrid quantum-classical optimization where classical optimizers tune gate parameters to minimize cost functions.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Parameterized gates transform quantum circuits from fixed algorithms into **trainable ansätze**, enabling hybrid quantum-classical optimization where classical optimizers tune gate parameters to minimize cost functions.
-</span></code></pre></div>
 <h3 id="general-rotation-gates"><strong>General Rotation Gates</strong></h3>
 <p>The most common parameterized gates are single-qubit rotation gates: <span class="arithmatex">\(R_x(\theta)\)</span>, <span class="arithmatex">\(R_y(\theta)\)</span>, and <span class="arithmatex">\(R_z(\theta)\)</span>. These perform rotations of angle <span class="arithmatex">\(\theta\)</span> around the corresponding axis on the Bloch sphere and are derived by exponentiating the Pauli matrices.</p>
 <p>The general rotation operator about an arbitrary axis <span class="arithmatex">\(\vec{k}\)</span> is:</p>
@@ -2824,13 +2815,10 @@ U = R_z(\alpha) R_y(\beta) R_z(\gamma)
 <p>these three parameterized rotations are sufficient to implement any single-qubit operation.</p>
 <div class="admonition example">
 <p class="admonition-title">Arbitrary Single-Qubit Decomposition</p>
+<p>Any unitary <span class="arithmatex">\(U \in U(2)\)</span> can be written as three rotations. For example, to prepare <span class="arithmatex">\(|\psi\rangle = \cos(\theta/2)|0\rangle + e^{i\phi}\sin(\theta/2)|1\rangle\)</span>:</p>
+<div class="arithmatex">\[|\psi\rangle = R_z(\phi) R_y(\theta) |0\rangle\]</div>
+<p>This uses only two parameterized rotations, making it efficient for variational circuits.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Any unitary $U \in U(2)$ can be written as three rotations. For example, to prepare $|\psi\rangle = \cos(\theta/2)|0\rangle + e^{i\phi}\sin(\theta/2)|1\rangle$:
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>$$|\psi\rangle = R_z(\phi) R_y(\theta) |0\rangle$$
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>This uses only two parameterized rotations, making it efficient for variational circuits.
-</span></code></pre></div>
 <h3 id="role-in-hybrid-classical-quantum-algorithms"><strong>Role in Hybrid Classical-Quantum Algorithms</strong></h3>
 <p>Parameterized gates are fundamental to <strong>Variational Quantum Circuits (VQCs)</strong>, which power hybrid algorithms such as:</p>
 <ul>
@@ -2871,17 +2859,16 @@ U = R_z(\alpha) R_y(\beta) R_z(\gamma)
 <p>Parameterized two-qubit gates allow finer control over entanglement and are often used in advanced ansätze for optimization or quantum machine learning.</p>
 <details class="question">
 <summary>How do we choose good parameter values?</summary>
+<p>Initial parameters are often randomized or set heuristically. Classical optimizers (gradient descent, COBYLA, Adam) then iteratively refine them. Gradient-based methods can use techniques like parameter-shift rules to compute gradients on quantum hardware without needing to differentiate the quantum circuit analytically.</p>
 </details>
-<h2 id="initial-parameters-are-often-randomized-or-set-heuristically-classical-optimizers-gradient-descent-cobyla-adam-then-iteratively-refine-them-gradient-based-methods-can-use-techniques-like-parameter-shift-rules-to-compute-gradients-on-quantum-hardware-without-needing-to-differentiate-the-quantum-circuit-analytically"><div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Initial parameters are often randomized or set heuristically. Classical optimizers (gradient descent, COBYLA, Adam) then iteratively refine them. Gradient-based methods can use techniques like parameter-shift rules to compute gradients on quantum hardware without needing to differentiate the quantum circuit analytically.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="34-universal-gate-sets"><strong>3.4 Universal Gate Sets</strong></h2>
 <hr />
 <p>A <strong>universal gate set</strong> is a minimal collection of quantum gates that is sufficient to construct, or <strong>approximate to arbitrary precision</strong>, any possible arbitrary unitary operation on any number of qubits. The existence of such a set is critical because it means that powerful quantum algorithms don't require an infinite, complex library of gates; they only require a few basic physical operations, which simplifies the engineering challenge of building hardware.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Universality means you don't need infinitely many gates—just a small set of elementary operations can be composed to approximate any quantum computation to arbitrary accuracy.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Universality means you don&#39;t need infinitely many gates—just a small set of elementary operations can be composed to approximate any quantum computation to arbitrary accuracy.
-</span></code></pre></div>
 <h3 id="conditions-for-universality"><strong>Conditions for Universality</strong></h3>
 <p>For a set of quantum gates <span class="arithmatex">\(\mathcal{G} = \{G_1, G_2, \ldots\}\)</span> to be universal, it must meet two essential requirements, related to the structure of the unitary group <span class="arithmatex">\(U(2^N)\)</span>:</p>
 <ol>
@@ -2912,9 +2899,8 @@ U = R_z(\alpha) R_y(\beta) R_z(\gamma)
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Solovay-Kitaev Theorem</p>
+<p>The Solovay-Kitaev theorem guarantees that any single-qubit unitary can be approximated to precision <span class="arithmatex">\(\epsilon\)</span> using <span class="arithmatex">\(O(\log^c(1/\epsilon))\)</span> gates from a discrete universal set like <span class="arithmatex">\(\{H, T\}\)</span> (where <span class="arithmatex">\(c \approx 2\)</span>). This means approximation is efficient—not exponentially costly.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>The Solovay-Kitaev theorem guarantees that any single-qubit unitary can be approximated to precision $\epsilon$ using $O(\log^c(1/\epsilon))$ gates from a discrete universal set like $\{H, T\}$ (where $c \approx 2$). This means approximation is efficient—not exponentially costly.
-</span></code></pre></div>
 <h3 id="the-role-of-universality-in-compilation"><strong>The Role of Universality in Compilation</strong></h3>
 <p>The concept of universality simplifies the physical implementation of algorithms:</p>
 <ol>
@@ -2923,17 +2909,16 @@ U = R_z(\alpha) R_y(\beta) R_z(\gamma)
 </ol>
 <details class="question">
 <summary>Why can't we just use more gate types in hardware?</summary>
+<p>Each additional native gate type increases hardware complexity, calibration requirements, and error rates. It's more practical to implement a small universal set with high fidelity and synthesize other gates through decomposition, even if it increases circuit depth.</p>
 </details>
-<h2 id="each-additional-native-gate-type-increases-hardware-complexity-calibration-requirements-and-error-rates-its-more-practical-to-implement-a-small-universal-set-with-high-fidelity-and-synthesize-other-gates-through-decomposition-even-if-it-increases-circuit-depth"><div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Each additional native gate type increases hardware complexity, calibration requirements, and error rates. It&#39;s more practical to implement a small universal set with high fidelity and synthesize other gates through decomposition, even if it increases circuit depth.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="35-quantum-circuit-design-and-compilation"><strong>3.5 Quantum Circuit Design and Compilation</strong></h2>
 <hr />
 <p>Quantum computation involves specifying a sequence of unitary operations, or <strong>quantum gates</strong>, applied to qubits over time, which is represented visually by a <strong>quantum circuit</strong>. This abstraction is necessary because physical quantum hardware has constraints, meaning the conceptual algorithm must undergo a complex translation process called <strong>compilation</strong> before execution.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Quantum circuits are the "assembly language" of quantum computing—they bridge the gap between high-level algorithms (like Shor's algorithm) and low-level hardware instructions (native gates on specific devices).</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Quantum circuits are the &quot;assembly language&quot; of quantum computing—they bridge the gap between high-level algorithms (like Shor&#39;s algorithm) and low-level hardware instructions (native gates on specific devices).
-</span></code></pre></div>
 <h3 id="quantum-circuit-design"><strong>Quantum Circuit Design</strong></h3>
 <p>A quantum circuit is a linear representation of a computation, where time flows from left to right, and horizontal lines represent individual qubits.</p>
 <ul>
@@ -2963,9 +2948,8 @@ U = R_z(\alpha) R_y(\beta) R_z(\gamma)
 <p>The insertion of SWAP gates significantly increases the total gate count and, critically, the <strong>Circuit Depth</strong>.</p>
 <div class="admonition example">
 <p class="admonition-title">Compilation Overhead</p>
+<p>A logical circuit with 50 gates might compile to 200+ gates after basis translation and SWAP insertion on a device with limited connectivity. This 4× overhead is typical for NISQ devices and directly impacts error rates.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>A logical circuit with 50 gates might compile to 200+ gates after basis translation and SWAP insertion on a device with limited connectivity. This 4× overhead is typical for NISQ devices and directly impacts error rates.
-</span></code></pre></div>
 <h3 id="circuit-optimization-for-nisq-devices"><strong>Circuit Optimization for NISQ Devices</strong></h3>
 <p>Circuit optimization is aimed at minimizing errors and execution time, a necessity given the limitations of <strong>Noisy Intermediate-Scale Quantum (NISQ) devices</strong>.</p>
 <ul>
@@ -2975,17 +2959,16 @@ U = R_z(\alpha) R_y(\beta) R_z(\gamma)
 </ul>
 <details class="question">
 <summary>Can we parallelize quantum gates to reduce depth?</summary>
+<p>Yes! Gates acting on independent qubits can execute in parallel (same layer). Modern compilers automatically identify commuting gates and schedule them in parallel layers to minimize depth while respecting hardware constraints.</p>
 </details>
-<h2 id="yes-gates-acting-on-independent-qubits-can-execute-in-parallel-same-layer-modern-compilers-automatically-identify-commuting-gates-and-schedule-them-in-parallel-layers-to-minimize-depth-while-respecting-hardware-constraints"><div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Yes! Gates acting on independent qubits can execute in parallel (same layer). Modern compilers automatically identify commuting gates and schedule them in parallel layers to minimize depth while respecting hardware constraints.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="36-quantum-circuit-depth-and-width"><strong>3.6 Quantum Circuit Depth and Width</strong></h2>
 <hr />
 <p>The <strong>depth</strong> and <strong>width</strong> of a quantum circuit are fundamental metrics that quantify the computational resources required for a quantum algorithm. These two dimensions have distinct physical interpretations and directly affect how feasible it is to execute a quantum algorithm on a given quantum device.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Circuit depth is the limiting factor for NISQ devices due to decoherence—circuits must finish before qubits lose their quantum state. Circuit width determines how many physical qubits are needed, limiting which devices can run the algorithm.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Circuit depth is the limiting factor for NISQ devices due to decoherence—circuits must finish before qubits lose their quantum state. Circuit width determines how many physical qubits are needed, limiting which devices can run the algorithm.
-</span></code></pre></div>
 <h3 id="circuit-depth"><strong>Circuit Depth</strong></h3>
 <p><strong>Circuit Depth</strong> is the number of sequential layers of gates in the circuit, where gates in the same layer act on disjoint sets of qubits and can be executed simultaneously (in parallel).</p>
 <ul>
@@ -3021,17 +3004,15 @@ D_{\text{max}} \approx \frac{T_2}{t_{\text{gate}}}
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Depth-Width Trade-off in Practice</p>
+<p>Consider implementing a quantum Fourier transform (QFT) on <span class="arithmatex">\(n\)</span> qubits:
+- Standard implementation: <span class="arithmatex">\(O(n^2)\)</span> depth, <span class="arithmatex">\(n\)</span> width
+- Approximate QFT: <span class="arithmatex">\(O(n \log n)\)</span> depth by truncating gates
+- Parallel QFT: <span class="arithmatex">\(O(n)\)</span> depth but requires <span class="arithmatex">\(O(n^2)\)</span> ancilla qubits (width)</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Consider implementing a quantum Fourier transform (QFT) on $n$ qubits:
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>- Standard implementation: $O(n^2)$ depth, $n$ width
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>- Approximate QFT: $O(n \log n)$ depth by truncating gates
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>- Parallel QFT: $O(n)$ depth but requires $O(n^2)$ ancilla qubits (width)
-</span></code></pre></div>
 <details class="question">
 <summary>How do we choose between depth and width optimization?</summary>
+<p>It depends on your hardware platform! Ion trap systems typically have excellent coherence (favor deeper circuits) but limited qubits. Superconducting systems have more qubits but shorter coherence times (favor shallow, wide circuits). Algorithm design must match the platform's strengths.</p>
 </details>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>It depends on your hardware platform! Ion trap systems typically have excellent coherence (favor deeper circuits) but limited qubits. Superconducting systems have more qubits but shorter coherence times (favor shallow, wide circuits). Algorithm design must match the platform&#39;s strengths.
-</span></code></pre></div>
 <h3 id="implications-for-nisq-devices"><strong>Implications for NISQ Devices</strong></h3>
 <p>For current <strong>Noisy Intermediate-Scale Quantum (NISQ) devices</strong>, the relationship between depth and system fidelity is the <strong>dominant constraint</strong> on algorithm feasibility.</p>
 <table>

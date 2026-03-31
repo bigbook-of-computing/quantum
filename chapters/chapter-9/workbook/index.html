@@ -1560,94 +1560,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#q-when-is-basis-encoding-preferable-to-amplitude-or-angle-encoding-in-qml-pipelines-info-answer-strategy-basis-encoding-is-generally-the-least-powerful-encoding-method-but-it-finds-a-niche-in-specific-scenarios-where-its-simplicity-and-direct-mapping-are-advantageous-it-is-preferable-under-the-following-conditions-1-discrete-categorical-data-when-dealing-with-inherently-discrete-and-non-numeric-data-eg-categories-like-cat-dog-bird-basis-encoding-provides-a-direct-and-unambiguous-representation-each-category-can-be-assigned-a-unique-basis-state-eg-00rangle-01rangle-10rangle-2-quantum-oracle-implementation-it-is-fundamental-for-building-oracles-in-algorithms-like-grovers-search-the-oracle-needs-to-mark-a-specific-basis-state-corresponding-to-the-solution-making-this-encoding-a-natural-fit-3-avoiding-non-linearity-if-a-qml-model-must-remain-simple-and-linear-basis-encoding-is-a-good-choice-angle-and-amplitude-encoding-introduce-non-linearities-that-might-not-be-desirable-for-all-models-4-readout-simplicity-measuring-in-the-computational-basis-directly-yields-the-classical-data-making-the-readout-process-straightforward-in-summary-choose-basis-encoding-when-your-data-is-discrete-you-need-to-implement-oracles-or-you-require-a-simple-linear-model-without-the-complexities-of-other-encodings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** When is basis encoding preferable to amplitude or angle encoding in QML pipelines? ???+ info &quot;Answer Strategy&quot; Basis encoding is generally the least powerful encoding method, but it finds a niche in specific scenarios where its simplicity and direct mapping are advantageous. It is preferable under the following conditions: 1. **Discrete, Categorical Data:** When dealing with inherently discrete and non-numeric data (e.g., categories like &quot;cat,&quot; &quot;dog,&quot; &quot;bird&quot;), basis encoding provides a direct and unambiguous representation. Each category can be assigned a unique basis state (e.g., $|00\rangle, |01\rangle, |10\rangle$). 2. **Quantum Oracle Implementation:** It is fundamental for building oracles in algorithms like Grover&#39;s search. The oracle needs to &quot;mark&quot; a specific basis state corresponding to the solution, making this encoding a natural fit. 3. **Avoiding Non-Linearity:** If a QML model must remain simple and linear, basis encoding is a good choice. Angle and amplitude encoding introduce non-linearities that might not be desirable for all models. 4. **Readout Simplicity:** Measuring in the computational basis directly yields the classical data, making the readout process straightforward. In summary, choose basis encoding when your data is discrete, you need to implement oracles, or you require a simple, linear model without the complexities of other encodings.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-amplitude-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Amplitude Encoding
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-why-does-amplitude-encoding-often-fail-to-provide-a-real-world-speedup-despite-its-exponential-data-compression-info-answer-strategy-amplitude-encoding-represents-a-classical-vector-of-size-n-using-only-log_2-n-qubits-offering-exponential-compression-however-this-often-fails-to-provide-a-wall-clock-speedup-due-to-two-main-bottlenecks-1-state-preparation-cost-for-a-general-classical-vector-preparing-the-corresponding-quantum-state-requires-a-circuit-with-a-depth-that-scales-as-thetan-this-classical-preprocessing-step-dominates-the-overall-runtime-negating-the-olog-n-complexity-of-the-quantum-algorithm-itself-2-data-loading-even-before-the-quantum-circuit-runs-the-classical-data-must-be-read-and-processed-which-is-a-thetan-operation-a-true-speedup-is-only-realized-if-the-data-is-already-in-a-quantum-state-or-has-a-special-structure-that-allows-for-efficient-sub-linear-state-preparation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Why does amplitude encoding often fail to provide a real-world speedup despite its exponential data compression? ???+ info &quot;Answer Strategy&quot; Amplitude encoding represents a classical vector of size $N$ using only $\log_2 N$ qubits, offering exponential compression. However, this often fails to provide a wall-clock speedup due to two main bottlenecks: 1. **State Preparation Cost:** For a general classical vector, preparing the corresponding quantum state requires a circuit with a depth that scales as $\Theta(N)$. This classical preprocessing step dominates the overall runtime, negating the $O(\log N)$ complexity of the quantum algorithm itself. 2. **Data Loading:** Even before the quantum circuit runs, the classical data must be read and processed, which is a $\Theta(N)$ operation. A true speedup is only realized if the data is already in a quantum state or has a special structure that allows for efficient (sub-linear) state preparation.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-angle-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Angle Encoding
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-describe-the-trade-offs-of-using-angle-encoding-in-a-qml-model-info-answer-strategy-angle-encoding-is-a-feature-rich-method-that-maps-a-classical-feature-vector-mathbfx-x_1-ldots-x_n-to-the-rotation-angles-of-single-qubit-gates-typically-using-a-circuit-of-the-form-umathbfx-bigotimes_i1n-r_yx_i-where-r_y-is-a-rotation-y-gate-key-properties-1-non-linearity-the-mapping-from-data-to-quantum-state-is-non-linear-due-to-the-trigonometric-nature-of-rotation-gates-e-i-fractheta2-y-this-allows-angle-encoding-to-implicitly-create-complex-high-dimensional-feature-maps-similar-to-classical-kernel-methods-the-resulting-quantum-model-can-learn-non-linear-decision-boundaries-without-requiring-explicit-non-linear-activation-functions-2-entanglement-free-in-its-basic-form-angle-encoding-is-a-product-state-or-tensor-product-map-each-qubit-encodes-exactly-one-feature-and-no-entangling-gates-like-cnot-are-used-this-makes-the-circuit-shallow-and-hardware-efficient-but-limits-its-expressivity-as-it-cannot-capture-correlations-between-features-3-re-uploading-for-expressivity-to-overcome-the-limitations-of-a-single-encoding-layer-data-re-uploading-can-be-used-this-involves-alternating-layers-of-angle-encoding-and-variational-trainable-gates-this-technique-allows-a-fixed-number-of-qubits-to-approximate-any-continuous-function-effectively-turning-the-circuit-into-a-universal-function-approximator-trade-offs-pros-hardware-efficient-non-linear-and-easily-extendable-with-data-re-uploading-cons-uses-n-qubits-for-n-features-no-compression-and-the-basic-form-lacks-entanglement-limiting-its-ability-to-model-feature-correlations-angle-encoding-is-a-practical-and-powerful-choice-for-many-qml-models-especially-when-non-linearity-is-desired-and-the-number-of-features-is-manageable-for-current-quantum-hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Describe the trade-offs of using angle encoding in a QML model. ???+ info &quot;Answer Strategy&quot; Angle encoding is a feature-rich method that maps a classical feature vector $\mathbf{x} = (x_1, \ldots, x_N)$ to the rotation angles of single-qubit gates, typically using a circuit of the form $U(\mathbf{x}) = \bigotimes_{i=1}^N R_y(x_i)$, where $R_y$ is a rotation-Y gate. **Key Properties:** 1. **Non-linearity:** The mapping from data to quantum state is non-linear due to the trigonometric nature of rotation gates ($e^{-i \frac{\theta}{2} Y}$). This allows angle encoding to implicitly create complex, high-dimensional feature maps, similar to classical kernel methods. The resulting quantum model can learn non-linear decision boundaries without requiring explicit non-linear activation functions. 2. **Entanglement-Free:** In its basic form, angle encoding is a &quot;product state&quot; or &quot;tensor product&quot; map. Each qubit encodes exactly one feature, and no entangling gates (like CNOT) are used. This makes the circuit shallow and hardware-efficient but limits its expressivity, as it cannot capture correlations between features. 3. **Re-uploading for Expressivity:** To overcome the limitations of a single encoding layer, &quot;data re-uploading&quot; can be used. This involves alternating layers of angle encoding and variational (trainable) gates. This technique allows a fixed number of qubits to approximate any continuous function, effectively turning the circuit into a universal function approximator. **Trade-offs:** * **Pros:** Hardware-efficient, non-linear, and easily extendable with data re-uploading. * **Cons:** Uses $N$ qubits for $N$ features (no compression), and the basic form lacks entanglement, limiting its ability to model feature correlations. Angle encoding is a practical and powerful choice for many QML models, especially when non-linearity is desired and the number of features is manageable for current quantum hardware.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-hamiltonian-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Hamiltonian Encoding
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-why-is-hamiltonian-encoding-considered-less-of-a-data-loading-technique-and-more-of-a-problem-definition-technique-info-answer-strategy-hamiltonian-encoding-differs-fundamentally-from-methods-like-angle-or-amplitude-encoding-while-the-latter-are-designed-to-load-classical-data-vectors-into-a-quantum-state-hamiltonian-encoding-is-designed-to-embed-a-classical-matrix-representing-a-linear-operator-or-a-problem-into-the-dynamics-of-a-quantum-system-heres-the-distinction-1-input-type-data-loading-angleamplitude-input-is-a-vector-mathbfx-the-goal-is-to-create-the-state-psimathbfxrangle-problem-definition-hamiltonian-input-is-a-matrix-a-the-goal-is-to-create-a-process-time-evolution-e-iht-that-acts-on-quantum-states-according-to-a-2-purpose-data-loading-prepares-the-input-for-a-quantum-algorithm-its-the-noun-or-the-subject-of-the-computation-problem-definition-defines-the-core-operation-of-the-algorithm-itself-its-the-verb-or-the-action-of-the-computation-for-example-in-the-hhl-algorithm-amathbfxmathbfb-amplitude-encoding-is-used-to-load-the-vector-mathbfb-into-a-state-mathbfbrangle-while-hamiltonian-encoding-is-used-to-represent-the-matrix-a-as-an-operator-that-can-be-manipulated-you-are-not-loading-the-matrix-a-as-a-state-to-be-processed-you-are-defining-the-systems-evolution-based-on-a" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Why is Hamiltonian encoding considered less of a &quot;data loading&quot; technique and more of a &quot;problem definition&quot; technique? ???+ info &quot;Answer Strategy&quot; Hamiltonian encoding differs fundamentally from methods like angle or amplitude encoding. While the latter are designed to load classical *data vectors* into a quantum state, Hamiltonian encoding is designed to embed a classical *matrix* (representing a linear operator or a problem) into the dynamics of a quantum system. Here’s the distinction: 1. **Input Type:** * **Data Loading (Angle/Amplitude):** Input is a vector $\mathbf{x}$. The goal is to create the state $|\psi(\mathbf{x})\rangle$. * **Problem Definition (Hamiltonian):** Input is a matrix $A$. The goal is to create a process (time evolution $e^{-iHt}$) that *acts on* quantum states according to $A$. 2. **Purpose:** * **Data Loading:** Prepares the input for a quantum algorithm. It&#39;s the &quot;noun&quot; or the subject of the computation. * **Problem Definition:** Defines the core operation of the algorithm itself. It&#39;s the &quot;verb&quot; or the action of the computation. For example, in the HHL algorithm ($A\mathbf{x}=\mathbf{b}$), amplitude encoding is used to load the vector $\mathbf{b}$ into a state $|\mathbf{b}\rangle$, while Hamiltonian encoding is used to represent the matrix $A$ as an operator that can be manipulated. You are not loading the matrix $A$ as a state to be processed; you are defining the system&#39;s evolution based on $A$.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-quantum-feature-maps-and-kernels" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Quantum Feature Maps and Kernels
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2670,94 +2582,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#q-when-is-basis-encoding-preferable-to-amplitude-or-angle-encoding-in-qml-pipelines-info-answer-strategy-basis-encoding-is-generally-the-least-powerful-encoding-method-but-it-finds-a-niche-in-specific-scenarios-where-its-simplicity-and-direct-mapping-are-advantageous-it-is-preferable-under-the-following-conditions-1-discrete-categorical-data-when-dealing-with-inherently-discrete-and-non-numeric-data-eg-categories-like-cat-dog-bird-basis-encoding-provides-a-direct-and-unambiguous-representation-each-category-can-be-assigned-a-unique-basis-state-eg-00rangle-01rangle-10rangle-2-quantum-oracle-implementation-it-is-fundamental-for-building-oracles-in-algorithms-like-grovers-search-the-oracle-needs-to-mark-a-specific-basis-state-corresponding-to-the-solution-making-this-encoding-a-natural-fit-3-avoiding-non-linearity-if-a-qml-model-must-remain-simple-and-linear-basis-encoding-is-a-good-choice-angle-and-amplitude-encoding-introduce-non-linearities-that-might-not-be-desirable-for-all-models-4-readout-simplicity-measuring-in-the-computational-basis-directly-yields-the-classical-data-making-the-readout-process-straightforward-in-summary-choose-basis-encoding-when-your-data-is-discrete-you-need-to-implement-oracles-or-you-require-a-simple-linear-model-without-the-complexities-of-other-encodings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** When is basis encoding preferable to amplitude or angle encoding in QML pipelines? ???+ info &quot;Answer Strategy&quot; Basis encoding is generally the least powerful encoding method, but it finds a niche in specific scenarios where its simplicity and direct mapping are advantageous. It is preferable under the following conditions: 1. **Discrete, Categorical Data:** When dealing with inherently discrete and non-numeric data (e.g., categories like &quot;cat,&quot; &quot;dog,&quot; &quot;bird&quot;), basis encoding provides a direct and unambiguous representation. Each category can be assigned a unique basis state (e.g., $|00\rangle, |01\rangle, |10\rangle$). 2. **Quantum Oracle Implementation:** It is fundamental for building oracles in algorithms like Grover&#39;s search. The oracle needs to &quot;mark&quot; a specific basis state corresponding to the solution, making this encoding a natural fit. 3. **Avoiding Non-Linearity:** If a QML model must remain simple and linear, basis encoding is a good choice. Angle and amplitude encoding introduce non-linearities that might not be desirable for all models. 4. **Readout Simplicity:** Measuring in the computational basis directly yields the classical data, making the readout process straightforward. In summary, choose basis encoding when your data is discrete, you need to implement oracles, or you require a simple, linear model without the complexities of other encodings.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-amplitude-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Amplitude Encoding
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-why-does-amplitude-encoding-often-fail-to-provide-a-real-world-speedup-despite-its-exponential-data-compression-info-answer-strategy-amplitude-encoding-represents-a-classical-vector-of-size-n-using-only-log_2-n-qubits-offering-exponential-compression-however-this-often-fails-to-provide-a-wall-clock-speedup-due-to-two-main-bottlenecks-1-state-preparation-cost-for-a-general-classical-vector-preparing-the-corresponding-quantum-state-requires-a-circuit-with-a-depth-that-scales-as-thetan-this-classical-preprocessing-step-dominates-the-overall-runtime-negating-the-olog-n-complexity-of-the-quantum-algorithm-itself-2-data-loading-even-before-the-quantum-circuit-runs-the-classical-data-must-be-read-and-processed-which-is-a-thetan-operation-a-true-speedup-is-only-realized-if-the-data-is-already-in-a-quantum-state-or-has-a-special-structure-that-allows-for-efficient-sub-linear-state-preparation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Why does amplitude encoding often fail to provide a real-world speedup despite its exponential data compression? ???+ info &quot;Answer Strategy&quot; Amplitude encoding represents a classical vector of size $N$ using only $\log_2 N$ qubits, offering exponential compression. However, this often fails to provide a wall-clock speedup due to two main bottlenecks: 1. **State Preparation Cost:** For a general classical vector, preparing the corresponding quantum state requires a circuit with a depth that scales as $\Theta(N)$. This classical preprocessing step dominates the overall runtime, negating the $O(\log N)$ complexity of the quantum algorithm itself. 2. **Data Loading:** Even before the quantum circuit runs, the classical data must be read and processed, which is a $\Theta(N)$ operation. A true speedup is only realized if the data is already in a quantum state or has a special structure that allows for efficient (sub-linear) state preparation.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-angle-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Angle Encoding
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-describe-the-trade-offs-of-using-angle-encoding-in-a-qml-model-info-answer-strategy-angle-encoding-is-a-feature-rich-method-that-maps-a-classical-feature-vector-mathbfx-x_1-ldots-x_n-to-the-rotation-angles-of-single-qubit-gates-typically-using-a-circuit-of-the-form-umathbfx-bigotimes_i1n-r_yx_i-where-r_y-is-a-rotation-y-gate-key-properties-1-non-linearity-the-mapping-from-data-to-quantum-state-is-non-linear-due-to-the-trigonometric-nature-of-rotation-gates-e-i-fractheta2-y-this-allows-angle-encoding-to-implicitly-create-complex-high-dimensional-feature-maps-similar-to-classical-kernel-methods-the-resulting-quantum-model-can-learn-non-linear-decision-boundaries-without-requiring-explicit-non-linear-activation-functions-2-entanglement-free-in-its-basic-form-angle-encoding-is-a-product-state-or-tensor-product-map-each-qubit-encodes-exactly-one-feature-and-no-entangling-gates-like-cnot-are-used-this-makes-the-circuit-shallow-and-hardware-efficient-but-limits-its-expressivity-as-it-cannot-capture-correlations-between-features-3-re-uploading-for-expressivity-to-overcome-the-limitations-of-a-single-encoding-layer-data-re-uploading-can-be-used-this-involves-alternating-layers-of-angle-encoding-and-variational-trainable-gates-this-technique-allows-a-fixed-number-of-qubits-to-approximate-any-continuous-function-effectively-turning-the-circuit-into-a-universal-function-approximator-trade-offs-pros-hardware-efficient-non-linear-and-easily-extendable-with-data-re-uploading-cons-uses-n-qubits-for-n-features-no-compression-and-the-basic-form-lacks-entanglement-limiting-its-ability-to-model-feature-correlations-angle-encoding-is-a-practical-and-powerful-choice-for-many-qml-models-especially-when-non-linearity-is-desired-and-the-number-of-features-is-manageable-for-current-quantum-hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Describe the trade-offs of using angle encoding in a QML model. ???+ info &quot;Answer Strategy&quot; Angle encoding is a feature-rich method that maps a classical feature vector $\mathbf{x} = (x_1, \ldots, x_N)$ to the rotation angles of single-qubit gates, typically using a circuit of the form $U(\mathbf{x}) = \bigotimes_{i=1}^N R_y(x_i)$, where $R_y$ is a rotation-Y gate. **Key Properties:** 1. **Non-linearity:** The mapping from data to quantum state is non-linear due to the trigonometric nature of rotation gates ($e^{-i \frac{\theta}{2} Y}$). This allows angle encoding to implicitly create complex, high-dimensional feature maps, similar to classical kernel methods. The resulting quantum model can learn non-linear decision boundaries without requiring explicit non-linear activation functions. 2. **Entanglement-Free:** In its basic form, angle encoding is a &quot;product state&quot; or &quot;tensor product&quot; map. Each qubit encodes exactly one feature, and no entangling gates (like CNOT) are used. This makes the circuit shallow and hardware-efficient but limits its expressivity, as it cannot capture correlations between features. 3. **Re-uploading for Expressivity:** To overcome the limitations of a single encoding layer, &quot;data re-uploading&quot; can be used. This involves alternating layers of angle encoding and variational (trainable) gates. This technique allows a fixed number of qubits to approximate any continuous function, effectively turning the circuit into a universal function approximator. **Trade-offs:** * **Pros:** Hardware-efficient, non-linear, and easily extendable with data re-uploading. * **Cons:** Uses $N$ qubits for $N$ features (no compression), and the basic form lacks entanglement, limiting its ability to model feature correlations. Angle encoding is a practical and powerful choice for many QML models, especially when non-linearity is desired and the number of features is manageable for current quantum hardware.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-hamiltonian-encoding" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Hamiltonian Encoding
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-why-is-hamiltonian-encoding-considered-less-of-a-data-loading-technique-and-more-of-a-problem-definition-technique-info-answer-strategy-hamiltonian-encoding-differs-fundamentally-from-methods-like-angle-or-amplitude-encoding-while-the-latter-are-designed-to-load-classical-data-vectors-into-a-quantum-state-hamiltonian-encoding-is-designed-to-embed-a-classical-matrix-representing-a-linear-operator-or-a-problem-into-the-dynamics-of-a-quantum-system-heres-the-distinction-1-input-type-data-loading-angleamplitude-input-is-a-vector-mathbfx-the-goal-is-to-create-the-state-psimathbfxrangle-problem-definition-hamiltonian-input-is-a-matrix-a-the-goal-is-to-create-a-process-time-evolution-e-iht-that-acts-on-quantum-states-according-to-a-2-purpose-data-loading-prepares-the-input-for-a-quantum-algorithm-its-the-noun-or-the-subject-of-the-computation-problem-definition-defines-the-core-operation-of-the-algorithm-itself-its-the-verb-or-the-action-of-the-computation-for-example-in-the-hhl-algorithm-amathbfxmathbfb-amplitude-encoding-is-used-to-load-the-vector-mathbfb-into-a-state-mathbfbrangle-while-hamiltonian-encoding-is-used-to-represent-the-matrix-a-as-an-operator-that-can-be-manipulated-you-are-not-loading-the-matrix-a-as-a-state-to-be-processed-you-are-defining-the-systems-evolution-based-on-a" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Why is Hamiltonian encoding considered less of a &quot;data loading&quot; technique and more of a &quot;problem definition&quot; technique? ???+ info &quot;Answer Strategy&quot; Hamiltonian encoding differs fundamentally from methods like angle or amplitude encoding. While the latter are designed to load classical *data vectors* into a quantum state, Hamiltonian encoding is designed to embed a classical *matrix* (representing a linear operator or a problem) into the dynamics of a quantum system. Here’s the distinction: 1. **Input Type:** * **Data Loading (Angle/Amplitude):** Input is a vector $\mathbf{x}$. The goal is to create the state $|\psi(\mathbf{x})\rangle$. * **Problem Definition (Hamiltonian):** Input is a matrix $A$. The goal is to create a process (time evolution $e^{-iHt}$) that *acts on* quantum states according to $A$. 2. **Purpose:** * **Data Loading:** Prepares the input for a quantum algorithm. It&#39;s the &quot;noun&quot; or the subject of the computation. * **Problem Definition:** Defines the core operation of the algorithm itself. It&#39;s the &quot;verb&quot; or the action of the computation. For example, in the HHL algorithm ($A\mathbf{x}=\mathbf{b}$), amplitude encoding is used to load the vector $\mathbf{b}$ into a state $|\mathbf{b}\rangle$, while Hamiltonian encoding is used to represent the matrix $A$ as an operator that can be manipulated. You are not loading the matrix $A$ as a state to be processed; you are defining the system&#39;s evolution based on $A$.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-quantum-feature-maps-and-kernels" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Quantum Feature Maps and Kernels
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2791,7 +2615,7 @@
   
 
 
-<h1 id="chapter-9-quantum-data-encoding-techniques-workbook"><strong>Chapter 9: Quantum Data Encoding Techniques () () (Workbook)</strong></h1>
+<h1 id="chapter-9-quantum-data-encoding-techniques-workbook"><strong>Chapter 9: Quantum Data Encoding Techniques (Workbook)</strong></h1>
 <hr />
 <blockquote>
 <p><strong>Summary:</strong> This chapter provides a comprehensive analysis of the primary techniques for encoding classical data into quantum states, a critical step in the quantum machine learning pipeline. We examine basis, amplitude, angle, and Hamiltonian encoding, as well as quantum feature maps, evaluating their mathematical foundations, implementation complexities, and the trade-offs between data compression and circuit depth. The discussion highlights how amplitude encoding offers exponential compression at the cost of a data loading bottleneck, while angle encoding and feature maps provide the shallow circuits necessary for NISQ-era algorithms. Understanding these encoding strategies is fundamental to designing practical quantum machine learning models and realizing quantum advantage.</p>
@@ -2800,294 +2624,268 @@
 <h2 id="1-basis-encoding">1. Basis Encoding</h2>
 <div class="admonition question">
 <p class="admonition-title">What is Basis Encoding and what are its main limitations?</p>
+<p>Basis encoding, also known as computational basis encoding, is a method for representing classical binary data in a quantum system. It maps a classical binary string to a corresponding quantum computational basis state.</p>
+<ul>
+<li><strong>Mechanism</strong>: An <span class="arithmatex">\(n\)</span>-bit classical string <span class="arithmatex">\(s = s_1s_2...s_n\)</span> is mapped to the quantum state <span class="arithmatex">\(|s\rangle = |s_1\rangle \otimes |s_2\rangle \otimes ... \otimes |s_n\rangle\)</span>.</li>
+<li><strong>Example</strong>: The classical string <code>101</code> is encoded as the quantum state <span class="arithmatex">\(|101\rangle\)</span>.</li>
+</ul>
+<p><strong>Limitations</strong>:
+1.  <strong>Resource Intensive</strong>: It requires <span class="arithmatex">\(N\)</span> qubits to store <span class="arithmatex">\(N\)</span> bits of information, offering no data compression.
+2.  <strong>Limited Quantum Advantage</strong>: Since it doesn't use superposition, it often fails to leverage the full power of quantum computation. Many algorithms that use basis encoding can be simulated efficiently on a classical computer.</p>
+<p><div class="heading-with-pill">
+<div class="heading-text">Hands-on</div>
+<div class="pill-right">Basis Encoding</div>
+</div></p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Basis encoding, also known as computational basis encoding, is a method for representing classical binary data in a quantum system. It maps a classical binary string to a corresponding quantum computational basis state.
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>- **Mechanism**: An $n$-bit classical string $s = s_1s_2...s_n$ is mapped to the quantum state $|s\rangle = |s_1\rangle \otimes |s_2\rangle \otimes ... \otimes |s_n\rangle$.
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>- **Example**: The classical string `101` is encoded as the quantum state $|101\rangle$.
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>**Limitations**:
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>1.  **Resource Intensive**: It requires $N$ qubits to store $N$ bits of information, offering no data compression.
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>2.  **Limited Quantum Advantage**: Since it doesn&#39;t use superposition, it often fails to leverage the full power of quantum computation. Many algorithms that use basis encoding can be simulated efficiently on a classical computer.
-</span></code></pre></div>
-<div class="heading-with-pill">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&lt;div class=&quot;heading-text&quot;&gt;Hands-on&lt;/div&gt;
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&lt;div class=&quot;pill-right&quot;&gt;Basis Encoding&lt;/div&gt;
-</span></code></pre></div>
-</div>
-
 <div class="admonition example">
 <p class="admonition-title">Example: Encoding a Binary String</p>
+<p>Let's encode the 4-bit string <code>1101</code> into a quantum state using Qiskit.</p>
+<p>```python
+from qiskit import QuantumCircuit</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Let&#39;s encode the 4-bit string `1101` into a quantum state using Qiskit.
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>```python
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>from qiskit import QuantumCircuit
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a># The classical binary string
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>binary_string = &quot;1101&quot;
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a># Create a quantum circuit with a qubit for each bit
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>qc = QuantumCircuit(len(binary_string))
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a># Apply an X gate for each &#39;1&#39; in the string (from right to left)
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>for i, bit in enumerate(reversed(binary_string)):
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    if bit == &#39;1&#39;:
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        qc.x(i)
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a># The statevector simulator can show the resulting quantum state
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>from qiskit.quantum_info import Statevector
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>state = Statevector(qc)
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>print(f&quot;The encoded state is: {state.draw(output=&#39;latex_source&#39;)}&quot;)
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a># Output: The encoded state is: |1101&gt;
+<h1 id="the-classical-binary-string">The classical binary string</h1>
+<p>binary_string = "1101"</p>
+<h1 id="create-a-quantum-circuit-with-a-qubit-for-each-bit">Create a quantum circuit with a qubit for each bit</h1>
+<p>qc = QuantumCircuit(len(binary_string))</p>
+<h1 id="apply-an-x-gate-for-each-1-in-the-string-from-right-to-left">Apply an X gate for each '1' in the string (from right to left)</h1>
+<p>for i, bit in enumerate(reversed(binary_string)):
+    if bit == '1':
+        qc.x(i)</p>
+<h1 id="the-statevector-simulator-can-show-the-resulting-quantum-state">The statevector simulator can show the resulting quantum state</h1>
+<p>from qiskit.quantum_info import Statevector
+state = Statevector(qc)
+print(f"The encoded state is: {state.draw(output='latex_source')}")</p>
+<h1 id="output-the-encoded-state-is-1101">Output: The encoded state is: |1101&gt;</h1>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>**Sample Output:**
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>```python
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>The encoded state is:  |1101\rangle
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">The</span> <span class="n">encoded</span> <span class="n">state</span> <span class="ow">is</span><span class="p">:</span>  <span class="o">|</span><span class="mi">1101</span>\<span class="n">rangle</span>
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>The circuit prepares the state $|1101\rangle$, directly corresponding to the classical input.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>The circuit prepares the state $|1101\rangle$, directly corresponding to the classical input.
 </span></code></pre></div>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> When is basis encoding preferable to amplitude or angle encoding in QML pipelines?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>Basis encoding is generally the least powerful encoding method, but it finds a niche in specific scenarios where its simplicity and direct mapping are advantageous. It is preferable under the following conditions:</p>
+<ol>
+<li><strong>Discrete, Categorical Data:</strong> When dealing with inherently discrete and non-numeric data (e.g., categories like "cat," "dog," "bird"), basis encoding provides a direct and unambiguous representation. Each category can be assigned a unique basis state (e.g., <span class="arithmatex">\(|00\rangle, |01\rangle, |10\rangle\)</span>).</li>
+<li><strong>Quantum Oracle Implementation:</strong> It is fundamental for building oracles in algorithms like Grover's search. The oracle needs to "mark" a specific basis state corresponding to the solution, making this encoding a natural fit.</li>
+<li><strong>Avoiding Non-Linearity:</strong> If a QML model must remain simple and linear, basis encoding is a good choice. Angle and amplitude encoding introduce non-linearities that might not be desirable for all models.</li>
+<li><strong>Readout Simplicity:</strong> Measuring in the computational basis directly yields the classical data, making the readout process straightforward.</li>
+</ol>
+<p>In summary, choose basis encoding when your data is discrete, you need to implement oracles, or you require a simple, linear model without the complexities of other encodings.</p>
+</details>
 </div>
-<h2 id="q-when-is-basis-encoding-preferable-to-amplitude-or-angle-encoding-in-qml-pipelines-info-answer-strategy-basis-encoding-is-generally-the-least-powerful-encoding-method-but-it-finds-a-niche-in-specific-scenarios-where-its-simplicity-and-direct-mapping-are-advantageous-it-is-preferable-under-the-following-conditions-1-discrete-categorical-data-when-dealing-with-inherently-discrete-and-non-numeric-data-eg-categories-like-cat-dog-bird-basis-encoding-provides-a-direct-and-unambiguous-representation-each-category-can-be-assigned-a-unique-basis-state-eg-00rangle-01rangle-10rangle-2-quantum-oracle-implementation-it-is-fundamental-for-building-oracles-in-algorithms-like-grovers-search-the-oracle-needs-to-mark-a-specific-basis-state-corresponding-to-the-solution-making-this-encoding-a-natural-fit-3-avoiding-non-linearity-if-a-qml-model-must-remain-simple-and-linear-basis-encoding-is-a-good-choice-angle-and-amplitude-encoding-introduce-non-linearities-that-might-not-be-desirable-for-all-models-4-readout-simplicity-measuring-in-the-computational-basis-directly-yields-the-classical-data-making-the-readout-process-straightforward-in-summary-choose-basis-encoding-when-your-data-is-discrete-you-need-to-implement-oracles-or-you-require-a-simple-linear-model-without-the-complexities-of-other-encodings"><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>**Q:** When is basis encoding preferable to amplitude or angle encoding in QML pipelines?
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    Basis encoding is generally the least powerful encoding method, but it finds a niche in specific scenarios where its simplicity and direct mapping are advantageous. It is preferable under the following conditions:
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    1.  **Discrete, Categorical Data:** When dealing with inherently discrete and non-numeric data (e.g., categories like &quot;cat,&quot; &quot;dog,&quot; &quot;bird&quot;), basis encoding provides a direct and unambiguous representation. Each category can be assigned a unique basis state (e.g., $|00\rangle, |01\rangle, |10\rangle$).
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    2.  **Quantum Oracle Implementation:** It is fundamental for building oracles in algorithms like Grover&#39;s search. The oracle needs to &quot;mark&quot; a specific basis state corresponding to the solution, making this encoding a natural fit.
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    3.  **Avoiding Non-Linearity:** If a QML model must remain simple and linear, basis encoding is a good choice. Angle and amplitude encoding introduce non-linearities that might not be desirable for all models.
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    4.  **Readout Simplicity:** Measuring in the computational basis directly yields the classical data, making the readout process straightforward.
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    In summary, choose basis encoding when your data is discrete, you need to implement oracles, or you require a simple, linear model without the complexities of other encodings.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="2-amplitude-encoding">2. Amplitude Encoding</h2>
 <div class="admonition question">
 <p class="admonition-title">What is Amplitude Encoding and what is its primary bottleneck?</p>
+<p>Amplitude encoding is a powerful technique for representing a classical vector in a quantum state. It maps a normalized <span class="arithmatex">\(N\)</span>-dimensional classical vector to the amplitudes of a quantum state with <span class="arithmatex">\(\log_2 N\)</span> qubits.</p>
+<ul>
+<li><strong>Mechanism</strong>: A classical vector <span class="arithmatex">\(\mathbf{x} = (x_1, x_2, ..., x_N)\)</span> with <span class="arithmatex">\(\|\mathbf{x}\|=1\)</span> is encoded as the state <span class="arithmatex">\(|\psi\rangle = \sum_{i=1}^{N} x_i |i\rangle\)</span>.</li>
+<li><strong>Advantage</strong>: It offers exponential data compression, storing <span class="arithmatex">\(N\)</span> values in only <span class="arithmatex">\(\log_2 N\)</span> qubits.</li>
+</ul>
+<p><strong>Primary Bottleneck</strong>:
+The main challenge is <strong>state preparation</strong>. For a general, arbitrary classical vector, creating the corresponding quantum state requires a circuit with a depth that scales linearly with <span class="arithmatex">\(N\)</span>, i.e., <span class="arithmatex">\(O(N)\)</span>. This cost of loading the data often negates the exponential speedup promised by the quantum algorithm itself, as the classical preprocessing and data loading dominate the total runtime.</p>
+<p><div class="heading-with-pill">
+<div class="heading-text">Hands-on</div>
+<div class="pill-right">Amplitude Encoding</div>
+</div></p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Amplitude encoding is a powerful technique for representing a classical vector in a quantum state. It maps a normalized $N$-dimensional classical vector to the amplitudes of a quantum state with $\log_2 N$ qubits.
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>- **Mechanism**: A classical vector $\mathbf{x} = (x_1, x_2, ..., x_N)$ with $\|\mathbf{x}\|=1$ is encoded as the state $|\psi\rangle = \sum_{i=1}^{N} x_i |i\rangle$.
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>- **Advantage**: It offers exponential data compression, storing $N$ values in only $\log_2 N$ qubits.
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>**Primary Bottleneck**:
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>The main challenge is **state preparation**. For a general, arbitrary classical vector, creating the corresponding quantum state requires a circuit with a depth that scales linearly with $N$, i.e., $O(N)$. This cost of loading the data often negates the exponential speedup promised by the quantum algorithm itself, as the classical preprocessing and data loading dominate the total runtime.
-</span></code></pre></div>
-<div class="heading-with-pill">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&lt;div class=&quot;heading-text&quot;&gt;Hands-on&lt;/div&gt;
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>&lt;div class=&quot;pill-right&quot;&gt;Amplitude Encoding&lt;/div&gt;
-</span></code></pre></div>
-</div>
-
 <div class="admonition example">
 <p class="admonition-title">Example: Encoding a 4D Vector</p>
+<p>Let's encode the normalized vector <span class="arithmatex">\(\mathbf{x} = [0.5, 0.5, 0.5, 0.5]\)</span> into a 2-qubit state. This specific vector corresponds to an equal superposition state.</p>
+<p>```python
+from qiskit import QuantumCircuit
+from qiskit.quantum_info import Statevector
+import numpy as np</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Let&#39;s encode the normalized vector $\mathbf{x} = [0.5, 0.5, 0.5, 0.5]$ into a 2-qubit state. This specific vector corresponds to an equal superposition state.
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>```python
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>from qiskit import QuantumCircuit
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>from qiskit.quantum_info import Statevector
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>import numpy as np
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a># The classical vector to encode
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>vector = np.array([0.5, 0.5, 0.5, 0.5])
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a># Normalize the vector (it&#39;s already normalized in this case)
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>norm = np.linalg.norm(vector)
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>normalized_vector = vector / norm
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a># Create a quantum circuit with log2(N) qubits
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>num_qubits = int(np.log2(len(normalized_vector)))
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>qc = QuantumCircuit(num_qubits)
-</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
-</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a># For this special case, applying H-gates creates the state
-</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>for i in range(num_qubits):
-</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    qc.h(i)
-</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>
-</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a># The initialize() method can prepare an arbitrary state
-</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a># qc.initialize(normalized_vector, range(num_qubits))
-</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>
-</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>state = Statevector(qc)
-</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>print(f&quot;The encoded state is: {state.draw(output=&#39;latex_source&#39;)}&quot;)
-</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a># Output: The encoded state is: 0.5 |00&gt; + 0.5 |01&gt; + 0.5 |10&gt; + 0.5 |11&gt;
+<h1 id="the-classical-vector-to-encode">The classical vector to encode</h1>
+<p>vector = np.array([0.5, 0.5, 0.5, 0.5])</p>
+<h1 id="normalize-the-vector-its-already-normalized-in-this-case">Normalize the vector (it's already normalized in this case)</h1>
+<p>norm = np.linalg.norm(vector)
+normalized_vector = vector / norm</p>
+<h1 id="create-a-quantum-circuit-with-log2n-qubits">Create a quantum circuit with log2(N) qubits</h1>
+<p>num_qubits = int(np.log2(len(normalized_vector)))
+qc = QuantumCircuit(num_qubits)</p>
+<h1 id="for-this-special-case-applying-h-gates-creates-the-state">For this special case, applying H-gates creates the state</h1>
+<p>for i in range(num_qubits):
+    qc.h(i)</p>
+<h1 id="the-initialize-method-can-prepare-an-arbitrary-state">The initialize() method can prepare an arbitrary state</h1>
+<h1 id="qcinitializenormalized_vector-rangenum_qubits">qc.initialize(normalized_vector, range(num_qubits))</h1>
+<p>state = Statevector(qc)
+print(f"The encoded state is: {state.draw(output='latex_source')}")</p>
+<h1 id="output-the-encoded-state-is-05-00-05-01-05-10-05-11">Output: The encoded state is: 0.5 |00&gt; + 0.5 |01&gt; + 0.5 |10&gt; + 0.5 |11&gt;</h1>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>**Sample Output:**
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>```python
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>The encoded state is: \frac{1}{2} |00\rangle+\frac{1}{2} |01\rangle+\frac{1}{2} |10\rangle+\frac{1}{2} |11\rangle
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">The</span> <span class="n">encoded</span> <span class="n">state</span> <span class="ow">is</span><span class="p">:</span> \<span class="n">frac</span><span class="p">{</span><span class="mi">1</span><span class="p">}{</span><span class="mi">2</span><span class="p">}</span> <span class="o">|</span><span class="mi">00</span>\<span class="n">rangle</span><span class="o">+</span>\<span class="n">frac</span><span class="p">{</span><span class="mi">1</span><span class="p">}{</span><span class="mi">2</span><span class="p">}</span> <span class="o">|</span><span class="mi">01</span>\<span class="n">rangle</span><span class="o">+</span>\<span class="n">frac</span><span class="p">{</span><span class="mi">1</span><span class="p">}{</span><span class="mi">2</span><span class="p">}</span> <span class="o">|</span><span class="mi">10</span>\<span class="n">rangle</span><span class="o">+</span>\<span class="n">frac</span><span class="p">{</span><span class="mi">1</span><span class="p">}{</span><span class="mi">2</span><span class="p">}</span> <span class="o">|</span><span class="mi">11</span>\<span class="n">rangle</span>
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>For arbitrary vectors, the `initialize()` function is used, but it hides the complex, deep circuit required for state preparation.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>For arbitrary vectors, the `initialize()` function is used, but it hides the complex, deep circuit required for state preparation.
 </span></code></pre></div>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Why does amplitude encoding often fail to provide a real-world speedup despite its exponential data compression?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>Amplitude encoding represents a classical vector of size <span class="arithmatex">\(N\)</span> using only <span class="arithmatex">\(\log_2 N\)</span> qubits, offering exponential compression. However, this often fails to provide a wall-clock speedup due to two main bottlenecks:</p>
+<ol>
+<li><strong>State Preparation Cost:</strong> For a general classical vector, preparing the corresponding quantum state requires a circuit with a depth that scales as <span class="arithmatex">\(\Theta(N)\)</span>. This classical preprocessing step dominates the overall runtime, negating the <span class="arithmatex">\(O(\log N)\)</span> complexity of the quantum algorithm itself.</li>
+<li><strong>Data Loading:</strong> Even before the quantum circuit runs, the classical data must be read and processed, which is a <span class="arithmatex">\(\Theta(N)\)</span> operation.</li>
+</ol>
+<p>A true speedup is only realized if the data is already in a quantum state or has a special structure that allows for efficient (sub-linear) state preparation.</p>
+</details>
 </div>
-<h2 id="q-why-does-amplitude-encoding-often-fail-to-provide-a-real-world-speedup-despite-its-exponential-data-compression-info-answer-strategy-amplitude-encoding-represents-a-classical-vector-of-size-n-using-only-log_2-n-qubits-offering-exponential-compression-however-this-often-fails-to-provide-a-wall-clock-speedup-due-to-two-main-bottlenecks-1-state-preparation-cost-for-a-general-classical-vector-preparing-the-corresponding-quantum-state-requires-a-circuit-with-a-depth-that-scales-as-thetan-this-classical-preprocessing-step-dominates-the-overall-runtime-negating-the-olog-n-complexity-of-the-quantum-algorithm-itself-2-data-loading-even-before-the-quantum-circuit-runs-the-classical-data-must-be-read-and-processed-which-is-a-thetan-operation-a-true-speedup-is-only-realized-if-the-data-is-already-in-a-quantum-state-or-has-a-special-structure-that-allows-for-efficient-sub-linear-state-preparation"><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>**Q:** Why does amplitude encoding often fail to provide a real-world speedup despite its exponential data compression?
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    Amplitude encoding represents a classical vector of size $N$ using only $\log_2 N$ qubits, offering exponential compression. However, this often fails to provide a wall-clock speedup due to two main bottlenecks:
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    1.  **State Preparation Cost:** For a general classical vector, preparing the corresponding quantum state requires a circuit with a depth that scales as $\Theta(N)$. This classical preprocessing step dominates the overall runtime, negating the $O(\log N)$ complexity of the quantum algorithm itself.
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    2.  **Data Loading:** Even before the quantum circuit runs, the classical data must be read and processed, which is a $\Theta(N)$ operation.
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    A true speedup is only realized if the data is already in a quantum state or has a special structure that allows for efficient (sub-linear) state preparation.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="3-angle-encoding">3. Angle Encoding</h2>
 <div class="admonition question">
 <p class="admonition-title">What is Angle Encoding and what are its key properties?</p>
+<p>Angle encoding is a data encoding technique that maps classical features to the rotation angles of single-qubit gates. It is widely used in variational quantum circuits.</p>
+<ul>
+<li><strong>Mechanism</strong>: A feature vector <span class="arithmatex">\(\mathbf{x} = (x_1, ..., x_N)\)</span> is encoded by applying rotation gates <span class="arithmatex">\(R_p(\phi(x_i))\)</span> to <span class="arithmatex">\(N\)</span> qubits, where <span class="arithmatex">\(p \in \{X, Y, Z\}\)</span> and <span class="arithmatex">\(\phi\)</span> is a scaling function. For example, <span class="arithmatex">\(|\psi(\mathbf{x})\rangle = \bigotimes_{i=1}^N R_y(x_i) |0\rangle_i\)</span>.</li>
+</ul>
+<p><strong>Key Properties</strong>:
+1.  <strong>Non-linear Mapping</strong>: The use of trigonometric functions in rotation gates creates a non-linear mapping from the data to the quantum state's amplitudes. This allows the model to learn complex, non-linear relationships.
+2.  <strong>Hardware-Efficient</strong>: The encoding circuit is typically shallow (depth 1 for the basic form), making it suitable for noisy intermediate-scale quantum (NISQ) devices.
+3.  <strong>No Data Compression</strong>: It requires <span class="arithmatex">\(N\)</span> qubits to encode <span class="arithmatex">\(N\)</span> features.</p>
+<p><div class="heading-with-pill">
+<div class="heading-text">Hands-on</div>
+<div class="pill-right">Angle Encoding</div>
+</div></p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Angle encoding is a data encoding technique that maps classical features to the rotation angles of single-qubit gates. It is widely used in variational quantum circuits.
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>- **Mechanism**: A feature vector $\mathbf{x} = (x_1, ..., x_N)$ is encoded by applying rotation gates $R_p(\phi(x_i))$ to $N$ qubits, where $p \in \{X, Y, Z\}$ and $\phi$ is a scaling function. For example, $|\psi(\mathbf{x})\rangle = \bigotimes_{i=1}^N R_y(x_i) |0\rangle_i$.
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>**Key Properties**:
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>1.  **Non-linear Mapping**: The use of trigonometric functions in rotation gates creates a non-linear mapping from the data to the quantum state&#39;s amplitudes. This allows the model to learn complex, non-linear relationships.
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>2.  **Hardware-Efficient**: The encoding circuit is typically shallow (depth 1 for the basic form), making it suitable for noisy intermediate-scale quantum (NISQ) devices.
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>3.  **No Data Compression**: It requires $N$ qubits to encode $N$ features.
-</span></code></pre></div>
-<div class="heading-with-pill">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>&lt;div class=&quot;heading-text&quot;&gt;Hands-on&lt;/div&gt;
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>&lt;div class=&quot;pill-right&quot;&gt;Angle Encoding&lt;/div&gt;
-</span></code></pre></div>
-</div>
-
 <div class="admonition example">
 <p class="admonition-title">Example: Encoding a 2D Vector</p>
+<p>Let's encode the vector <span class="arithmatex">\(\mathbf{x} = [\pi/2, \pi/4]\)</span> into a 2-qubit state using <span class="arithmatex">\(R_y\)</span> rotations.</p>
+<p>```python
+from qiskit import QuantumCircuit
+from qiskit.quantum_info import Statevector
+import numpy as np</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Let&#39;s encode the vector $\mathbf{x} = [\pi/2, \pi/4]$ into a 2-qubit state using $R_y$ rotations.
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>```python
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>from qiskit import QuantumCircuit
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>from qiskit.quantum_info import Statevector
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>import numpy as np
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a># The classical vector to encode
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>vector = np.array([np.pi/2, np.pi/4])
-</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
-</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a># Create a quantum circuit with a qubit for each feature
-</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>qc = QuantumCircuit(len(vector))
-</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
-</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a># Apply Ry gates with the feature values as angles
-</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>for i, angle in enumerate(vector):
-</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    qc.ry(angle, i)
-</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
-</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>state = Statevector(qc)
-</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>print(f&quot;The encoded state is: {state.draw(output=&#39;latex_source&#39;)}&quot;)
-</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a># Output: The encoded state is: 0.653 |00&gt; + 0.271 |01&gt; + 0.653 |10&gt; + 0.271 |11&gt;
+<h1 id="the-classical-vector-to-encode_1">The classical vector to encode</h1>
+<p>vector = np.array([np.pi/2, np.pi/4])</p>
+<h1 id="create-a-quantum-circuit-with-a-qubit-for-each-feature">Create a quantum circuit with a qubit for each feature</h1>
+<p>qc = QuantumCircuit(len(vector))</p>
+<h1 id="apply-ry-gates-with-the-feature-values-as-angles">Apply Ry gates with the feature values as angles</h1>
+<p>for i, angle in enumerate(vector):
+    qc.ry(angle, i)</p>
+<p>state = Statevector(qc)
+print(f"The encoded state is: {state.draw(output='latex_source')}")</p>
+<h1 id="output-the-encoded-state-is-0653-00-0271-01-0653-10-0271-11">Output: The encoded state is: 0.653 |00&gt; + 0.271 |01&gt; + 0.653 |10&gt; + 0.271 |11&gt;</h1>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>**Sample Output:**
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>```python
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>The encoded state is: 0.6532814824 |00\rangle+0.6532814824 |01\rangle+0.2705980501 |10\rangle+0.2705980501 |11\rangle
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">The</span> <span class="n">encoded</span> <span class="n">state</span> <span class="ow">is</span><span class="p">:</span> <span class="mf">0.6532814824</span> <span class="o">|</span><span class="mi">00</span>\<span class="n">rangle</span><span class="o">+</span><span class="mf">0.6532814824</span> <span class="o">|</span><span class="mi">01</span>\<span class="n">rangle</span><span class="o">+</span><span class="mf">0.2705980501</span> <span class="o">|</span><span class="mi">10</span>\<span class="n">rangle</span><span class="o">+</span><span class="mf">0.2705980501</span> <span class="o">|</span><span class="mi">11</span>\<span class="n">rangle</span>
 </span></code></pre></div></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>The resulting state&#39;s amplitudes are non-linear functions ($\cos(\theta/2), \sin(\theta/2)$) of the input features.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>The resulting state&#39;s amplitudes are non-linear functions ($\cos(\theta/2), \sin(\theta/2)$) of the input features.
 </span></code></pre></div>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Describe the trade-offs of using angle encoding in a QML model.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>Angle encoding is a feature-rich method that maps a classical feature vector <span class="arithmatex">\(\mathbf{x} = (x_1, \ldots, x_N)\)</span> to the rotation angles of single-qubit gates, typically using a circuit of the form <span class="arithmatex">\(U(\mathbf{x}) = \bigotimes_{i=1}^N R_y(x_i)\)</span>, where <span class="arithmatex">\(R_y\)</span> is a rotation-Y gate.</p>
+<p><strong>Key Properties:</strong></p>
+<ol>
+<li><strong>Non-linearity:</strong> The mapping from data to quantum state is non-linear due to the trigonometric nature of rotation gates (<span class="arithmatex">\(e^{-i \frac{\theta}{2} Y}\)</span>). This allows angle encoding to implicitly create complex, high-dimensional feature maps, similar to classical kernel methods. The resulting quantum model can learn non-linear decision boundaries without requiring explicit non-linear activation functions.</li>
+<li><strong>Entanglement-Free:</strong> In its basic form, angle encoding is a "product state" or "tensor product" map. Each qubit encodes exactly one feature, and no entangling gates (like CNOT) are used. This makes the circuit shallow and hardware-efficient but limits its expressivity, as it cannot capture correlations between features.</li>
+<li><strong>Re-uploading for Expressivity:</strong> To overcome the limitations of a single encoding layer, "data re-uploading" can be used. This involves alternating layers of angle encoding and variational (trainable) gates. This technique allows a fixed number of qubits to approximate any continuous function, effectively turning the circuit into a universal function approximator.</li>
+</ol>
+<p><strong>Trade-offs:</strong></p>
+<ul>
+<li><strong>Pros:</strong> Hardware-efficient, non-linear, and easily extendable with data re-uploading.</li>
+<li><strong>Cons:</strong> Uses <span class="arithmatex">\(N\)</span> qubits for <span class="arithmatex">\(N\)</span> features (no compression), and the basic form lacks entanglement, limiting its ability to model feature correlations.</li>
+</ul>
+<p>Angle encoding is a practical and powerful choice for many QML models, especially when non-linearity is desired and the number of features is manageable for current quantum hardware.</p>
+</details>
 </div>
-<h2 id="q-describe-the-trade-offs-of-using-angle-encoding-in-a-qml-model-info-answer-strategy-angle-encoding-is-a-feature-rich-method-that-maps-a-classical-feature-vector-mathbfx-x_1-ldots-x_n-to-the-rotation-angles-of-single-qubit-gates-typically-using-a-circuit-of-the-form-umathbfx-bigotimes_i1n-r_yx_i-where-r_y-is-a-rotation-y-gate-key-properties-1-non-linearity-the-mapping-from-data-to-quantum-state-is-non-linear-due-to-the-trigonometric-nature-of-rotation-gates-e-i-fractheta2-y-this-allows-angle-encoding-to-implicitly-create-complex-high-dimensional-feature-maps-similar-to-classical-kernel-methods-the-resulting-quantum-model-can-learn-non-linear-decision-boundaries-without-requiring-explicit-non-linear-activation-functions-2-entanglement-free-in-its-basic-form-angle-encoding-is-a-product-state-or-tensor-product-map-each-qubit-encodes-exactly-one-feature-and-no-entangling-gates-like-cnot-are-used-this-makes-the-circuit-shallow-and-hardware-efficient-but-limits-its-expressivity-as-it-cannot-capture-correlations-between-features-3-re-uploading-for-expressivity-to-overcome-the-limitations-of-a-single-encoding-layer-data-re-uploading-can-be-used-this-involves-alternating-layers-of-angle-encoding-and-variational-trainable-gates-this-technique-allows-a-fixed-number-of-qubits-to-approximate-any-continuous-function-effectively-turning-the-circuit-into-a-universal-function-approximator-trade-offs-pros-hardware-efficient-non-linear-and-easily-extendable-with-data-re-uploading-cons-uses-n-qubits-for-n-features-no-compression-and-the-basic-form-lacks-entanglement-limiting-its-ability-to-model-feature-correlations-angle-encoding-is-a-practical-and-powerful-choice-for-many-qml-models-especially-when-non-linearity-is-desired-and-the-number-of-features-is-manageable-for-current-quantum-hardware"><div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>**Q:** Describe the trade-offs of using angle encoding in a QML model.
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    Angle encoding is a feature-rich method that maps a classical feature vector $\mathbf{x} = (x_1, \ldots, x_N)$ to the rotation angles of single-qubit gates, typically using a circuit of the form $U(\mathbf{x}) = \bigotimes_{i=1}^N R_y(x_i)$, where $R_y$ is a rotation-Y gate.
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    **Key Properties:**
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    1.  **Non-linearity:** The mapping from data to quantum state is non-linear due to the trigonometric nature of rotation gates ($e^{-i \frac{\theta}{2} Y}$). This allows angle encoding to implicitly create complex, high-dimensional feature maps, similar to classical kernel methods. The resulting quantum model can learn non-linear decision boundaries without requiring explicit non-linear activation functions.
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    2.  **Entanglement-Free:** In its basic form, angle encoding is a &quot;product state&quot; or &quot;tensor product&quot; map. Each qubit encodes exactly one feature, and no entangling gates (like CNOT) are used. This makes the circuit shallow and hardware-efficient but limits its expressivity, as it cannot capture correlations between features.
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    3.  **Re-uploading for Expressivity:** To overcome the limitations of a single encoding layer, &quot;data re-uploading&quot; can be used. This involves alternating layers of angle encoding and variational (trainable) gates. This technique allows a fixed number of qubits to approximate any continuous function, effectively turning the circuit into a universal function approximator.
-</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>
-</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>    **Trade-offs:**
-</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>
-</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>    *   **Pros:** Hardware-efficient, non-linear, and easily extendable with data re-uploading.
-</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>    *   **Cons:** Uses $N$ qubits for $N$ features (no compression), and the basic form lacks entanglement, limiting its ability to model feature correlations.
-</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
-</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>    Angle encoding is a practical and powerful choice for many QML models, especially when non-linearity is desired and the number of features is manageable for current quantum hardware.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="4-hamiltonian-encoding">4. Hamiltonian Encoding</h2>
 <div class="admonition question">
 <p class="admonition-title">What is Hamiltonian Encoding and where is it typically used?</p>
+<p>Hamiltonian encoding, also known as dense encoding or block encoding, embeds a matrix <span class="arithmatex">\(A\)</span> into a Hamiltonian <span class="arithmatex">\(H\)</span> such that <span class="arithmatex">\(A\)</span> is a sub-block of <span class="arithmatex">\(H\)</span>. This method is more abstract than other encodings and is central to advanced quantum algorithms.</p>
+<ul>
+<li><strong>Mechanism</strong>: Given a matrix <span class="arithmatex">\(A\)</span>, we construct a Hamiltonian <span class="arithmatex">\(H\)</span> (often for a larger system) where <span class="arithmatex">\(A\)</span> can be accessed. For example, <span class="arithmatex">\(H = \begin{pmatrix} A &amp; \cdot \\ \cdot &amp; \cdot \end{pmatrix}\)</span>. The algorithm then simulates the evolution <span class="arithmatex">\(e^{-iHt}\)</span> to apply the effects of <span class="arithmatex">\(A\)</span>.</li>
+</ul>
+<p><strong>Typical Use Cases</strong>:
+1.  <strong>Quantum Simulation</strong>: It is the natural way to represent the Hamiltonian of a physical system (like a molecule) that you want to simulate on a quantum computer.
+2.  <strong>HHL Algorithm</strong>: The HHL algorithm for solving linear systems of equations <span class="arithmatex">\(A\mathbf{x}=\mathbf{b}\)</span> requires encoding the matrix <span class="arithmatex">\(A\)</span> into a Hamiltonian to perform quantum phase estimation and matrix inversion.
+3.  <strong>Advanced Algorithms</strong>: Many modern quantum algorithms, particularly those based on the quantum singular value transformation (QSVT), rely on block encodings to manipulate matrices.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Hamiltonian encoding, also known as dense encoding or block encoding, embeds a matrix $A$ into a Hamiltonian $H$ such that $A$ is a sub-block of $H$. This method is more abstract than other encodings and is central to advanced quantum algorithms.
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>- **Mechanism**: Given a matrix $A$, we construct a Hamiltonian $H$ (often for a larger system) where $A$ can be accessed. For example, $H = \begin{pmatrix} A &amp; \cdot \\ \cdot &amp; \cdot \end{pmatrix}$. The algorithm then simulates the evolution $e^{-iHt}$ to apply the effects of $A$.
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>**Typical Use Cases**:
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>1.  **Quantum Simulation**: It is the natural way to represent the Hamiltonian of a physical system (like a molecule) that you want to simulate on a quantum computer.
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>2.  **HHL Algorithm**: The HHL algorithm for solving linear systems of equations $A\mathbf{x}=\mathbf{b}$ requires encoding the matrix $A$ into a Hamiltonian to perform quantum phase estimation and matrix inversion.
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>3.  **Advanced Algorithms**: Many modern quantum algorithms, particularly those based on the quantum singular value transformation (QSVT), rely on block encodings to manipulate matrices.
-</span></code></pre></div>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Why is Hamiltonian encoding considered less of a "data loading" technique and more of a "problem definition" technique?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>Hamiltonian encoding differs fundamentally from methods like angle or amplitude encoding. While the latter are designed to load classical <em>data vectors</em> into a quantum state, Hamiltonian encoding is designed to embed a classical <em>matrix</em> (representing a linear operator or a problem) into the dynamics of a quantum system.</p>
+<p>Here’s the distinction:</p>
+<ol>
+<li>
+<p><strong>Input Type:</strong></p>
+<ul>
+<li><strong>Data Loading (Angle/Amplitude):</strong> Input is a vector <span class="arithmatex">\(\mathbf{x}\)</span>. The goal is to create the state <span class="arithmatex">\(|\psi(\mathbf{x})\rangle\)</span>.</li>
+<li><strong>Problem Definition (Hamiltonian):</strong> Input is a matrix <span class="arithmatex">\(A\)</span>. The goal is to create a process (time evolution <span class="arithmatex">\(e^{-iHt}\)</span>) that <em>acts on</em> quantum states according to <span class="arithmatex">\(A\)</span>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li><strong>Data Loading:</strong> Prepares the input for a quantum algorithm. It's the "noun" or the subject of the computation.</li>
+<li><strong>Problem Definition:</strong> Defines the core operation of the algorithm itself. It's the "verb" or the action of the computation.</li>
+</ul>
+</li>
+</ol>
+<p>For example, in the HHL algorithm (<span class="arithmatex">\(A\mathbf{x}=\mathbf{b}\)</span>), amplitude encoding is used to load the vector <span class="arithmatex">\(\mathbf{b}\)</span> into a state <span class="arithmatex">\(|\mathbf{b}\rangle\)</span>, while Hamiltonian encoding is used to represent the matrix <span class="arithmatex">\(A\)</span> as an operator that can be manipulated. You are not loading the matrix <span class="arithmatex">\(A\)</span> as a state to be processed; you are defining the system's evolution based on <span class="arithmatex">\(A\)</span>.</p>
+</details>
 </div>
-<h2 id="q-why-is-hamiltonian-encoding-considered-less-of-a-data-loading-technique-and-more-of-a-problem-definition-technique-info-answer-strategy-hamiltonian-encoding-differs-fundamentally-from-methods-like-angle-or-amplitude-encoding-while-the-latter-are-designed-to-load-classical-data-vectors-into-a-quantum-state-hamiltonian-encoding-is-designed-to-embed-a-classical-matrix-representing-a-linear-operator-or-a-problem-into-the-dynamics-of-a-quantum-system-heres-the-distinction-1-input-type-data-loading-angleamplitude-input-is-a-vector-mathbfx-the-goal-is-to-create-the-state-psimathbfxrangle-problem-definition-hamiltonian-input-is-a-matrix-a-the-goal-is-to-create-a-process-time-evolution-e-iht-that-acts-on-quantum-states-according-to-a-2-purpose-data-loading-prepares-the-input-for-a-quantum-algorithm-its-the-noun-or-the-subject-of-the-computation-problem-definition-defines-the-core-operation-of-the-algorithm-itself-its-the-verb-or-the-action-of-the-computation-for-example-in-the-hhl-algorithm-amathbfxmathbfb-amplitude-encoding-is-used-to-load-the-vector-mathbfb-into-a-state-mathbfbrangle-while-hamiltonian-encoding-is-used-to-represent-the-matrix-a-as-an-operator-that-can-be-manipulated-you-are-not-loading-the-matrix-a-as-a-state-to-be-processed-you-are-defining-the-systems-evolution-based-on-a"><div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>**Q:** Why is Hamiltonian encoding considered less of a &quot;data loading&quot; technique and more of a &quot;problem definition&quot; technique?
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    Hamiltonian encoding differs fundamentally from methods like angle or amplitude encoding. While the latter are designed to load classical *data vectors* into a quantum state, Hamiltonian encoding is designed to embed a classical *matrix* (representing a linear operator or a problem) into the dynamics of a quantum system.
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>    Here’s the distinction:
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
-</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    1.  **Input Type:**
-</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>        *   **Data Loading (Angle/Amplitude):** Input is a vector $\mathbf{x}$. The goal is to create the state $|\psi(\mathbf{x})\rangle$.
-</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>        *   **Problem Definition (Hamiltonian):** Input is a matrix $A$. The goal is to create a process (time evolution $e^{-iHt}$) that *acts on* quantum states according to $A$.
-</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
-</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    2.  **Purpose:**
-</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>        *   **Data Loading:** Prepares the input for a quantum algorithm. It&#39;s the &quot;noun&quot; or the subject of the computation.
-</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>        *   **Problem Definition:** Defines the core operation of the algorithm itself. It&#39;s the &quot;verb&quot; or the action of the computation.
-</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
-</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>    For example, in the HHL algorithm ($A\mathbf{x}=\mathbf{b}$), amplitude encoding is used to load the vector $\mathbf{b}$ into a state $|\mathbf{b}\rangle$, while Hamiltonian encoding is used to represent the matrix $A$ as an operator that can be manipulated. You are not loading the matrix $A$ as a state to be processed; you are defining the system&#39;s evolution based on $A$.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="5-quantum-feature-maps-and-kernels">5. Quantum Feature Maps and Kernels</h2>
 <div class="admonition question">
 <p class="admonition-title">What is a quantum feature map and how does it relate to quantum kernels?</p>
+<p>A <strong>quantum feature map</strong> is a procedure that maps a classical data point <span class="arithmatex">\(\mathbf{x}\)</span> to a quantum state <span class="arithmatex">\(|\phi(\mathbf{x})\rangle\)</span> in a high-dimensional Hilbert space. The encoding techniques discussed earlier (angle, amplitude, etc.) are all examples of feature maps.</p>
+<ul>
+<li><strong>Purpose</strong>: To transform classical data into a quantum representation where patterns might be more easily identified. The non-linearity of angle encoding, for instance, creates a complex feature map.</li>
+</ul>
+<p>A <strong>quantum kernel</strong> is a measure of similarity between two data points, computed in the quantum feature space. It is defined as the inner product of their corresponding quantum states.</p>
+<ul>
+<li><strong>Mechanism</strong>: The kernel value for two data points <span class="arithmatex">\(\mathbf{x}_i\)</span> and <span class="arithmatex">\(\mathbf{x}_j\)</span> is given by <span class="arithmatex">\(K(\mathbf{x}_i, \mathbf{x}_j) = |\langle \phi(\mathbf{x}_i) | \phi(\mathbf{x}_j) \rangle|^2\)</span>.</li>
+<li><strong>Application</strong>: This kernel matrix can be fed into a classical machine learning algorithm, such as a Support Vector Machine (SVM), to perform classification. This is the basis of the "quantum kernel trick."</li>
+</ul>
+<p><div class="heading-with-pill">
+<div class="heading-text">Hands-on</div>
+<div class="pill-right">Quantum Kernel</div>
+</div></p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>A **quantum feature map** is a procedure that maps a classical data point $\mathbf{x}$ to a quantum state $|\phi(\mathbf{x})\rangle$ in a high-dimensional Hilbert space. The encoding techniques discussed earlier (angle, amplitude, etc.) are all examples of feature maps.
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>- **Purpose**: To transform classical data into a quantum representation where patterns might be more easily identified. The non-linearity of angle encoding, for instance, creates a complex feature map.
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>A **quantum kernel** is a measure of similarity between two data points, computed in the quantum feature space. It is defined as the inner product of their corresponding quantum states.
-</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
-</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>- **Mechanism**: The kernel value for two data points $\mathbf{x}_i$ and $\mathbf{x}_j$ is given by $K(\mathbf{x}_i, \mathbf{x}_j) = |\langle \phi(\mathbf{x}_i) | \phi(\mathbf{x}_j) \rangle|^2$.
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>- **Application**: This kernel matrix can be fed into a classical machine learning algorithm, such as a Support Vector Machine (SVM), to perform classification. This is the basis of the &quot;quantum kernel trick.&quot;
-</span></code></pre></div>
-<div class="heading-with-pill">
-<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>&lt;div class=&quot;heading-text&quot;&gt;Hands-on&lt;/div&gt;
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>&lt;div class=&quot;pill-right&quot;&gt;Quantum Kernel&lt;/div&gt;
-</span></code></pre></div>
-</div>
-
 <div class="admonition example">
 <p class="admonition-title">Example: Computing a Kernel Entry</p>
+<p>Let's compute a single entry of a quantum kernel matrix using Qiskit's <code>Fidelity</code> primitive. We'll use a simple angle encoding feature map.</p>
+<p>```python
+from qiskit import QuantumCircuit
+from qiskit_algorithms.primitives import Fidelity</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Let&#39;s compute a single entry of a quantum kernel matrix using Qiskit&#39;s `Fidelity` primitive. We&#39;ll use a simple angle encoding feature map.
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>```python
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>from qiskit import QuantumCircuit
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>from qiskit_algorithms.primitives import Fidelity
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a># Define the feature map (angle encoding)
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>def feature_map(x):
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    qc = QuantumCircuit(1)
-</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>    qc.ry(x[0], 0)
-</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>    return qc
-</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
-</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a># Two data points
-</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>x_i = [1.5]
-</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>x_j = [2.0]
-</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>
-</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a># Create the circuits for the two points
-</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>qc_i = feature_map(x_i)
-</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>qc_j = feature_map(x_j)
-</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>
-</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a># Use the Fidelity primitive to compute the inner product squared
-</span><span id="__span-22-22"><a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>fidelity = Fidelity()
-</span><span id="__span-22-23"><a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>result = fidelity.run(qc_i, qc_j).result()
-</span><span id="__span-22-24"><a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>kernel_entry = result.fidelities[0]
-</span><span id="__span-22-25"><a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a>
-</span><span id="__span-22-26"><a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>print(f&quot;The kernel entry K(x_i, x_j) is: {kernel_entry:.4f}&quot;)
-</span><span id="__span-22-27"><a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a># Output: The kernel entry K(x_i, x_j) is: 0.9405
+<h1 id="define-the-feature-map-angle-encoding">Define the feature map (angle encoding)</h1>
+<p>def feature_map(x):
+    qc = QuantumCircuit(1)
+    qc.ry(x[0], 0)
+    return qc</p>
+<h1 id="two-data-points">Two data points</h1>
+<p>x_i = [1.5]
+x_j = [2.0]</p>
+<h1 id="create-the-circuits-for-the-two-points">Create the circuits for the two points</h1>
+<p>qc_i = feature_map(x_i)
+qc_j = feature_map(x_j)</p>
+<h1 id="use-the-fidelity-primitive-to-compute-the-inner-product-squared">Use the Fidelity primitive to compute the inner product squared</h1>
+<p>fidelity = Fidelity()
+result = fidelity.run(qc_i, qc_j).result()
+kernel_entry = result.fidelities[0]</p>
+<p>print(f"The kernel entry K(x_i, x_j) is: {kernel_entry:.4f}")</p>
+<h1 id="output-the-kernel-entry-kx_i-x_j-is-09405">Output: The kernel entry K(x_i, x_j) is: 0.9405</h1>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>This value represents the similarity between the two data points in the quantum feature space. Repeating this for all pairs of data points creates the full kernel matrix.
 </span></code></pre></div>
-This value represents the similarity between the two data points in the quantum feature space. Repeating this for all pairs of data points creates the full kernel matrix.</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>!!! abstract &quot;Interview-Style Question&quot;
-</span></code></pre></div>
-<strong>Q:</strong> What is the "quantum kernel trick," and what potential advantages does it offer over classical kernels?</p>
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> What is the "quantum kernel trick," and what potential advantages does it offer over classical kernels?</p>
 <details class="info" open="open">
 <summary>Answer Strategy</summary>
 <p>The "quantum kernel trick" is a hybrid quantum-classical machine learning method where a quantum computer is used to estimate a kernel matrix, which is then used to train a classical kernel machine like a Support Vector Machine (SVM).</p>
@@ -3099,7 +2897,7 @@ This value represents the similarity between the two data points in the quantum 
 The primary hope is that quantum feature maps can create kernels that are <strong>classically intractable to compute</strong>. If a quantum computer can efficiently calculate a kernel that would take exponential time for a classical computer, it could lead to a quantum advantage. This might happen if the feature space explored by the quantum map is so large and complex that classical methods cannot efficiently simulate it.</p>
 <p>However, a significant challenge is that many currently proposed quantum kernels can be efficiently simulated classically, or they suffer from noise and measurement errors that diminish their effectiveness. The search for provably advantageous quantum kernels is an active area of research.</p>
 </details>
-<p>```</p>
+</div>
 
 
 

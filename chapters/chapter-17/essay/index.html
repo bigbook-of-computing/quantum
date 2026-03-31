@@ -2608,9 +2608,8 @@
 <p>The Hartree-Fock approximation finds the single Slater determinant that minimises the electronic energy. Correlation methods (CISD, MP2, CCSD) add perturbative corrections.</p>
 <div class="admonition tip">
 <p class="admonition-title">First Quantization on Quantum Computers</p>
+<p>First quantization on quantum computers represents electronic positions on a 3D spatial grid, using <span class="arithmatex">\(O(\log N + \log(1/\epsilon))\)</span> qubits per electron. Recent proposals by Babbush et al. show first-quantized quantum simulation requires fewer qubits than second-quantized approaches for large molecules, making it promising for fault-tolerant hardware.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>First quantization on quantum computers represents electronic positions on a 3D spatial grid, using $O(\log N + \log(1/\epsilon))$ qubits per electron. Recent proposals by Babbush et al. show first-quantized quantum simulation requires fewer qubits than second-quantized approaches for large molecules, making it promising for fault-tolerant hardware.
-</span></code></pre></div>
 <h3 id="second-quantization-occupation-number-representation"><strong>Second Quantization: Occupation Number Representation</strong></h3>
 <hr />
 <p>In second quantization, rather than tracking which orbital each electron occupies, we count <strong>how many electrons occupy each orbital</strong>. For <span class="arithmatex">\(M\)</span> spin-orbitals <span class="arithmatex">\(\{\phi_p\}\)</span>, the basis states are occupation-number vectors:</p>
@@ -2620,14 +2619,13 @@
 <p>where <span class="arithmatex">\(n_p = 1\)</span> means orbital <span class="arithmatex">\(\phi_p\)</span> is occupied and <span class="arithmatex">\(n_p = 0\)</span> means it is empty. The full <strong>many-body Hilbert space</strong> (Fock space of <span class="arithmatex">\(M\)</span> orbitals) has dimension <span class="arithmatex">\(2^M\)</span>, mapping naturally to <span class="arithmatex">\(M\)</span> qubits.</p>
 <div class="admonition example">
 <p class="admonition-title">H₂ Occupation Number Basis</p>
+<p>For H₂ in the STO-3G basis, there are <span class="arithmatex">\(M = 4\)</span> spin-orbitals (2 spatial orbitals × 2 spins). The <span class="arithmatex">\(2^4 = 16\)</span> Fock states span from the vacuum <span class="arithmatex">\(|0000\rangle\)</span> to the fully occupied <span class="arithmatex">\(|1111\rangle\)</span>. The physical 2-electron sector contains <span class="arithmatex">\(\binom{4}{2} = 6\)</span> states.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>For H₂ in the STO-3G basis, there are $M = 4$ spin-orbitals (2 spatial orbitals × 2 spins). The $2^4 = 16$ Fock states span from the vacuum $|0000\rangle$ to the fully occupied $|1111\rangle$. The physical 2-electron sector contains $\binom{4}{2} = 6$ states.
-</span></code></pre></div>
 <details class="question">
 <summary>Why does the number of qubits needed for second quantization scale with the number of orbitals and not the number of electrons?</summary>
+<p>In second quantization, each qubit represents one spin-orbital's occupancy (empty or occupied), independently of how many electrons are in the system. Encoding <span class="arithmatex">\(M\)</span> molecular spin-orbitals therefore requires exactly <span class="arithmatex">\(M\)</span> qubits. In contrast, first-quantized simulation assigns <span class="arithmatex">\(n \sim \log(M)\)</span> qubits per electron, favouring first-quantization for large electron numbers.</p>
 </details>
-<h2 id="in-second-quantization-each-qubit-represents-one-spin-orbitals-occupancy-empty-or-occupied-independently-of-how-many-electrons-are-in-the-system-encoding-m-molecular-spin-orbitals-therefore-requires-exactly-m-qubits-in-contrast-first-quantized-simulation-assigns-n-sim-logm-qubits-per-electron-favouring-first-quantization-for-large-electron-numbers"><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>In second quantization, each qubit represents one spin-orbital&#39;s occupancy (empty or occupied), independently of how many electrons are in the system. Encoding $M$ molecular spin-orbitals therefore requires exactly $M$ qubits. In contrast, first-quantized simulation assigns $n \sim \log(M)$ qubits per electron, favouring first-quantization for large electron numbers.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="172-fermionic-fock-space-and-operators"><strong>17.2 Fermionic Fock Space and Operators</strong></h2>
 <hr />
 <h3 id="creation-and-annihilation-operators"><strong>Creation and Annihilation Operators</strong></h3>

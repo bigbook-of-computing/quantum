@@ -1824,62 +1824,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-if-a-classical-monte-carlo-simulation-requires-n-samples-to-achieve-precision-epsilon-how-does-the-precision-error-epsilon-scale-with-the-number-of-samples-n-a-mathcalon-b-mathcalo1n-c-mathcalo1sqrtn-d-mathcalo1n2-info-see-answer-correct-c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **1. If a classical Monte Carlo simulation requires $N$ samples to achieve precision $\epsilon$, how does the precision error $\epsilon$ scale with the number of samples $N$?** - A. $\mathcal{O}(N)$ - B. $\mathcal{O}(1/N)$ - C. $\mathcal{O}(1/\sqrt{N})$ - D. $\mathcal{O}(1/N^2)$ ??? info &quot;See Answer&quot; **Correct: C**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-the-primary-quantum-algorithm-used-to-achieve-a-quadratic-speedup-in-monte-carlo-simulations-is-a-quantum-phase-estimation-qpe-b-shors-factoring-algorithm-c-quantum-amplitude-estimation-qae-d-variational-quantum-eigensolver-vqe-info-see-answer-correct-c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **2. The primary quantum algorithm used to achieve a quadratic speedup in Monte Carlo simulations is:** - A. Quantum Phase Estimation (QPE) - B. Shor&#39;s Factoring Algorithm - C. Quantum Amplitude Estimation (QAE) - D. Variational Quantum Eigensolver (VQE) ??? info &quot;See Answer&quot; **Correct: C**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-after-calculating-the-expected-payoff-mathbbemaxs_t-k-0-using-qae-what-final-classical-step-is-required-to-determine-the-options-current-price-v-a-applying-the-maximum-function-b-multiplying-by-the-discount-factor-e-rt-c-adding-the-strike-price-k-d-dividing-by-the-risk-free-rate-r-info-see-answer-correct-b" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **3. After calculating the expected payoff $\mathbb{E}[\max(S_T - K, 0)]$ using QAE, what final classical step is required to determine the option&#39;s current price $V$?** - A. Applying the maximum function - B. Multiplying by the discount factor $e^{-rT}$ - C. Adding the strike price $K$ - D. Dividing by the risk-free rate $r$ ??? info &quot;See Answer&quot; **Correct: B**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-the-non-linear-nature-of-the-payoff-function-fx-maxx-k-0-is-typically-handled-in-quantum-circuits-by-a-using-only-the-iterative-qae-iqae-variant-b-approximating-fx-using-piecewise-linear-or-polynomial-functions-c-applying-a-cnot-gate-to-the-payoff-register-d-using-the-bravyi-kitaev-transformation-info-see-answer-correct-b" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **4. The non-linear nature of the payoff function $f(x) = \max(x - K, 0)$ is typically handled in quantum circuits by:** - A. Using only the Iterative QAE (IQAE) variant - B. Approximating $f(x)$ using piecewise-linear or polynomial functions - C. Applying a CNOT gate to the payoff register - D. Using the Bravyi-Kitaev transformation ??? info &quot;See Answer&quot; **Correct: B**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-quantify-the-performance-difference-between-classical-monte-carlo-and-quantum-amplitude-estimation-qae-in-terms-of-computational-complexity-assuming-both-are-seeking-the-same-accuracy-epsilon-info-answer-strategy-the-performance-difference-is-a-quadratic-speedup-in-favor-of-the-quantum-approach-this-can-be-quantified-by-analyzing-how-the-required-number-of-computational-steps-scales-with-the-desired-accuracy-epsilon-1-classical-monte-carlo-error-scaling-the-error-of-a-classical-monte-carlo-simulation-decreases-with-the-number-of-samples-n-as-mathcalo1sqrtn-complexity-to-achieve-a-target-accuracy-epsilon-we-need-the-error-to-be-at-most-epsilon-therefore-1sqrtn-approx-epsilon-which-means-the-required-number-of-samples-n-scales-as-mathcalo1epsilon2-2-quantum-amplitude-estimation-qae-error-scaling-the-error-of-qae-decreases-with-the-number-of-quantum-queries-m-as-mathcalo1m-complexity-to-achieve-the-same-accuracy-epsilon-we-need-1m-approx-epsilon-which-means-the-required-number-of-queries-m-scales-as-mathcalo1epsilon-conclusion-to-get-10x-more-accuracy-decreasing-epsilon-by-a-factor-of-10-the-classical-method-requires-100x-more-work-while-the-quantum-method-requires-only-10x-more-work-this-quadratic-difference-in-scaling-1epsilon2-vs-1epsilon-is-the-source-of-the-quantum-advantage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Quantify the performance difference between classical Monte Carlo and Quantum Amplitude Estimation (QAE) in terms of computational complexity, assuming both are seeking the same accuracy $\epsilon$. ???+ info &quot;Answer Strategy&quot; The performance difference is a **quadratic speedup** in favor of the quantum approach. This can be quantified by analyzing how the required number of computational steps scales with the desired accuracy, $\epsilon$. 1. **Classical Monte Carlo:** * **Error Scaling:** The error of a classical Monte Carlo simulation decreases with the number of samples $N$ as $\mathcal{O}(1/\sqrt{N})$. * **Complexity:** To achieve a target accuracy $\epsilon$, we need the error to be at most $\epsilon$. Therefore, $1/\sqrt{N} \approx \epsilon$, which means the required number of samples $N$ scales as $\mathcal{O}(1/\epsilon^2)$. 2. **Quantum Amplitude Estimation (QAE):** * **Error Scaling:** The error of QAE decreases with the number of quantum queries $M$ as $\mathcal{O}(1/M)$. * **Complexity:** To achieve the same accuracy $\epsilon$, we need $1/M \approx \epsilon$, which means the required number of queries $M$ scales as $\mathcal{O}(1/\epsilon)$. **Conclusion:** To get 10x more accuracy (decreasing $\epsilon$ by a factor of 10), the classical method requires 100x more work, while the quantum method requires only 10x more work. This quadratic difference in scaling ($1/\epsilon^2$ vs. $1/\epsilon$) is the source of the quantum advantage.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="**Q:** Quantify the performance difference between classical Monte Carlo and Quantum Amplitude Estimation (QAE) in terms of computational complexity, assuming both are seeking the same accuracy $\epsilon$. ???+ info &#34;Answer Strategy&#34; The performance difference is a **quadratic speedup** in favor of the quantum approach. This can be quantified by analyzing how the required number of computational steps scales with the desired accuracy, $\epsilon$. 1. **Classical Monte Carlo:** * **Error Scaling:** The error of a classical Monte Carlo simulation decreases with the number of samples $N$ as $\mathcal{O}(1/\sqrt{N})$. * **Complexity:** To achieve a target accuracy $\epsilon$, we need the error to be at most $\epsilon$. Therefore, $1/\sqrt{N} \approx \epsilon$, which means the required number of samples $N$ scales as $\mathcal{O}(1/\epsilon^2)$. 2. **Quantum Amplitude Estimation (QAE):** * **Error Scaling:** The error of QAE decreases with the number of quantum queries $M$ as $\mathcal{O}(1/M)$. * **Complexity:** To achieve the same accuracy $\epsilon$, we need $1/M \approx \epsilon$, which means the required number of queries $M$ scales as $\mathcal{O}(1/\epsilon)$. **Conclusion:** To get 10x more accuracy (decreasing $\epsilon$ by a factor of 10), the classical method requires 100x more work, while the quantum method requires only 10x more work. This quadratic difference in scaling ($1/\epsilon^2$ vs. $1/\epsilon$) is the source of the quantum advantage.">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#hands-on-project" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1921,11 +1865,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2716,62 +2655,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-if-a-classical-monte-carlo-simulation-requires-n-samples-to-achieve-precision-epsilon-how-does-the-precision-error-epsilon-scale-with-the-number-of-samples-n-a-mathcalon-b-mathcalo1n-c-mathcalo1sqrtn-d-mathcalo1n2-info-see-answer-correct-c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **1. If a classical Monte Carlo simulation requires $N$ samples to achieve precision $\epsilon$, how does the precision error $\epsilon$ scale with the number of samples $N$?** - A. $\mathcal{O}(N)$ - B. $\mathcal{O}(1/N)$ - C. $\mathcal{O}(1/\sqrt{N})$ - D. $\mathcal{O}(1/N^2)$ ??? info &quot;See Answer&quot; **Correct: C**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-the-primary-quantum-algorithm-used-to-achieve-a-quadratic-speedup-in-monte-carlo-simulations-is-a-quantum-phase-estimation-qpe-b-shors-factoring-algorithm-c-quantum-amplitude-estimation-qae-d-variational-quantum-eigensolver-vqe-info-see-answer-correct-c" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **2. The primary quantum algorithm used to achieve a quadratic speedup in Monte Carlo simulations is:** - A. Quantum Phase Estimation (QPE) - B. Shor&#39;s Factoring Algorithm - C. Quantum Amplitude Estimation (QAE) - D. Variational Quantum Eigensolver (VQE) ??? info &quot;See Answer&quot; **Correct: C**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-after-calculating-the-expected-payoff-mathbbemaxs_t-k-0-using-qae-what-final-classical-step-is-required-to-determine-the-options-current-price-v-a-applying-the-maximum-function-b-multiplying-by-the-discount-factor-e-rt-c-adding-the-strike-price-k-d-dividing-by-the-risk-free-rate-r-info-see-answer-correct-b" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **3. After calculating the expected payoff $\mathbb{E}[\max(S_T - K, 0)]$ using QAE, what final classical step is required to determine the option&#39;s current price $V$?** - A. Applying the maximum function - B. Multiplying by the discount factor $e^{-rT}$ - C. Adding the strike price $K$ - D. Dividing by the risk-free rate $r$ ??? info &quot;See Answer&quot; **Correct: B**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-the-non-linear-nature-of-the-payoff-function-fx-maxx-k-0-is-typically-handled-in-quantum-circuits-by-a-using-only-the-iterative-qae-iqae-variant-b-approximating-fx-using-piecewise-linear-or-polynomial-functions-c-applying-a-cnot-gate-to-the-payoff-register-d-using-the-bravyi-kitaev-transformation-info-see-answer-correct-b" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **4. The non-linear nature of the payoff function $f(x) = \max(x - K, 0)$ is typically handled in quantum circuits by:** - A. Using only the Iterative QAE (IQAE) variant - B. Approximating $f(x)$ using piecewise-linear or polynomial functions - C. Applying a CNOT gate to the payoff register - D. Using the Bravyi-Kitaev transformation ??? info &quot;See Answer&quot; **Correct: B**
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#q-quantify-the-performance-difference-between-classical-monte-carlo-and-quantum-amplitude-estimation-qae-in-terms-of-computational-complexity-assuming-both-are-seeking-the-same-accuracy-epsilon-info-answer-strategy-the-performance-difference-is-a-quadratic-speedup-in-favor-of-the-quantum-approach-this-can-be-quantified-by-analyzing-how-the-required-number-of-computational-steps-scales-with-the-desired-accuracy-epsilon-1-classical-monte-carlo-error-scaling-the-error-of-a-classical-monte-carlo-simulation-decreases-with-the-number-of-samples-n-as-mathcalo1sqrtn-complexity-to-achieve-a-target-accuracy-epsilon-we-need-the-error-to-be-at-most-epsilon-therefore-1sqrtn-approx-epsilon-which-means-the-required-number-of-samples-n-scales-as-mathcalo1epsilon2-2-quantum-amplitude-estimation-qae-error-scaling-the-error-of-qae-decreases-with-the-number-of-quantum-queries-m-as-mathcalo1m-complexity-to-achieve-the-same-accuracy-epsilon-we-need-1m-approx-epsilon-which-means-the-required-number-of-queries-m-scales-as-mathcalo1epsilon-conclusion-to-get-10x-more-accuracy-decreasing-epsilon-by-a-factor-of-10-the-classical-method-requires-100x-more-work-while-the-quantum-method-requires-only-10x-more-work-this-quadratic-difference-in-scaling-1epsilon2-vs-1epsilon-is-the-source-of-the-quantum-advantage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        **Q:** Quantify the performance difference between classical Monte Carlo and Quantum Amplitude Estimation (QAE) in terms of computational complexity, assuming both are seeking the same accuracy $\epsilon$. ???+ info &quot;Answer Strategy&quot; The performance difference is a **quadratic speedup** in favor of the quantum approach. This can be quantified by analyzing how the required number of computational steps scales with the desired accuracy, $\epsilon$. 1. **Classical Monte Carlo:** * **Error Scaling:** The error of a classical Monte Carlo simulation decreases with the number of samples $N$ as $\mathcal{O}(1/\sqrt{N})$. * **Complexity:** To achieve a target accuracy $\epsilon$, we need the error to be at most $\epsilon$. Therefore, $1/\sqrt{N} \approx \epsilon$, which means the required number of samples $N$ scales as $\mathcal{O}(1/\epsilon^2)$. 2. **Quantum Amplitude Estimation (QAE):** * **Error Scaling:** The error of QAE decreases with the number of quantum queries $M$ as $\mathcal{O}(1/M)$. * **Complexity:** To achieve the same accuracy $\epsilon$, we need $1/M \approx \epsilon$, which means the required number of queries $M$ scales as $\mathcal{O}(1/\epsilon)$. **Conclusion:** To get 10x more accuracy (decreasing $\epsilon$ by a factor of 10), the classical method requires 100x more work, while the quantum method requires only 10x more work. This quadratic difference in scaling ($1/\epsilon^2$ vs. $1/\epsilon$) is the source of the quantum advantage.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="**Q:** Quantify the performance difference between classical Monte Carlo and Quantum Amplitude Estimation (QAE) in terms of computational complexity, assuming both are seeking the same accuracy $\epsilon$. ???+ info &#34;Answer Strategy&#34; The performance difference is a **quadratic speedup** in favor of the quantum approach. This can be quantified by analyzing how the required number of computational steps scales with the desired accuracy, $\epsilon$. 1. **Classical Monte Carlo:** * **Error Scaling:** The error of a classical Monte Carlo simulation decreases with the number of samples $N$ as $\mathcal{O}(1/\sqrt{N})$. * **Complexity:** To achieve a target accuracy $\epsilon$, we need the error to be at most $\epsilon$. Therefore, $1/\sqrt{N} \approx \epsilon$, which means the required number of samples $N$ scales as $\mathcal{O}(1/\epsilon^2)$. 2. **Quantum Amplitude Estimation (QAE):** * **Error Scaling:** The error of QAE decreases with the number of quantum queries $M$ as $\mathcal{O}(1/M)$. * **Complexity:** To achieve the same accuracy $\epsilon$, we need $1/M \approx \epsilon$, which means the required number of queries $M$ scales as $\mathcal{O}(1/\epsilon)$. **Conclusion:** To get 10x more accuracy (decreasing $\epsilon$ by a factor of 10), the classical method requires 100x more work, while the quantum method requires only 10x more work. This quadratic difference in scaling ($1/\epsilon^2$ vs. $1/\epsilon$) is the source of the quantum advantage.">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#hands-on-project" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2820,11 +2703,6 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
     </ul>
   
@@ -2859,7 +2737,7 @@
   
 
 
-<h1 id="chapter-18-181-quantum-monte-carlo-for-option-pricing-heading-with-pill-workbook"><strong>Chapter 18: 18.1 Quantum Monte Carlo for Option Pricing {.heading-with-pill} () () (Workbook)</strong></h1>
+<h1 id="chapter-18-181-quantum-monte-carlo-for-option-pricing-heading-with-pill-workbook"><strong>Chapter 18: 18.1 Quantum Monte Carlo for Option Pricing {.heading-with-pill} (Workbook)</strong></h1>
 <blockquote>
 <p><strong>Concept:</strong> Quantum Amplitude Estimation for Financial Derivatives • <strong>Difficulty:</strong> ★★★★☆
 <strong>Summary:</strong> This chapter analyzes how Quantum Amplitude Estimation (QAE) provides a quadratic speedup over classical Monte Carlo methods for calculating the expected payoff and subsequent price of financial derivatives.</p>
@@ -2890,75 +2768,95 @@
 <h3 id="comprehension-check"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
+<p><strong>1. If a classical Monte Carlo simulation requires <span class="arithmatex">\(N\)</span> samples to achieve precision <span class="arithmatex">\(\epsilon\)</span>, how does the precision error <span class="arithmatex">\(\epsilon\)</span> scale with the number of samples <span class="arithmatex">\(N\)</span>?</strong></p>
+<ul>
+<li>A. <span class="arithmatex">\(\mathcal{O}(N)\)</span></li>
+<li>B. <span class="arithmatex">\(\mathcal{O}(1/N)\)</span></li>
+<li>C. <span class="arithmatex">\(\mathcal{O}(1/\sqrt{N})\)</span></li>
+<li>D. <span class="arithmatex">\(\mathcal{O}(1/N^2)\)</span></li>
+</ul>
 </div>
-<h2 id="1-if-a-classical-monte-carlo-simulation-requires-n-samples-to-achieve-precision-epsilon-how-does-the-precision-error-epsilon-scale-with-the-number-of-samples-n-a-mathcalon-b-mathcalo1n-c-mathcalo1sqrtn-d-mathcalo1n2-info-see-answer-correct-c"><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>**1. If a classical Monte Carlo simulation requires $N$ samples to achieve precision $\epsilon$, how does the precision error $\epsilon$ scale with the number of samples $N$?**
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>- A. $\mathcal{O}(N)$
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>- B. $\mathcal{O}(1/N)$
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>- C. $\mathcal{O}(1/\sqrt{N})$
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>- D. $\mathcal{O}(1/N^2)$
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    **Correct: C**
-</span></code></pre></div></h2>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: C**
+</code></pre></div>
+</details>
+<hr />
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
+<p><strong>2. The primary quantum algorithm used to achieve a quadratic speedup in Monte Carlo simulations is:</strong></p>
+<ul>
+<li>A. Quantum Phase Estimation (QPE)</li>
+<li>B. Shor's Factoring Algorithm</li>
+<li>C. Quantum Amplitude Estimation (QAE)</li>
+<li>D. Variational Quantum Eigensolver (VQE)</li>
+</ul>
 </div>
-<h2 id="2-the-primary-quantum-algorithm-used-to-achieve-a-quadratic-speedup-in-monte-carlo-simulations-is-a-quantum-phase-estimation-qpe-b-shors-factoring-algorithm-c-quantum-amplitude-estimation-qae-d-variational-quantum-eigensolver-vqe-info-see-answer-correct-c"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>**2. The primary quantum algorithm used to achieve a quadratic speedup in Monte Carlo simulations is:**
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>- A. Quantum Phase Estimation (QPE)
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>- B. Shor&#39;s Factoring Algorithm
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>- C. Quantum Amplitude Estimation (QAE)
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>- D. Variational Quantum Eigensolver (VQE)
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    **Correct: C**
-</span></code></pre></div></h2>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: C**
+</code></pre></div>
+</details>
+<hr />
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
+<p><strong>3. After calculating the expected payoff <span class="arithmatex">\(\mathbb{E}[\max(S_T - K, 0)]\)</span> using QAE, what final classical step is required to determine the option's current price <span class="arithmatex">\(V\)</span>?</strong></p>
+<ul>
+<li>A. Applying the maximum function</li>
+<li>B. Multiplying by the discount factor <span class="arithmatex">\(e^{-rT}\)</span></li>
+<li>C. Adding the strike price <span class="arithmatex">\(K\)</span></li>
+<li>D. Dividing by the risk-free rate <span class="arithmatex">\(r\)</span></li>
+</ul>
 </div>
-<h2 id="3-after-calculating-the-expected-payoff-mathbbemaxs_t-k-0-using-qae-what-final-classical-step-is-required-to-determine-the-options-current-price-v-a-applying-the-maximum-function-b-multiplying-by-the-discount-factor-e-rt-c-adding-the-strike-price-k-d-dividing-by-the-risk-free-rate-r-info-see-answer-correct-b"><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>**3. After calculating the expected payoff $\mathbb{E}[\max(S_T - K, 0)]$ using QAE, what final classical step is required to determine the option&#39;s current price $V$?**
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>- A. Applying the maximum function
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>- B. Multiplying by the discount factor $e^{-rT}$
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>- C. Adding the strike price $K$
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>- D. Dividing by the risk-free rate $r$
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    **Correct: B**
-</span></code></pre></div></h2>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: B**
+</code></pre></div>
+</details>
+<hr />
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
+<p><strong>4. The non-linear nature of the payoff function <span class="arithmatex">\(f(x) = \max(x - K, 0)\)</span> is typically handled in quantum circuits by:</strong></p>
+<ul>
+<li>A. Using only the Iterative QAE (IQAE) variant</li>
+<li>B. Approximating <span class="arithmatex">\(f(x)\)</span> using piecewise-linear or polynomial functions</li>
+<li>C. Applying a CNOT gate to the payoff register</li>
+<li>D. Using the Bravyi-Kitaev transformation</li>
+</ul>
 </div>
-<h2 id="4-the-non-linear-nature-of-the-payoff-function-fx-maxx-k-0-is-typically-handled-in-quantum-circuits-by-a-using-only-the-iterative-qae-iqae-variant-b-approximating-fx-using-piecewise-linear-or-polynomial-functions-c-applying-a-cnot-gate-to-the-payoff-register-d-using-the-bravyi-kitaev-transformation-info-see-answer-correct-b"><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>**4. The non-linear nature of the payoff function $f(x) = \max(x - K, 0)$ is typically handled in quantum circuits by:**
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>- A. Using only the Iterative QAE (IQAE) variant
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>- B. Approximating $f(x)$ using piecewise-linear or polynomial functions
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>- C. Applying a CNOT gate to the payoff register
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>- D. Using the Bravyi-Kitaev transformation
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    **Correct: B**
-</span></code></pre></div></h2>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: B**
+</code></pre></div>
+</details>
+<hr />
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Quantify the performance difference between classical Monte Carlo and Quantum Amplitude Estimation (QAE) in terms of computational complexity, assuming both are seeking the same accuracy <span class="arithmatex">\(\epsilon\)</span>.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The performance difference is a <strong>quadratic speedup</strong> in favor of the quantum approach. This can be quantified by analyzing how the required number of computational steps scales with the desired accuracy, <span class="arithmatex">\(\epsilon\)</span>.</p>
+<ol>
+<li>
+<p><strong>Classical Monte Carlo:</strong></p>
+<ul>
+<li><strong>Error Scaling:</strong> The error of a classical Monte Carlo simulation decreases with the number of samples <span class="arithmatex">\(N\)</span> as <span class="arithmatex">\(\mathcal{O}(1/\sqrt{N})\)</span>.</li>
+<li><strong>Complexity:</strong> To achieve a target accuracy <span class="arithmatex">\(\epsilon\)</span>, we need the error to be at most <span class="arithmatex">\(\epsilon\)</span>. Therefore, <span class="arithmatex">\(1/\sqrt{N} \approx \epsilon\)</span>, which means the required number of samples <span class="arithmatex">\(N\)</span> scales as <span class="arithmatex">\(\mathcal{O}(1/\epsilon^2)\)</span>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Quantum Amplitude Estimation (QAE):</strong></p>
+<ul>
+<li><strong>Error Scaling:</strong> The error of QAE decreases with the number of quantum queries <span class="arithmatex">\(M\)</span> as <span class="arithmatex">\(\mathcal{O}(1/M)\)</span>.</li>
+<li><strong>Complexity:</strong> To achieve the same accuracy <span class="arithmatex">\(\epsilon\)</span>, we need <span class="arithmatex">\(1/M \approx \epsilon\)</span>, which means the required number of queries <span class="arithmatex">\(M\)</span> scales as <span class="arithmatex">\(\mathcal{O}(1/\epsilon)\)</span>.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Conclusion:</strong>
+To get 10x more accuracy (decreasing <span class="arithmatex">\(\epsilon\)</span> by a factor of 10), the classical method requires 100x more work, while the quantum method requires only 10x more work. This quadratic difference in scaling (<span class="arithmatex">\(1/\epsilon^2\)</span> vs. <span class="arithmatex">\(1/\epsilon\)</span>) is the source of the quantum advantage.</p>
+</details>
 </div>
-<h2 id="q-quantify-the-performance-difference-between-classical-monte-carlo-and-quantum-amplitude-estimation-qae-in-terms-of-computational-complexity-assuming-both-are-seeking-the-same-accuracy-epsilon-info-answer-strategy-the-performance-difference-is-a-quadratic-speedup-in-favor-of-the-quantum-approach-this-can-be-quantified-by-analyzing-how-the-required-number-of-computational-steps-scales-with-the-desired-accuracy-epsilon-1-classical-monte-carlo-error-scaling-the-error-of-a-classical-monte-carlo-simulation-decreases-with-the-number-of-samples-n-as-mathcalo1sqrtn-complexity-to-achieve-a-target-accuracy-epsilon-we-need-the-error-to-be-at-most-epsilon-therefore-1sqrtn-approx-epsilon-which-means-the-required-number-of-samples-n-scales-as-mathcalo1epsilon2-2-quantum-amplitude-estimation-qae-error-scaling-the-error-of-qae-decreases-with-the-number-of-quantum-queries-m-as-mathcalo1m-complexity-to-achieve-the-same-accuracy-epsilon-we-need-1m-approx-epsilon-which-means-the-required-number-of-queries-m-scales-as-mathcalo1epsilon-conclusion-to-get-10x-more-accuracy-decreasing-epsilon-by-a-factor-of-10-the-classical-method-requires-100x-more-work-while-the-quantum-method-requires-only-10x-more-work-this-quadratic-difference-in-scaling-1epsilon2-vs-1epsilon-is-the-source-of-the-quantum-advantage"><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>**Q:** Quantify the performance difference between classical Monte Carlo and Quantum Amplitude Estimation (QAE) in terms of computational complexity, assuming both are seeking the same accuracy $\epsilon$.
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    The performance difference is a **quadratic speedup** in favor of the quantum approach. This can be quantified by analyzing how the required number of computational steps scales with the desired accuracy, $\epsilon$.
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    1.  **Classical Monte Carlo:**
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        *   **Error Scaling:** The error of a classical Monte Carlo simulation decreases with the number of samples $N$ as $\mathcal{O}(1/\sqrt{N})$.
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        *   **Complexity:** To achieve a target accuracy $\epsilon$, we need the error to be at most $\epsilon$. Therefore, $1/\sqrt{N} \approx \epsilon$, which means the required number of samples $N$ scales as $\mathcal{O}(1/\epsilon^2)$.
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    2.  **Quantum Amplitude Estimation (QAE):**
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        *   **Error Scaling:** The error of QAE decreases with the number of quantum queries $M$ as $\mathcal{O}(1/M)$.
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        *   **Complexity:** To achieve the same accuracy $\epsilon$, we need $1/M \approx \epsilon$, which means the required number of queries $M$ scales as $\mathcal{O}(1/\epsilon)$.
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    **Conclusion:**
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    To get 10x more accuracy (decreasing $\epsilon$ by a factor of 10), the classical method requires 100x more work, while the quantum method requires only 10x more work. This quadratic difference in scaling ($1/\epsilon^2$ vs. $1/\epsilon$) is the source of the quantum advantage.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="hands-on-project"><strong><i class="fa-solid fa-flask"></i> Hands-On Project</strong></h3>
 <h4 id="project-classical-vs-quantum-sample-scaling"><strong>Project:</strong> Classical vs. Quantum Sample Scaling</h4>
 <hr />

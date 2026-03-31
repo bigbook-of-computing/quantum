@@ -2598,9 +2598,8 @@
 <p>The foundation of quantum machine learning and variational algorithms is the <strong>Parameterized Quantum Circuit (PQC)</strong>, commonly referred to as a <strong>Variational Quantum Circuit (VQC)</strong>. A VQC is a <strong>hybrid quantum-classical model</strong> designed to be the trainable core of an algorithm, where the quantum hardware performs the complex state transformation and the classical hardware executes the optimization.</p>
 <div class="admonition tip">
 <p class="admonition-title">VQCs as Quantum Neural Networks</p>
+<p>Think of a VQC as a quantum neural network: the encoding layer is the input, the parameterized gates are trainable weights, entangling gates are activation functions, and measurement extracts the output. The entire circuit learns by gradient descent [3].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Think of a VQC as a quantum neural network: the encoding layer is the input, the parameterized gates are trainable weights, entangling gates are activation functions, and measurement extracts the output. The entire circuit learns by gradient descent [3].
-</span></code></pre></div>
 <h3 id="structural-stages-of-a-vqc"><strong>Structural Stages of a VQC</strong></h3>
 <hr />
 <p>A VQC operates in three sequential, interconnected layers, transforming classical input data <span class="arithmatex">\(x\)</span> into a classical output value (e.g., a cost or a classification probability):</p>
@@ -2647,15 +2646,16 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 <p>where <span class="arithmatex">\(y_i\)</span> is the target label.</p>
 <div class="admonition example">
 <p class="admonition-title">VQC for Binary Classification</p>
+<p>For classifying data point <span class="arithmatex">\(x\)</span> into classes <span class="arithmatex">\(\{-1, +1\}\)</span>:</p>
+<ol>
+<li><strong>Encode:</strong> <span class="arithmatex">\(U_\phi(x)|0\rangle^{\otimes n}\)</span> maps <span class="arithmatex">\(x\)</span> to quantum state</li>
+<li><strong>Transform:</strong> <span class="arithmatex">\(U(\vec{\theta})\)</span> applies trainable rotations and entanglement</li>
+<li><strong>Measure:</strong> Compute <span class="arithmatex">\(\langle Z_0 \rangle\)</span> (expectation of Pauli-Z on qubit 0)</li>
+<li><strong>Classify:</strong> Prediction = sign(<span class="arithmatex">\(\langle Z_0 \rangle\)</span>)</li>
+<li><strong>Train:</strong> Minimize <span class="arithmatex">\(L(\vec{\theta}) = \sum_i (\langle Z_0 \rangle_i - y_i)^2\)</span> using classical optimizer</li>
+</ol>
 </div>
-<h2 id="for-classifying-data-point-x-into-classes-1-1-1-encode-u_phix0rangleotimes-n-maps-x-to-quantum-state-2-transform-uvectheta-applies-trainable-rotations-and-entanglement-3-measure-compute-langle-z_0-rangle-expectation-of-pauli-z-on-qubit-0-4-classify-prediction-signlangle-z_0-rangle-5-train-minimize-lvectheta-sum_i-langle-z_0-rangle_i-y_i2-using-classical-optimizer"><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>For classifying data point $x$ into classes $\{-1, +1\}$:
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>1. **Encode:** $U_\phi(x)|0\rangle^{\otimes n}$ maps $x$ to quantum state
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>2. **Transform:** $U(\vec{\theta})$ applies trainable rotations and entanglement
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>3. **Measure:** Compute $\langle Z_0 \rangle$ (expectation of Pauli-Z on qubit 0)
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>4. **Classify:** Prediction = sign($\langle Z_0 \rangle$)
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>5. **Train:** Minimize $L(\vec{\theta}) = \sum_i (\langle Z_0 \rangle_i - y_i)^2$ using classical optimizer
-</span></code></pre></div></h2>
+<hr />
 <h3 id="analogy-to-classical-neural-networks"><strong>Analogy to Classical Neural Networks</strong></h3>
 <hr />
 <p>The VQC serves as the quantum analogue of a classical feedforward neural network:</p>
@@ -2664,31 +2664,31 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 <li>The <strong>Parameterized Unitary Layer (<span class="arithmatex">\(U(\vec{\theta})\)</span>)</strong> is analogous to the <strong>hidden layers</strong> with adjustable weights.</li>
 <li>The <strong>Entangling Gates</strong> (CNOTs) serve as the <strong>non-linear activation functions</strong>, generating the required complexity and expressivity.</li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">VQC_Forward_Pass</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Initialize quantum state</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">state</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="c1"># Stage 1: Data Encoding Layer (fixed, data-dependent)</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Angle encoding</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="c1"># Stage 2: Parameterized Unitary Layer (trainable)</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">param_idx</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="c1"># Rotation layer (trainable parameters)</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="c1"># Entangling layer (fixed structure)</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="c1"># Stage 3: Measurement Layer</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="n">observable</span> <span class="o">=</span> <span class="n">Pauli_Z</span><span class="p">(</span><span class="n">qubit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Measure Z on first qubit</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="n">expectation</span> <span class="o">=</span> <span class="n">Measure_Expectation</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">observable</span><span class="p">)</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="k">return</span> <span class="n">expectation</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">VQC_Forward_Pass</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># Initialize quantum state</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">state</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># Stage 1: Data Encoding Layer (fixed, data-dependent)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Angle encoding</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="c1"># Stage 2: Parameterized Unitary Layer (trainable)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">param_idx</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="c1"># Rotation layer (trainable parameters)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="c1"># Entangling layer (fixed structure)</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="c1"># Stage 3: Measurement Layer</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">observable</span> <span class="o">=</span> <span class="n">Pauli_Z</span><span class="p">(</span><span class="n">qubit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Measure Z on first qubit</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">expectation</span> <span class="o">=</span> <span class="n">Measure_Expectation</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">observable</span><span class="p">)</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="k">return</span> <span class="n">expectation</span>
 </span></code></pre></div>
 <hr />
 <h2 id="102-circuit-ansatze-for-learning"><strong>10.2 Circuit Ansätze for Learning</strong></h2>
@@ -2696,9 +2696,8 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 <p>An <strong>ansatz</strong> is a pre-defined template for the <strong>Parameterized Unitary Layer</strong> <span class="arithmatex">\(U(\vec{\theta})\)</span> in a Variational Quantum Circuit (VQC). It is a structured sequence of fixed gates and trainable rotations that determines the <strong>expressibility</strong> (the ability to generate complex target states) and <strong>trainability</strong> (the ease of finding optimal parameters) of the model.</p>
 <div class="admonition tip">
 <p class="admonition-title">Ansatz Design is Everything</p>
+<p>The choice of ansatz is not a mere implementation detail—it fundamentally determines whether your VQC will train successfully or get stuck in barren plateaus. Structured, problem-inspired ansätze often outperform deep random circuits [4].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>The choice of ansatz is not a mere implementation detail—it fundamentally determines whether your VQC will train successfully or get stuck in barren plateaus. Structured, problem-inspired ansätze often outperform deep random circuits [4].
-</span></code></pre></div>
 <h3 id="structure-and-design-principles"><strong>Structure and Design Principles</strong></h3>
 <hr />
 <p>Ansätze are constructed by alternating layers of two basic components to ensure both local transformation and global correlation:</p>
@@ -2731,51 +2730,51 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 </ul>
 <details class="question">
 <summary>Why do entangling gates act like activation functions in neural networks?</summary>
+<p>Entangling gates create non-linear correlations between qubits by coupling their states, similar to how ReLU or sigmoid functions introduce non-linearity in neural networks. Without entanglement, the circuit would only produce separable (product) states, limiting expressivity to linear transformations.</p>
 </details>
-<h2 id="entangling-gates-create-non-linear-correlations-between-qubits-by-coupling-their-states-similar-to-how-relu-or-sigmoid-functions-introduce-non-linearity-in-neural-networks-without-entanglement-the-circuit-would-only-produce-separable-product-states-limiting-expressivity-to-linear-transformations"><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Entangling gates create non-linear correlations between qubits by coupling their states, similar to how ReLU or sigmoid functions introduce non-linearity in neural networks. Without entanglement, the circuit would only produce separable (product) states, limiting expressivity to linear transformations.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="importance-for-trainability-barren-plateaus"><strong>Importance for Trainability (Barren Plateaus)</strong></h3>
 <hr />
 <p>The choice of ansatz is the primary tool for mitigating the <strong>Barren Plateau</strong> problem. Barren plateaus occur when the gradients vanish exponentially, stalling training.</p>
 <p><strong>Mitigation</strong></p>
 <p>Structured, local, and <strong>shallow circuits</strong> (like hardware-efficient ansätze) are preferred because they restrict the search space, maintaining higher gradients and ensuring the classical optimizer can still effectively update the parameters <span class="arithmatex">\(\vec{\theta}\)</span>.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Hardware_Efficient_Ansatz</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="c1"># theta is flattened parameter vector</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">param_idx</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="c1"># Rotation layer: single-qubit gates</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="n">Apply_R_z</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="c1"># Entangling layer: nearest-neighbor CNOTs</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="k">return</span> <span class="n">qubits</span>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
-</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="n">Problem_Inspired_Ansatz_QAOA</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    <span class="c1"># QAOA ansatz with mixer (beta) and cost (gamma) parameters</span>
-</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
-</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
-</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    <span class="c1"># Initialize in equal superposition</span>
-</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>        <span class="n">Apply_H</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
-</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
-</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        <span class="c1"># Cost Hamiltonian layer (problem-dependent)</span>
-</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>            <span class="n">Apply_ZZ_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
-</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>
-</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>        <span class="c1"># Mixer Hamiltonian layer (driver)</span>
-</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
-</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>            <span class="n">Apply_R_x</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">beta</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
-</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
-</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>    <span class="k">return</span> <span class="n">qubits</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Hardware_Efficient_Ansatz</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># theta is flattened parameter vector</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">param_idx</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="c1"># Rotation layer: single-qubit gates</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="n">Apply_R_z</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="c1"># Entangling layer: nearest-neighbor CNOTs</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="k">return</span> <span class="n">qubits</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">Problem_Inspired_Ansatz_QAOA</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="c1"># QAOA ansatz with mixer (beta) and cost (gamma) parameters</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="c1"># Initialize in equal superposition</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="n">Apply_H</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="c1"># Cost Hamiltonian layer (problem-dependent)</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>            <span class="n">Apply_ZZ_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>        <span class="c1"># Mixer Hamiltonian layer (driver)</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            <span class="n">Apply_R_x</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">beta</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    <span class="k">return</span> <span class="n">qubits</span>
 </span></code></pre></div>
 <hr />
 <h2 id="103-hybrid-classical-quantum-models"><strong>10.3 Hybrid Classical-Quantum Models</strong></h2>
@@ -2783,9 +2782,8 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 <p>Variational Quantum Circuits (VQCs) are not standalone algorithms; they function as the quantum processor within <strong>hybrid quantum-classical models</strong>. This model is the dominant paradigm for current computation on <strong>NISQ (Noisy Intermediate-Scale Quantum)</strong> devices, pragmatically dividing the computational workload between the quantum processor and the conventional classical computer.</p>
 <div class="admonition tip">
 <p class="admonition-title">Why Hybrid Models Dominate NISQ</p>
+<p>Quantum hardware excels at exploring exponential Hilbert spaces but is terrible at iterative optimization (noise, decoherence, limited coherence time). Classical computers excel at optimization but cannot efficiently simulate quantum states. Hybrid models exploit the best of both worlds [5].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Quantum hardware excels at exploring exponential Hilbert spaces but is terrible at iterative optimization (noise, decoherence, limited coherence time). Classical computers excel at optimization but cannot efficiently simulate quantum states. Hybrid models exploit the best of both worlds [5].
-</span></code></pre></div>
 <h3 id="the-hybrid-workflow"><strong>The Hybrid Workflow</strong></h3>
 <hr />
 <p>The hybrid model partitions tasks based on the resource required, allowing each processor to handle the computationally intensive part it excels at:</p>
@@ -2848,31 +2846,31 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
     F --&gt;|Yes| H[Return Optimal θ*]</code></pre>
 <div class="admonition example">
 <p class="admonition-title">VQC Training Loop Pseudo-code</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>VQC_Training_Loop(data, labels, initial_theta, max_iterations):
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    theta = initial_theta
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    for iteration in range(max_iterations):
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        # Quantum execution: evaluate cost
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        total_cost = 0
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        for (x, y) in zip(data, labels):
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>            # Run VQC on quantum hardware
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>            prediction = VQC_Forward_Pass(x, theta)
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>            total_cost += (prediction - y)^2
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        # Classical optimization: compute gradient and update
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        if using_gradient_based_optimizer:
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>            gradient = Parameter_Shift_Rule(theta, data, labels)
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>            theta = theta - learning_rate * gradient
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        else:
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>            # Gradient-free (e.g., COBYLA)
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>            theta = Optimizer_Step(theta, total_cost)
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>        # Check convergence
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>        if total_cost &lt; tolerance:
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>            break
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>    return theta
-</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code>VQC_Training_Loop(data, labels, initial_theta, max_iterations):
+    theta = initial_theta
+
+    for iteration in range(max_iterations):
+        # Quantum execution: evaluate cost
+        total_cost = 0
+        for (x, y) in zip(data, labels):
+            # Run VQC on quantum hardware
+            prediction = VQC_Forward_Pass(x, theta)
+            total_cost += (prediction - y)^2
+
+        # Classical optimization: compute gradient and update
+        if using_gradient_based_optimizer:
+            gradient = Parameter_Shift_Rule(theta, data, labels)
+            theta = theta - learning_rate * gradient
+        else:
+            # Gradient-free (e.g., COBYLA)
+            theta = Optimizer_Step(theta, total_cost)
+
+        # Check convergence
+        if total_cost &lt; tolerance:
+            break
+
+    return theta
+</code></pre></div>
 </div>
 <hr />
 <h3 id="advantages-for-nisq"><strong>Advantages for NISQ</strong></h3>
@@ -2888,9 +2886,8 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 <p>Training a Variational Quantum Circuit (VQC) involves the critical step of using a classical optimizer to find the parameter vector <span class="arithmatex">\(\vec{\theta}\)</span> that minimizes the measured cost function <span class="arithmatex">\(C(\vec{\theta})\)</span>. This process relies on efficiently calculating or approximating the gradient of the cost function, often through quantum mechanical methods.</p>
 <div class="admonition tip">
 <p class="admonition-title">The Parameter Shift Rule: Quantum Backpropagation</p>
+<p>Classical neural networks use backpropagation to compute gradients. Quantum circuits use the parameter shift rule—a quantum-native method that analytically computes gradients by running the circuit twice with shifted parameters [6].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Classical neural networks use backpropagation to compute gradients. Quantum circuits use the parameter shift rule—a quantum-native method that analytically computes gradients by running the circuit twice with shifted parameters [6].
-</span></code></pre></div>
 <h3 id="gradient-based-optimization-and-the-parameter-shift-rule"><strong>Gradient-Based Optimization and the Parameter Shift Rule</strong></h3>
 <hr />
 <p>Gradient-based optimizers (e.g., <strong>Adam, SGD, RMSProp</strong>) require the gradient (<span class="arithmatex">\(\frac{\partial C}{\partial \theta_k}\)</span>) to determine the steepest descent direction in the parameter space. Since the VQC output is probabilistic and its parameters are angles, the gradient cannot be computed using standard classical backpropagation.</p>
@@ -2903,32 +2900,32 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 \frac{\partial C}{\partial \theta_k} = \frac{C(\theta_k + s) - C(\theta_k - s)}{2 \sin(s)}
 \]</div>
 <p>where <span class="arithmatex">\(s\)</span> is the shift angle (typically <span class="arithmatex">\(s=\pi/2\)</span>). The gradient calculation thus involves <strong>two evaluations of the quantum circuit</strong> per parameter.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">Parameter_Shift_Rule</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">π</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="c1"># Compute gradient of cost w.r.t. theta[k]</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">theta_plus</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">theta_plus</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">shift</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">theta_minus</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">theta_minus</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">shift</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="c1"># Evaluate cost at shifted parameters</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">cost_plus</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">(</span><span class="n">theta_plus</span><span class="p">)</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">cost_minus</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">(</span><span class="n">theta_minus</span><span class="p">)</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="c1"># Compute gradient</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="n">gradient</span> <span class="o">=</span> <span class="p">(</span><span class="n">cost_plus</span> <span class="o">-</span> <span class="n">cost_minus</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">shift</span><span class="p">))</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="k">return</span> <span class="n">gradient</span>
-</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
-</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="n">Compute_Full_Gradient</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">):</span>
-</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>    <span class="c1"># Compute gradient for all parameters</span>
-</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>    <span class="n">num_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>    <span class="n">gradient</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_params</span><span class="p">)</span>
-</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
-</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_params</span><span class="p">):</span>
-</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        <span class="n">gradient</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter_Shift_Rule</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">)</span>
-</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>
-</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>    <span class="k">return</span> <span class="n">gradient</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Parameter_Shift_Rule</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">π</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Compute gradient of cost w.r.t. theta[k]</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">theta_plus</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">theta_plus</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">shift</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">theta_minus</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">theta_minus</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">shift</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="c1"># Evaluate cost at shifted parameters</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">cost_plus</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">(</span><span class="n">theta_plus</span><span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">cost_minus</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">(</span><span class="n">theta_minus</span><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="c1"># Compute gradient</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">gradient</span> <span class="o">=</span> <span class="p">(</span><span class="n">cost_plus</span> <span class="o">-</span> <span class="n">cost_minus</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">shift</span><span class="p">))</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="k">return</span> <span class="n">gradient</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">Compute_Full_Gradient</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">):</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="c1"># Compute gradient for all parameters</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="n">num_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="n">gradient</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_params</span><span class="p">)</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_params</span><span class="p">):</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="n">gradient</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter_Shift_Rule</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">)</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="k">return</span> <span class="n">gradient</span>
 </span></code></pre></div>
 <hr />
 <h3 id="gradient-free-and-stochastic-optimizers"><strong>Gradient-Free and Stochastic Optimizers</strong></h3>
@@ -2940,9 +2937,9 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 <p>Methods like <strong>SPSA (Simultaneous Perturbation Stochastic Approximation)</strong> estimate the gradient using only a small, fixed number of noisy measurements (usually two per iteration), regardless of the number of parameters. This makes SPSA highly efficient in terms of quantum circuit executions, particularly for circuits with a large number of parameters.</p>
 <details class="question">
 <summary>When should you use COBYLA instead of Adam for VQC training?</summary>
+<p>Use COBYLA when: (1) measurement noise is high and gradient estimates are unreliable, (2) the number of parameters is small (&lt;50), or (3) the cost landscape is highly non-convex with many local minima. Adam is preferred when gradients are reliable and you need faster convergence with many parameters.</p>
 </details>
-<h2 id="use-cobyla-when-1-measurement-noise-is-high-and-gradient-estimates-are-unreliable-2-the-number-of-parameters-is-small-50-or-3-the-cost-landscape-is-highly-non-convex-with-many-local-minima-adam-is-preferred-when-gradients-are-reliable-and-you-need-faster-convergence-with-many-parameters"><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Use COBYLA when: (1) measurement noise is high and gradient estimates are unreliable, (2) the number of parameters is small (&lt;50), or (3) the cost landscape is highly non-convex with many local minima. Adam is preferred when gradients are reliable and you need faster convergence with many parameters.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="challenges-to-optimization"><strong>Challenges to Optimization</strong></h3>
 <hr />
 <p>VQC optimization is hampered by two primary challenges:</p>
@@ -2956,9 +2953,8 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
 <p><strong>Barren plateaus</strong> are a critical, inherent issue in training large <strong>Variational Quantum Circuits (VQCs)</strong>, representing an exponential vanishing of gradients across the optimization landscape. This issue directly impacts the <strong>trainability</strong> of VQCs.</p>
 <div class="admonition tip">
 <p class="admonition-title">The Barren Plateau Crisis</p>
+<p>Barren plateaus are the quantum equivalent of the vanishing gradient problem in deep classical neural networks, but exponentially worse. Random deep quantum circuits become exponentially flat—gradients vanish as <span class="arithmatex">\(\exp(-n)\)</span> where <span class="arithmatex">\(n\)</span> is the number of qubits [7].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Barren plateaus are the quantum equivalent of the vanishing gradient problem in deep classical neural networks, but exponentially worse. Random deep quantum circuits become exponentially flat—gradients vanish as $\exp(-n)$ where $n$ is the number of qubits [7].
-</span></code></pre></div>
 <h3 id="the-phenomenon"><strong>The Phenomenon</strong></h3>
 <hr />
 <p>A barren plateau occurs when the variance of the partial derivative (<span class="arithmatex">\(\frac{\partial C}{\partial \theta_k}\)</span>) of the cost function <span class="arithmatex">\(C(\vec{\theta})\)</span> drops exponentially with the number of qubits (<span class="arithmatex">\(n\)</span>) or the circuit depth.</p>
@@ -3006,15 +3002,15 @@ L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
     B --&gt;|Var ∇C ~ poly n| I</code></pre>
 <div class="admonition example">
 <p class="admonition-title">Barren Plateau Detection</p>
+<p>To detect if your VQC suffers from barren plateaus:</p>
+<ol>
+<li><strong>Sample gradients:</strong> Compute <span class="arithmatex">\(\frac{\partial C}{\partial \theta_k}\)</span> for multiple random <span class="arithmatex">\(\vec{\theta}\)</span></li>
+<li><strong>Calculate variance:</strong> <span class="arithmatex">\(\text{Var}[\nabla C] = \frac{1}{K}\sum_{k=1}^{K}(\nabla_k C)^2 - (\frac{1}{K}\sum_{k=1}^{K}\nabla_k C)^2\)</span></li>
+<li><strong>Check scaling:</strong> If <span class="arithmatex">\(\text{Var}[\nabla C] \propto 2^{-n}\)</span>, you have a barren plateau</li>
+<li><strong>Mitigate:</strong> Switch to shallow, structured ansatz or local cost function</li>
+</ol>
+<p>The challenge of barren plateaus reinforces the current necessity of designing <strong>shallow, localized VQCs</strong> for quantum machine learning.</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>To detect if your VQC suffers from barren plateaus:
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>1. **Sample gradients:** Compute $\frac{\partial C}{\partial \theta_k}$ for multiple random $\vec{\theta}$
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>2. **Calculate variance:** $\text{Var}[\nabla C] = \frac{1}{K}\sum_{k=1}^{K}(\nabla_k C)^2 - (\frac{1}{K}\sum_{k=1}^{K}\nabla_k C)^2$
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>3. **Check scaling:** If $\text{Var}[\nabla C] \propto 2^{-n}$, you have a barren plateau
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>4. **Mitigate:** Switch to shallow, structured ansatz or local cost function
-</span></code></pre></div>
-The challenge of barren plateaus reinforces the current necessity of designing <strong>shallow, localized VQCs</strong> for quantum machine learning.</p>
 <hr />
 <h3 id="summary-comparison-of-vqc-components-and-challenges"><strong>Summary: Comparison of VQC Components and Challenges</strong></h3>
 <hr />

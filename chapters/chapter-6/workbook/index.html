@@ -3483,7 +3483,7 @@
   
 
 
-<h1 id="chapter-6-variational-quantum-algorithms-workbook"><strong>Chapter 6: Variational Quantum Algorithms () () (Workbook)</strong></h1>
+<h1 id="chapter-6-variational-quantum-algorithms-workbook"><strong>Chapter 6: Variational Quantum Algorithms (Workbook)</strong></h1>
 <hr />
 <blockquote>
 <p><strong>Summary:</strong> This chapter explores Variational Quantum Algorithms (VQAs), a hybrid quantum-classical approach designed for NISQ-era devices. We delve into the two foundational VQAs—the Variational Quantum Eigensolver (VQE) for eigenvalue problems and the Quantum Approximate Optimization Algorithm (QAOA) for combinatorial optimization. The chapter examines the critical design considerations of ansatz design, classical optimizers, cost functions, and the challenges posed by barren plateaus, providing a comprehensive overview of this leading paradigm in near-term quantum computing.</p>
@@ -3567,41 +3567,43 @@ Optimization terminates when:</p>
 <h3 id="comprehension-check"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<p><strong>1. What quantity does VQE minimize?</strong></p>
-<ul>
-<li>A. Circuit depth  </li>
-<li>B. Number of entangling gates  </li>
-<li>C. The variance of measurements  </li>
-<li>D. The expected energy <span class="arithmatex">\(E(\mathbf{\theta})\)</span>  </li>
-</ul>
-<p><strong>2. Why decompose <span class="arithmatex">\(\mathbf{H}\)</span> into Pauli strings?</strong></p>
-<ul>
-<li>A. To reduce qubit count  </li>
-<li>B. To enable term-wise measurement on hardware  </li>
-<li>C. To avoid using unitaries  </li>
-<li>D. To remove non-commuting terms  </li>
-</ul>
-<details class="info">
-<summary>See Answer</summary>
-<p><strong>1: D</strong> — The VQE objective is <span class="arithmatex">\(E(\mathbf{\theta}) = \langle \psi(\mathbf{\theta}) \rvert \mathbf{H} \lvert \psi(\mathbf{\theta}) \rangle\)</span>.<br />
-<strong>2: B</strong> — Pauli decomposition allows hardware-friendly expectation estimation term by term (with grouping when commuting).</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**1. What quantity does VQE minimize?**
+
+- A. Circuit depth  
+- B. Number of entangling gates  
+- C. The variance of measurements  
+- D. The expected energy $E(\mathbf{\theta})$
+
+**2. Why decompose $\mathbf{H}$ into Pauli strings?**
+
+- A. To reduce qubit count  
+- B. To enable term-wise measurement on hardware  
+- C. To avoid using unitaries  
+- D. To remove non-commuting terms
+
+??? info &quot;See Answer&quot;
+    **1: D** — The VQE objective is $E(\mathbf{\theta}) = \langle \psi(\mathbf{\theta}) \rvert \mathbf{H} \lvert \psi(\mathbf{\theta}) \rangle$.  
+    **2: B** — Pauli decomposition allows hardware-friendly expectation estimation term by term (with grouping when commuting).
+</code></pre></div>
 </div>
 <hr />
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
-<p><strong>Q:</strong> Define the role of the classical optimizer in VQE and discuss when gradient-based vs. gradient-free methods are preferable on NISQ devices.</p>
-<details class="info" open="open">
-<summary>Answer Strategy</summary>
-<p><strong>The Classical Optimizer Role</strong><br />
-In VQE's hybrid loop, the classical optimizer navigates the energy landscape <span class="arithmatex">\(E(\vec{\theta}) = \langle\psi(\vec{\theta})|H|\psi(\vec{\theta})\rangle\)</span> toward the ground state minimum. It processes noisy quantum measurements and updates ansatz parameters <span class="arithmatex">\(\vec{\theta}\)</span> iteratively until convergence.</p>
-<p><strong>Gradient-Based Methods (Adam, L-BFGS)</strong><br />
-These use the parameter-shift rule to compute gradients: <span class="arithmatex">\(\frac{\partial E}{\partial \theta_i} = \frac{E(\vec{\theta} + \frac{\pi}{2}\hat{e}_i) - E(\vec{\theta} - \frac{\pi}{2}\hat{e}_i)}{2}\)</span>, requiring <span class="arithmatex">\(2d\)</span> circuit evaluations for <span class="arithmatex">\(d\)</span> parameters. They converge rapidly when shot noise is small (<span class="arithmatex">\(N_{\text{shots}} \sim 10^4\)</span>), gradients are measurable (not in barren plateaus where <span class="arithmatex">\(|\nabla E| \sim e^{-n}\)</span>), and the landscape is smooth. Best for small problems (<span class="arithmatex">\(n \leq 6\)</span> qubits, <span class="arithmatex">\(d \leq 12\)</span> parameters).</p>
-<p><strong>Gradient-Free Methods (COBYLA, SPSA, Nelder-Mead)</strong><br />
-SPSA estimates gradients via random perturbations using only 2 evaluations per iteration regardless of dimension, versus <span class="arithmatex">\(2d\)</span> for parameter-shift. These methods naturally average out shot noise and make progress even in barren plateau regions by using finite-difference scales larger than vanishing gradients. Preferred when shot noise is high, parameter count exceeds 50, or barren plateaus are suspected.</p>
-<p><strong>NISQ Recommendations</strong><br />
-For <span class="arithmatex">\(n &gt; 15\)</span> qubits on noisy hardware, gradient-free methods (especially SPSA) dominate due to superior scaling and noise resilience. Medium problems (<span class="arithmatex">\(7 \leq n \leq 15\)</span>) balance with COBYLA. Only small, low-noise scenarios favor gradient-based approaches. Device calibration drift and limited coherence make minimizing circuit repetitions critical, giving gradient-free methods a decisive advantage.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**Q:** Define the role of the classical optimizer in VQE and discuss when gradient-based vs. gradient-free methods are preferable on NISQ devices.
+
+???+ info &quot;Answer Strategy&quot;
+    **The Classical Optimizer Role**  
+    In VQE&#39;s hybrid loop, the classical optimizer navigates the energy landscape $E(\vec{\theta}) = \langle\psi(\vec{\theta})|H|\psi(\vec{\theta})\rangle$ toward the ground state minimum. It processes noisy quantum measurements and updates ansatz parameters $\vec{\theta}$ iteratively until convergence.
+
+    **Gradient-Based Methods (Adam, L-BFGS)**  
+    These use the parameter-shift rule to compute gradients: $\frac{\partial E}{\partial \theta_i} = \frac{E(\vec{\theta} + \frac{\pi}{2}\hat{e}_i) - E(\vec{\theta} - \frac{\pi}{2}\hat{e}_i)}{2}$, requiring $2d$ circuit evaluations for $d$ parameters. They converge rapidly when shot noise is small ($N_{\text{shots}} \sim 10^4$), gradients are measurable (not in barren plateaus where $|\nabla E| \sim e^{-n}$), and the landscape is smooth. Best for small problems ($n \leq 6$ qubits, $d \leq 12$ parameters).
+
+    **Gradient-Free Methods (COBYLA, SPSA, Nelder-Mead)**  
+    SPSA estimates gradients via random perturbations using only 2 evaluations per iteration regardless of dimension, versus $2d$ for parameter-shift. These methods naturally average out shot noise and make progress even in barren plateau regions by using finite-difference scales larger than vanishing gradients. Preferred when shot noise is high, parameter count exceeds 50, or barren plateaus are suspected.
+
+    **NISQ Recommendations**  
+    For $n &gt; 15$ qubits on noisy hardware, gradient-free methods (especially SPSA) dominate due to superior scaling and noise resilience. Medium problems ($7 \leq n \leq 15$) balance with COBYLA. Only small, low-noise scenarios favor gradient-based approaches. Device calibration drift and limited coherence make minimizing circuit repetitions critical, giving gradient-free methods a decisive advantage.
+</code></pre></div>
 </div>
 <h3 id="hands-on-projects"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
 <h4 id="project-blueprint"><strong>Project Blueprint</strong></h4>
@@ -3770,41 +3772,43 @@ QAOA performance requires <span class="arithmatex">\([\mathbf{C}, \mathbf{B}] \n
 <h3 id="comprehension-check_1"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<p><strong>1. Which unitary encodes the problem constraints?</strong></p>
-<ul>
-<li>A. <span class="arithmatex">\(e^{-i\beta \mathbf{B}}\)</span>  </li>
-<li>B. <span class="arithmatex">\(e^{-i\gamma \mathbf{C}}\)</span>  </li>
-<li>C. Hadamards only  </li>
-<li>D. Identity  </li>
-</ul>
-<p><strong>2. What is the main trade-off when increasing depth <span class="arithmatex">\(p\)</span>?</strong></p>
-<ul>
-<li>A. Fewer parameters  </li>
-<li>B. Lower expressibility  </li>
-<li>C. Greater depth and noise accumulation  </li>
-<li>D. Elimination of barren plateaus  </li>
-</ul>
-<details class="info">
-<summary>See Answer</summary>
-<p><strong>1: B</strong> — The cost unitary contains the problem Hamiltonian.<br />
-<strong>2: C</strong> — Deeper circuits increase error rates and runtime on NISQ hardware.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**1. Which unitary encodes the problem constraints?**
+
+- A. $e^{-i\beta \mathbf{B}}$  
+- B. $e^{-i\gamma \mathbf{C}}$  
+- C. Hadamards only  
+- D. Identity
+
+**2. What is the main trade-off when increasing depth $p$?**
+
+- A. Fewer parameters  
+- B. Lower expressibility  
+- C. Greater depth and noise accumulation  
+- D. Elimination of barren plateaus
+
+??? info &quot;See Answer&quot;
+    **1: B** — The cost unitary contains the problem Hamiltonian.  
+    **2: C** — Deeper circuits increase error rates and runtime on NISQ hardware.
+</code></pre></div>
 </div>
 <hr />
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
-<p><strong>Q:</strong> Explain why <span class="arithmatex">\([\mathbf{C},\mathbf{B}] \ne 0\)</span> is essential for QAOA performance. What happens if they commute?</p>
-<details class="info" open="open">
-<summary>Answer Strategy</summary>
-<p><strong>The Commutativity Collapse</strong><br />
-QAOA alternates cost <span class="arithmatex">\(U_C(\gamma) = e^{-i\gamma C}\)</span> and mixer <span class="arithmatex">\(U_B(\beta) = e^{-i\beta B}\)</span> unitaries. If <span class="arithmatex">\([C,B] = 0\)</span>, they share an eigenbasis and the Baker-Campbell-Hausdorff formula simplifies: <span class="arithmatex">\(U_B(\beta) U_C(\gamma) = e^{-i(\beta B + \gamma C)}\)</span>. A <span class="arithmatex">\(p\)</span>-layer circuit collapses to depth-1 regardless of <span class="arithmatex">\(p\)</span>, reducing the parameter space from <span class="arithmatex">\(2p\)</span> dimensions to just 2.</p>
-<p><strong>Loss of Expressibility</strong><br />
-Non-commuting operators enable exploration of a richer state manifold. When <span class="arithmatex">\([C,B] \neq 0\)</span>, each layer rotates the state in different directions, interpolating between mixer eigenstates and cost eigenstates through complex superpositions. With commuting operators, the ansatz remains confined to a 2D submanifold—no entanglement patterns or interference structures needed for hard optimization emerge.</p>
-<p><strong>Physical Mechanism</strong><br />
-Non-commutativity means <span class="arithmatex">\(C\)</span> and <span class="arithmatex">\(B\)</span> don't share eigenstates. Applying <span class="arithmatex">\(U_C\)</span> rotates <span class="arithmatex">\(B\)</span> eigenstates into superpositions over <span class="arithmatex">\(C\)</span> eigenstates, creating quantum interference: the cost unitary imprints computational-basis phases while the mixer creates superpositions that interfere constructively on low-cost states. For MaxCut with <span class="arithmatex">\(C = \sum_{(i,j)} \frac{1-Z_i Z_j}{2}\)</span> and <span class="arithmatex">\(B = \sum_i X_i\)</span>, we have <span class="arithmatex">\([Z_i Z_j, X_k] \neq 0\)</span>—essential for transitioning between cut configurations.</p>
-<p><strong>Performance Impact</strong><br />
-QAOA's approximation ratio improves with depth for non-commuting operators (<span class="arithmatex">\(p=1\)</span> achieves <span class="arithmatex">\(\geq 0.6924\)</span> on 3-regular graphs, <span class="arithmatex">\(p=2\)</span> reaches <span class="arithmatex">\(\geq 0.7559\)</span>). If <span class="arithmatex">\([C,B] = 0\)</span>, increasing <span class="arithmatex">\(p\)</span> beyond 1 yields zero improvement—the algorithm cannot escape the depth-1 performance ceiling. Designing mixers that preserve non-commutativity while respecting problem constraints is a core QAOA design principle.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**Q:** Explain why $[\mathbf{C},\mathbf{B}] \ne 0$ is essential for QAOA performance. What happens if they commute?
+
+???+ info &quot;Answer Strategy&quot;
+    **The Commutativity Collapse**  
+    QAOA alternates cost $U_C(\gamma) = e^{-i\gamma C}$ and mixer $U_B(\beta) = e^{-i\beta B}$ unitaries. If $[C,B] = 0$, they share an eigenbasis and the Baker-Campbell-Hausdorff formula simplifies: $U_B(\beta) U_C(\gamma) = e^{-i(\beta B + \gamma C)}$. A $p$-layer circuit collapses to depth-1 regardless of $p$, reducing the parameter space from $2p$ dimensions to just 2.
+
+    **Loss of Expressibility**  
+    Non-commuting operators enable exploration of a richer state manifold. When $[C,B] \neq 0$, each layer rotates the state in different directions, interpolating between mixer eigenstates and cost eigenstates through complex superpositions. With commuting operators, the ansatz remains confined to a 2D submanifold—no entanglement patterns or interference structures needed for hard optimization emerge.
+
+    **Physical Mechanism**  
+    Non-commutativity means $C$ and $B$ don&#39;t share eigenstates. Applying $U_C$ rotates $B$ eigenstates into superpositions over $C$ eigenstates, creating quantum interference: the cost unitary imprints computational-basis phases while the mixer creates superpositions that interfere constructively on low-cost states. For MaxCut with $C = \sum_{(i,j)} \frac{1-Z_i Z_j}{2}$ and $B = \sum_i X_i$, we have $[Z_i Z_j, X_k] \neq 0$—essential for transitioning between cut configurations.
+
+    **Performance Impact**  
+    QAOA&#39;s approximation ratio improves with depth for non-commuting operators ($p=1$ achieves $\geq 0.6924$ on 3-regular graphs, $p=2$ reaches $\geq 0.7559$). If $[C,B] = 0$, increasing $p$ beyond 1 yields zero improvement—the algorithm cannot escape the depth-1 performance ceiling. Designing mixers that preserve non-commutativity while respecting problem constraints is a core QAOA design principle.
+</code></pre></div>
 </div>
 <h3 id="hands-on-projects_1"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
 <h4 id="project-blueprint_1"><strong>Project Blueprint</strong></h4>
@@ -3945,41 +3949,43 @@ Pesah et al. showed ansätze with bounded entanglement growth avoid barren plate
 <h3 id="comprehension-check_2"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<p><strong>1. What is a primary advantage of hardware-efficient ansätze?</strong></p>
-<ul>
-<li>A. Exact ground states for any <span class="arithmatex">\(\mathbf{H}\)</span>  </li>
-<li>B. Shallow depth matching native gates  </li>
-<li>C. Guaranteed convex optimization  </li>
-<li>D. Zero-shot variance  </li>
-</ul>
-<p><strong>2. UCC ansätze are most useful for which domain?</strong></p>
-<ul>
-<li>A. MaxCut on graphs  </li>
-<li>B. Quantum chemistry electronic structure  </li>
-<li>C. Shallow image classifiers  </li>
-<li>D. Hash functions  </li>
-</ul>
-<details class="info">
-<summary>See Answer</summary>
-<p><strong>1: B</strong> — They reduce compilation overhead on NISQ devices.<br />
-<strong>2: B</strong> — UCC originates from many-body quantum chemistry.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**1. What is a primary advantage of hardware-efficient ansätze?**
+
+- A. Exact ground states for any $\mathbf{H}$  
+- B. Shallow depth matching native gates  
+- C. Guaranteed convex optimization  
+- D. Zero-shot variance
+
+**2. UCC ansätze are most useful for which domain?**
+
+- A. MaxCut on graphs  
+- B. Quantum chemistry electronic structure  
+- C. Shallow image classifiers  
+- D. Hash functions
+
+??? info &quot;See Answer&quot;
+    **1: B** — They reduce compilation overhead on NISQ devices.  
+    **2: B** — UCC originates from many-body quantum chemistry.
+</code></pre></div>
 </div>
 <hr />
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
-<p><strong>Q:</strong> Describe how ansatz depth and entanglement pattern influence both expressibility and barren plateau risk.</p>
-<details class="info" open="open">
-<summary>Answer Strategy</summary>
-<p><strong>The Expressibility-Trainability Tradeoff</strong><br />
-Deeper circuits with more entangling gates expand the accessible state manifold (higher expressibility) but create exponentially flat cost landscapes where gradients vanish. McClean et al. showed that for random-like deep circuits, gradient variance scales as <span class="arithmatex">\(\text{Var}[\partial L/\partial \theta_i] \sim O(1/2^n)\)</span>—for <span class="arithmatex">\(n=50\)</span> qubits, gradients disappear into noise.</p>
-<p><strong>Depth Impact</strong><br />
-Shallow circuits (<span class="arithmatex">\(d \sim O(1)\)</span>) avoid plateaus with <span class="arithmatex">\(O(1)\)</span> gradients but have low expressibility. Moderate depth (<span class="arithmatex">\(d \sim O(\text{poly}(n))\)</span>) balances both. Deep circuits (<span class="arithmatex">\(d \gg n\)</span>) achieve near-universal expressibility via Solovay-Kitaev but suffer severe barren plateaus. The critical threshold beyond which additional layers don't improve outcomes is problem-dependent.</p>
-<p><strong>Entanglement Pattern Effects</strong><br />
-Global all-to-all entanglement creates Haar-random-like states inducing barren plateaus. Local nearest-neighbor patterns restrict entanglement to bounded regions, preserving gradients. Problem-adapted structures (e.g., UCCSD for molecules) focus on relevant subspaces, mitigating plateaus. Pesah et al. proved ansätze with bounded entanglement growth (linear light-cone) avoid exponential gradient suppression even at large <span class="arithmatex">\(n\)</span>.</p>
-<p><strong>Design Strategies</strong><br />
-Use problem-inspired ansätze encoding domain knowledge, adaptive depth starting shallow and adding layers only if needed, local cost functions whose gradients don't vanish, and parameter initialization near known solutions. For molecular VQE: hardware-efficient depth-20 circuits suffer plateaus for <span class="arithmatex">\(n&gt;20\)</span>, while UCCSD maintains trainability for 50+ qubits despite lower general expressibility.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**Q:** Describe how ansatz depth and entanglement pattern influence both expressibility and barren plateau risk.
+
+???+ info &quot;Answer Strategy&quot;
+    **The Expressibility-Trainability Tradeoff**  
+    Deeper circuits with more entangling gates expand the accessible state manifold (higher expressibility) but create exponentially flat cost landscapes where gradients vanish. McClean et al. showed that for random-like deep circuits, gradient variance scales as $\text{Var}[\partial L/\partial \theta_i] \sim O(1/2^n)$—for $n=50$ qubits, gradients disappear into noise.
+
+    **Depth Impact**  
+    Shallow circuits ($d \sim O(1)$) avoid plateaus with $O(1)$ gradients but have low expressibility. Moderate depth ($d \sim O(\text{poly}(n))$) balances both. Deep circuits ($d \gg n$) achieve near-universal expressibility via Solovay-Kitaev but suffer severe barren plateaus. The critical threshold beyond which additional layers don&#39;t improve outcomes is problem-dependent.
+
+    **Entanglement Pattern Effects**  
+    Global all-to-all entanglement creates Haar-random-like states inducing barren plateaus. Local nearest-neighbor patterns restrict entanglement to bounded regions, preserving gradients. Problem-adapted structures (e.g., UCCSD for molecules) focus on relevant subspaces, mitigating plateaus. Pesah et al. proved ansätze with bounded entanglement growth (linear light-cone) avoid exponential gradient suppression even at large $n$.
+
+    **Design Strategies**  
+    Use problem-inspired ansätze encoding domain knowledge, adaptive depth starting shallow and adding layers only if needed, local cost functions whose gradients don&#39;t vanish, and parameter initialization near known solutions. For molecular VQE: hardware-efficient depth-20 circuits suffer plateaus for $n&gt;20$, while UCCSD maintains trainability for 50+ qubits despite lower general expressibility.
+</code></pre></div>
 </div>
 <h3 id="hands-on-projects_2"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
 <h4 id="project-blueprint_2"><strong>Project Blueprint</strong></h4>
@@ -4171,41 +4177,43 @@ N_{\text{total}} = N_{\text{iter}} \times Q_{\text{iter}} \times N_{\text{shots}
 <h3 id="comprehension-check_3"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<p><strong>1. SPSA estimates gradients using how many function evaluations per step (dimension-free)?</strong></p>
-<ul>
-<li>A. One  </li>
-<li>B. Two  </li>
-<li>C. <span class="arithmatex">\(2d\)</span>  </li>
-<li>D. <span class="arithmatex">\(d\)</span>  </li>
-</ul>
-<p><strong>2. Parameter-shift rules apply when generators satisfy which property?</strong></p>
-<ul>
-<li>A. Non-unitary  </li>
-<li>B. Nilpotent  </li>
-<li>C. Involutory with two-point spectrum  </li>
-<li>D. Non-Hermitian  </li>
-</ul>
-<details class="info">
-<summary>See Answer</summary>
-<p><strong>1: B</strong> — SPSA uses two queries irrespective of dimension.<br />
-<strong>2: C</strong> — Generators with eigenvalues <span class="arithmatex">\(\pm 1\)</span> (up to scale) admit parameter-shift.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**1. SPSA estimates gradients using how many function evaluations per step (dimension-free)?**
+
+- A. One  
+- B. Two  
+- C. $2d$  
+- D. $d$
+
+**2. Parameter-shift rules apply when generators satisfy which property?**
+
+- A. Non-unitary  
+- B. Nilpotent  
+- C. Involutory with two-point spectrum  
+- D. Non-Hermitian
+
+??? info &quot;See Answer&quot;
+    **1: B** — SPSA uses two queries irrespective of dimension.  
+    **2: C** — Generators with eigenvalues $\pm 1$ (up to scale) admit parameter-shift.
+</code></pre></div>
 </div>
 <hr />
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
-<p><strong>Q:</strong> When would you prefer SPSA over parameter-shift in VQE, and why?</p>
-<details class="info" open="open">
-<summary>Answer Strategy</summary>
-<p><strong>Query Complexity Tradeoff</strong><br />
-Parameter-shift provides exact gradients via <span class="arithmatex">\(\frac{\partial L}{\partial \theta_i} = \frac{L(\theta_i + \pi/4) - L(\theta_i - \pi/4)}{2}\)</span>, requiring <span class="arithmatex">\(2m\)</span> circuit evaluations for <span class="arithmatex">\(m\)</span> parameters. SPSA estimates all components simultaneously using random perturbations <span class="arithmatex">\(\Delta\vec{\theta}\)</span> with only 2 evaluations: <span class="arithmatex">\(\nabla L \approx \frac{L(\vec{\theta} + c\Delta\vec{\theta}) - L(\vec{\theta} - c\Delta\vec{\theta})}{2c} \Delta\vec{\theta}\)</span>. This is <span class="arithmatex">\(O(1)\)</span> vs <span class="arithmatex">\(O(m)\)</span> query complexity.</p>
-<p><strong>Prefer SPSA When</strong><br />
-Tight shot budgets (<span class="arithmatex">\(N_{\text{shots}} &lt; 10^4\)</span>), high-dimensional parameters (<span class="arithmatex">\(m &gt; 50\)</span>), and noisy NISQ devices favor SPSA. For a 100-parameter ansatz, SPSA uses 2 circuits per iteration versus 200 for parameter-shift—a 100× reduction. Random perturbations naturally average out measurement noise and help escape noise-induced local minima. Early-stage exploratory optimization benefits from SPSA's rough gradient directions.</p>
-<p><strong>Prefer Parameter-Shift When</strong><br />
-Sufficient shot budget (<span class="arithmatex">\(N_{\text{shots}} &gt; 10^5\)</span>), low-to-moderate dimensions (<span class="arithmatex">\(m &lt; 30\)</span>), and fine-tuning near convergence favor parameter-shift. Exact gradients enable faster convergence with fewer iterations and are more compatible with error mitigation techniques. Late-stage refinement requires the precision SPSA's stochastic noise hinders.</p>
-<p><strong>Practical Hybrid Strategy</strong><br />
-Use SPSA for 50-100 iterations to identify promising regions, then switch to parameter-shift for final 20-50 iterations. For a 12-qubit molecule with 80-parameter UCCSD: SPSA achieves 20× shot reduction (4×10^6 total shots) versus parameter-shift (8×10^7 shots), making it essential for resource-constrained NISQ demonstrations.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**Q:** When would you prefer SPSA over parameter-shift in VQE, and why?
+
+???+ info &quot;Answer Strategy&quot;
+    **Query Complexity Tradeoff**  
+    Parameter-shift provides exact gradients via $\frac{\partial L}{\partial \theta_i} = \frac{L(\theta_i + \pi/4) - L(\theta_i - \pi/4)}{2}$, requiring $2m$ circuit evaluations for $m$ parameters. SPSA estimates all components simultaneously using random perturbations $\Delta\vec{\theta}$ with only 2 evaluations: $\nabla L \approx \frac{L(\vec{\theta} + c\Delta\vec{\theta}) - L(\vec{\theta} - c\Delta\vec{\theta})}{2c} \Delta\vec{\theta}$. This is $O(1)$ vs $O(m)$ query complexity.
+
+    **Prefer SPSA When**  
+    Tight shot budgets ($N_{\text{shots}} &lt; 10^4$), high-dimensional parameters ($m &gt; 50$), and noisy NISQ devices favor SPSA. For a 100-parameter ansatz, SPSA uses 2 circuits per iteration versus 200 for parameter-shift—a 100× reduction. Random perturbations naturally average out measurement noise and help escape noise-induced local minima. Early-stage exploratory optimization benefits from SPSA&#39;s rough gradient directions.
+
+    **Prefer Parameter-Shift When**  
+    Sufficient shot budget ($N_{\text{shots}} &gt; 10^5$), low-to-moderate dimensions ($m &lt; 30$), and fine-tuning near convergence favor parameter-shift. Exact gradients enable faster convergence with fewer iterations and are more compatible with error mitigation techniques. Late-stage refinement requires the precision SPSA&#39;s stochastic noise hinders.
+
+    **Practical Hybrid Strategy**  
+    Use SPSA for 50-100 iterations to identify promising regions, then switch to parameter-shift for final 20-50 iterations. For a 12-qubit molecule with 80-parameter UCCSD: SPSA achieves 20× shot reduction (4×10^6 total shots) versus parameter-shift (8×10^7 shots), making it essential for resource-constrained NISQ demonstrations.
+</code></pre></div>
 </div>
 <h3 id="hands-on-projects_3"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
 <h4 id="project-blueprint_3"><strong>Project Blueprint</strong></h4>
@@ -4374,41 +4382,43 @@ Monitor:
 <h3 id="comprehension-check_4"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<p><strong>1. Why group commuting Pauli terms before measurement?</strong></p>
-<ul>
-<li>A. To change the Hamiltonian  </li>
-<li>B. To reduce distinct measurement bases  </li>
-<li>C. To increase variance  </li>
-<li>D. To avoid tomography  </li>
-</ul>
-<p><strong>2. Which indicator best signals convergence in VQE?</strong></p>
-<ul>
-<li>A. Increasing depth during optimization  </li>
-<li>B. Oscillating energy with growing amplitude  </li>
-<li>C. Stabilized energy and small <span class="arithmatex">\(\|\nabla E\|\)</span>  </li>
-<li>D. Random parameter jumps  </li>
-</ul>
-<details class="info">
-<summary>See Answer</summary>
-<p><strong>1: B</strong> — Commuting groups share a basis and can be measured together.<br />
-<strong>2: C</strong> — Plateaued energy and vanishing gradients indicate convergence.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**1. Why group commuting Pauli terms before measurement?**
+
+- A. To change the Hamiltonian  
+- B. To reduce distinct measurement bases  
+- C. To increase variance  
+- D. To avoid tomography
+
+**2. Which indicator best signals convergence in VQE?**
+
+- A. Increasing depth during optimization  
+- B. Oscillating energy with growing amplitude  
+- C. Stabilized energy and small $\|\nabla E\|$  
+- D. Random parameter jumps
+
+??? info &quot;See Answer&quot;
+    **1: B** — Commuting groups share a basis and can be measured together.  
+    **2: C** — Plateaued energy and vanishing gradients indicate convergence.
+</code></pre></div>
 </div>
 <hr />
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
-<p><strong>Q:</strong> Outline an adaptive measurement strategy to allocate shots across commuting groups under a fixed budget.</p>
-<details class="info" open="open">
-<summary>Answer Strategy</summary>
-<p><strong>The Allocation Problem</strong><br />
-Measuring Hamiltonian <span class="arithmatex">\(H = \sum_j c_j P_j\)</span> grouped into <span class="arithmatex">\(M\)</span> commuting sets <span class="arithmatex">\(\{G_1, \ldots, G_M\}\)</span> under total budget <span class="arithmatex">\(N_{\text{total}}\)</span> requires optimal shot allocation <span class="arithmatex">\(\{N_1, \ldots, N_M\}\)</span> to minimize total variance <span class="arithmatex">\(\text{Var}[\widehat{L}] = \sum_m \frac{\sigma_m^2}{N_m}\)</span>.</p>
-<p><strong>Optimal Allocation (Known Variances)</strong><br />
-With known group variances <span class="arithmatex">\(\{\sigma_m^2\}\)</span>, minimize via Lagrange multipliers: <span class="arithmatex">\(N_m^* = N_{\text{total}} \cdot \frac{\sigma_m}{\sum_k \sigma_k}\)</span>. Allocate shots proportional to group standard deviation (not variance)—high-variance groups receive more shots.</p>
-<p><strong>Adaptive Strategy (Unknown Variances)</strong><br />
-<strong>Step 1</strong>: Pilot exploration with <span class="arithmatex">\(N_{\text{pilot}}/M\)</span> shots per group to estimate <span class="arithmatex">\(\widehat{\sigma}_m^2 = \frac{1}{N_m-1} \sum_k (L_m^{(k)} - \widehat{L}_m)^2\)</span>. <strong>Step 2</strong>: For remaining budget, allocate proportionally: <span class="arithmatex">\(N_m = N_m^{(0)} + N_{\text{remaining}} \cdot \frac{\widehat{\sigma}_m}{\sum_k \widehat{\sigma}_k}\)</span>. <strong>Step 3</strong>: Update variance estimates at each optimization iteration based on recent measurements. Enforce minimum allocation <span class="arithmatex">\(N_m \geq N_{\text{min}}\)</span> to avoid under-sampling.</p>
-<p><strong>Impact</strong><br />
-For a 12-qubit molecule with 20 commuting groups, adaptive allocation with <span class="arithmatex">\(10^5\)</span> shots achieves variance comparable to <span class="arithmatex">\(3\times10^5\)</span> shots under equal allocation—a 3× effective shot economy. This is critical for scaling VQE to larger molecules on shot-limited NISQ hardware.</p>
-</details>
+<div class="language-text highlight"><pre><span></span><code>**Q:** Outline an adaptive measurement strategy to allocate shots across commuting groups under a fixed budget.
+
+???+ info &quot;Answer Strategy&quot;
+    **The Allocation Problem**  
+    Measuring Hamiltonian $H = \sum_j c_j P_j$ grouped into $M$ commuting sets $\{G_1, \ldots, G_M\}$ under total budget $N_{\text{total}}$ requires optimal shot allocation $\{N_1, \ldots, N_M\}$ to minimize total variance $\text{Var}[\widehat{L}] = \sum_m \frac{\sigma_m^2}{N_m}$.
+
+    **Optimal Allocation (Known Variances)**  
+    With known group variances $\{\sigma_m^2\}$, minimize via Lagrange multipliers: $N_m^* = N_{\text{total}} \cdot \frac{\sigma_m}{\sum_k \sigma_k}$. Allocate shots proportional to group standard deviation (not variance)—high-variance groups receive more shots.
+
+    **Adaptive Strategy (Unknown Variances)**  
+    **Step 1**: Pilot exploration with $N_{\text{pilot}}/M$ shots per group to estimate $\widehat{\sigma}_m^2 = \frac{1}{N_m-1} \sum_k (L_m^{(k)} - \widehat{L}_m)^2$. **Step 2**: For remaining budget, allocate proportionally: $N_m = N_m^{(0)} + N_{\text{remaining}} \cdot \frac{\widehat{\sigma}_m}{\sum_k \widehat{\sigma}_k}$. **Step 3**: Update variance estimates at each optimization iteration based on recent measurements. Enforce minimum allocation $N_m \geq N_{\text{min}}$ to avoid under-sampling.
+
+    **Impact**  
+    For a 12-qubit molecule with 20 commuting groups, adaptive allocation with $10^5$ shots achieves variance comparable to $3\times10^5$ shots under equal allocation—a 3× effective shot economy. This is critical for scaling VQE to larger molecules on shot-limited NISQ hardware.
+</code></pre></div>
 </div>
 <h3 id="hands-on-projects_4"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
 <h4 id="project-blueprint_4"><strong>Project Blueprint</strong></h4>

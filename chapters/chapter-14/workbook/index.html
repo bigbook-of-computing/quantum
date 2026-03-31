@@ -1729,17 +1729,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#explain-the-practical-necessity-of-the-mathematical-equivalence-between-qubo-and-the-ising-model-in-the-context-of-commercial-quantum-hardware-info-answer-strategy-the-equivalence-is-a-crucial-bridge-between-how-we-formulate-problems-and-how-quantum-hardware-solves-them-1-problem-formulation-qubo-many-real-world-optimization-problems-in-business-logistics-and-finance-are-most-naturally-expressed-using-binary-variables-x_i-in-0-1-which-is-the-language-of-qubo-for-example-should-we-include-this-asset-in-the-portfolio-or-not-2-hardware-operation-ising-quantum-hardware-especially-quantum-annealers-is-physically-built-to-find-the-lowest-energy-state-of-a-system-of-interacting-spins-z_i-in-1-1-this-is-the-language-of-the-ising-model-3-the-necessary-translator-the-mathematical-equivalence-acts-as-a-compiler-it-translates-the-problem-from-its-natural-binary-language-qubo-into-the-spin-based-language-ising-that-the-quantum-hardware-physically-understands-without-this-bridge-we-could-not-solve-practical-business-problems-on-these-specialized-quantum-devices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware. ???+ info &quot;Answer Strategy&quot; The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them. 1. **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, &quot;Should we include this asset in the portfolio or not?&quot; 2. **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model. 3. **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#142-adiabatic-and-variational-optimization" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1775,17 +1764,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compare-and-contrast-quantum-annealing-and-qaoa-as-approaches-to-quantum-optimization-info-answer-strategy-both-are-leading-methods-for-quantum-optimization-but-they-differ-fundamentally-in-their-approach-and-hardware-requirements-feature-quantum-annealing-qa-qaoa-process-analog-a-continuous-physical-process-that-slowly-morphs-a-simple-energy-landscape-into-the-complex-problem-landscape-digital-a-gate-based-discrete-approximation-of-an-adiabatic-evolution-broken-into-steps-hardware-specialized-runs-on-quantum-annealers-eg-d-wave-universal-runs-on-general-purpose-gate-based-quantum-computers-eg-ibm-google-control-simple-the-main-control-knob-is-the-total-annealing-evolution-time-its-largely-a-fire-and-forget-process-complex-variational-requires-a-classical-optimization-loop-to-tune-a-set-of-2p-circuit-parameters-vecgamma-vecbeta-guarantees-theoretical-the-adiabatic-theorem-guarantees-finding-the-ground-state-if-the-evolution-is-infinitely-slow-barring-thermal-noise-and-small-energy-gaps-heuristic-performance-depends-heavily-on-the-circuit-depth-p-and-the-success-of-the-classical-optimizer-there-is-no-guarantee-of-finding-the-optimal-solution-in-short-annealing-is-an-analog-hardware-specific-approach-with-strong-theoretical-backing-while-qaoa-is-a-digital-flexible-and-hardware-agnostic-variational-algorithm-designed-for-the-nisq-era" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization. ???+ info &quot;Answer Strategy&quot; Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements. | Feature | Quantum Annealing (QA) | QAOA | | :--- | :--- | :--- | | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. | | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). | | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It&#39;s largely a &quot;fire-and-forget&quot; process. | **Complex &amp; Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. | | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. | **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1829,17 +1807,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-portfolio-manager-asks-you-why-they-should-consider-a-quantum-approach-for-portfolio-optimization-over-classical-solvers-what-is-the-potential-long-term-advantage-you-would-highlight-info-answer-strategy-the-key-long-term-advantage-is-the-potential-to-handle-the-combinatorial-explosion-inherent-in-portfolio-selection-more-effectively-than-any-classical-computer-1-the-scaling-problem-with-n-assets-there-are-2n-possible-portfolios-as-the-number-of-available-assets-grows-this-search-space-becomes-astronomically-large-making-it-impossible-for-classical-computers-to-check-every-combination-classical-solvers-must-rely-on-heuristics-and-approximations-that-may-miss-the-true-optimal-portfolio-2-the-quantum-promise-quantum-optimization-algorithms-like-qaoa-or-quantum-annealing-are-designed-to-navigate-these-massive-combinatorial-spaces-by-using-principles-like-superposition-and-entanglement-they-can-explore-a-vast-number-of-possibilities-simultaneously-this-offers-the-potential-to-find-higher-quality-portfolios-ie-better-riskreturn-profiles-that-are-inaccessible-to-classical-methods-3-the-important-caveat-its-crucial-to-be-transparent-that-this-is-a-future-facing-advantage-todays-nisq-era-quantum-computers-are-not-yet-large-or-robust-enough-to-outperform-state-of-the-art-classical-solvers-on-this-problem-the-advantage-is-predicated-on-the-future-development-of-larger-fault-tolerant-quantum-hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight? ???+ info &quot;Answer Strategy&quot; The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer. 1. **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio. 2. **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods. 3. **The Important Caveat:** It&#39;s crucial to be transparent that this is a **future-facing advantage**. Today&#39;s NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#144-constraint-encoding-with-penalty-terms" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1875,17 +1842,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-main-challenge-in-choosing-the-penalty-factor-lambda-what-happens-if-its-too-small-or-too-large-info-answer-strategy-the-main-challenge-is-the-goldilocks-problem-the-penalty-factor-lambda-must-be-finely-tuned-to-be-just-right-it-needs-to-be-strong-enough-to-enforce-the-constraint-without-overwhelming-the-original-problem-if-lambda-is-too-small-effect-the-penalty-for-violating-the-constraint-is-insignificant-result-the-optimizer-may-find-a-solution-that-has-a-great-objective-score-but-is-invalid-because-it-breaks-the-rule-eg-a-portfolio-that-is-over-budget-the-constraint-is-treated-as-a-weak-suggestion-not-a-hard-rule-if-lambda-is-too-large-effect-the-penalty-term-dominates-the-entire-cost-function-drowning-out-the-original-objective-the-energy-landscape-becomes-a-flat-plain-of-valid-solutions-surrounded-by-massive-penalty-walls-result-the-optimizer-will-certainly-find-a-valid-solution-but-it-will-likely-not-be-the-optimal-one-the-subtle-variations-in-the-original-cost-function-that-guide-the-search-for-the-best-solution-are-lost-in-the-noise-of-the-huge-penalty-values-this-can-also-make-the-problem-numerically-unstable-and-harder-for-the-solver-to-handle" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the main challenge in choosing the penalty factor $\lambda$? What happens if it&#39;s too small or too large? ???+ info &quot;Answer Strategy&quot; The main challenge is the &quot;Goldilocks problem&quot;: the penalty factor $\lambda$ must be finely tuned to be &quot;just right.&quot; It needs to be strong enough to enforce the constraint without overwhelming the original problem. * **If $\lambda$ is too small:** * **Effect:** The penalty for violating the constraint is insignificant. * **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule. * **If $\lambda$ is too large:** * **Effect:** The penalty term dominates the entire cost function, &quot;drowning out&quot; the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls. * **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
-      
-    </span>
-  </a>
   
 </li>
       
@@ -2911,17 +2867,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#explain-the-practical-necessity-of-the-mathematical-equivalence-between-qubo-and-the-ising-model-in-the-context-of-commercial-quantum-hardware-info-answer-strategy-the-equivalence-is-a-crucial-bridge-between-how-we-formulate-problems-and-how-quantum-hardware-solves-them-1-problem-formulation-qubo-many-real-world-optimization-problems-in-business-logistics-and-finance-are-most-naturally-expressed-using-binary-variables-x_i-in-0-1-which-is-the-language-of-qubo-for-example-should-we-include-this-asset-in-the-portfolio-or-not-2-hardware-operation-ising-quantum-hardware-especially-quantum-annealers-is-physically-built-to-find-the-lowest-energy-state-of-a-system-of-interacting-spins-z_i-in-1-1-this-is-the-language-of-the-ising-model-3-the-necessary-translator-the-mathematical-equivalence-acts-as-a-compiler-it-translates-the-problem-from-its-natural-binary-language-qubo-into-the-spin-based-language-ising-that-the-quantum-hardware-physically-understands-without-this-bridge-we-could-not-solve-practical-business-problems-on-these-specialized-quantum-devices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware. ???+ info &quot;Answer Strategy&quot; The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them. 1. **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, &quot;Should we include this asset in the portfolio or not?&quot; 2. **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model. 3. **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#142-adiabatic-and-variational-optimization" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2957,17 +2902,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compare-and-contrast-quantum-annealing-and-qaoa-as-approaches-to-quantum-optimization-info-answer-strategy-both-are-leading-methods-for-quantum-optimization-but-they-differ-fundamentally-in-their-approach-and-hardware-requirements-feature-quantum-annealing-qa-qaoa-process-analog-a-continuous-physical-process-that-slowly-morphs-a-simple-energy-landscape-into-the-complex-problem-landscape-digital-a-gate-based-discrete-approximation-of-an-adiabatic-evolution-broken-into-steps-hardware-specialized-runs-on-quantum-annealers-eg-d-wave-universal-runs-on-general-purpose-gate-based-quantum-computers-eg-ibm-google-control-simple-the-main-control-knob-is-the-total-annealing-evolution-time-its-largely-a-fire-and-forget-process-complex-variational-requires-a-classical-optimization-loop-to-tune-a-set-of-2p-circuit-parameters-vecgamma-vecbeta-guarantees-theoretical-the-adiabatic-theorem-guarantees-finding-the-ground-state-if-the-evolution-is-infinitely-slow-barring-thermal-noise-and-small-energy-gaps-heuristic-performance-depends-heavily-on-the-circuit-depth-p-and-the-success-of-the-classical-optimizer-there-is-no-guarantee-of-finding-the-optimal-solution-in-short-annealing-is-an-analog-hardware-specific-approach-with-strong-theoretical-backing-while-qaoa-is-a-digital-flexible-and-hardware-agnostic-variational-algorithm-designed-for-the-nisq-era" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization. ???+ info &quot;Answer Strategy&quot; Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements. | Feature | Quantum Annealing (QA) | QAOA | | :--- | :--- | :--- | | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. | | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). | | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It&#39;s largely a &quot;fire-and-forget&quot; process. | **Complex &amp; Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. | | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. | **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
-      
-    </span>
-  </a>
   
 </li>
       
@@ -3011,17 +2945,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#a-portfolio-manager-asks-you-why-they-should-consider-a-quantum-approach-for-portfolio-optimization-over-classical-solvers-what-is-the-potential-long-term-advantage-you-would-highlight-info-answer-strategy-the-key-long-term-advantage-is-the-potential-to-handle-the-combinatorial-explosion-inherent-in-portfolio-selection-more-effectively-than-any-classical-computer-1-the-scaling-problem-with-n-assets-there-are-2n-possible-portfolios-as-the-number-of-available-assets-grows-this-search-space-becomes-astronomically-large-making-it-impossible-for-classical-computers-to-check-every-combination-classical-solvers-must-rely-on-heuristics-and-approximations-that-may-miss-the-true-optimal-portfolio-2-the-quantum-promise-quantum-optimization-algorithms-like-qaoa-or-quantum-annealing-are-designed-to-navigate-these-massive-combinatorial-spaces-by-using-principles-like-superposition-and-entanglement-they-can-explore-a-vast-number-of-possibilities-simultaneously-this-offers-the-potential-to-find-higher-quality-portfolios-ie-better-riskreturn-profiles-that-are-inaccessible-to-classical-methods-3-the-important-caveat-its-crucial-to-be-transparent-that-this-is-a-future-facing-advantage-todays-nisq-era-quantum-computers-are-not-yet-large-or-robust-enough-to-outperform-state-of-the-art-classical-solvers-on-this-problem-the-advantage-is-predicated-on-the-future-development-of-larger-fault-tolerant-quantum-hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight? ???+ info &quot;Answer Strategy&quot; The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer. 1. **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio. 2. **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods. 3. **The Important Caveat:** It&#39;s crucial to be transparent that this is a **future-facing advantage**. Today&#39;s NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#144-constraint-encoding-with-penalty-terms" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3057,17 +2980,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-the-main-challenge-in-choosing-the-penalty-factor-lambda-what-happens-if-its-too-small-or-too-large-info-answer-strategy-the-main-challenge-is-the-goldilocks-problem-the-penalty-factor-lambda-must-be-finely-tuned-to-be-just-right-it-needs-to-be-strong-enough-to-enforce-the-constraint-without-overwhelming-the-original-problem-if-lambda-is-too-small-effect-the-penalty-for-violating-the-constraint-is-insignificant-result-the-optimizer-may-find-a-solution-that-has-a-great-objective-score-but-is-invalid-because-it-breaks-the-rule-eg-a-portfolio-that-is-over-budget-the-constraint-is-treated-as-a-weak-suggestion-not-a-hard-rule-if-lambda-is-too-large-effect-the-penalty-term-dominates-the-entire-cost-function-drowning-out-the-original-objective-the-energy-landscape-becomes-a-flat-plain-of-valid-solutions-surrounded-by-massive-penalty-walls-result-the-optimizer-will-certainly-find-a-valid-solution-but-it-will-likely-not-be-the-optimal-one-the-subtle-variations-in-the-original-cost-function-that-guide-the-search-for-the-best-solution-are-lost-in-the-noise-of-the-huge-penalty-values-this-can-also-make-the-problem-numerically-unstable-and-harder-for-the-solver-to-handle" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What is the main challenge in choosing the penalty factor $\lambda$? What happens if it&#39;s too small or too large? ???+ info &quot;Answer Strategy&quot; The main challenge is the &quot;Goldilocks problem&quot;: the penalty factor $\lambda$ must be finely tuned to be &quot;just right.&quot; It needs to be strong enough to enforce the constraint without overwhelming the original problem. * **If $\lambda$ is too small:** * **Effect:** The penalty for violating the constraint is insignificant. * **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule. * **If $\lambda$ is too large:** * **Effect:** The penalty term dominates the entire cost function, &quot;drowning out&quot; the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls. * **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
-      
-    </span>
-  </a>
   
 </li>
       
@@ -3215,7 +3127,7 @@
   
 
 
-<h1 id="chapter-14-quantum-optimization-qubo-family-workbook"><strong>Chapter 14: Quantum Optimization (QUBO-Family) () () (Workbook)</strong></h1>
+<h1 id="chapter-14-quantum-optimization-qubo-family-workbook"><strong>Chapter 14: Quantum Optimization (QUBO-Family) (Workbook)</strong></h1>
 <hr />
 <blockquote>
 <p><strong>Summary:</strong> This chapter explores quantum optimization, focusing on the QUBO (Quadratic Unconstrained Binary Optimization) and Ising model formulations, which provide a universal language for mapping NP-hard problems onto quantum hardware. We examine the two primary quantum approaches: Adiabatic Quantum Optimization (AQO), realized in quantum annealers, which slowly evolves a system to its optimal ground state; and the Quantum Approximate Optimization Algorithm (QAOA), a gate-based variational method for NISQ devices. By detailing the mathematical foundations and practical applications of these frameworks, the chapter provides a guide to leveraging near-term quantum computers for solving complex optimization challenges.</p>
@@ -3255,31 +3167,37 @@ z_i = 2x_i - 1 \quad \iff \quad x_i = \frac{z_i + 1}{2}
 <h3 id="comprehension-check"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>The mapping <span class="arithmatex">\(z_i = 2x_i - 1\)</span> is used to convert a QUBO problem into an equivalent Ising model. This changes the domain of the variables from binary (<span class="arithmatex">\(x_i \in \{0, 1\}\)</span>) to:</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  The mapping $z_i = 2x_i - 1$ is used to convert a QUBO problem into an equivalent Ising model. This changes the domain of the variables from binary ($x_i \in \{0, 1\}$) to:
+- A. Real numbers $z_i \in [0, 1]$.
+- B. Spin variables $z_i \in \{-1, 1\}$.
+- C. Continuous angles $z_i \in [0, 2\pi]$.
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    - A. Real numbers $z_i \in [0, 1]$.
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    - B. Spin variables $z_i \in \{-1, 1\}$.
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    - C. Continuous angles $z_i \in [0, 2\pi]$.
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    **Correct: B**. The transformation maps binary variables to spin variables.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: B**. The transformation maps binary variables to spin variables.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them.</p>
+<ol>
+<li>
+<p><strong>Problem Formulation (QUBO):</strong> Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables (<span class="arithmatex">\(x_i \in \{0, 1\}\)</span>), which is the language of QUBO. For example, "Should we include this asset in the portfolio or not?"</p>
+</li>
+<li>
+<p><strong>Hardware Operation (Ising):</strong> Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins (<span class="arithmatex">\(z_i \in \{-1, 1\}\)</span>). This is the language of the Ising model.</p>
+</li>
+<li>
+<p><strong>The Necessary Translator:</strong> The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.</p>
+</li>
+</ol>
+</details>
 </div>
-<h2 id="explain-the-practical-necessity-of-the-mathematical-equivalence-between-qubo-and-the-ising-model-in-the-context-of-commercial-quantum-hardware-info-answer-strategy-the-equivalence-is-a-crucial-bridge-between-how-we-formulate-problems-and-how-quantum-hardware-solves-them-1-problem-formulation-qubo-many-real-world-optimization-problems-in-business-logistics-and-finance-are-most-naturally-expressed-using-binary-variables-x_i-in-0-1-which-is-the-language-of-qubo-for-example-should-we-include-this-asset-in-the-portfolio-or-not-2-hardware-operation-ising-quantum-hardware-especially-quantum-annealers-is-physically-built-to-find-the-lowest-energy-state-of-a-system-of-interacting-spins-z_i-in-1-1-this-is-the-language-of-the-ising-model-3-the-necessary-translator-the-mathematical-equivalence-acts-as-a-compiler-it-translates-the-problem-from-its-natural-binary-language-qubo-into-the-spin-based-language-ising-that-the-quantum-hardware-physically-understands-without-this-bridge-we-could-not-solve-practical-business-problems-on-these-specialized-quantum-devices"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware.
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them.
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    1.  **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, &quot;Should we include this asset in the portfolio or not?&quot;
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    2.  **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model.
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    3.  **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
-</span></code></pre></div></h2>
+<hr />
 <h2 class="heading-with-pill" id="142-adiabatic-and-variational-optimization"><strong>14.2 Adiabatic and Variational Optimization</strong></h2>
 <blockquote>
 <p><strong>Difficulty:</strong> ★★★★☆</p>
@@ -3295,7 +3213,7 @@ z_i = 2x_i - 1 \quad \iff \quad x_i = \frac{z_i + 1}{2}
 -   Define the problem Hamiltonian, <span class="arithmatex">\(H_P\)</span>, which is the Ising model of our problem. Its ground state is the optimal solution we seek.
 -   Slowly evolve the system's Hamiltonian over a total time <span class="arithmatex">\(T\)</span>:</p>
 <div class="arithmatex">\[
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>H(t) = \left(1 - \frac{t}{T}\right) H_0 + \left(\frac{t}{T}\right) H_P
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>H(t) = \left(1 - \frac{t}{T}\right) H_0 + \left(\frac{t}{T}\right) H_P
 </span></code></pre></div>
 \]</div>
 <ul>
@@ -3304,8 +3222,8 @@ z_i = 2x_i - 1 \quad \iff \quad x_i = \frac{z_i + 1}{2}
 <p><strong>2. Quantum Approximate Optimization Algorithm (QAOA):</strong></p>
 <p>QAOA is a hybrid, variational algorithm designed for NISQ-era devices. It approximates the adiabatic evolution with a fixed-depth quantum circuit.
 -   The circuit consists of <span class="arithmatex">\(p\)</span> alternating layers of two unitary operators:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>-   $U_C(\gamma) = e^{-i\gamma H_P}$: The **cost unitary**, which applies phases based on the problem Hamiltonian.
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>-   $U_B(\beta) = e^{-i\beta H_0}$: The **mixer unitary**, which drives transitions between solutions.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>-   $U_C(\gamma) = e^{-i\gamma H_P}$: The **cost unitary**, which applies phases based on the problem Hamiltonian.
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>-   $U_B(\beta) = e^{-i\beta H_0}$: The **mixer unitary**, which drives transitions between solutions.
 </span></code></pre></div>
 -   The full state is prepared as <span class="arithmatex">\(|\psi(\vec{\gamma}, \vec{\beta})\rangle = U_B(\beta_p)U_C(\gamma_p) \cdots U_B(\beta_1)U_C(\gamma_1) |s_0\rangle\)</span>.
 -   A classical optimizer then tunes the <span class="arithmatex">\(2p\)</span> angles <span class="arithmatex">\((\vec{\gamma}, \vec{\beta})\)</span> to minimize the expected energy <span class="arithmatex">\(\langle \psi | H_P | \psi \rangle\)</span>.</p>
@@ -3313,34 +3231,58 @@ z_i = 2x_i - 1 \quad \iff \quad x_i = \frac{z_i + 1}{2}
 <h3 id="comprehension-check_1"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>In the QAOA circuit, the two alternating unitaries <span class="arithmatex">\(U_C(\gamma)\)</span> and <span class="arithmatex">\(U_B(\beta)\)</span> correspond to the effects of which two Hamiltonians from the adiabatic process?</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  In the QAOA circuit, the two alternating unitaries $U_C(\gamma)$ and $U_B(\beta)$ correspond to the effects of which two Hamiltonians from the adiabatic process?
+- A. The Entanglement Hamiltonian and the Phase Hamiltonian.
+- B. The Problem Hamiltonian ($H_P$) and the Initial Hamiltonian ($H_0$).
+- C. The Identity and the X gate.
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>    - A. The Entanglement Hamiltonian and the Phase Hamiltonian.
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    - B. The Problem Hamiltonian ($H_P$) and the Initial Hamiltonian ($H_0$).
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    - C. The Identity and the X gate.
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    **Correct: B**. $U_C$ evolves under the problem Hamiltonian, and $U_B$ evolves under the initial/mixer Hamiltonian.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: B**. $U_C$ evolves under the problem Hamiltonian, and $U_B$ evolves under the initial/mixer Hamiltonian.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: left;">Quantum Annealing (QA)</th>
+<th style="text-align: left;">QAOA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Process</strong></td>
+<td style="text-align: left;"><strong>Analog:</strong> A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape.</td>
+<td style="text-align: left;"><strong>Digital:</strong> A gate-based, discrete approximation of an adiabatic evolution, broken into steps.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hardware</strong></td>
+<td style="text-align: left;"><strong>Specialized:</strong> Runs on quantum annealers (e.g., D-Wave).</td>
+<td style="text-align: left;"><strong>Universal:</strong> Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Control</strong></td>
+<td style="text-align: left;"><strong>Simple:</strong> The main control knob is the total annealing (evolution) time. It's largely a "fire-and-forget" process.</td>
+<td style="text-align: left;"><strong>Complex &amp; Variational:</strong> Requires a classical optimization loop to tune a set of <span class="arithmatex">\(2p\)</span> circuit parameters <span class="arithmatex">\((\vec{\gamma}, \vec{\beta})\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Guarantees</strong></td>
+<td style="text-align: left;"><strong>Theoretical:</strong> The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps).</td>
+<td style="text-align: left;"><strong>Heuristic:</strong> Performance depends heavily on the circuit depth (<span class="arithmatex">\(p\)</span>) and the success of the classical optimizer. There is no guarantee of finding the optimal solution.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In short:</strong> Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.</p>
+</details>
 </div>
-<h2 id="compare-and-contrast-quantum-annealing-and-qaoa-as-approaches-to-quantum-optimization-info-answer-strategy-both-are-leading-methods-for-quantum-optimization-but-they-differ-fundamentally-in-their-approach-and-hardware-requirements-feature-quantum-annealing-qa-qaoa-process-analog-a-continuous-physical-process-that-slowly-morphs-a-simple-energy-landscape-into-the-complex-problem-landscape-digital-a-gate-based-discrete-approximation-of-an-adiabatic-evolution-broken-into-steps-hardware-specialized-runs-on-quantum-annealers-eg-d-wave-universal-runs-on-general-purpose-gate-based-quantum-computers-eg-ibm-google-control-simple-the-main-control-knob-is-the-total-annealing-evolution-time-its-largely-a-fire-and-forget-process-complex-variational-requires-a-classical-optimization-loop-to-tune-a-set-of-2p-circuit-parameters-vecgamma-vecbeta-guarantees-theoretical-the-adiabatic-theorem-guarantees-finding-the-ground-state-if-the-evolution-is-infinitely-slow-barring-thermal-noise-and-small-energy-gaps-heuristic-performance-depends-heavily-on-the-circuit-depth-p-and-the-success-of-the-classical-optimizer-there-is-no-guarantee-of-finding-the-optimal-solution-in-short-annealing-is-an-analog-hardware-specific-approach-with-strong-theoretical-backing-while-qaoa-is-a-digital-flexible-and-hardware-agnostic-variational-algorithm-designed-for-the-nisq-era"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization.
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements.
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    | Feature | Quantum Annealing (QA) | QAOA |
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    | :--- | :--- | :--- |
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. |
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). |
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It&#39;s largely a &quot;fire-and-forget&quot; process. | **Complex &amp; Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. |
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. |
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
-</span></code></pre></div></h2>
+<hr />
 <h2 class="heading-with-pill" id="143-application-portfolio-optimization"><strong>14.3 Application: Portfolio Optimization</strong></h2>
 <blockquote>
 <p><strong>Difficulty:</strong> ★★★☆☆</p>
@@ -3364,31 +3306,37 @@ z_i = 2x_i - 1 \quad \iff \quad x_i = \frac{z_i + 1}{2}
 <h3 id="comprehension-check_2"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>In the quantum formulation of Portfolio Optimization, the risk of the portfolio is primarily encoded by which component?</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  In the quantum formulation of Portfolio Optimization, the risk of the portfolio is primarily encoded by which component?
+- A. The expected return vector $\mathbf{\mu}$.
+- B. The selection vector $\mathbf{x}$.
+- C. The covariance matrix $\mathbf{\Sigma}$.
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>    - A. The expected return vector $\mathbf{\mu}$.
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    - B. The selection vector $\mathbf{x}$.
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    - C. The covariance matrix $\mathbf{\Sigma}$.
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    **Correct: C**. The covariance matrix defines the risk arising from assets moving together.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: C**. The covariance matrix defines the risk arising from assets moving together.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The key long-term advantage is the potential to handle the <strong>combinatorial explosion</strong> inherent in portfolio selection more effectively than any classical computer.</p>
+<ol>
+<li>
+<p><strong>The Scaling Problem:</strong> With <span class="arithmatex">\(N\)</span> assets, there are <span class="arithmatex">\(2^N\)</span> possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio.</p>
+</li>
+<li>
+<p><strong>The Quantum Promise:</strong> Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods.</p>
+</li>
+<li>
+<p><strong>The Important Caveat:</strong> It's crucial to be transparent that this is a <strong>future-facing advantage</strong>. Today's NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.</p>
+</li>
+</ol>
+</details>
 </div>
-<h2 id="a-portfolio-manager-asks-you-why-they-should-consider-a-quantum-approach-for-portfolio-optimization-over-classical-solvers-what-is-the-potential-long-term-advantage-you-would-highlight-info-answer-strategy-the-key-long-term-advantage-is-the-potential-to-handle-the-combinatorial-explosion-inherent-in-portfolio-selection-more-effectively-than-any-classical-computer-1-the-scaling-problem-with-n-assets-there-are-2n-possible-portfolios-as-the-number-of-available-assets-grows-this-search-space-becomes-astronomically-large-making-it-impossible-for-classical-computers-to-check-every-combination-classical-solvers-must-rely-on-heuristics-and-approximations-that-may-miss-the-true-optimal-portfolio-2-the-quantum-promise-quantum-optimization-algorithms-like-qaoa-or-quantum-annealing-are-designed-to-navigate-these-massive-combinatorial-spaces-by-using-principles-like-superposition-and-entanglement-they-can-explore-a-vast-number-of-possibilities-simultaneously-this-offers-the-potential-to-find-higher-quality-portfolios-ie-better-riskreturn-profiles-that-are-inaccessible-to-classical-methods-3-the-important-caveat-its-crucial-to-be-transparent-that-this-is-a-future-facing-advantage-todays-nisq-era-quantum-computers-are-not-yet-large-or-robust-enough-to-outperform-state-of-the-art-classical-solvers-on-this-problem-the-advantage-is-predicated-on-the-future-development-of-larger-fault-tolerant-quantum-hardware"><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight?
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer.
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    1.  **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio.
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    2.  **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods.
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    3.  **The Important Caveat:** It&#39;s crucial to be transparent that this is a **future-facing advantage**. Today&#39;s NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
-</span></code></pre></div></h2>
+<hr />
 <h2 class="heading-with-pill" id="144-constraint-encoding-with-penalty-terms"><strong>14.4 Constraint Encoding with Penalty Terms</strong></h2>
 <blockquote>
 <p><strong>Difficulty:</strong> ★★★☆☆</p>
@@ -3416,33 +3364,42 @@ P(\mathbf{x}) = \left( \sum_i x_i - B \right)^2
 <h3 id="comprehension-check_3"><strong>Comprehension Check</strong></h3>
 <div class="admonition note">
 <p class="admonition-title">Quiz</p>
-<ol>
-<li>The most common method for handling a budget constraint in a QUBO formulation is to:</li>
-</ol>
+<div class="language-text highlight"><pre><span></span><code>1.  The most common method for handling a budget constraint in a QUBO formulation is to:
+- A. Use a continuous variable solver.
+- B. Add a penalty term to the cost function.
+- C. Enforce the constraint with the $H_0$ Hamiltonian.
+</code></pre></div>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>    - A. Use a continuous variable solver.
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    - B. Add a penalty term to the cost function.
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    - C. Enforce the constraint with the $H_0$ Hamiltonian.
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>??? info &quot;See Answer&quot;
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    **Correct: B**. A penalty term makes invalid solutions have a very high cost.
-</span></code></pre></div>
+<details class="info">
+<summary>See Answer</summary>
+<div class="language-text highlight"><pre><span></span><code>**Correct: B**. A penalty term makes invalid solutions have a very high cost.
+</code></pre></div>
+</details>
 <div class="admonition abstract">
 <p class="admonition-title">Interview-Style Question</p>
+<p>What is the main challenge in choosing the penalty factor <span class="arithmatex">\(\lambda\)</span>? What happens if it's too small or too large?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p>The main challenge is the "Goldilocks problem": the penalty factor <span class="arithmatex">\(\lambda\)</span> must be finely tuned to be "just right." It needs to be strong enough to enforce the constraint without overwhelming the original problem.</p>
+<ul>
+<li>
+<p><strong>If <span class="arithmatex">\(\lambda\)</span> is too small:</strong></p>
+<ul>
+<li><strong>Effect:</strong> The penalty for violating the constraint is insignificant.</li>
+<li><strong>Result:</strong> The optimizer may find a solution that has a great objective score but is <strong>invalid</strong> because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule.</li>
+</ul>
+</li>
+<li>
+<p><strong>If <span class="arithmatex">\(\lambda\)</span> is too large:</strong></p>
+<ul>
+<li><strong>Effect:</strong> The penalty term dominates the entire cost function, "drowning out" the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls.</li>
+<li><strong>Result:</strong> The optimizer will certainly find a <strong>valid</strong> solution, but it will likely not be the <strong>optimal</strong> one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.</li>
+</ul>
+</li>
+</ul>
+</details>
 </div>
-<h2 id="what-is-the-main-challenge-in-choosing-the-penalty-factor-lambda-what-happens-if-its-too-small-or-too-large-info-answer-strategy-the-main-challenge-is-the-goldilocks-problem-the-penalty-factor-lambda-must-be-finely-tuned-to-be-just-right-it-needs-to-be-strong-enough-to-enforce-the-constraint-without-overwhelming-the-original-problem-if-lambda-is-too-small-effect-the-penalty-for-violating-the-constraint-is-insignificant-result-the-optimizer-may-find-a-solution-that-has-a-great-objective-score-but-is-invalid-because-it-breaks-the-rule-eg-a-portfolio-that-is-over-budget-the-constraint-is-treated-as-a-weak-suggestion-not-a-hard-rule-if-lambda-is-too-large-effect-the-penalty-term-dominates-the-entire-cost-function-drowning-out-the-original-objective-the-energy-landscape-becomes-a-flat-plain-of-valid-solutions-surrounded-by-massive-penalty-walls-result-the-optimizer-will-certainly-find-a-valid-solution-but-it-will-likely-not-be-the-optimal-one-the-subtle-variations-in-the-original-cost-function-that-guide-the-search-for-the-best-solution-are-lost-in-the-noise-of-the-huge-penalty-values-this-can-also-make-the-problem-numerically-unstable-and-harder-for-the-solver-to-handle"><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>What is the main challenge in choosing the penalty factor $\lambda$? What happens if it&#39;s too small or too large?
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>???+ info &quot;Answer Strategy&quot;
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    The main challenge is the &quot;Goldilocks problem&quot;: the penalty factor $\lambda$ must be finely tuned to be &quot;just right.&quot; It needs to be strong enough to enforce the constraint without overwhelming the original problem.
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    *   **If $\lambda$ is too small:**
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        *   **Effect:** The penalty for violating the constraint is insignificant.
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        *   **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule.
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    *   **If $\lambda$ is too large:**
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>        *   **Effect:** The penalty term dominates the entire cost function, &quot;drowning out&quot; the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls.
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        *   **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
-</span></code></pre></div></h2>
+<hr />
 <h2 class="heading-with-pill" id="145-from-theory-to-practice-qubo-projects"><strong>14.5 From Theory to Practice: QUBO Projects</strong></h2>
 <blockquote>
 <p><strong>Difficulty:</strong> ★★★☆☆</p>
@@ -3488,63 +3445,63 @@ P(\mathbf{x}) = \left( \sum_i x_i - B \right)^2
 </table>
 <hr />
 <h4 id="python-implementation"><strong>Python Implementation</strong></h4>
-<p><div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Project: QUBO Formulation and Brute-Force Solver</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># MaxCut on a weighted 4-node graph → QUBO form</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># Graph adjacency (weighted)</span>
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">],</span>
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
-</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="p">[</span><span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="p">])</span>
-</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>
-</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="c1"># QUBO matrix: Q_ij = -W_ij + delta_ij * sum_k W_ik</span>
-</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
-</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">maxcut_qubo</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
-</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
-</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
-</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>                <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>  <span class="c1"># diagonal: -degree</span>
-</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>            <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
-</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>                <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>    <span class="k">return</span> <span class="n">Q</span>
-</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>
-</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="n">Q</span> <span class="o">=</span> <span class="n">maxcut_qubo</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
-</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QUBO matrix Q:&quot;</span><span class="p">)</span>
-</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>
-</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="c1"># Brute-force: find binary vector x minimizing x^T Q x</span>
-</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>
-</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="n">best_x</span><span class="p">,</span> <span class="n">best_val</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
-</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
-</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a>    <span class="n">val</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">x</span>
-</span><span id="__span-12-41"><a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a>    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">best_val</span><span class="p">:</span>
-</span><span id="__span-12-42"><a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a>        <span class="n">best_val</span><span class="p">,</span> <span class="n">best_x</span> <span class="o">=</span> <span class="n">val</span><span class="p">,</span> <span class="n">bits</span>
-</span><span id="__span-12-43"><a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a>
-</span><span id="__span-12-44"><a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimal partition: </span><span class="si">{</span><span class="n">best_x</span><span class="si">}</span><span class="s2">  (QUBO objective = </span><span class="si">{</span><span class="n">best_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span><span id="__span-12-45"><a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a><span class="n">cut_value</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-</span><span id="__span-12-46"><a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a>                <span class="k">if</span> <span class="n">best_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">best_x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-</span><span id="__span-12-47"><a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MaxCut value: </span><span class="si">{</span><span class="n">cut_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Project: QUBO Formulation and Brute-Force Solver</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># MaxCut on a weighted 4-node graph → QUBO form</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># Graph adjacency (weighted)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">],</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="p">[</span><span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">])</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1"># QUBO matrix: Q_ij = -W_ij + delta_ij * sum_k W_ik</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">maxcut_qubo</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>                <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>  <span class="c1"># diagonal: -degree</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>            <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>                <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>    <span class="k">return</span> <span class="n">Q</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="n">Q</span> <span class="o">=</span> <span class="n">maxcut_qubo</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QUBO matrix Q:&quot;</span><span class="p">)</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="c1"># Brute-force: find binary vector x minimizing x^T Q x</span>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a><span class="n">best_x</span><span class="p">,</span> <span class="n">best_val</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>    <span class="n">val</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">x</span>
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">best_val</span><span class="p">:</span>
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>        <span class="n">best_val</span><span class="p">,</span> <span class="n">best_x</span> <span class="o">=</span> <span class="n">val</span><span class="p">,</span> <span class="n">bits</span>
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimal partition: </span><span class="si">{</span><span class="n">best_x</span><span class="si">}</span><span class="s2">  (QUBO objective = </span><span class="si">{</span><span class="n">best_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="n">cut_value</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>                <span class="k">if</span> <span class="n">best_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">best_x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MaxCut value: </span><span class="si">{</span><span class="n">cut_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <strong>Sample Output:</strong>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">QUBO</span> <span class="n">matrix</span> <span class="n">Q</span><span class="p">:</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">[[</span><span class="o">-</span><span class="mf">1.5</span>  <span class="mf">1.</span>   <span class="mf">0.5</span>  <span class="mf">0.</span> <span class="p">]</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a> <span class="p">[</span> <span class="mf">0.</span>  <span class="o">-</span><span class="mf">2.5</span>  <span class="mf">0.</span>   <span class="mf">1.5</span><span class="p">]</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a> <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.</span>  <span class="o">-</span><span class="mf">1.5</span>  <span class="mf">1.</span> <span class="p">]</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a> <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.</span>   <span class="mf">0.</span>  <span class="o">-</span><span class="mf">2.5</span><span class="p">]]</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">Optimal</span> <span class="n">partition</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="p">(</span><span class="n">QUBO</span> <span class="n">objective</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.000</span><span class="p">)</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">MaxCut</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.0</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">QUBO</span> <span class="n">matrix</span> <span class="n">Q</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">[[</span><span class="o">-</span><span class="mf">1.5</span>  <span class="mf">1.</span>   <span class="mf">0.5</span>  <span class="mf">0.</span> <span class="p">]</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a> <span class="p">[</span> <span class="mf">0.</span>  <span class="o">-</span><span class="mf">2.5</span>  <span class="mf">0.</span>   <span class="mf">1.5</span><span class="p">]</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a> <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.</span>  <span class="o">-</span><span class="mf">1.5</span>  <span class="mf">1.</span> <span class="p">]</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a> <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.</span>   <span class="mf">0.</span>  <span class="o">-</span><span class="mf">2.5</span><span class="p">]]</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">Optimal</span> <span class="n">partition</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="p">(</span><span class="n">QUBO</span> <span class="n">objective</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.000</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">MaxCut</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.0</span>
 </span></code></pre></div></p>
 <h4 id="outcome-and-interpretation">Outcome and Interpretation</h4>
 <p>The QUBO function <span class="arithmatex">\(C(x) = x_1 x_2 - 3x_1\)</span> is equivalent to the Ising model <span class="arithmatex">\(E(z) = 0.25 z_1 z_2 - 1.25 z_1 + 0.25 z_2 - 1.25\)</span>. This demonstrates how a binary optimization problem can be directly translated into the language of interacting spins, ready for a quantum annealer.</p>

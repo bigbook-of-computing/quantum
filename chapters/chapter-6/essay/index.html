@@ -2596,9 +2596,8 @@
 <p>The <strong>Variational Quantum Eigensolver (VQE)</strong> is a pivotal algorithm for the <strong>Noisy Intermediate-Scale Quantum (NISQ)</strong> era. It estimates the <strong>ground state energy</strong> (lowest eigenvalue) of a quantum system described by a <strong>Hamiltonian</strong> <span class="arithmatex">\(H\)</span>. VQE is a <strong>hybrid quantum-classical</strong> algorithm, combining quantum state preparation with classical optimization.</p>
 <div class="admonition tip">
 <p class="admonition-title">NISQ-Era Workhorse</p>
+<p>VQE circumvents the need for deep quantum circuits and error correction by offloading the computationally expensive optimization task to classical processors, making it one of the most practical algorithms for current quantum hardware [3].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>VQE circumvents the need for deep quantum circuits and error correction by offloading the computationally expensive optimization task to classical processors, making it one of the most practical algorithms for current quantum hardware [3].
-</span></code></pre></div>
 <h3 id="the-variational-principle-and-objective-function"><strong>The Variational Principle and Objective Function</strong></h3>
 <hr />
 <p>VQE is based on the <strong>variational principle</strong> from quantum mechanics, which guarantees:</p>
@@ -2618,15 +2617,13 @@ E(\vec{\theta}) = \langle \psi(\vec{\theta}) \lvert H \rvert \psi(\vec{\theta}) 
 <p>That is, find the parameters <span class="arithmatex">\(\vec{\theta}\)</span> that minimize <span class="arithmatex">\(E(\vec{\theta})\)</span>, bringing the trial state as close as possible to the true ground state.</p>
 <div class="admonition example">
 <p class="admonition-title">VQE for Molecular Hydrogen</p>
+<p>For the H₂ molecule, the Hamiltonian can be mapped to a 2-qubit operator. VQE uses a simple ansatz like:</p>
+<div class="arithmatex">\[
+|\psi(\theta)\rangle = \cos(\theta/2)|01\rangle + \sin(\theta/2)|10\rangle
+\]</div>
+<p>By varying <span class="arithmatex">\(\theta\)</span> and measuring <span class="arithmatex">\(\langle H \rangle\)</span>, the classical optimizer finds the angle that minimizes the energy, yielding the ground state energy of H₂.</p>
 </div>
-<h2 id="for-the-h2-molecule-the-hamiltonian-can-be-mapped-to-a-2-qubit-operator-vqe-uses-a-simple-ansatz-like-psithetarangle-costheta201rangle-sintheta210rangle-by-varying-theta-and-measuring-langle-h-rangle-the-classical-optimizer-finds-the-angle-that-minimizes-the-energy-yielding-the-ground-state-energy-of-h2"><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>For the H₂ molecule, the Hamiltonian can be mapped to a 2-qubit operator. VQE uses a simple ansatz like:
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$$
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>|\psi(\theta)\rangle = \cos(\theta/2)|01\rangle + \sin(\theta/2)|10\rangle
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>$$
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>By varying $\theta$ and measuring $\langle H \rangle$, the classical optimizer finds the angle that minimizes the energy, yielding the ground state energy of H₂.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="the-hybrid-vqe-loop"><strong>The Hybrid VQE Loop</strong></h3>
 <hr />
 <p>The VQE algorithm proceeds through a hybrid <strong>quantum–classical loop</strong>:</p>
@@ -2642,30 +2639,30 @@ E(\vec{\theta}) = \langle \psi(\vec{\theta}) \lvert H \rvert \psi(\vec{\theta}) 
 <p><strong>Classical Optimization</strong></p>
 <p>An optimizer (e.g., COBYLA, SPSA, or BFGS) updates <span class="arithmatex">\(\vec{\theta}\)</span> to reduce <span class="arithmatex">\(E(\vec{\theta})\)</span>.</p>
 <p>Steps 2–3 are repeated until <strong>convergence</strong>, i.e., the energy plateaus or gradients vanish.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">VQE_Algorithm</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="n">initial_θ</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Initialize parameters</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">θ</span> <span class="o">=</span> <span class="n">initial_θ</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="c1"># Hybrid optimization loop</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">converged</span><span class="p">:</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="c1"># Quantum step: Prepare state and measure energy</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="n">ψ_θ</span> <span class="o">=</span> <span class="n">Prepare_State</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">E_θ</span> <span class="o">=</span> <span class="n">Measure_Expectation</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ψ_θ</span><span class="p">)</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="c1"># Classical step: Update parameters</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="n">θ</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">E_θ</span><span class="p">)</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="c1"># Check convergence</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="k">if</span> <span class="o">|</span><span class="n">E_θ</span> <span class="o">-</span> <span class="n">E_prev</span><span class="o">|</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">:</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>            <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="k">return</span> <span class="n">θ</span><span class="p">,</span> <span class="n">E_θ</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">VQE_Algorithm</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">,</span> <span class="n">initial_θ</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># Initialize parameters</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">θ</span> <span class="o">=</span> <span class="n">initial_θ</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># Hybrid optimization loop</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">converged</span><span class="p">:</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="c1"># Quantum step: Prepare state and measure energy</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">ψ_θ</span> <span class="o">=</span> <span class="n">Prepare_State</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="n">E_θ</span> <span class="o">=</span> <span class="n">Measure_Expectation</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">ψ_θ</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="c1"># Classical step: Update parameters</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="n">θ</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">E_θ</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="c1"># Check convergence</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="k">if</span> <span class="o">|</span><span class="n">E_θ</span> <span class="o">-</span> <span class="n">E_prev</span><span class="o">|</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">:</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="k">return</span> <span class="n">θ</span><span class="p">,</span> <span class="n">E_θ</span>
 </span></code></pre></div>
 <details class="question">
 <summary>Why not use a purely quantum approach?</summary>
+<p>Purely quantum eigenvalue algorithms like QPE require deep circuits with extensive error correction—capabilities beyond current NISQ devices. VQE's hybrid approach sidesteps these requirements by using shallow quantum circuits and leveraging classical optimization, making it practical for near-term hardware.</p>
 </details>
-<h2 id="purely-quantum-eigenvalue-algorithms-like-qpe-require-deep-circuits-with-extensive-error-correctioncapabilities-beyond-current-nisq-devices-vqes-hybrid-approach-sidesteps-these-requirements-by-using-shallow-quantum-circuits-and-leveraging-classical-optimization-making-it-practical-for-near-term-hardware"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Purely quantum eigenvalue algorithms like QPE require deep circuits with extensive error correction—capabilities beyond current NISQ devices. VQE&#39;s hybrid approach sidesteps these requirements by using shallow quantum circuits and leveraging classical optimization, making it practical for near-term hardware.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="hamiltonian-decomposition-and-measurement"><strong>Hamiltonian Decomposition and Measurement</strong></h3>
 <hr />
 <p>To compute <span class="arithmatex">\(E(\vec{\theta})\)</span> on a quantum device, the Hamiltonian <span class="arithmatex">\(H\)</span> must be <strong>decomposed</strong> into measurable components.</p>
@@ -2712,9 +2709,8 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
 <p>The <strong>Quantum Approximate Optimization Algorithm (QAOA)</strong> is a hybrid quantum-classical algorithm specifically designed to find approximate solutions to <strong>combinatorial optimization problems</strong>, such as MaxCut, satisfiability (SAT), and various graph problems. Like VQE, QAOA operates within the <strong>NISQ</strong> paradigm by utilizing a parameterized circuit optimized by a classical loop.</p>
 <div class="admonition tip">
 <p class="admonition-title">Optimization in the NISQ Era</p>
+<p>QAOA represents a fundamentally different approach than classical approximation algorithms—it uses quantum interference to explore the solution space in ways classical methods cannot, potentially offering polynomial speedups for certain hard combinatorial problems [4].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>QAOA represents a fundamentally different approach than classical approximation algorithms—it uses quantum interference to explore the solution space in ways classical methods cannot, potentially offering polynomial speedups for certain hard combinatorial problems [4].
-</span></code></pre></div>
 <h3 id="problem-formulation"><strong>Problem Formulation</strong></h3>
 <hr />
 <p>QAOA is applied to problems that can be mapped onto a <strong>Quadratic Unconstrained Binary Optimization (QUBO)</strong> form, or equivalently, an <strong>Ising Hamiltonian</strong>. The goal is to maximize the value of a cost function <span class="arithmatex">\(C(z)\)</span> over a binary string <span class="arithmatex">\(z \in \{0,1\}^n\)</span>, where the cost function <span class="arithmatex">\(C\)</span> is a sum of terms corresponding to the problem constraints:</p>
@@ -2724,15 +2720,13 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
 <p>The cost function <span class="arithmatex">\(C\)</span> is treated as a diagonal Hamiltonian in the computational basis, meaning its eigenvalues correspond to the possible objective values <span class="arithmatex">\(C(z)\)</span> for each configuration <span class="arithmatex">\(z\)</span>.</p>
 <div class="admonition example">
 <p class="admonition-title">MaxCut as QAOA Problem</p>
+<p>For a graph with edges <span class="arithmatex">\((i,j)\)</span>, the MaxCut cost Hamiltonian is:</p>
+<div class="arithmatex">\[
+C = \sum_{(i,j) \in E} \frac{1}{2}(1 - Z_i Z_j)
+\]</div>
+<p>Each term equals 1 when qubits <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> differ (edge is "cut"), and 0 when they match. QAOA seeks the bitstring <span class="arithmatex">\(|z\rangle\)</span> that maximizes the number of cut edges.</p>
 </div>
-<h2 id="for-a-graph-with-edges-ij-the-maxcut-cost-hamiltonian-is-c-sum_ij-in-e-frac121-z_i-z_j-each-term-equals-1-when-qubits-i-and-j-differ-edge-is-cut-and-0-when-they-match-qaoa-seeks-the-bitstring-zrangle-that-maximizes-the-number-of-cut-edges"><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>For a graph with edges $(i,j)$, the MaxCut cost Hamiltonian is:
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>$$
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>C = \sum_{(i,j) \in E} \frac{1}{2}(1 - Z_i Z_j)
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>$$
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Each term equals 1 when qubits $i$ and $j$ differ (edge is &quot;cut&quot;), and 0 when they match. QAOA seeks the bitstring $|z\rangle$ that maximizes the number of cut edges.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="the-qaoa-circuit-and-alternating-unitaries"><strong>The QAOA Circuit and Alternating Unitaries</strong></h3>
 <hr />
 <p>The QAOA circuit prepares a final state <span class="arithmatex">\(|\vec{\gamma}, \vec{\beta}\rangle\)</span> by starting from an initial uniform superposition and iteratively applying two types of unitary operators in an alternating sequence. The algorithm structure is defined by the number of alternating layers, <span class="arithmatex">\(p\)</span>:</p>
@@ -2753,20 +2747,20 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
 <li><strong>Action:</strong> <span class="arithmatex">\(U_M(\beta) = e^{-i \beta B}\)</span>. This operation is a product of single-qubit <span class="arithmatex">\(R_x\)</span> rotations.</li>
 <li><strong>Role:</strong> Introduces <strong>quantum fluctuations</strong> and entanglement, enabling the state to explore the entire solution space and preventing it from becoming trapped in local minima found by the cost unitary. It ensures the circuit is <strong>ergodic</strong> and <strong>trainable</strong>.</li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">QAOA_Circuit</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">γ</span><span class="p">,</span> <span class="n">β</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="c1"># Initialize uniform superposition</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">ψ</span> <span class="o">=</span> <span class="n">H</span><span class="err">⊗</span><span class="n">ⁿ</span><span class="o">|</span><span class="mi">0</span><span class="err">⟩⊗</span><span class="n">ⁿ</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="c1"># Apply p layers of alternating unitaries</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">p</span><span class="p">:</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="c1"># Apply cost unitary</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="n">ψ</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i·γ</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="err">·</span><span class="n">C</span><span class="p">)</span><span class="err">·</span><span class="n">ψ</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="c1"># Apply mixer unitary</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="n">ψ</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i·β</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="err">·</span><span class="n">B</span><span class="p">)</span><span class="err">·</span><span class="n">ψ</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="c1"># Measure in computational basis</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="k">return</span> <span class="n">Measure</span><span class="p">(</span><span class="n">ψ</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">QAOA_Circuit</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">γ</span><span class="p">,</span> <span class="n">β</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># Initialize uniform superposition</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">ψ</span> <span class="o">=</span> <span class="n">H</span><span class="err">⊗</span><span class="n">ⁿ</span><span class="o">|</span><span class="mi">0</span><span class="err">⟩⊗</span><span class="n">ⁿ</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="c1"># Apply p layers of alternating unitaries</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">p</span><span class="p">:</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="c1"># Apply cost unitary</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">ψ</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i·γ</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="err">·</span><span class="n">C</span><span class="p">)</span><span class="err">·</span><span class="n">ψ</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="c1"># Apply mixer unitary</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="n">ψ</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">i·β</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span><span class="err">·</span><span class="n">B</span><span class="p">)</span><span class="err">·</span><span class="n">ψ</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="c1"># Measure in computational basis</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="k">return</span> <span class="n">Measure</span><span class="p">(</span><span class="n">ψ</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
 <h3 id="trade-offs-and-performance"><strong>Trade-offs and Performance</strong></h3>
@@ -2778,17 +2772,16 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
 </ul>
 <details class="question">
 <summary>How does QAOA compare to classical algorithms?</summary>
+<p>For MaxCut on 3-regular graphs, QAOA with <span class="arithmatex">\(p=1\)</span> achieves an approximation ratio of 0.6924, which already beats simple classical greedy algorithms. As <span class="arithmatex">\(p \to \infty\)</span>, QAOA approaches the optimal solution, though practical implementations are limited by circuit depth and noise on NISQ hardware [5].</p>
 </details>
-<h2 id="for-maxcut-on-3-regular-graphs-qaoa-with-p1-achieves-an-approximation-ratio-of-06924-which-already-beats-simple-classical-greedy-algorithms-as-p-to-infty-qaoa-approaches-the-optimal-solution-though-practical-implementations-are-limited-by-circuit-depth-and-noise-on-nisq-hardware-5"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>For MaxCut on 3-regular graphs, QAOA with $p=1$ achieves an approximation ratio of 0.6924, which already beats simple classical greedy algorithms. As $p \to \infty$, QAOA approaches the optimal solution, though practical implementations are limited by circuit depth and noise on NISQ hardware [5].
-</span></code></pre></div></h2>
+<hr />
 <h2 id="63-ansatz-design-hardware-efficient-ucc-etc"><strong>6.3 Ansatz Design (Hardware Efficient, UCC, etc.)</strong></h2>
 <hr />
 <p>The <strong>ansatz</strong> (<span class="arithmatex">\(|\psi(\vec{\theta})\rangle\)</span>) is the parameterized quantum circuit that defines the space of trial solutions in variational quantum algorithms (VQAs). Designing an effective ansatz is crucial because it determines both the <strong>expressibility</strong> (ability to reach the optimal solution) and the <strong>trainability</strong> (ease of optimization) of the VQA.</p>
 <div class="admonition tip">
 <p class="admonition-title">The Ansatz Dilemma</p>
+<p>Ansatz design embodies a fundamental tradeoff: circuits must be expressive enough to approximate the target state, yet structured enough to avoid barren plateaus where gradients vanish exponentially. This balance determines whether a VQA succeeds or fails [6].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Ansatz design embodies a fundamental tradeoff: circuits must be expressive enough to approximate the target state, yet structured enough to avoid barren plateaus where gradients vanish exponentially. This balance determines whether a VQA succeeds or fails [6].
-</span></code></pre></div>
 <h3 id="desirable-properties-of-an-ansatz"><strong>Desirable Properties of an Ansatz</strong></h3>
 <hr />
 <p>A well-designed ansatz must balance competing requirements to be successful on Noisy Intermediate-Scale Quantum (NISQ) hardware:</p>
@@ -2823,15 +2816,13 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Hardware-Efficient vs UCC</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>For a 4-qubit chemistry problem:
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>- **Hardware-Efficient:** 10-20 parameters, circuit depth ~5-10, works on any topology
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>- **UCC (UCCSD):** 3-8 parameters (chemically motivated), circuit depth ~20-50, requires high connectivity
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>The hardware-efficient ansatz trades parameter efficiency for shallower circuits, while UCC prioritizes physical accuracy at the cost of depth.
-</span></code></pre></div>
-<strong>Problem-Inspired Ansatz</strong></p>
+<p>For a 4-qubit chemistry problem:
+- <strong>Hardware-Efficient:</strong> 10-20 parameters, circuit depth ~5-10, works on any topology
+- <strong>UCC (UCCSD):</strong> 3-8 parameters (chemically motivated), circuit depth ~20-50, requires high connectivity</p>
+<p>The hardware-efficient ansatz trades parameter efficiency for shallower circuits, while UCC prioritizes physical accuracy at the cost of depth.</p>
+<p><strong>Problem-Inspired Ansatz</strong></p>
 <p>This general category includes structures tailored to encode known symmetries or constraints of the problem. <strong>QAOA's circuit structure</strong> (alternating cost and mixer unitaries) is the most prominent example of a problem-inspired ansatz designed for combinatorial optimization. These ansätze are generally shallow and incorporate known symmetries, thereby maintaining larger gradients and mitigating the risk of <strong>Barren Plateaus</strong>.</p>
+</div>
 <hr />
 <h3 id="mitigation-of-barren-plateaus"><strong>Mitigation of Barren Plateaus</strong></h3>
 <hr />
@@ -2845,17 +2836,16 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
     G --&gt; H[Successful Optimization]</code></pre>
 <details class="question">
 <summary>Can we detect barren plateaus before optimization?</summary>
+<p>Yes! Recent research shows that gradient variance scales inversely with the Hilbert space dimension for certain ansatz types. By analyzing the ansatz structure—particularly its depth, entanglement pattern, and parameter distribution—we can predict susceptibility to barren plateaus before running expensive optimization [7].</p>
 </details>
-<h2 id="yes-recent-research-shows-that-gradient-variance-scales-inversely-with-the-hilbert-space-dimension-for-certain-ansatz-types-by-analyzing-the-ansatz-structureparticularly-its-depth-entanglement-pattern-and-parameter-distributionwe-can-predict-susceptibility-to-barren-plateaus-before-running-expensive-optimization-7"><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Yes! Recent research shows that gradient variance scales inversely with the Hilbert space dimension for certain ansatz types. By analyzing the ansatz structure—particularly its depth, entanglement pattern, and parameter distribution—we can predict susceptibility to barren plateaus before running expensive optimization [7].
-</span></code></pre></div></h2>
+<hr />
 <h2 id="64-classical-optimizers"><strong>6.4 Classical Optimizers</strong></h2>
 <hr />
 <p>Classical optimization is the indispensable counterpart to the quantum computation step in <strong>Variational Quantum Algorithms (VQAs)</strong>, forming the "classical engine" that drives the minimization of the cost function <span class="arithmatex">\(C(\vec{\theta})\)</span>. The choice of optimizer significantly impacts the algorithm's <strong>convergence speed, resilience to noise</strong>, and ability to avoid local minima or <strong>Barren Plateaus</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">The Classical Engine</p>
+<p>While quantum processors prepare superpositions and measure expectation values, classical optimizers navigate the parameter landscape—often a rugged, noisy terrain littered with local minima. The optimizer's sophistication often determines whether a VQA succeeds or fails [8].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>While quantum processors prepare superpositions and measure expectation values, classical optimizers navigate the parameter landscape—often a rugged, noisy terrain littered with local minima. The optimizer&#39;s sophistication often determines whether a VQA succeeds or fails [8].
-</span></code></pre></div>
 <h3 id="role-of-the-optimizer"><strong>Role of the Optimizer</strong></h3>
 <hr />
 <p>The optimizer's task is to efficiently determine the next set of improved parameters <span class="arithmatex">\(\vec{\theta}'\)</span> to send back to the quantum hardware, based on the cost function value <span class="arithmatex">\(C(\vec{\theta})\)</span> measured in the previous quantum step.</p>
@@ -2888,30 +2878,28 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
 </ul>
 <div class="admonition example">
 <p class="admonition-title">SPSA vs Parameter-Shift Gradient</p>
+<p>For a VQA with 100 parameters:
+- <strong>Parameter-Shift Rule:</strong> Requires 200 circuit evaluations per gradient (2 per parameter)
+- <strong>SPSA:</strong> Requires only 2 circuit evaluations per iteration (independent of parameter count)</p>
+<p>This 100× reduction in quantum circuit calls makes SPSA especially valuable for NISQ devices where circuit executions are expensive.</p>
+<p>```python
+SPSA_Optimizer(C, θ, max_iterations):
+    for iteration = 1 to max_iterations:
+        # Generate random perturbation
+        Δ = Random_Direction()</p>
+<div class="language-text highlight"><pre><span></span><code>    # Evaluate cost at perturbed points
+    C_plus = Evaluate(θ + c·Δ)
+    C_minus = Evaluate(θ - c·Δ)
+
+    # Estimate gradient
+    gradient_estimate = (C_plus - C_minus) / (2·c·Δ)
+
+    # Update parameters
+    θ = θ - learning_rate · gradient_estimate
+
+return θ
+</code></pre></div>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>For a VQA with 100 parameters:
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>- **Parameter-Shift Rule:** Requires 200 circuit evaluations per gradient (2 per parameter)
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>- **SPSA:** Requires only 2 circuit evaluations per iteration (independent of parameter count)
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>This 100× reduction in quantum circuit calls makes SPSA especially valuable for NISQ devices where circuit executions are expensive.
-</span></code></pre></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">SPSA_Optimizer</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">max_iterations</span><span class="p">):</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="k">for</span> <span class="n">iteration</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">max_iterations</span><span class="p">:</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>        <span class="c1"># Generate random perturbation</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="n">Δ</span> <span class="o">=</span> <span class="n">Random_Direction</span><span class="p">()</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        <span class="c1"># Evaluate cost at perturbed points</span>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="n">C_plus</span> <span class="o">=</span> <span class="n">Evaluate</span><span class="p">(</span><span class="n">θ</span> <span class="o">+</span> <span class="n">c·Δ</span><span class="p">)</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        <span class="n">C_minus</span> <span class="o">=</span> <span class="n">Evaluate</span><span class="p">(</span><span class="n">θ</span> <span class="o">-</span> <span class="n">c·Δ</span><span class="p">)</span>
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>        <span class="c1"># Estimate gradient</span>
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        <span class="n">gradient_estimate</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_plus</span> <span class="o">-</span> <span class="n">C_minus</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="err">·</span><span class="n">c·Δ</span><span class="p">)</span>
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>        <span class="c1"># Update parameters</span>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>        <span class="n">θ</span> <span class="o">=</span> <span class="n">θ</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="err">·</span> <span class="n">gradient_estimate</span>
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
-</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="k">return</span> <span class="n">θ</span>
-</span></code></pre></div></p>
 <hr />
 <h3 id="trade-offs-and-best-practices"><strong>Trade-offs and Best Practices</strong></h3>
 <hr />
@@ -2923,17 +2911,16 @@ E(\vec{\theta}) = \sum_j c_j \langle \psi(\vec{\theta}) \lvert P_j \rvert \psi(\
 <p>The optimal choice of optimizer is therefore often empirical, depending on the specific VQA problem, the chosen <strong>ansatz</strong>, and the noise characteristics of the underlying quantum hardware.</p>
 <details class="question">
 <summary>When should I use gradient-free vs gradient-based optimizers?</summary>
+<p>Use gradient-free optimizers (COBYLA, Nelder-Mead) for low-dimensional problems (&lt;10 parameters) or when gradients are unreliable due to noise. Use gradient-based methods (BFGS, Adam) with parameter-shift rule when gradients are trustworthy and the landscape is smooth. Use SPSA when you have many parameters (&gt;20) and need to minimize quantum circuit evaluations [9].</p>
 </details>
-<h2 id="use-gradient-free-optimizers-cobyla-nelder-mead-for-low-dimensional-problems-10-parameters-or-when-gradients-are-unreliable-due-to-noise-use-gradient-based-methods-bfgs-adam-with-parameter-shift-rule-when-gradients-are-trustworthy-and-the-landscape-is-smooth-use-spsa-when-you-have-many-parameters-20-and-need-to-minimize-quantum-circuit-evaluations-9"><div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Use gradient-free optimizers (COBYLA, Nelder-Mead) for low-dimensional problems (&lt;10 parameters) or when gradients are unreliable due to noise. Use gradient-based methods (BFGS, Adam) with parameter-shift rule when gradients are trustworthy and the landscape is smooth. Use SPSA when you have many parameters (&gt;20) and need to minimize quantum circuit evaluations [9].
-</span></code></pre></div></h2>
+<hr />
 <h2 id="65-cost-functions-and-convergence"><strong>6.5 Cost Functions and Convergence</strong></h2>
 <hr />
 <p>In <strong>Variational Quantum Algorithms (VQAs)</strong>, the <strong>Cost Function</strong> <span class="arithmatex">\(C(\vec{\theta})\)</span> is the scalar objective quantity that the hybrid quantum-classical loop seeks to optimize (minimize for VQE, maximize for QAOA). <strong>Convergence</strong> is the final stage of the optimization where the parameters stabilize, indicating that a satisfactory solution has been found.</p>
 <div class="admonition tip">
 <p class="admonition-title">Measurement is Everything</p>
+<p>The cost function in VQAs is fundamentally statistical—it emerges from finite sampling of quantum measurements. Understanding shot noise, measurement grouping, and convergence criteria is essential for extracting reliable results from NISQ hardware [10].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>The cost function in VQAs is fundamentally statistical—it emerges from finite sampling of quantum measurements. Understanding shot noise, measurement grouping, and convergence criteria is essential for extracting reliable results from NISQ hardware [10].
-</span></code></pre></div>
 <h3 id="cost-function-definition-and-evaluation"><strong>Cost Function Definition and Evaluation</strong></h3>
 <hr />
 <p>The VQA cost function is typically an <strong>expectation value</strong> of a quantum observable, measured from the parameterized quantum state <span class="arithmatex">\(|\psi(\vec{\theta})\rangle\)</span>.</p>
@@ -2956,16 +2943,14 @@ C(\vec{\theta}) = E(\vec{\theta}) = \langle \psi(\vec{\theta}) | H | \psi(\vec{\
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Measurement Grouping Efficiency</p>
+<p>Consider a Hamiltonian with 20 Pauli terms:</p>
+<div class="arithmatex">\[
+H = 0.5·Z_0 + 0.3·Z_1 + 0.2·X_0X_1 + \ldots
+\]</div>
+<p>Without grouping: 20 separate measurement bases required.
+With grouping: Terms like <span class="arithmatex">\(Z_0, Z_1, Z_0Z_1\)</span> commute and can be measured together in Z-basis, reducing to ~5-7 measurement bases.</p>
 </div>
-<h2 id="consider-a-hamiltonian-with-20-pauli-terms-h-05z_0-03z_1-02x_0x_1-ldots-without-grouping-20-separate-measurement-bases-required-with-grouping-terms-like-z_0-z_1-z_0z_1-commute-and-can-be-measured-together-in-z-basis-reducing-to-5-7-measurement-bases"><div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Consider a Hamiltonian with 20 Pauli terms:
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>$$
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>H = 0.5·Z_0 + 0.3·Z_1 + 0.2·X_0X_1 + \ldots
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>$$
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>Without grouping: 20 separate measurement bases required.
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>With grouping: Terms like $Z_0, Z_1, Z_0Z_1$ commute and can be measured together in Z-basis, reducing to ~5-7 measurement bases.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="convergence-criteria"><strong>Convergence Criteria</strong></h3>
 <hr />
 <p>The optimization loop continues until predefined <strong>convergence criteria</strong> are met, signaling that the classical optimizer has settled near a local or global minimum.</p>
@@ -2988,26 +2973,26 @@ C(\vec{\theta}) = E(\vec{\theta}) = \langle \psi(\vec{\theta}) | H | \psi(\vec{\
 ||\nabla C(\vec{\theta})|| &lt; \gamma
 \]</div>
 <p>The inherent <strong>noise and statistical fluctuation</strong> of VQA measurements mean that true convergence may not achieve the mathematical precision of classical optimization; instead, the process aims to find a robust minimum within the constraints of the NISQ device.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">Check_Convergence</span><span class="p">(</span><span class="n">C_current</span><span class="p">,</span> <span class="n">C_previous</span><span class="p">,</span> <span class="n">θ_current</span><span class="p">,</span> <span class="n">θ_previous</span><span class="p">):</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="c1"># Cost plateau criterion</span>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="k">if</span> <span class="o">|</span><span class="n">C_current</span> <span class="o">-</span> <span class="n">C_previous</span><span class="o">|</span> <span class="o">&lt;</span> <span class="n">ε_cost</span><span class="p">:</span>
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    <span class="c1"># Parameter stability criterion</span>
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="k">if</span> <span class="o">||</span><span class="n">θ_current</span> <span class="o">-</span> <span class="n">θ_previous</span><span class="o">||</span> <span class="o">&lt;</span> <span class="n">ε_param</span><span class="p">:</span>
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    <span class="c1"># Maximum iterations reached</span>
-</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="n">max_iterations</span><span class="p">:</span>
-</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>
-</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>    <span class="k">return</span> <span class="kc">False</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Check_Convergence</span><span class="p">(</span><span class="n">C_current</span><span class="p">,</span> <span class="n">C_previous</span><span class="p">,</span> <span class="n">θ_current</span><span class="p">,</span> <span class="n">θ_previous</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Cost plateau criterion</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">if</span> <span class="o">|</span><span class="n">C_current</span> <span class="o">-</span> <span class="n">C_previous</span><span class="o">|</span> <span class="o">&lt;</span> <span class="n">ε_cost</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="c1"># Parameter stability criterion</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">if</span> <span class="o">||</span><span class="n">θ_current</span> <span class="o">-</span> <span class="n">θ_previous</span><span class="o">||</span> <span class="o">&lt;</span> <span class="n">ε_param</span><span class="p">:</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="c1"># Maximum iterations reached</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&gt;</span> <span class="n">max_iterations</span><span class="p">:</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="k">return</span> <span class="kc">False</span>
 </span></code></pre></div>
 <details class="question">
 <summary>How many shots are needed for reliable cost function estimation?</summary>
+<p>The required shot count depends on the desired precision. For chemical accuracy (<span class="arithmatex">\(\sim\)</span>1 kcal/mol), typically 10³-10⁴ shots suffice for small molecules. The uncertainty scales as <span class="arithmatex">\(1/\sqrt{N_{\text{shots}}}\)</span>, so reducing error by 10× requires 100× more shots. Adaptive shot allocation—using fewer shots early in optimization and more near convergence—can significantly reduce total quantum circuit evaluations.</p>
 </details>
-<h2 id="the-required-shot-count-depends-on-the-desired-precision-for-chemical-accuracy-sim1-kcalmol-typically-103-104-shots-suffice-for-small-molecules-the-uncertainty-scales-as-1sqrtn_textshots-so-reducing-error-by-10-requires-100-more-shots-adaptive-shot-allocationusing-fewer-shots-early-in-optimization-and-more-near-convergencecan-significantly-reduce-total-quantum-circuit-evaluations"><div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>The required shot count depends on the desired precision. For chemical accuracy ($\sim$1 kcal/mol), typically 10³-10⁴ shots suffice for small molecules. The uncertainty scales as $1/\sqrt{N_{\text{shots}}}$, so reducing error by 10× requires 100× more shots. Adaptive shot allocation—using fewer shots early in optimization and more near convergence—can significantly reduce total quantum circuit evaluations.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="summary-of-variational-algorithms">Summary of Variational Algorithms</h2>
 <p>This table contrasts the two primary variational algorithms—<strong>VQE</strong> and <strong>QAOA</strong>—highlighting their goals, unitary structures, ansatz strategies, optimization roles, and key implementation challenges. A third column summarizes general insights applicable to all <strong>Variational Quantum Algorithms (VQAs)</strong>.</p>
 <hr />

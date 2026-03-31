@@ -2597,22 +2597,21 @@
 <p>The foundation of quantum computing lies in the rigorous mathematical description of state and operation using linear algebra over complex numbers. The standard language for this description is the <strong>Dirac notation</strong>, also known as the bra-ket notation, which elegantly captures the concepts of vectors, their duals, and products in a Hilbert space.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Dirac notation provides a compact, powerful formalism that unifies state representation, operations, and measurements into a single coherent mathematical language.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Dirac notation provides a compact, powerful formalism that unifies state representation, operations, and measurements into a single coherent mathematical language.
-</span></code></pre></div>
 <h3 id="the-ket-vector-and-the-state"><strong>The Ket Vector and the State</strong></h3>
 <p>The state of a closed quantum system is represented by a vector, <span class="arithmatex">\(|\psi\rangle\)</span>, residing in a complex <strong>Hilbert space</strong> <span class="arithmatex">\(\mathcal{H}\)</span> (Postulate I). This is known as the <strong>ket vector</strong>.</p>
 <ul>
 <li><strong>Qubit Representation:</strong> For a single qubit in the computational basis <span class="arithmatex">\(\{|0\rangle, |1\rangle\}\)</span>, the ket is written as a linear superposition:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$$
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>|\psi\rangle = \alpha|0\rangle + \beta|1\rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$$
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>where $\alpha$ and $\beta$ are complex **probability amplitudes**.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$$
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|\psi\rangle = \alpha|0\rangle + \beta|1\rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>$$
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>where $\alpha$ and $\beta$ are complex **probability amplitudes**.
 </span></code></pre></div></li>
 <li><strong>Normalization:</strong> For <span class="arithmatex">\(|\psi\rangle\)</span> to represent a physically valid state, it must be a unit vector, ensuring that the total probability of measurement outcomes is one:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$$
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>\langle\psi|\psi\rangle = |\alpha|^2 + |\beta|^2 = 1
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$$
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>\langle\psi|\psi\rangle = |\alpha|^2 + |\beta|^2 = 1
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$$
 </span></code></pre></div></li>
 </ul>
 <h3 id="the-bra-vector-and-the-inner-product"><strong>The Bra Vector and the Inner Product</strong></h3>
@@ -2628,13 +2627,10 @@
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Inner Product Calculation</p>
+<p>For <span class="arithmatex">\(|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span> and <span class="arithmatex">\(|\phi\rangle = |0\rangle\)</span>:</p>
+<div class="arithmatex">\[\langle\phi|\psi\rangle = \langle 0|\left(\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\right) = \frac{1}{\sqrt{2}}\]</div>
+<p>The probability of measuring <span class="arithmatex">\(|0\rangle\)</span> is <span class="arithmatex">\(P(0) = |\langle 0|\psi\rangle|^2 = \frac{1}{2}\)</span>.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>For $|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ and $|\phi\rangle = |0\rangle$:
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>$$\langle\phi|\psi\rangle = \langle 0|\left(\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\right) = \frac{1}{\sqrt{2}}$$
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>The probability of measuring $|0\rangle$ is $P(0) = |\langle 0|\psi\rangle|^2 = \frac{1}{2}$.
-</span></code></pre></div>
 <h3 id="the-outer-product-and-operators"><strong>The Outer Product and Operators</strong></h3>
 <p>The <strong>outer product</strong> <span class="arithmatex">\(|\psi\rangle\langle\phi|\)</span> is the product of the column vector <span class="arithmatex">\(|\psi\rangle\)</span> and the row vector <span class="arithmatex">\(\langle\phi|\)</span>.</p>
 <ul>
@@ -2642,24 +2638,23 @@
 <li><strong>Projection Operators:</strong> For a normalized state <span class="arithmatex">\(|\psi\rangle\)</span>, the outer product <span class="arithmatex">\(P = |\psi\rangle\langle\psi|\)</span> is a <strong>projection operator</strong> that projects any arbitrary state onto the line spanned by <span class="arithmatex">\(|\psi\rangle\)</span>. Projection operators are crucial in formally defining the measurement process.</li>
 <li><strong>Identity Operator:</strong> The identity operator <span class="arithmatex">\(I\)</span> for a single qubit can be written as the sum of the outer products of the basis states:</li>
 </ul>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$$
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>I = |0\rangle\langle 0| + |1\rangle\langle 1| = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$$
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>I = |0\rangle\langle 0| + |1\rangle\langle 1| = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>$$
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Outer products convert states into operators. This is how measurement projectors and density matrices are constructed from state vectors.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Outer products convert states into operators. This is how measurement projectors and density matrices are constructed from state vectors.
-</span></code></pre></div>
 <h3 id="multi-qubit-systems-and-basis-states"><strong>Multi-Qubit Systems and Basis States</strong></h3>
 <p>For a system of <span class="arithmatex">\(N\)</span> qubits, the state space is the tensor product of <span class="arithmatex">\(N\)</span> copies of <span class="arithmatex">\(\mathcal{H}^2\)</span> (Postulate IV).</p>
 <ul>
 <li><strong>Basis States:</strong> The basis states of the composite system are formed by the tensor products of the individual basis states, e.g., for two qubits: <span class="arithmatex">\(|00\rangle, |01\rangle, |10\rangle, |11\rangle\)</span>.</li>
 <li><strong>Example State:</strong> A general two-qubit state <span class="arithmatex">\(|\Psi\rangle\)</span> is written in Dirac notation as:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$$
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>|\Psi\rangle = \alpha_{00}|00\rangle + \alpha_{01}|01\rangle + \alpha_{10}|10\rangle + \alpha_{11}|11\rangle
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>$$
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>where $\sum_{ij} |\alpha_{ij}|^2 = 1$. The corresponding column vector in the standard four-dimensional basis is $\begin{pmatrix} \alpha_{00} \\ \alpha_{01} \\ \alpha_{10} \\ \alpha_{11} \end{pmatrix}$. This exponential growth of the basis set is why $N$ qubits can manage $2^N$ complex probability amplitudes simultaneously.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$$
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>|\Psi\rangle = \alpha_{00}|00\rangle + \alpha_{01}|01\rangle + \alpha_{10}|10\rangle + \alpha_{11}|11\rangle
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>$$
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>where $\sum_{ij} |\alpha_{ij}|^2 = 1$. The corresponding column vector in the standard four-dimensional basis is $\begin{pmatrix} \alpha_{00} \\ \alpha_{01} \\ \alpha_{10} \\ \alpha_{11} \end{pmatrix}$. This exponential growth of the basis set is why $N$ qubits can manage $2^N$ complex probability amplitudes simultaneously.
 </span></code></pre></div></li>
 </ul>
 <hr />
@@ -2673,9 +2668,8 @@
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>The density matrix is essential for describing <strong>open quantum systems</strong> that interact with an environment, or subsystems of entangled states where classical uncertainty is unavoidable.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>The density matrix is essential for describing **open quantum systems** that interact with an environment, or subsystems of entangled states where classical uncertainty is unavoidable.
-</span></code></pre></div>
 <h3 id="formal-definition-and-properties"><strong>Formal Definition and Properties</strong></h3>
 <p>The <strong>density matrix</strong> <span class="arithmatex">\(\rho\)</span> for a general mixed state (statistical ensemble) is defined by the convex combination of the outer products of its constituent pure states:</p>
 <div class="arithmatex">\[
@@ -2695,13 +2689,10 @@
 </ol>
 <div class="admonition example">
 <p class="admonition-title">Maximally Mixed State</p>
+<p>For a single qubit, the maximally mixed state represents complete classical uncertainty:</p>
+<div class="arithmatex">\[\rho_{\text{mixed}} = \frac{1}{2}|0\rangle\langle 0| + \frac{1}{2}|1\rangle\langle 1| = \frac{1}{2}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \frac{I}{2}\]</div>
+<p>This state has equal probability of being <span class="arithmatex">\(|0\rangle\)</span> or <span class="arithmatex">\(|1\rangle\)</span>, and measurement yields each outcome with 50% probability.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>For a single qubit, the maximally mixed state represents complete classical uncertainty:
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>$$\rho_{\text{mixed}} = \frac{1}{2}|0\rangle\langle 0| + \frac{1}{2}|1\rangle\langle 1| = \frac{1}{2}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \frac{I}{2}$$
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>This state has equal probability of being $|0\rangle$ or $|1\rangle$, and measurement yields each outcome with 50% probability.
-</span></code></pre></div>
 <h3 id="distinguishing-pure-and-mixed-states"><strong>Distinguishing Pure and Mixed States</strong></h3>
 <p>The density matrix formalism provides a single, unified mathematical object to describe both pure and mixed states. They are distinguished by the condition of <strong>idempotence</strong> (<span class="arithmatex">\(\rho^2 = \rho\)</span>):</p>
 <ul>
@@ -2727,19 +2718,17 @@
   $$</p>
 <details class="question">
 <summary>How does the density matrix describe entangled subsystems?</summary>
+<p>When tracing out part of an entangled system, the remaining subsystem's density matrix is typically mixed, even if the total system is in a pure state. This is why density matrices are essential for quantum information theory.</p>
+<p>The density matrix is thus a powerful and essential tool, particularly when dealing with <strong>open quantum systems</strong> (systems interacting with an environment) or when describing subsystems of an entangled state, where the state of the subsystem is invariably mixed.</p>
 </details>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>When tracing out part of an entangled system, the remaining subsystem&#39;s density matrix is typically mixed, even if the total system is in a pure state. This is why density matrices are essential for quantum information theory.
-</span></code></pre></div>
-The density matrix is thus a powerful and essential tool, particularly when dealing with <strong>open quantum systems</strong> (systems interacting with an environment) or when describing subsystems of an entangled state, where the state of the subsystem is invariably mixed.</p>
 <hr />
 <h2 id="23-unitary-operators-and-evolution"><strong>2.3 Unitary Operators and Evolution</strong></h2>
 <hr />
 <p>The evolution of a <strong>closed quantum system</strong> is fundamentally governed by the second postulate of quantum mechanics, which states that any such change must be achieved via a <strong>unitary transformation</strong>. These transformations are the building blocks of quantum computation, represented mathematically by <strong>unitary operators</strong> or <strong>quantum gates</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Unitary evolution is the only physically allowed transformation of a closed quantum system. All quantum gates must be unitary, ensuring reversibility and probability conservation.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Unitary evolution is the only physically allowed transformation of a closed quantum system. All quantum gates must be unitary, ensuring reversibility and probability conservation.
-</span></code></pre></div>
 <h3 id="definition-and-properties-of-unitary-operators"><strong>Definition and Properties of Unitary Operators</strong></h3>
 <p>An operator (matrix) <span class="arithmatex">\(U\)</span> acting on a state vector <span class="arithmatex">\(|\psi\rangle\)</span> is <strong>unitary</strong> if it satisfies the condition:</p>
 <div class="arithmatex">\[
@@ -2759,13 +2748,10 @@ U^\dagger U = U U^\dagger = I
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Verifying Unitarity: Pauli X Gate</p>
+<p>The Pauli X gate (quantum NOT) is:</p>
+<div class="arithmatex">\[X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\]</div>
+<p>We verify: <span class="arithmatex">\(X^\dagger X = X \cdot X = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I\)</span>. Also, <span class="arithmatex">\(X^2 = I\)</span>, so X is its own inverse.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>The Pauli X gate (quantum NOT) is:
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>$$X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}$$
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>We verify: $X^\dagger X = X \cdot X = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I$. Also, $X^2 = I$, so X is its own inverse.
-</span></code></pre></div>
 <h3 id="time-evolution-and-the-hamiltonian"><strong>Time Evolution and the Hamiltonian</strong></h3>
 <p>In continuous time, the unitary evolution of a system is generated by its <strong>Hamiltonian</strong> (<span class="arithmatex">\(H\)</span>) (Postulate II). Since the Hamiltonian is an observable associated with the system's energy, it must be a <strong>Hermitian operator</strong> (<span class="arithmatex">\(H = H^\dagger\)</span>).</p>
 <p>The unitary time evolution operator <span class="arithmatex">\(U(t)\)</span> that governs the change of the state vector <span class="arithmatex">\(|\psi(t)\rangle\)</span> over time <span class="arithmatex">\(t\)</span> is given by:</p>
@@ -2792,17 +2778,16 @@ U(t) = e^{-iHt/\hbar}
 </ul>
 <details class="question">
 <summary>Why must quantum gates be reversible?</summary>
+<p>Unitarity ensures reversibility because <span class="arithmatex">\(U^{-1} = U^\dagger\)</span> always exists. This is required by fundamental physics—information cannot be destroyed in a closed quantum system, only transformed. Irreversible gates would violate probability conservation and energy conservation.</p>
 </details>
-<h2 id="unitarity-ensures-reversibility-because-u-1-udagger-always-exists-this-is-required-by-fundamental-physicsinformation-cannot-be-destroyed-in-a-closed-quantum-system-only-transformed-irreversible-gates-would-violate-probability-conservation-and-energy-conservation"><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Unitarity ensures reversibility because $U^{-1} = U^\dagger$ always exists. This is required by fundamental physics—information cannot be destroyed in a closed quantum system, only transformed. Irreversible gates would violate probability conservation and energy conservation.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="24-measurement-and-collapse"><strong>2.4 Measurement and Collapse</strong></h2>
 <hr />
 <p>Quantum evolution is smooth and unitary, but the act of observing the system—the <strong>measurement</strong>—is an irreversible, non-unitary process that yields a classical outcome. This process is governed by Postulate III, known as the <strong>Measurement Postulate</strong> or the <strong>Born Rule</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Measurement is the bridge between the quantum and classical worlds. It irreversibly extracts classical information from quantum superposition, collapsing the state in the process.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Measurement is the bridge between the quantum and classical worlds. It irreversibly extracts classical information from quantum superposition, collapsing the state in the process.
-</span></code></pre></div>
 <h3 id="probabilistic-outcomes-the-born-rule"><strong>Probabilistic Outcomes (The Born Rule)</strong></h3>
 <p>When a measurement is performed on a quantum state, the outcome is <strong>probabilistic</strong>.</p>
 <p>For a single qubit state measured in the computational basis:</p>
@@ -2824,14 +2809,13 @@ P(0) + P(1) = |\alpha|^2 + |\beta|^2 = 1
 <p>due to the state normalization.</p>
 <div class="admonition example">
 <p class="admonition-title">Measurement Probability Calculation</p>
+<p>For the state <span class="arithmatex">\(|\psi\rangle = \frac{1}{2}|0\rangle + \frac{\sqrt{3}}{2}|1\rangle\)</span>:</p>
+<ul>
+<li>Probability of measuring <span class="arithmatex">\(|0\rangle\)</span>: <span class="arithmatex">\(P(0) = |\frac{1}{2}|^2 = \frac{1}{4} = 25\%\)</span></li>
+<li>Probability of measuring <span class="arithmatex">\(|1\rangle\)</span>: <span class="arithmatex">\(P(1) = |\frac{\sqrt{3}}{2}|^2 = \frac{3}{4} = 75\%\)</span></li>
+</ul>
+<p>After measurement, the superposition is destroyed and the state becomes either <span class="arithmatex">\(|0\rangle\)</span> or <span class="arithmatex">\(|1\rangle\)</span> with these probabilities.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>For the state $|\psi\rangle = \frac{1}{2}|0\rangle + \frac{\sqrt{3}}{2}|1\rangle$:
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>- Probability of measuring $|0\rangle$: $P(0) = |\frac{1}{2}|^2 = \frac{1}{4} = 25\%$
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>- Probability of measuring $|1\rangle$: $P(1) = |\frac{\sqrt{3}}{2}|^2 = \frac{3}{4} = 75\%$
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>After measurement, the superposition is destroyed and the state becomes either $|0\rangle$ or $|1\rangle$ with these probabilities.
-</span></code></pre></div>
 <h3 id="state-collapse-and-operators"><strong>State Collapse and Operators</strong></h3>
 <p>The general framework for measurement involves <strong>measurement operators</strong> <span class="arithmatex">\(M_i\)</span> associated with the <span class="arithmatex">\(i\)</span>-th possible outcome.</p>
 <ul>
@@ -2853,17 +2837,16 @@ M_0 = |0\rangle\langle 0|, \quad M_1 = |1\rangle\langle 1|
 \]</div>
 <details class="question">
 <summary>Is measurement collapse instantaneous everywhere?</summary>
+<p>The collapse is instantaneous in the mathematical formalism, but this doesn't allow faster-than-light communication. The collapse affects correlated measurement statistics but cannot transmit information without a classical channel to compare results.</p>
 </details>
-<h2 id="the-collapse-is-instantaneous-in-the-mathematical-formalism-but-this-doesnt-allow-faster-than-light-communication-the-collapse-affects-correlated-measurement-statistics-but-cannot-transmit-information-without-a-classical-channel-to-compare-results"><div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>The collapse is instantaneous in the mathematical formalism, but this doesn&#39;t allow faster-than-light communication. The collapse affects correlated measurement statistics but cannot transmit information without a classical channel to compare results.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="25-no-cloning-theorem"><strong>2.5 No-Cloning Theorem</strong></h2>
 <hr />
 <p>The <strong>No-cloning theorem</strong> is a fundamental constraint in quantum information that distinguishes it sharply from classical information.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>The no-cloning theorem is not a technological limitation—it's a fundamental law of quantum mechanics arising from the linearity of unitary evolution. You cannot copy what you don't know.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>The no-cloning theorem is not a technological limitation—it&#39;s a fundamental law of quantum mechanics arising from the linearity of unitary evolution. You cannot copy what you don&#39;t know.
-</span></code></pre></div>
 <h3 id="statement-and-proof-sketch"><strong>Statement and Proof Sketch</strong></h3>
 <p><strong>Statement:</strong> It is impossible to construct a universal quantum operation that can create an identical copy of an <strong>arbitrary unknown quantum state</strong>.</p>
 <p><strong>Proof Sketch (by contradiction):</strong> Assume a universal cloning unitary operator <span class="arithmatex">\(U\)</span> exists. Let <span class="arithmatex">\(|0\rangle_T\)</span> be an ancilla target state, and <span class="arithmatex">\(|\psi\rangle\)</span> and <span class="arithmatex">\(|\phi\rangle\)</span> be two arbitrary, unknown quantum states. The cloning operation must work for both states:</p>
@@ -2886,13 +2869,10 @@ U|\psi\rangle|0\rangle_T = |\psi\rangle|\psi\rangle \quad \text{and} \quad U|\ph
 <p>This equality holds <em>only</em> if <span class="arithmatex">\(\langle \psi | \phi \rangle = 0\)</span> (orthogonal states) or <span class="arithmatex">\(\langle \psi | \phi \rangle = 1\)</span> (identical states). Since quantum states can have arbitrary overlaps, the assumption that a universal <span class="arithmatex">\(U\)</span> exists leads to a contradiction. Therefore, no such universal cloning unitary exists.</p>
 <div class="admonition example">
 <p class="admonition-title">Why Classical Copying Works</p>
+<p>Classical bits can be copied because they are in definite states (0 or 1). A classical COPY operation:</p>
+<div class="arithmatex">\[\text{COPY}(0, 0) = (0, 0) \quad \text{and} \quad \text{COPY}(1, 0) = (1, 1)\]</div>
+<p>works perfectly because there's no superposition to preserve. Quantum superpositions <span class="arithmatex">\(\alpha|0\rangle + \beta|1\rangle\)</span> contain information in the complex amplitudes that cannot be extracted without measurement (which destroys the superposition).</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Classical bits can be copied because they are in definite states (0 or 1). A classical COPY operation:
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>$$\text{COPY}(0, 0) = (0, 0) \quad \text{and} \quad \text{COPY}(1, 0) = (1, 1)$$
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>works perfectly because there&#39;s no superposition to preserve. Quantum superpositions $\alpha|0\rangle + \beta|1\rangle$ contain information in the complex amplitudes that cannot be extracted without measurement (which destroys the superposition).
-</span></code></pre></div>
 <h3 id="practical-implications"><strong>Practical Implications</strong></h3>
 <p>The theorem is a consequence of the <strong>linearity (unitary nature)</strong> of quantum operators and has profound implications:</p>
 <ul>
@@ -2905,9 +2885,9 @@ U|\psi\rangle|0\rangle_T = |\psi\rangle|\psi\rangle \quad \text{and} \quad U|\ph
 </ul>
 <details class="question">
 <summary>Can we clone known quantum states?</summary>
+<p>Yes! If you know the exact state (e.g., <span class="arithmatex">\(|0\rangle\)</span> or <span class="arithmatex">\(|+\rangle\)</span>), you can prepare as many copies as you want. The no-cloning theorem only forbids copying <em>arbitrary unknown</em> states. This is why quantum key distribution protocols like BB84 are secure—eavesdroppers cannot copy unknown quantum states without detection.</p>
 </details>
-<h2 id="yes-if-you-know-the-exact-state-eg-0rangle-or-rangle-you-can-prepare-as-many-copies-as-you-want-the-no-cloning-theorem-only-forbids-copying-arbitrary-unknown-states-this-is-why-quantum-key-distribution-protocols-like-bb84-are-secureeavesdroppers-cannot-copy-unknown-quantum-states-without-detection"><div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Yes! If you know the exact state (e.g., $|0\rangle$ or $|+\rangle$), you can prepare as many copies as you want. The no-cloning theorem only forbids copying *arbitrary unknown* states. This is why quantum key distribution protocols like BB84 are secure—eavesdroppers cannot copy unknown quantum states without detection.
-</span></code></pre></div></h2>
+<hr />
 
 
 

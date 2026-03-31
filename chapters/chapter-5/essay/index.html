@@ -2591,9 +2591,8 @@
 <p>The <strong>Quantum Fourier Transform (QFT)</strong> is an indispensable quantum primitive that plays the same role in quantum computation as the Fast Fourier Transform (FFT) does in classical signal processing, data compression, and analysis. The QFT transforms a quantum state vector from its basis representation to its frequency domain representation, enabling the extraction of periodicity and phase information.</p>
 <div class="admonition tip">
 <p class="admonition-title">Intuition Boost</p>
+<p>Think of the QFT as a quantum "frequency analyzer"—it takes a superposition encoded in the computational basis and reveals the hidden periodic patterns by transforming it into the frequency domain, all in polynomial time instead of exponential.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Think of the QFT as a quantum &quot;frequency analyzer&quot;—it takes a superposition encoded in the computational basis and reveals the hidden periodic patterns by transforming it into the frequency domain, all in polynomial time instead of exponential.
-</span></code></pre></div>
 <h3 id="definition-of-the-quantum-fourier-transform"><strong>Definition of the Quantum Fourier Transform</strong></h3>
 <hr />
 <p>The QFT is the unitary transformation acting on a quantum state that corresponds mathematically to the <strong>Discrete Fourier Transform (DFT)</strong> acting on the state's amplitude vector.</p>
@@ -2607,15 +2606,12 @@
 </ul>
 <div class="admonition example">
 <p class="admonition-title">QFT on a Single Qubit</p>
+<p>For <span class="arithmatex">\(n=1\)</span> (single qubit), the QFT reduces to the Hadamard gate:</p>
+<div class="arithmatex">\[
+\text{QFT}(|0\rangle) = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle), \quad \text{QFT}(|1\rangle) = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)
+\]</div>
+<p>This shows the QFT generalizes the familiar Hadamard transformation to higher-dimensional spaces.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>For $n=1$ (single qubit), the QFT reduces to the Hadamard gate:
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$$
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>\text{QFT}(|0\rangle) = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle), \quad \text{QFT}(|1\rangle) = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>$$
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>This shows the QFT generalizes the familiar Hadamard transformation to higher-dimensional spaces.
-</span></code></pre></div>
 <h3 id="decomposition-into-bit-wise-product"><strong>Decomposition into Bit-wise Product</strong></h3>
 <hr />
 <p>The power of the QFT lies in its ability to be decomposed into a product of single-qubit Hadamard and Controlled-Phase gates. This allows the overall operation to be executed in polynomial time.</p>
@@ -2629,19 +2625,18 @@
 <li><strong>Controlled-Phase rotations</strong> between pairs of qubits, where the rotation angle is precisely <span class="arithmatex">\(\theta = 2\pi / 2^k\)</span> (for <span class="arithmatex">\(k=2, 3, \ldots, n\)</span>).</li>
 </ol>
 <p>Here is the circuit structure for implementing the QFT:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">QFT_Circuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">n_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="n">Apply</span> <span class="n">H</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">n_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="n">Apply</span> <span class="n">Controlled</span><span class="o">-</span><span class="n">R</span><span class="p">(</span><span class="mi">2</span><span class="n">π</span> <span class="o">/</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">with</span> <span class="n">control</span><span class="o">=</span><span class="n">qubit</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">Reverse</span> <span class="n">the</span> <span class="n">order</span> <span class="n">of</span> <span class="n">qubits</span> <span class="p">(</span><span class="n">SWAP</span> <span class="n">operations</span><span class="p">)</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">return</span> <span class="n">quantum_state</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">QFT_Circuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">n_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="n">Apply</span> <span class="n">H</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="k">for</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">n_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            <span class="n">Apply</span> <span class="n">Controlled</span><span class="o">-</span><span class="n">R</span><span class="p">(</span><span class="mi">2</span><span class="n">π</span> <span class="o">/</span> <span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="k">with</span> <span class="n">control</span><span class="o">=</span><span class="n">qubit</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">Reverse</span> <span class="n">the</span> <span class="n">order</span> <span class="n">of</span> <span class="n">qubits</span> <span class="p">(</span><span class="n">SWAP</span> <span class="n">operations</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">return</span> <span class="n">quantum_state</span>
 </span></code></pre></div>
 <details class="question">
 <summary>Why does the QFT require a final qubit reversal?</summary>
+<p>The natural output of the QFT circuit produces qubits in reversed order compared to the standard basis ordering. SWAP gates reorder them to match conventional notation, though this reversal can sometimes be absorbed into subsequent operations for efficiency.</p>
 </details>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>The natural output of the QFT circuit produces qubits in reversed order compared to the standard basis ordering. SWAP gates reorder them to match conventional notation, though this reversal can sometimes be absorbed into subsequent operations for efficiency.
-</span></code></pre></div>
 <h3 id="exponential-speedup-in-implementation"><strong>Exponential Speedup in Implementation</strong></h3>
 <hr />
 <p>While the QFT performs the exact same mathematical transformation as the DFT, the way it processes the information provides a massive complexity advantage.</p>
@@ -2690,9 +2685,8 @@
 <p>The <strong>Quantum Phase Estimation (QPE)</strong> algorithm is one of the most significant quantum primitives, providing a method to estimate the unknown phase (eigenvalue) associated with a given unitary operator. QPE is the core subroutine that grants exponential speedups in structural algorithms like <strong>Shor's factoring algorithm</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>QPE transforms the difficult problem of finding eigenvalues (which requires exponential classical resources) into a problem of measuring quantum phases—a task the QFT performs in polynomial time. This conversion is the secret behind many exponential quantum speedups.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>QPE transforms the difficult problem of finding eigenvalues (which requires exponential classical resources) into a problem of measuring quantum phases—a task the QFT performs in polynomial time. This conversion is the secret behind many exponential quantum speedups.
-</span></code></pre></div>
 <h3 id="problem-statement"><strong>Problem Statement</strong></h3>
 <hr />
 <p>QPE estimates the unknown phase <span class="arithmatex">\(\phi\)</span> in the expression:</p>
@@ -2726,38 +2720,35 @@ U|\psi\rangle = e^{2\pi i \phi} |\psi\rangle
 </ul>
 <div class="admonition example">
 <p class="admonition-title">QPE Circuit Flow</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>The QPE algorithm can be visualized as a four-stage pipeline:
-</span></code></pre></div>
-Stage 1: |0⟩⊗ⁿ → H⊗ⁿ → Uniform Superposition
+<p>The QPE algorithm can be visualized as a four-stage pipeline:</p>
+<p>Stage 1: |0⟩⊗ⁿ → H⊗ⁿ → Uniform Superposition
 Stage 2: Apply Controlled-U<sup>(2</sup>j) for j=0...n-1 → Phase Encoding
 Stage 3: Apply Inverse QFT → Phase Decoding
-Stage 4: Measure → n-bit approximation of φ
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>
-</span></code></pre></div>
-Here is the complete QPE algorithm structure:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">QPE_Algorithm</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">ψ</span><span class="p">,</span> <span class="n">n_precision_bits</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="c1"># Initialize registers</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">counting_reg</span> <span class="o">=</span> <span class="o">|</span><span class="mi">0</span><span class="err">⟩⊗</span><span class="n">n</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">target_reg</span> <span class="o">=</span> <span class="o">|</span><span class="n">ψ</span><span class="err">⟩</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="c1"># Step 1: Create superposition</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="n">Apply</span> <span class="n">H</span> <span class="n">to</span> <span class="n">counting_reg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="c1"># Step 2: Controlled-Unitary operations</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="n">Apply</span> <span class="n">Controlled</span><span class="o">-</span><span class="n">U</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="n">i</span><span class="p">)</span> <span class="k">with</span> <span class="n">control</span><span class="o">=</span><span class="n">counting_reg</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">target</span><span class="o">=</span><span class="n">target_reg</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="c1"># Step 3: Inverse QFT</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    <span class="n">Apply</span> <span class="n">IQFT</span> <span class="n">to</span> <span class="n">counting_reg</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    <span class="c1"># Step 4: Measurement</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>    <span class="n">measured_value</span> <span class="o">=</span> <span class="n">Measure</span><span class="p">(</span><span class="n">counting_reg</span><span class="p">)</span>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    <span class="n">estimated_phase</span> <span class="o">=</span> <span class="n">measured_value</span> <span class="o">/</span> <span class="mi">2</span><span class="o">^</span><span class="n">n</span>
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>    <span class="k">return</span> <span class="n">estimated_phase</span>
-</span></code></pre></div>
+Stage 4: Measure → n-bit approximation of φ</p>
+<p>Here is the complete QPE algorithm structure:</p>
+<p>```python
+QPE_Algorithm(U, ψ, n_precision_bits):
+    # Initialize registers
+    counting_reg = |0⟩⊗n
+    target_reg = |ψ⟩</p>
+<div class="language-text highlight"><pre><span></span><code># Step 1: Create superposition
+for i = 0 to n-1:
+    Apply H to counting_reg[i]
+
+# Step 2: Controlled-Unitary operations
+for i = 0 to n-1:
+    Apply Controlled-U^(2^i) with control=counting_reg[i], target=target_reg
+
+# Step 3: Inverse QFT
+Apply IQFT to counting_reg
+
+# Step 4: Measurement
+measured_value = Measure(counting_reg)
+estimated_phase = measured_value / 2^n
+
+return estimated_phase
+</code></pre></div>
+</div>
 <h3 id="the-role-of-phase-kickback"><strong>The Role of Phase Kickback</strong></h3>
 <hr />
 <p>QPE relies heavily on the principle of <strong>Phase Kickback</strong>. When a controlled-unitary <span class="arithmatex">\(U\)</span> is applied with a control qubit in the <span class="arithmatex">\(|1\rangle\)</span> state and a target in an eigenstate <span class="arithmatex">\(|\psi\rangle\)</span>, the operation is:</p>
@@ -2767,9 +2758,8 @@ Here is the complete QPE algorithm structure:</p>
 <p>The phase <span class="arithmatex">\(e^{2\pi i \phi}\)</span> is effectively "kicked back" to the control qubit, allowing the algorithm to manipulate <span class="arithmatex">\(\phi\)</span> without disturbing the target eigenstate <span class="arithmatex">\(|\psi\rangle\)</span>. The controlled-<span class="arithmatex">\(U^{2^j}\)</span> sequence uses this kickback repeatedly to encode each binary digit of <span class="arithmatex">\(\phi\)</span> onto the <span class="arithmatex">\(j\)</span>-th control qubit.</p>
 <details class="question">
 <summary>What happens if the target state is not an exact eigenstate?</summary>
+<p>If <span class="arithmatex">\(|\psi\rangle\)</span> is not an exact eigenstate but a superposition of eigenstates, QPE will output one of the corresponding eigenvalues probabilistically. The measurement outcome depends on the decomposition weights, and repeating QPE multiple times can reveal the full eigenspectrum.</p>
 </details>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>If $|\psi\rangle$ is not an exact eigenstate but a superposition of eigenstates, QPE will output one of the corresponding eigenvalues probabilistically. The measurement outcome depends on the decomposition weights, and repeating QPE multiple times can reveal the full eigenspectrum.
-</span></code></pre></div>
 <h3 id="efficiency-and-applications"><strong>Efficiency and Applications</strong></h3>
 <hr />
 <p>QPE is performed in <strong>polynomial time</strong>, specifically <span class="arithmatex">\(O(n^2)\)</span> gate applications (excluding the complexity of <span class="arithmatex">\(U\)</span> itself), where <span class="arithmatex">\(n\)</span> is the number of bits of precision required.</p>
@@ -2785,9 +2775,8 @@ Here is the complete QPE algorithm structure:</p>
 <p>The <strong>Quantum Phase Estimation (QPE)</strong> algorithm is the computational engine behind the exponential speedup achieved by <strong>Shor's factoring algorithm</strong>. This section explains how QPE is applied to solve the intermediate, computationally hard problem of <strong>Order Finding</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Connecting QPE to Factoring</p>
+<p>The genius of Shor's algorithm lies in recognizing that factoring can be reduced to period finding, and period finding can be solved by QPE. This chain of reductions transforms an intractable problem into a tractable one through quantum phase estimation.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>The genius of Shor&#39;s algorithm lies in recognizing that factoring can be reduced to period finding, and period finding can be solved by QPE. This chain of reductions transforms an intractable problem into a tractable one through quantum phase estimation.
-</span></code></pre></div>
 <h3 id="the-order-finding-problem"><strong>The Order Finding Problem</strong></h3>
 <hr />
 <p>Factoring a large composite number <span class="arithmatex">\(N\)</span> is classically difficult. Shor's insight was that factoring can be efficiently <strong>reduced</strong> to the problem of <strong>Order Finding</strong>.</p>
@@ -2820,32 +2809,30 @@ U \lvert \psi_k \rangle = e^{2\pi i (k/r)} \lvert \psi_k \rangle
 <p>Thus, the goal of QPE becomes extracting this fractional phase <span class="arithmatex">\(\phi\)</span>.</p>
 <div class="admonition example">
 <p class="admonition-title">Order Finding for N=15, a=7</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>For $N=15$ and $a=7$, the order is $r=4$ because $7^4 = 2401 \equiv 1 \pmod{15}$.
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>QPE would measure phases $\phi \in \{0/4, 1/4, 2/4, 3/4\}$ depending on which eigenstate $|\psi_k\rangle$ the system collapses to. The continued fractions algorithm then extracts the common denominator $r=4$ from any non-zero measurement.
-</span></code></pre></div>
-<strong>Step 3: Apply QPE and Extract <span class="arithmatex">\(r\)</span></strong></p>
+<p>For <span class="arithmatex">\(N=15\)</span> and <span class="arithmatex">\(a=7\)</span>, the order is <span class="arithmatex">\(r=4\)</span> because <span class="arithmatex">\(7^4 = 2401 \equiv 1 \pmod{15}\)</span>.</p>
+<p>QPE would measure phases <span class="arithmatex">\(\phi \in \{0/4, 1/4, 2/4, 3/4\}\)</span> depending on which eigenstate <span class="arithmatex">\(|\psi_k\rangle\)</span> the system collapses to. The continued fractions algorithm then extracts the common denominator <span class="arithmatex">\(r=4\)</span> from any non-zero measurement.</p>
+<p><strong>Step 3: Apply QPE and Extract <span class="arithmatex">\(r\)</span></strong></p>
 <p>The QPE algorithm measures an estimate of <span class="arithmatex">\(\phi = k/r\)</span>. Then, using the <strong>continued fractions algorithm</strong>, we extract the denominator <span class="arithmatex">\(r\)</span> from the estimated <span class="arithmatex">\(\phi\)</span> with high probability.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">Order_Finding</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="c1"># Choose precision</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ceil</span><span class="p">(</span><span class="n">log</span><span class="err">₂</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="c1"># Prepare eigenstate (or uniform superposition approximation)</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">ψ</span> <span class="o">=</span> <span class="n">Prepare_Eigenstate_Approximation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="c1"># Apply QPE to extract phase φ = k/r</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="n">φ_estimate</span> <span class="o">=</span> <span class="n">QPE</span><span class="p">(</span><span class="n">U_modular_exp</span><span class="p">,</span> <span class="n">ψ</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="c1"># Extract denominator r using continued fractions</span>
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="n">r</span> <span class="o">=</span> <span class="n">Continued_Fractions</span><span class="p">(</span><span class="n">φ_estimate</span><span class="p">)</span>
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
-</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="c1"># Verify that a^r ≡ 1 (mod N)</span>
-</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="k">if</span> <span class="n">Power_Mod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>        <span class="k">return</span> <span class="n">r</span>
-</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>        <span class="n">retry</span> <span class="k">with</span> <span class="n">different</span> <span class="n">eigenstate</span>
-</span></code></pre></div>
+<p>```python
+Order_Finding(N, a):
+    # Choose precision
+    n = 2 * ceil(log₂(N)) + 1</p>
+<div class="language-text highlight"><pre><span></span><code># Prepare eigenstate (or uniform superposition approximation)
+ψ = Prepare_Eigenstate_Approximation(a, N)
+
+# Apply QPE to extract phase φ = k/r
+φ_estimate = QPE(U_modular_exp, ψ, n)
+
+# Extract denominator r using continued fractions
+r = Continued_Fractions(φ_estimate)
+
+# Verify that a^r ≡ 1 (mod N)
+if Power_Mod(a, r, N) == 1:
+    return r
+else:
+    retry with different eigenstate
+</code></pre></div>
+</div>
 <h3 id="the-factoring-process"><strong>The Factoring Process</strong></h3>
 <hr />
 <p>Once the order <span class="arithmatex">\(r\)</span> is known, we can <strong>classically compute the factors</strong> of <span class="arithmatex">\(N\)</span> efficiently.</p>
@@ -2871,19 +2858,17 @@ a^r - 1 \equiv 0 \pmod{N} \quad \Rightarrow \quad (a^{r/2} - 1)(a^{r/2} + 1) \eq
     H --&gt; I[Factors found!]</code></pre>
 <details class="question">
 <summary>Why might the algorithm need to retry?</summary>
+<p>QPE might measure a phase corresponding to <span class="arithmatex">\(k=0\)</span> (yielding no information), or the order <span class="arithmatex">\(r\)</span> might be odd, or <span class="arithmatex">\(a^{r/2} \equiv -1 \pmod{N}\)</span>. In these cases, we simply choose a different random <span class="arithmatex">\(a\)</span> and retry. Statistically, success occurs with high probability after a few attempts.</p>
+<p>In summary, <strong>QPE reduces factoring to period finding</strong>, which is efficient on a quantum computer. The <strong>quantum speedup</strong> lies in this core exponential advantage over classical algorithms [3, 4].</p>
 </details>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>QPE might measure a phase corresponding to $k=0$ (yielding no information), or the order $r$ might be odd, or $a^{r/2} \equiv -1 \pmod{N}$. In these cases, we simply choose a different random $a$ and retry. Statistically, success occurs with high probability after a few attempts.
-</span></code></pre></div>
-In summary, <strong>QPE reduces factoring to period finding</strong>, which is efficient on a quantum computer. The <strong>quantum speedup</strong> lies in this core exponential advantage over classical algorithms [3, 4].</p>
 <hr />
 <h2 id="54-phase-kickback-and-qft-based-algorithms"><strong>5.4 Phase Kickback and QFT-based Algorithms</strong></h2>
 <hr />
 <p>The technique of <strong>Phase Kickback</strong> is a subtle but foundational quantum mechanical trick that enables the efficient extraction of phase information, making it indispensable for QPE and all related QFT-based algorithms.</p>
 <div class="admonition tip">
 <p class="admonition-title">The Hidden Trick</p>
+<p>Phase kickback exploits the eigenstructure of controlled operations to transfer phase information from the target register to the control qubit—a quantum-mechanical sleight of hand that makes eigenvalue estimation possible without directly measuring the target state [5].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Phase kickback exploits the eigenstructure of controlled operations to transfer phase information from the target register to the control qubit—a quantum-mechanical sleight of hand that makes eigenvalue estimation possible without directly measuring the target state [5].
-</span></code></pre></div>
 <h3 id="the-mechanism-of-phase-kickback"><strong>The Mechanism of Phase Kickback</strong></h3>
 <hr />
 <p>Phase kickback refers to the process by which the <strong>eigenphase</strong> of a unitary operator <span class="arithmatex">\(U\)</span>, which acts on a <strong>target qubit</strong> (or register), is transferred to the <strong>control qubit</strong>.</p>
@@ -2909,13 +2894,13 @@ In summary, <strong>QPE reduces factoring to period finding</strong>, which is e
 <p>Without phase kickback, the phase information would remain trapped in the target register, unable to be accessed or measured directly by the final computational basis measurement.</p>
 <div class="admonition example">
 <p class="admonition-title">Phase Kickback in Action</p>
+<p>Consider a controlled-<span class="arithmatex">\(Z\)</span> gate acting on <span class="arithmatex">\(|+\rangle \otimes |1\rangle\)</span>:
+$$
+C-Z: \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |1\rangle \rightarrow \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) \otimes |1\rangle
+$$
+The phase <span class="arithmatex">\(e^{i\pi} = -1\)</span> kicked back to the control qubit, transforming <span class="arithmatex">\(|+\rangle\)</span> into <span class="arithmatex">\(|-\rangle\)</span> while leaving the target state <span class="arithmatex">\(|1\rangle\)</span> unchanged.</p>
 </div>
-<h2 id="consider-a-controlled-z-gate-acting-on-rangle-otimes-1rangle-c-z-frac1sqrt20rangle-1rangle-otimes-1rangle-rightarrow-frac1sqrt20rangle-1rangle-otimes-1rangle-the-phase-eipi-1-kicked-back-to-the-control-qubit-transforming-rangle-into-rangle-while-leaving-the-target-state-1rangle-unchanged"><div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Consider a controlled-$Z$ gate acting on $|+\rangle \otimes |1\rangle$:
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>$$
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>C-Z: \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |1\rangle \rightarrow \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) \otimes |1\rangle
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>$$
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>The phase $e^{i\pi} = -1$ kicked back to the control qubit, transforming $|+\rangle$ into $|-\rangle$ while leaving the target state $|1\rangle$ unchanged.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="qft-based-algorithms"><strong>QFT-based Algorithms</strong></h3>
 <hr />
 <p>The combination of phase kickback, which converts eigenvalues to phase, and the QFT, which converts phase to measurable bits, forms the basis for the most powerful structural quantum algorithms.</p>
@@ -2951,31 +2936,31 @@ In summary, <strong>QPE reduces factoring to period finding</strong>, which is e
 </tbody>
 </table>
 <p>These QFT-based algorithms transform the exponential nature of structural problems (like finding periodicity or factoring) into a polynomial-time search, cementing the QFT and its prerequisite, phase kickback, as fundamental building blocks of quantum computation.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">QFT_Based_Workflow</span><span class="p">():</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="c1"># General structure for QFT-based algorithms</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="c1"># Step 1: Prepare quantum state encoding problem structure</span>
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="n">ψ</span> <span class="o">=</span> <span class="n">Prepare_Problem_State</span><span class="p">()</span>
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="c1"># Step 2: Apply controlled operations to encode phase</span>
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>        <span class="n">Apply_Controlled_U</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="n">j</span><span class="p">)(</span><span class="n">control_qubit</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">ψ</span><span class="p">)</span>
-</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
-</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>    <span class="c1"># Step 3: Apply Inverse QFT to decode phase</span>
-</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>    <span class="n">Apply_IQFT</span><span class="p">(</span><span class="n">control_register</span><span class="p">)</span>
-</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
-</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>    <span class="c1"># Step 4: Measure to extract solution</span>
-</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">Measure</span><span class="p">(</span><span class="n">control_register</span><span class="p">)</span>
-</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>
-</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>    <span class="c1"># Step 5: Classical post-processing</span>
-</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>    <span class="n">solution</span> <span class="o">=</span> <span class="n">Classical_Decode</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>    <span class="k">return</span> <span class="n">solution</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">QFT_Based_Workflow</span><span class="p">():</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># General structure for QFT-based algorithms</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="c1"># Step 1: Prepare quantum state encoding problem structure</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">ψ</span> <span class="o">=</span> <span class="n">Prepare_Problem_State</span><span class="p">()</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="c1"># Step 2: Apply controlled operations to encode phase</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">Apply_Controlled_U</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="n">j</span><span class="p">)(</span><span class="n">control_qubit</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">ψ</span><span class="p">)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="c1"># Step 3: Apply Inverse QFT to decode phase</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">Apply_IQFT</span><span class="p">(</span><span class="n">control_register</span><span class="p">)</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="c1"># Step 4: Measure to extract solution</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">Measure</span><span class="p">(</span><span class="n">control_register</span><span class="p">)</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="c1"># Step 5: Classical post-processing</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">solution</span> <span class="o">=</span> <span class="n">Classical_Decode</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="k">return</span> <span class="n">solution</span>
 </span></code></pre></div>
 <details class="question">
 <summary>What happens if the target state is not an eigenstate?</summary>
+<p>If the target state <span class="arithmatex">\(|\psi\rangle\)</span> is not an eigenstate of <span class="arithmatex">\(U\)</span>, it can be expressed as a superposition of eigenstates: <span class="arithmatex">\(|\psi\rangle = \sum_k c_k |\psi_k\rangle\)</span>. The phase kickback mechanism still works, but QPE will measure one of the eigenphases <span class="arithmatex">\(\phi_k\)</span> probabilistically with probability <span class="arithmatex">\(|c_k|^2\)</span>. This is actually exploited in applications where we want to sample from the eigenspectrum [6].</p>
 </details>
-<h2 id="if-the-target-state-psirangle-is-not-an-eigenstate-of-u-it-can-be-expressed-as-a-superposition-of-eigenstates-psirangle-sum_k-c_k-psi_krangle-the-phase-kickback-mechanism-still-works-but-qpe-will-measure-one-of-the-eigenphases-phi_k-probabilistically-with-probability-c_k2-this-is-actually-exploited-in-applications-where-we-want-to-sample-from-the-eigenspectrum-6"><div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>If the target state $|\psi\rangle$ is not an eigenstate of $U$, it can be expressed as a superposition of eigenstates: $|\psi\rangle = \sum_k c_k |\psi_k\rangle$. The phase kickback mechanism still works, but QPE will measure one of the eigenphases $\phi_k$ probabilistically with probability $|c_k|^2$. This is actually exploited in applications where we want to sample from the eigenspectrum [6].
-</span></code></pre></div></h2>
+<hr />
 <h2 id="comparison-and-analysis-of-quantum-fourier-transform-applications">Comparison and Analysis of Quantum Fourier Transform Applications</h2>
 <p>This table summarizes the core components and complexity advantages of the algorithms presented in Chapter 5, focusing on routines that rely centrally on the <strong>Quantum Fourier Transform (QFT)</strong> and <strong>Phase Kickback</strong>.</p>
 <hr />

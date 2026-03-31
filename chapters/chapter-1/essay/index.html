@@ -2603,10 +2603,9 @@
 <p>Classical computation, rooted in the Turing model, operates on <strong>bits</strong> that exist in a definitive state of 0 or 1. While the raw speed and scale of semiconductor technology continue to improve (often summarized by Moore's Law), there are fundamental classes of problems where even the most powerful classical supercomputers hit an exponential scaling wall. This limit arises because a classical system with <span class="arithmatex">\(N\)</span> bits can only ever explore <strong>one</strong> of <span class="arithmatex">\(2^N\)</span> possible configurations at any given moment. Computation thus becomes a deterministic or probabilistic march through a single path in the exponentially large solution space.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>The classical computational limit is not a matter of engineering—it is a fundamental consequence of the deterministic, single-path nature of classical logic.</p>
+<p>This exponential barrier, referred to as the <strong>classical computational limit</strong>, is particularly restrictive for systems governed by quantum mechanics itself, such as molecular simulation and materials science, as well as for certain problems in number theory (e.g., factoring large integers) and optimization. For example, simulating the ground state energy of a moderately sized molecule classically requires computational resources that scale exponentially with the number of atoms, quickly becoming infeasible.</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>The classical computational limit is not a matter of engineering—it is a fundamental consequence of the deterministic, single-path nature of classical logic.
-</span></code></pre></div>
-This exponential barrier, referred to as the <strong>classical computational limit</strong>, is particularly restrictive for systems governed by quantum mechanics itself, such as molecular simulation and materials science, as well as for certain problems in number theory (e.g., factoring large integers) and optimization. For example, simulating the ground state energy of a moderately sized molecule classically requires computational resources that scale exponentially with the number of atoms, quickly becoming infeasible.</p>
 <h3 id="the-quantum-computational-paradigm"><strong>The Quantum Computational Paradigm</strong></h3>
 <p><strong>Quantum computing</strong> is a novel computational paradigm that overcomes this exponential barrier by leveraging core principles of quantum mechanics. It replaces the classical bit with the <strong>qubit</strong>, the fundamental unit of quantum information. Unlike a bit, a qubit is an abstract entity that is represented by a vector in a two-dimensional complex Hilbert space, defined by a linear combination of its basis states, <span class="arithmatex">\(|0\rangle\)</span> and <span class="arithmatex">\(|1\rangle\)</span>:</p>
 <div class="arithmatex">\[
@@ -2620,10 +2619,9 @@ This exponential barrier, referred to as the <strong>classical computational lim
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Quantum Parallelism in Action</p>
+<p>A 300-qubit quantum computer can simultaneously process <span class="arithmatex">\(2^{300} \approx 10^{90}\)</span> states—more than the estimated number of atoms in the observable universe. This massive parallelism is the source of quantum advantage.</p>
+<p>The combination of <strong>superposition</strong> and <strong>entanglement</strong> provides the massive parallel input space, and <strong>interference</strong> provides the ability to filter that space into a readable, classical output upon measurement.</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>A 300-qubit quantum computer can simultaneously process $2^{300} \approx 10^{90}$ states—more than the estimated number of atoms in the observable universe. This massive parallelism is the source of quantum advantage.
-</span></code></pre></div>
-The combination of <strong>superposition</strong> and <strong>entanglement</strong> provides the massive parallel input space, and <strong>interference</strong> provides the ability to filter that space into a readable, classical output upon measurement.</p>
 <h3 id="domains-of-quantum-advantage"><strong>Domains of Quantum Advantage</strong></h3>
 <p>Quantum computers are not universal accelerators; their effectiveness is concentrated in specific classes of problems where complexity and interactions are highly leveraged by quantum properties. The primary application domains are:</p>
 <ul>
@@ -2634,10 +2632,9 @@ The combination of <strong>superposition</strong> and <strong>entanglement</stro
 </ul>
 <details class="question">
 <summary>When will quantum computers surpass classical supercomputers?</summary>
+<p>For specific problems (quantum simulation, factoring), quantum advantage may already be achievable with near-term devices. For general-purpose computing, fault-tolerant quantum computers with millions of qubits are likely decades away.</p>
+<p>The transition to quantum computing is therefore marked by a shift from deterministic logical operations to <strong>linear algebra over a complex vector space</strong>, enabling the simultaneous exploration of the vast computational landscape.</p>
 </details>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>For specific problems (quantum simulation, factoring), quantum advantage may already be achievable with near-term devices. For general-purpose computing, fault-tolerant quantum computers with millions of qubits are likely decades away.
-</span></code></pre></div>
-The transition to quantum computing is therefore marked by a shift from deterministic logical operations to <strong>linear algebra over a complex vector space</strong>, enabling the simultaneous exploration of the vast computational landscape.</p>
 <hr />
 <h2 id="12-classical-vs-quantum-information"><strong>1.2 Classical vs Quantum Information</strong></h2>
 <hr />
@@ -2662,10 +2659,9 @@ The transition to quantum computing is therefore marked by a shift from determin
 <p>Here, <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span> are <strong>complex-valued probability amplitudes</strong>. The normalization condition, <span class="arithmatex">\(|\alpha|^2 + |\beta|^2 = 1\)</span>, ensures that the total probability of observing either state upon measurement is unity. The actual information stored is encoded in these complex amplitudes, leading to <strong>amplitude-based</strong> information storage.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>A qubit doesn't store more <em>classical</em> bits—it stores complex probability amplitudes that can interfere constructively or destructively. This interference is what enables quantum computational advantage.</p>
+<p>For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in a <span class="arithmatex">\(2^N\)</span>-dimensional Hilbert space, achieved through the <strong>tensor product</strong> of the individual qubit spaces (Postulate 4). This allows the system to instantaneously encode and process <span class="arithmatex">\(2^N\)</span> complex amplitudes, facilitating quantum parallelism.</p>
 </div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>A qubit doesn&#39;t store more *classical* bits—it stores complex probability amplitudes that can interfere constructively or destructively. This interference is what enables quantum computational advantage.
-</span></code></pre></div>
-For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in a <span class="arithmatex">\(2^N\)</span>-dimensional Hilbert space, achieved through the <strong>tensor product</strong> of the individual qubit spaces (Postulate 4). This allows the system to instantaneously encode and process <span class="arithmatex">\(2^N\)</span> complex amplitudes, facilitating quantum parallelism.</p>
 <hr />
 <h4 id="evolution-and-unitarity"><strong>Evolution and Unitarity</strong></h4>
 <p>Quantum computation does not use Boolean logic. Instead, the evolution of a closed quantum system is governed by a <strong>unitary transformation</strong> (Postulate 2).</p>
@@ -2679,9 +2675,9 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 <p>A key constraint in quantum information is the <strong>No-cloning theorem</strong>, which states that it is physically impossible to create an identical copy of an arbitrary, unknown quantum state. This theorem is a direct consequence of the <strong>linearity</strong> of quantum mechanics, specifically the unitary nature of quantum operations. This constraint reinforces the difference between quantum and classical data handling: quantum information cannot be simply backed up or duplicated without collapsing the superposition.</p>
 <div class="admonition example">
 <p class="admonition-title">No-Cloning in Practice</p>
+<p>Unlike classical bits that can be copied via <code>COPY(bit) → bit, bit</code>, an arbitrary qubit state <span class="arithmatex">\(|\psi\rangle = \alpha|0\rangle + \beta|1\rangle\)</span> cannot be cloned to produce <span class="arithmatex">\(|\psi\rangle \otimes |\psi\rangle\)</span> without first measuring (and thus collapsing) it.</p>
 </div>
-<h2 id="unlike-classical-bits-that-can-be-copied-via-copybit-bit-bit-an-arbitrary-qubit-state-psirangle-alpha0rangle-beta1rangle-cannot-be-cloned-to-produce-psirangle-otimes-psirangle-without-first-measuring-and-thus-collapsing-it"><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Unlike classical bits that can be copied via `COPY(bit) → bit, bit`, an arbitrary qubit state $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$ cannot be cloned to produce $|\psi\rangle \otimes |\psi\rangle$ without first measuring (and thus collapsing) it.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="computational-model-comparison"><strong>Computational Model Comparison</strong></h3>
 <p>The following table summarizes the key distinctions between the two information models:</p>
 <table>
@@ -2733,74 +2729,74 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 <h3 id="postulate-i-state-space-and-state-vector"><strong>Postulate I: State Space and State Vector</strong></h3>
 <div class="admonition tip">
 <p class="admonition-title">Postulate I</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>The state of a closed quantum system is represented by a vector in a complex **Hilbert space** ($\mathcal{H}$).
-</span></code></pre></div>
-* <strong>Hilbert Space:</strong> A Hilbert space is a vector space (often of finite dimension, <span class="arithmatex">\(2^N\)</span>, for quantum computing) over the complex numbers <span class="arithmatex">\(\mathbb{C}\)</span> that is equipped with an inner product, allowing for the definition of distance, length, and orthogonality.
-* <strong>State Vector:</strong> For a single qubit, the state vector <span class="arithmatex">\(|\psi\rangle\)</span> lives in <span class="arithmatex">\(\mathcal{H}^2\)</span>. It is represented using the <strong>Dirac notation</strong> (ket vector) as a linear combination of the computational basis states, <span class="arithmatex">\(|0\rangle\)</span> and <span class="arithmatex">\(|1\rangle\)</span>:</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$$
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>|\psi\rangle = \alpha|0\rangle + \beta|1\rangle = \begin{pmatrix} \alpha \\ \beta \end{pmatrix}
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>$$
-</span></code></pre></div>
+<p>The state of a closed quantum system is represented by a vector in a complex <strong>Hilbert space</strong> (<span class="arithmatex">\(\mathcal{H}\)</span>).</p>
+<ul>
+<li><strong>Hilbert Space:</strong> A Hilbert space is a vector space (often of finite dimension, <span class="arithmatex">\(2^N\)</span>, for quantum computing) over the complex numbers <span class="arithmatex">\(\mathbb{C}\)</span> that is equipped with an inner product, allowing for the definition of distance, length, and orthogonality.</li>
+<li><strong>State Vector:</strong> For a single qubit, the state vector <span class="arithmatex">\(|\psi\rangle\)</span> lives in <span class="arithmatex">\(\mathcal{H}^2\)</span>. It is represented using the <strong>Dirac notation</strong> (ket vector) as a linear combination of the computational basis states, <span class="arithmatex">\(|0\rangle\)</span> and <span class="arithmatex">\(|1\rangle\)</span>:</li>
+</ul>
+<p>$$
+|\psi\rangle = \alpha|0\rangle + \beta|1\rangle = \begin{pmatrix} \alpha \ \beta \end{pmatrix}
+$$
 * <strong>Normalization:</strong> For the vector to be a physically valid quantum state, it must be a unit vector; thus, the normalization condition requires:</p>
-<h2 id="langlepsipsirangle-alpha2-beta2-1-this-ensures-that-the-total-probability-of-all-possible-outcomes-upon-measurement-sums-to-unity"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$$
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>\langle\psi|\psi\rangle = |\alpha|^2 + |\beta|^2 = 1
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>$$
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>This ensures that the total probability of all possible outcomes upon measurement sums to unity.
-</span></code></pre></div></h2>
+<p>$$
+\langle\psi|\psi\rangle = |\alpha|^2 + |\beta|^2 = 1
+$$
+This ensures that the total probability of all possible outcomes upon measurement sums to unity.</p>
+</div>
+<hr />
 <h3 id="postulate-ii-unitary-evolution"><strong>Postulate II: Unitary Evolution</strong></h3>
 <div class="admonition tip">
 <p class="admonition-title">Postulate II</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>The evolution of a closed quantum system over time is governed by a **unitary transformation**.
-</span></code></pre></div>
-* <strong>Unitary Operators:</strong> A quantum operation, or <strong>quantum gate</strong>, is represented by a square matrix <span class="arithmatex">\(U\)</span> acting on the state vector. This matrix <span class="arithmatex">\(U\)</span> must be <strong>unitary</strong>, satisfying the condition <span class="arithmatex">\(U^\dagger U = I\)</span>, where <span class="arithmatex">\(U^\dagger\)</span> is the conjugate transpose of <span class="arithmatex">\(U\)</span>, and <span class="arithmatex">\(I\)</span> is the identity matrix.
-* <strong>Reversibility:</strong> The unitary nature of quantum evolution implies that all quantum gates are fundamentally <strong>reversible</strong>. The time evolution from time <span class="arithmatex">\(t_1\)</span> to <span class="arithmatex">\(t_2\)</span> is given by <span class="arithmatex">\(|\psi(t_2)\rangle = U(t_2, t_1)|\psi(t_1)\rangle\)</span>.
-* <strong>Schrödinger Equation:</strong> In the continuous time domain, this unitary evolution is generated by the time-dependent <strong>Schrödinger equation</strong>:</p>
+<p>The evolution of a closed quantum system over time is governed by a <strong>unitary transformation</strong>.</p>
+<ul>
+<li><strong>Unitary Operators:</strong> A quantum operation, or <strong>quantum gate</strong>, is represented by a square matrix <span class="arithmatex">\(U\)</span> acting on the state vector. This matrix <span class="arithmatex">\(U\)</span> must be <strong>unitary</strong>, satisfying the condition <span class="arithmatex">\(U^\dagger U = I\)</span>, where <span class="arithmatex">\(U^\dagger\)</span> is the conjugate transpose of <span class="arithmatex">\(U\)</span>, and <span class="arithmatex">\(I\)</span> is the identity matrix.</li>
+<li><strong>Reversibility:</strong> The unitary nature of quantum evolution implies that all quantum gates are fundamentally <strong>reversible</strong>. The time evolution from time <span class="arithmatex">\(t_1\)</span> to <span class="arithmatex">\(t_2\)</span> is given by <span class="arithmatex">\(|\psi(t_2)\rangle = U(t_2, t_1)|\psi(t_1)\rangle\)</span>.</li>
+<li><strong>Schrödinger Equation:</strong> In the continuous time domain, this unitary evolution is generated by the time-dependent <strong>Schrödinger equation</strong>:</li>
+</ul>
 <div class="arithmatex">\[
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>i\hbar \frac{\mathrm{d}}{\mathrm{d}t}|\psi(t)\rangle = H|\psi(t)\rangle
-</span></code></pre></div>
+i\hbar \frac{\mathrm{d}}{\mathrm{d}t}|\psi(t)\rangle = H|\psi(t)\rangle
 \]</div>
 <p>where <span class="arithmatex">\(H\)</span> is the Hermitian operator known as the <strong>Hamiltonian</strong> of the system, and <span class="arithmatex">\(\hbar\)</span> is the reduced Planck constant. The Hamiltonian effectively dictates the energy and dynamics of the system.</p>
+</div>
 <div class="admonition example">
 <p class="admonition-title">Unitary Gate Example: Hadamard</p>
+<p>The Hadamard gate <span class="arithmatex">\(H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}\)</span> transforms <span class="arithmatex">\(|0\rangle\)</span> into the equal superposition <span class="arithmatex">\(\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\)</span>. You can verify it's unitary: <span class="arithmatex">\(H^\dagger H = I\)</span>.</p>
 </div>
-<h2 id="the-hadamard-gate-h-frac1sqrt2beginpmatrix-1-1-1-1-endpmatrix-transforms-0rangle-into-the-equal-superposition-frac1sqrt20rangle-1rangle-you-can-verify-its-unitary-hdagger-h-i"><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>The Hadamard gate $H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}$ transforms $|0\rangle$ into the equal superposition $\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$. You can verify it&#39;s unitary: $H^\dagger H = I$.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="postulate-iii-quantum-measurement-and-the-born-rule"><strong>Postulate III: Quantum Measurement and the Born Rule</strong></h3>
 <div class="admonition tip">
 <p class="admonition-title">Postulate III</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Measurement outcomes are probabilistic and correspond to eigenvalues of **Hermitian operators**.
-</span></code></pre></div>
-* <strong>Observables:</strong> Every measurable physical quantity, or <strong>observable</strong>, is associated with a linear, <strong>Hermitian operator</strong> (<span class="arithmatex">\(M\)</span>) acting on the Hilbert space. A Hermitian operator satisfies <span class="arithmatex">\(M = M^\dagger\)</span>.
-* <strong>Eigenvalues and Outcomes:</strong> The only possible outcomes of a measurement are the <strong>eigenvalues</strong> (<span class="arithmatex">\(\lambda_i\)</span>) of the operator <span class="arithmatex">\(M\)</span>.
-* <strong>Born Rule (Probabilistic Outcome):</strong> If a system is in state <span class="arithmatex">\(|\psi\rangle\)</span>, the probability <span class="arithmatex">\(P(i)\)</span> of observing the outcome corresponding to eigenvalue <span class="arithmatex">\(\lambda_i\)</span> is given by the square of the amplitude's projection onto the corresponding eigenvector <span class="arithmatex">\(|e_i\rangle\)</span>:</p>
+<p>Measurement outcomes are probabilistic and correspond to eigenvalues of <strong>Hermitian operators</strong>.</p>
+<ul>
+<li><strong>Observables:</strong> Every measurable physical quantity, or <strong>observable</strong>, is associated with a linear, <strong>Hermitian operator</strong> (<span class="arithmatex">\(M\)</span>) acting on the Hilbert space. A Hermitian operator satisfies <span class="arithmatex">\(M = M^\dagger\)</span>.</li>
+<li><strong>Eigenvalues and Outcomes:</strong> The only possible outcomes of a measurement are the <strong>eigenvalues</strong> (<span class="arithmatex">\(\lambda_i\)</span>) of the operator <span class="arithmatex">\(M\)</span>.</li>
+<li><strong>Born Rule (Probabilistic Outcome):</strong> If a system is in state <span class="arithmatex">\(|\psi\rangle\)</span>, the probability <span class="arithmatex">\(P(i)\)</span> of observing the outcome corresponding to eigenvalue <span class="arithmatex">\(\lambda_i\)</span> is given by the square of the amplitude's projection onto the corresponding eigenvector <span class="arithmatex">\(|e_i\rangle\)</span>:</li>
+</ul>
 <div class="arithmatex">\[
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>P(i) = |\langle e_i|\psi\rangle|^2
-</span></code></pre></div>
+P(i) = |\langle e_i|\psi\rangle|^2
 \]</div>
 <ul>
 <li><strong>State Collapse:</strong> The act of measurement extracts classical information from the system. If the outcome <span class="arithmatex">\(\lambda_i\)</span> is observed, the state of the system <strong>instantaneously collapses</strong> from <span class="arithmatex">\(|\psi\rangle\)</span> to the corresponding eigenvector <span class="arithmatex">\(|e_i\rangle\)</span> (or its projection onto the corresponding eigenspace). This collapse is the point where the inherently probabilistic quantum computation yields a deterministic classical result.</li>
 </ul>
+</div>
 <details class="question">
 <summary>Why does measurement destroy superposition?</summary>
+<p>Measurement is fundamentally a non-unitary operation that couples the quantum system to a classical measuring device. This interaction forces the system into an eigenstate of the measurement operator, collapsing the superposition irreversibly.</p>
 </details>
-<h2 id="measurement-is-fundamentally-a-non-unitary-operation-that-couples-the-quantum-system-to-a-classical-measuring-device-this-interaction-forces-the-system-into-an-eigenstate-of-the-measurement-operator-collapsing-the-superposition-irreversibly"><div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Measurement is fundamentally a non-unitary operation that couples the quantum system to a classical measuring device. This interaction forces the system into an eigenstate of the measurement operator, collapsing the superposition irreversibly.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="postulate-iv-composite-systems"><strong>Postulate IV: Composite Systems</strong></h3>
 <div class="admonition tip">
 <p class="admonition-title">Postulate IV</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>The state space of a composite quantum system is the **tensor product** of the state spaces of its individual components.
-</span></code></pre></div>
-* <strong>Tensor Product:</strong> To describe a system of <span class="arithmatex">\(N\)</span> qubits, we combine their individual Hilbert spaces. If qubit A is in state <span class="arithmatex">\(|\psi_A\rangle \in \mathcal{H}_A\)</span> and qubit B is in state <span class="arithmatex">\(|\psi_B\rangle \in \mathcal{H}_B\)</span>, the composite system state is:</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$$
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>|\psi_{AB}\rangle = |\psi_A\rangle \otimes |\psi_B\rangle
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>$$
-</span></code></pre></div>
+<p>The state space of a composite quantum system is the <strong>tensor product</strong> of the state spaces of its individual components.</p>
+<ul>
+<li><strong>Tensor Product:</strong> To describe a system of <span class="arithmatex">\(N\)</span> qubits, we combine their individual Hilbert spaces. If qubit A is in state <span class="arithmatex">\(|\psi_A\rangle \in \mathcal{H}_A\)</span> and qubit B is in state <span class="arithmatex">\(|\psi_B\rangle \in \mathcal{H}_B\)</span>, the composite system state is:</li>
+</ul>
+<p>$$
+|\psi_{AB}\rangle = |\psi_A\rangle \otimes |\psi_B\rangle
+$$
 * <strong>Dimensionality:</strong> If each component has dimension <span class="arithmatex">\(d_i\)</span>, the composite system has dimension <span class="arithmatex">\(\prod_i d_i\)</span>. For <span class="arithmatex">\(N\)</span> qubits, the total Hilbert space dimension is <span class="arithmatex">\(2^N\)</span>.
 * <strong>Entanglement:</strong> This postulate is key to defining <strong>entanglement</strong>. A composite state is separable (non-entangled) if it <em>can</em> be written as a tensor product. If it <em>cannot</em> be factored into a simple tensor product, it is an <strong>entangled state</strong>, representing the strongest form of quantum correlation (e.g., the Bell states).</p>
+</div>
 <hr />
 <h2 id="14-qubits-and-the-bloch-sphere"><strong>1.4 Qubits and the Bloch Sphere</strong></h2>
 <hr />
@@ -2818,9 +2814,9 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 <p>Here, <span class="arithmatex">\(\theta \in [0, \pi]\)</span> and <span class="arithmatex">\(\phi \in [0, 2\pi)\)</span>. This representation establishes a direct mapping between the abstract quantum state vector and a point on a three-dimensional real sphere.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Despite having complex amplitudes, a single qubit's state is fully specified by just two real parameters (<span class="arithmatex">\(\theta\)</span>, <span class="arithmatex">\(\phi\)</span>) due to normalization and global phase invariance. This enables geometric visualization.</p>
 </div>
-<h2 id="despite-having-complex-amplitudes-a-single-qubits-state-is-fully-specified-by-just-two-real-parameters-theta-phi-due-to-normalization-and-global-phase-invariance-this-enables-geometric-visualization"><div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Despite having complex amplitudes, a single qubit&#39;s state is fully specified by just two real parameters ($\theta$, $\phi$) due to normalization and global phase invariance. This enables geometric visualization.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="the-bloch-sphere-geometry"><strong>The Bloch Sphere Geometry</strong></h3>
 <p>The <strong>Bloch Sphere</strong> provides a graphical representation of the pure state space of a single qubit.</p>
 <ul>
@@ -2834,13 +2830,14 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Single-Qubit Gates as Rotations</p>
+<p>The utility of the Bloch Sphere is that it visualizes the action of <strong>single-qubit quantum gates</strong> as simple <strong>rotations</strong>:</p>
+<ul>
+<li>The <strong>NOT (X) gate</strong> corresponds to a rotation of <span class="arithmatex">\(\pi\)</span> radians about the X-axis (flips <span class="arithmatex">\(|0\rangle \leftrightarrow |1\rangle\)</span>).</li>
+<li>The <strong>Phase (Z) gate</strong> corresponds to a rotation about the Z-axis.</li>
+<li>The <strong>Hadamard (H) gate</strong> combines rotations about multiple axes.</li>
+</ul>
 </div>
-<h2 id="the-utility-of-the-bloch-sphere-is-that-it-visualizes-the-action-of-single-qubit-quantum-gates-as-simple-rotations-the-not-x-gate-corresponds-to-a-rotation-of-pi-radians-about-the-x-axis-flips-0rangle-leftrightarrow-1rangle-the-phase-z-gate-corresponds-to-a-rotation-about-the-z-axis-the-hadamard-h-gate-combines-rotations-about-multiple-axes"><div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>The utility of the Bloch Sphere is that it visualizes the action of **single-qubit quantum gates** as simple **rotations**:
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>- The **NOT (X) gate** corresponds to a rotation of $\pi$ radians about the X-axis (flips $|0\rangle \leftrightarrow |1\rangle$).
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>- The **Phase (Z) gate** corresponds to a rotation about the Z-axis.
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>- The **Hadamard (H) gate** combines rotations about multiple axes.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="the-role-of-measurement-and-collapse"><strong>The Role of Measurement and Collapse</strong></h3>
 <p>While the Bloch Sphere visualizes the state of a qubit in <strong>superposition</strong>, the act of <strong>measurement</strong> fundamentally alters the state in a way that cannot be represented by a smooth rotation. According to Postulate III (the Measurement Postulate), when a measurement is performed:</p>
 <ol>
@@ -2869,19 +2866,20 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Dirac Notation in Practice</p>
+<p>For <span class="arithmatex">\(|\psi\rangle = \alpha|0\rangle + \beta|1\rangle\)</span> and <span class="arithmatex">\(|\phi\rangle = \gamma|0\rangle + \delta|1\rangle\)</span>:</p>
+<ul>
+<li>Inner product: <span class="arithmatex">\(\langle\phi|\psi\rangle = \gamma^*\alpha + \delta^*\beta\)</span> (a complex number)</li>
+<li>Outer product: <span class="arithmatex">\(|\psi\rangle\langle\phi| = \begin{pmatrix} \alpha\gamma^* &amp; \alpha\delta^* \\ \beta\gamma^* &amp; \beta\delta^* \end{pmatrix}\)</span> (a matrix)</li>
+</ul>
 </div>
-<h2 id="for-psirangle-alpha0rangle-beta1rangle-and-phirangle-gamma0rangle-delta1rangle-inner-product-langlephipsirangle-gammaalpha-deltabeta-a-complex-number-outer-product-psiranglelanglephi-beginpmatrix-alphagamma-alphadelta-betagamma-betadelta-endpmatrix-a-matrix"><div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>For $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$ and $|\phi\rangle = \gamma|0\rangle + \delta|1\rangle$:
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>- Inner product: $\langle\phi|\psi\rangle = \gamma^*\alpha + \delta^*\beta$ (a complex number)
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>- Outer product: $|\psi\rangle\langle\phi| = \begin{pmatrix} \alpha\gamma^* &amp; \alpha\delta^* \\ \beta\gamma^* &amp; \beta\delta^* \end{pmatrix}$ (a matrix)
-</span></code></pre></div></h2>
+<hr />
 <h3 id="matrices-operators-and-gates"><strong>Matrices, Operators, and Gates</strong></h3>
 <ul>
 <li><strong>Matrices as Operators:</strong> Quantum operations are performed by applying square matrices, known as <strong>operators</strong> or <strong>quantum gates</strong>, to the state vectors.</li>
 <li><strong>Unitary Matrices:</strong> As required by Postulate II (Evolution), all quantum gates are represented by <strong>unitary matrices</strong> (<span class="arithmatex">\(U\)</span>). A unitary matrix preserves the norm of the state vector, ensuring that total probability remains 1, and is always invertible:</li>
 </ul>
 <div class="arithmatex">\[
-<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>U^\dagger U = U U^\dagger = I
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>U^\dagger U = U U^\dagger = I
 </span></code></pre></div>
 \]</div>
 <ul>
@@ -2890,9 +2888,9 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p><strong>Unitary matrices</strong> govern time evolution (gates), while <strong>Hermitian matrices</strong> represent measurements (observables). Both are essential but serve different roles in quantum computation.</p>
 </div>
-<h2 id="unitary-matrices-govern-time-evolution-gates-while-hermitian-matrices-represent-measurements-observables-both-are-essential-but-serve-different-roles-in-quantum-computation"><div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>**Unitary matrices** govern time evolution (gates), while **Hermitian matrices** represent measurements (observables). Both are essential but serve different roles in quantum computation.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="tensor-products-for-composite-systems"><strong>Tensor Products for Composite Systems</strong></h3>
 <ul>
 <li><strong>Combining States:</strong> To describe a system composed of two or more independent qubits, the <strong>tensor product</strong> (or Kronecker product, <span class="arithmatex">\(\otimes\)</span>) is used to combine their individual state vectors into a single, higher-dimensional composite state vector (Postulate IV).<ul>
@@ -2915,9 +2913,8 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Entanglement is not just correlation—it's a fundamentally quantum phenomenon where measuring one qubit instantaneously determines the state of another, regardless of spatial separation. This is the resource that enables quantum computational advantage.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>Entanglement is not just correlation—it&#39;s a fundamentally quantum phenomenon where measuring one qubit instantaneously determines the state of another, regardless of spatial separation. This is the resource that enables quantum computational advantage.
-</span></code></pre></div>
 <h3 id="the-bell-states-and-strong-correlation"><strong>The Bell States and Strong Correlation</strong></h3>
 <p>The simplest and most famous examples of entangled states are the two-qubit <strong>Bell states</strong>, which form an orthonormal basis for the <span class="arithmatex">\(\mathcal{H}^4\)</span> space. The Bell state <span class="arithmatex">\(|\Phi^+\rangle\)</span> is a key example:</p>
 <div class="arithmatex">\[
@@ -2931,23 +2928,22 @@ For a system of <span class="arithmatex">\(N\)</span> qubits, the state lives in
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Bell State Properties</p>
+<p>The four Bell states form a maximally entangled basis:</p>
+<ul>
+<li><span class="arithmatex">\(|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span></li>
+<li><span class="arithmatex">\(|\Phi^-\rangle = \frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)\)</span></li>
+<li><span class="arithmatex">\(|\Psi^+\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)\)</span></li>
+<li><span class="arithmatex">\(|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|01\rangle - |10\rangle)\)</span></li>
+</ul>
+<p>Each exhibits perfect correlation between qubits that cannot be explained by classical probability.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>The four Bell states form a maximally entangled basis:
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>- $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>- $|\Phi^-\rangle = \frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)$
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>- $|\Psi^+\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle)$
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>- $|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|01\rangle - |10\rangle)$
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>Each exhibits perfect correlation between qubits that cannot be explained by classical probability.
-</span></code></pre></div>
 <h3 id="the-no-cloning-theorem"><strong>The No-Cloning Theorem</strong></h3>
 <p>The inability to factor entangled states is related to the fundamental constraint of quantum information: the <strong>No-cloning theorem</strong>. This theorem states that it is impossible to create an exact copy of an arbitrary, unknown quantum state. This restriction arises directly from the <strong>linearity and unitarity</strong> of quantum evolution (Postulate II). If cloning were possible, it would violate the linearity of the quantum evolution operator, proving that the handling and persistence of quantum information are subject to unique, non-classical constraints.</p>
 <details class="question">
 <summary>Can we measure entanglement without destroying it?</summary>
+<p>Partial measurements and density matrix tomography can characterize entanglement, but any complete measurement that extracts classical information will collapse the entangled state. This is why quantum error correction and entanglement preservation are critical challenges in quantum computing.</p>
 </details>
-<h2 id="partial-measurements-and-density-matrix-tomography-can-characterize-entanglement-but-any-complete-measurement-that-extracts-classical-information-will-collapse-the-entangled-state-this-is-why-quantum-error-correction-and-entanglement-preservation-are-critical-challenges-in-quantum-computing"><div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>Partial measurements and density matrix tomography can characterize entanglement, but any complete measurement that extracts classical information will collapse the entangled state. This is why quantum error correction and entanglement preservation are critical challenges in quantum computing.
-</span></code></pre></div></h2>
+<hr />
 
 
 

@@ -2614,9 +2614,8 @@
 <p>The Deutsch and Deutsch-Jozsa (DJ) algorithms are historically significant, serving as the first concrete demonstrations that quantum computers can outperform their classical counterparts, even if only for highly specific, contrived problems. They introduce the fundamental concepts of <strong>quantum oracle queries</strong> and the use of <strong>interference</strong> to extract global properties of a function in a single query.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>The Deutsch-Jozsa algorithm was the first to prove quantum computers could solve certain problems exponentially faster than classical computers, demonstrating that quantum computing is not just a theoretical curiosity but offers genuine computational advantages.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>The Deutsch-Jozsa algorithm was the first to prove quantum computers could solve certain problems exponentially faster than classical computers, demonstrating that quantum computing is not just a theoretical curiosity but offers genuine computational advantages.
-</span></code></pre></div>
 <h3 id="deutschs-problem-and-the-query-advantage"><strong>Deutsch’s Problem and the Query Advantage</strong></h3>
 <p><strong>Deutsch's Problem</strong> addresses the simplest version of the <strong>promise problem</strong>: given a function <span class="arithmatex">\(f: \{0,1\} \to \{0,1\}\)</span>, determine whether <span class="arithmatex">\(f\)</span> is <strong>constant</strong> (<span class="arithmatex">\(f(0) = f(1)\)</span>) or <strong>balanced</strong> (<span class="arithmatex">\(f(0) \neq f(1)\)</span>).</p>
 <ul>
@@ -2635,15 +2634,15 @@
 <p>The algorithm relies on three critical quantum techniques:</p>
 <ol>
 <li><strong>Uniform Superposition:</strong> The <span class="arithmatex">\(n\)</span> input qubits are initialized to <span class="arithmatex">\(|0\rangle^{\otimes n}\)</span> and transformed by <span class="arithmatex">\(n\)</span> Hadamard gates to a uniform superposition of all <span class="arithmatex">\(2^n\)</span> computational basis states:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$$
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>|\psi_1\rangle = H^{\otimes n} |0\rangle^{\otimes n} = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$$
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|\psi_1\rangle = H^{\otimes n} |0\rangle^{\otimes n} = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Quantum Oracle Query (<span class="arithmatex">\(U_f\)</span>):</strong> The oracle <span class="arithmatex">\(U_f\)</span> is a unitary transformation that acts as <span class="arithmatex">\(U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle\)</span>. By initializing the auxiliary qubit to the special state <span class="arithmatex">\(\frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\)</span>, the operation induces a <strong>phase shift</strong> on the input register (known as <strong>phase kickback</strong>):
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$$
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>U_f|x\rangle \frac{|0\rangle - |1\rangle}{\sqrt{2}} = (-1)^{f(x)} |x\rangle \frac{|0\rangle - |1\rangle}{\sqrt{2}}
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>$$
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>This encodes the global behavior of $f(x)$ into the phase of the superposition.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$$
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>U_f|x\rangle \frac{|0\rangle - |1\rangle}{\sqrt{2}} = (-1)^{f(x)} |x\rangle \frac{|0\rangle - |1\rangle}{\sqrt{2}}
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>$$
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>This encodes the global behavior of $f(x)$ into the phase of the superposition.
 </span></code></pre></div></li>
 <li><strong>Strategic Interference:</strong> The final step applies another set of Hadamard gates <span class="arithmatex">\(H^{\otimes n}\)</span> to the input register. This acts as a <strong>Quantum Fourier Transform</strong> (QFT, a concept explored in Chapter 5) which measures the global frequency or pattern of the phase information.<ul>
 <li>If <span class="arithmatex">\(f\)</span> is <strong>constant</strong>, the phases interfere <strong>constructively</strong> in the final state component <span class="arithmatex">\(|0\rangle^{\otimes n}\)</span>, causing the measurement to yield <span class="arithmatex">\(|0\rangle^{\otimes n}\)</span>.</li>
@@ -2654,14 +2653,13 @@
 <p>The ability of the algorithm to use interference to collapse the exponentially large superposition onto a single result that reveals a global property of the function is the core of the quantum speedup.</p>
 <div class="admonition example">
 <p class="admonition-title">Interference Pattern</p>
+<p>For a constant function, all <span class="arithmatex">\(2^n\)</span> amplitudes pick up the same phase (either all <span class="arithmatex">\(+1\)</span> or all <span class="arithmatex">\(-1\)</span>), so when Hadamard gates are reapplied, they interfere constructively to recreate <span class="arithmatex">\(|0\rangle^{\otimes n}\)</span>. For a balanced function, exactly half the amplitudes are positive and half negative, causing destructive interference at <span class="arithmatex">\(|0\rangle^{\otimes n}\)</span>.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>For a constant function, all $2^n$ amplitudes pick up the same phase (either all $+1$ or all $-1$), so when Hadamard gates are reapplied, they interfere constructively to recreate $|0\rangle^{\otimes n}$. For a balanced function, exactly half the amplitudes are positive and half negative, causing destructive interference at $|0\rangle^{\otimes n}$.
-</span></code></pre></div>
 <details class="question">
 <summary>Is the Deutsch-Jozsa algorithm practical?</summary>
+<p>While it demonstrates exponential speedup, the algorithm solves an artificial promise problem with limited real-world applications. However, it established crucial proof-of-concept for quantum advantage and introduced techniques (phase kickback, interference) used in practical algorithms like Shor's.</p>
 </details>
-<h2 id="while-it-demonstrates-exponential-speedup-the-algorithm-solves-an-artificial-promise-problem-with-limited-real-world-applications-however-it-established-crucial-proof-of-concept-for-quantum-advantage-and-introduced-techniques-phase-kickback-interference-used-in-practical-algorithms-like-shors"><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>While it demonstrates exponential speedup, the algorithm solves an artificial promise problem with limited real-world applications. However, it established crucial proof-of-concept for quantum advantage and introduced techniques (phase kickback, interference) used in practical algorithms like Shor&#39;s.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="42-bernstein-vazirani-algorithm"><strong>4.2 Bernstein-Vazirani Algorithm</strong></h2>
 <hr />
 <p>The Bernstein-Vazirani (BV) algorithm is a key demonstration of the power of <strong>quantum parallelism</strong> and <strong>phase estimation</strong>. It solves a promise problem with an <strong>exponential speedup</strong> over the classical deterministic approach, making it a stronger showcase of quantum advantage than the Deutsch-Jozsa algorithm.</p>
@@ -2671,16 +2669,15 @@
 <h3 id="problem-statement-and-classical-complexity"><strong>Problem Statement and Classical Complexity</strong></h3>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Bernstein-Vazirani showcases quantum parallelism at its finest: extracting an entire n-bit hidden string in a single query by simultaneously evaluating the oracle on all <span class="arithmatex">\(2^n\)</span> possible inputs and using the QFT to decode the result.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Bernstein-Vazirani showcases quantum parallelism at its finest: extracting an entire n-bit hidden string in a single query by simultaneously evaluating the oracle on all $2^n$ possible inputs and using the QFT to decode the result.
-</span></code></pre></div>
 <h3 id="problem-statement-and-classical-complexity_1"><strong>Problem Statement and Classical Complexity</strong></h3>
 <p>The BV algorithm aims to find a hidden binary string <span class="arithmatex">\(s\)</span> of length <span class="arithmatex">\(n\)</span>, where <span class="arithmatex">\(s \in \{0,1\}^n\)</span>.</p>
 <ul>
 <li><strong>The Oracle Function:</strong> Access is granted to an oracle that computes the function <span class="arithmatex">\(f_s(x)\)</span>, defined for an <span class="arithmatex">\(n\)</span>-bit input string <span class="arithmatex">\(x \in \{0,1\}^n\)</span>, as the <strong>bitwise dot product modulo 2</strong> of the input <span class="arithmatex">\(x\)</span> and the hidden string <span class="arithmatex">\(s\)</span>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$$
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>f_s(x) = s \cdot x \pmod 2 = \left( \sum_{i=1}^n s_i x_i \right) \pmod 2
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$$
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>f_s(x) = s \cdot x \pmod 2 = \left( \sum_{i=1}^n s_i x_i \right) \pmod 2
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Classical Complexity:</strong> To determine the <span class="arithmatex">\(n\)</span> bits of the hidden string <span class="arithmatex">\(s\)</span>, a classical computer must query the oracle <span class="arithmatex">\(f_s(x)\)</span> at least <span class="arithmatex">\(n\)</span> times. For instance, querying with the input <span class="arithmatex">\(x = (100\dots0)\)</span> reveals <span class="arithmatex">\(s_1\)</span>, querying with <span class="arithmatex">\(x = (010\dots0)\)</span> reveals <span class="arithmatex">\(s_2\)</span>, and so on, requiring <span class="arithmatex">\(n\)</span> linearly independent inputs.</li>
 </ul>
@@ -2690,51 +2687,49 @@
 <ol>
 <li><strong>Initialization:</strong> The state is initialized to <span class="arithmatex">\(|0\rangle^{\otimes n} \otimes |1\rangle\)</span>.</li>
 <li><strong>Superposition:</strong> Hadamard gates are applied to all <span class="arithmatex">\(n+1\)</span> qubits. As in the Deutsch-Jozsa algorithm, the last qubit is transformed to the phase kickback state <span class="arithmatex">\(\frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)\)</span>. The input register becomes a uniform superposition of all <span class="arithmatex">\(2^n\)</span> inputs:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$$
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>|\psi_1\rangle = \left( \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle \right) \otimes \left( \frac{|0\rangle - |1\rangle}{\sqrt{2}} \right)
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$$
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>|\psi_1\rangle = \left( \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle \right) \otimes \left( \frac{|0\rangle - |1\rangle}{\sqrt{2}} \right)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Oracle Application:</strong> Applying the quantum oracle <span class="arithmatex">\(U_{f_s}\)</span> achieves the simultaneous evaluation of <span class="arithmatex">\(f_s(x)\)</span> for all <span class="arithmatex">\(2^n\)</span> inputs in a single step—<strong>quantum parallelism</strong>. Due to <strong>phase kickback</strong> (similar to the DJ algorithm), the oracle applies a phase shift of <span class="arithmatex">\((-1)^{f_s(x)}\)</span> to the input register, leaving the auxiliary qubit unchanged:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$$
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>|\psi_2\rangle = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} (-1)^{f_s(x)} |x\rangle \otimes \left( \frac{|0\rangle - |1\rangle}{\sqrt{2}} \right)
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$$
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>|\psi_2\rangle = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} (-1)^{f_s(x)} |x\rangle \otimes \left( \frac{|0\rangle - |1\rangle}{\sqrt{2}} \right)
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Hadamard Transform and Extraction:</strong> The key lies in the final transformation of the input register by applying <span class="arithmatex">\(H^{\otimes n}\)</span>. The Hadamard transform on a state with a phase factor <span class="arithmatex">\((-1)^{s \cdot x}\)</span> is a special case of the <strong>Quantum Fourier Transform</strong> (QFT). The output of <span class="arithmatex">\(H^{\otimes n}\)</span> on the first register is exactly the hidden string <span class="arithmatex">\(|s\rangle\)</span>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$$
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>|\psi_3\rangle = H^{\otimes n} |\psi_2\rangle = |s\rangle \otimes \left( \frac{|0\rangle - |1\rangle}{\sqrt{2}} \right)
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$$
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>|\psi_3\rangle = H^{\otimes n} |\psi_2\rangle = |s\rangle \otimes \left( \frac{|0\rangle - |1\rangle}{\sqrt{2}} \right)
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Measurement:</strong> Measuring the first <span class="arithmatex">\(n\)</span> qubits yields the hidden string <span class="arithmatex">\(|s\rangle\)</span> with probability 1.</li>
 </ol>
 <div class="admonition example">
 <p class="admonition-title">Quantum Parallelism in Action</p>
+<p>Instead of querying with <span class="arithmatex">\(n\)</span> different basis vectors classically (<span class="arithmatex">\(|100...0\rangle\)</span>, <span class="arithmatex">\(|010...0\rangle\)</span>, etc.), the quantum algorithm queries with the superposition of all <span class="arithmatex">\(2^n\)</span> basis vectors simultaneously, encodes the entire dot product pattern in phases, then uses the inverse QFT (Hadamard) to extract the hidden string.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Instead of querying with $n$ different basis vectors classically ($|100...0\rangle$, $|010...0\rangle$, etc.), the quantum algorithm queries with the superposition of all $2^n$ basis vectors simultaneously, encodes the entire dot product pattern in phases, then uses the inverse QFT (Hadamard) to extract the hidden string.
-</span></code></pre></div>
 <h3 id="demonstration-of-quantum-parallelism"><strong>Demonstration of Quantum Parallelism</strong></h3>
 <p>The Bernstein-Vazirani algorithm provides the clearest conceptual demonstration of how a quantum computer retrieves an entire <span class="arithmatex">\(n\)</span>-bit string of information in one query, exploiting the <span class="arithmatex">\(2^n\)</span>-dimensional amplitude space to store the results of all possible inputs. The final Hadamard transformation effectively performs an inverse QFT, isolating the hidden pattern <span class="arithmatex">\(s\)</span> that was encoded in the phase of the superposition.</p>
 <details class="question">
 <summary>Why doesn't this violate the holographic bound?</summary>
+<p>While we encode <span class="arithmatex">\(2^n\)</span> function evaluations in the quantum state, we only extract <span class="arithmatex">\(n\)</span> bits of classical information (the string <span class="arithmatex">\(s\)</span>). The exponential quantum state space collapses to linear classical output—no violation of information bounds occurs.</p>
 </details>
-<h2 id="while-we-encode-2n-function-evaluations-in-the-quantum-state-we-only-extract-n-bits-of-classical-information-the-string-s-the-exponential-quantum-state-space-collapses-to-linear-classical-outputno-violation-of-information-bounds-occurs"><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>While we encode $2^n$ function evaluations in the quantum state, we only extract $n$ bits of classical information (the string $s$). The exponential quantum state space collapses to linear classical output—no violation of information bounds occurs.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="43-simons-algorithm"><strong>4.3 Simon's Algorithm</strong></h2>
 <hr />
 <hr />
 <p>Simon's algorithm is mathematically significant because it was the first quantum algorithm to provide a clear <strong>exponential speedup</strong> over the best known classical algorithm for a non-trivial problem, predating Shor's algorithm in this regard. It highlights how quantum mechanics can solve problems involving hidden global structure, particularly <strong>periodicity</strong>, which forms the conceptual foundation for Shor's factoring routine.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Simon's algorithm is the direct predecessor to Shor's factoring algorithm—both use the same core technique of encoding hidden periodicity into quantum phases and extracting it via the quantum Fourier transform. Understanding Simon's algorithm is essential for understanding Shor's.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Simon&#39;s algorithm is the direct predecessor to Shor&#39;s factoring algorithm—both use the same core technique of encoding hidden periodicity into quantum phases and extracting it via the quantum Fourier transform. Understanding Simon&#39;s algorithm is essential for understanding Shor&#39;s.
-</span></code></pre></div>
 <h3 id="problem-statement-and-classical-complexity_2"><strong>Problem Statement and Classical Complexity</strong></h3>
 <p><strong>Simon's Problem</strong> involves an oracle function <span class="arithmatex">\(f: \{0,1\}^n \to \{0,1\}^n\)</span> with a hidden structure defined by a non-zero secret string <span class="arithmatex">\(s \in \{0,1\}^n\)</span>.</p>
 <ul>
 <li><strong>Hidden Structure (Periodicity):</strong> The function is guaranteed to be periodic, satisfying the condition:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$$
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>f(x) = f(y) \quad \text{if and only if} \quad x \oplus y = s
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>$$
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>where $\oplus$ denotes the bitwise XOR operation (addition modulo 2).
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$$
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>f(x) = f(y) \quad \text{if and only if} \quad x \oplus y = s
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>$$
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>where $\oplus$ denotes the bitwise XOR operation (addition modulo 2).
 </span></code></pre></div></li>
 <li><strong>The Goal:</strong> The task is to find the secret string <span class="arithmatex">\(s\)</span>.</li>
 <li><strong>Classical Complexity:</strong> Classically, Simon's problem is solved by searching for collisions (pairs <span class="arithmatex">\(x, y\)</span> such that <span class="arithmatex">\(f(x) = f(y)\)</span>) until <span class="arithmatex">\(n-1\)</span> linearly independent equations involving <span class="arithmatex">\(s\)</span> are found. This process requires, on average, an exponential number of queries, <span class="arithmatex">\(O(2^{n/2})\)</span>, using probabilistic algorithms. A deterministic solution requires <span class="arithmatex">\(O(2^n)\)</span> queries.</li>
@@ -2744,49 +2739,47 @@
 <p>The algorithm uses two quantum registers, each of <span class="arithmatex">\(n\)</span> qubits (total <span class="arithmatex">\(2n\)</span> qubits):</p>
 <ol>
 <li><strong>Initialization and Superposition:</strong> Start with <span class="arithmatex">\(|0\rangle^{\otimes n} |0\rangle^{\otimes n}\)</span>. Apply Hadamard gates to the first register (<span class="arithmatex">\(n\)</span> qubits) to create a uniform superposition over all possible inputs <span class="arithmatex">\(x\)</span>.
-<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$$
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>|\psi_1\rangle = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle |0\rangle^{\otimes n}
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$$
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>|\psi_1\rangle = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle |0\rangle^{\otimes n}
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Oracle Query (<span class="arithmatex">\(U_f\)</span>):</strong> Apply the oracle <span class="arithmatex">\(U_f\)</span> to compute the function <span class="arithmatex">\(f(x)\)</span> in the second register:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$$
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>|\psi_2\rangle = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle |f(x)\rangle
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$$
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>|\psi_2\rangle = \frac{1}{\sqrt{2^n}} \sum_{x \in \{0,1\}^n} |x\rangle |f(x)\rangle
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Measurement of the Second Register (Collapsing the State):</strong> Measuring the second register collapses the first register into an equal superposition of two states, <span class="arithmatex">\(x_0\)</span> and <span class="arithmatex">\(x_0 \oplus s\)</span>, for some random <span class="arithmatex">\(x_0\)</span>, since <span class="arithmatex">\(f(x_0) = f(x_0 \oplus s)\)</span>.
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$$
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>|\psi_3\rangle = \frac{1}{\sqrt{2}} \left( |x_0\rangle + |x_0 \oplus s\rangle \right) |f(x_0)\rangle
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$$
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>|\psi_3\rangle = \frac{1}{\sqrt{2}} \left( |x_0\rangle + |x_0 \oplus s\rangle \right) |f(x_0)\rangle
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>Final Hadamard Transform and Phase Extraction:</strong> The crucial final step is applying Hadamard gates to the first register. This acts as a Quantum Fourier Transform (QFT)-like operation that extracts the pattern encoded in the superposition. The measurement of the first register yields a string <span class="arithmatex">\(y \in \{0,1\}^n\)</span> that satisfies the equation:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$$
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>y \cdot s = 0 \pmod 2
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>$$
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>This is a linear equation relating the unknown bits of $s$ to the measured bits of $y$.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$$
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>y \cdot s = 0 \pmod 2
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>$$
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>This is a linear equation relating the unknown bits of $s$ to the measured bits of $y$.
 </span></code></pre></div></li>
 </ol>
 <div class="admonition example">
 <p class="admonition-title">Building the Linear System</p>
+<p>Each run of Simon's algorithm produces one linear equation: <span class="arithmatex">\(y_1 \cdot s = 0\)</span>, <span class="arithmatex">\(y_2 \cdot s = 0\)</span>, etc. After <span class="arithmatex">\(n-1\)</span> independent equations, we can solve the system using Gaussian elimination to find the unique <span class="arithmatex">\(n\)</span>-bit string <span class="arithmatex">\(s\)</span>.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Each run of Simon&#39;s algorithm produces one linear equation: $y_1 \cdot s = 0$, $y_2 \cdot s = 0$, etc. After $n-1$ independent equations, we can solve the system using Gaussian elimination to find the unique $n$-bit string $s$.
-</span></code></pre></div>
 <h3 id="solution-and-link-to-shors-algorithm"><strong>Solution and Link to Shor's Algorithm</strong></h3>
 <p>Since one run yields only one equation, the entire procedure must be repeated <span class="arithmatex">\(n-1\)</span> times to gather enough linearly independent equations to solve for the <span class="arithmatex">\(n\)</span> bits of the hidden string <span class="arithmatex">\(s\)</span> using classical linear algebra.</p>
 <p>The significance of Simon's algorithm is that the core mechanism—creating a superposition over an input register, querying a periodic oracle, and using a final Hadamard (QFT) transformation to measure a string <span class="arithmatex">\(y\)</span> in the frequency domain that reveals the hidden period <span class="arithmatex">\(s\)</span>—is precisely the routine used for the <strong>period-finding</strong> component of <strong>Shor's factoring algorithm</strong>. Thus, Simon's algorithm serves as the conceptual blueprint for the most powerful known quantum algorithm.</p>
 <details class="question">
 <summary>Why is periodicity so important in quantum algorithms?</summary>
+<p>Periodic functions create regular interference patterns in quantum superpositions. The QFT is specifically designed to detect these patterns, making periodicity the "sweet spot" where quantum algorithms achieve exponential speedups. This property underlies both Simon's and Shor's algorithms.</p>
 </details>
-<h2 id="periodic-functions-create-regular-interference-patterns-in-quantum-superpositions-the-qft-is-specifically-designed-to-detect-these-patterns-making-periodicity-the-sweet-spot-where-quantum-algorithms-achieve-exponential-speedups-this-property-underlies-both-simons-and-shors-algorithms"><div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Periodic functions create regular interference patterns in quantum superpositions. The QFT is specifically designed to detect these patterns, making periodicity the &quot;sweet spot&quot; where quantum algorithms achieve exponential speedups. This property underlies both Simon&#39;s and Shor&#39;s algorithms.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="44-grovers-search-algorithm"><strong>4.4 Grover's Search Algorithm</strong></h2>
 <hr />
 <hr />
 <p>Grover's algorithm is a celebrated quantum algorithm that provides a <strong>quadratic speedup</strong> for searching an unstructured database, outperforming the best possible classical search methods. It is a foundational example of <strong>quantum amplitude amplification</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Unlike algorithms that achieve exponential speedups through periodicity, Grover's algorithm achieves a quadratic speedup through amplitude amplification—a completely different quantum mechanism. This makes it broadly applicable to optimization and search problems across many domains.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Unlike algorithms that achieve exponential speedups through periodicity, Grover&#39;s algorithm achieves a quadratic speedup through amplitude amplification—a completely different quantum mechanism. This makes it broadly applicable to optimization and search problems across many domains.
-</span></code></pre></div>
 <h3 id="problem-statement-and-classical-complexity_3"><strong>Problem Statement and Classical Complexity</strong></h3>
 <ul>
 <li><strong>Problem:</strong> Given an unsorted database or list of size <span class="arithmatex">\(N = 2^n\)</span> items, find the unique input <span class="arithmatex">\(x\)</span> that satisfies the condition <span class="arithmatex">\(f(x)=1\)</span>, where <span class="arithmatex">\(f: \{0,1\}^n \to \{0,1\}\)</span> is an oracle function that marks the solution.</li>
@@ -2800,35 +2793,33 @@
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Quadratic Speedup in Practice</p>
+<p>For a database with 1 million items (<span class="arithmatex">\(N = 10^6\)</span>), classical search requires up to 1 million queries, while Grover's algorithm finds the solution in approximately 1,000 queries—a 1,000× speedup. For <span class="arithmatex">\(N = 2^{40}\)</span> items, classical needs ~1 trillion queries; Grover needs only ~1 million.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>For a database with 1 million items ($N = 10^6$), classical search requires up to 1 million queries, while Grover&#39;s algorithm finds the solution in approximately 1,000 queries—a 1,000× speedup. For $N = 2^{40}$ items, classical needs ~1 trillion queries; Grover needs only ~1 million.
-</span></code></pre></div>
 <h3 id="the-grover-iteration-oracle-and-diffusion"><strong>The Grover Iteration: Oracle and Diffusion</strong></h3>
 <p>Grover's algorithm is an iterative process that repeatedly amplifies the probability amplitude of the desired state while suppressing the amplitudes of all incorrect states. Each <strong>Grover iteration</strong> consists of two main unitary components: the oracle and the diffusion operator.</p>
 <ol>
 <li><strong>Initialization:</strong> The algorithm begins by preparing an input register of <span class="arithmatex">\(n\)</span> qubits in a <strong>uniform superposition</strong> of all <span class="arithmatex">\(N=2^n\)</span> states, achieved by applying the Hadamard gate <span class="arithmatex">\(H^{\otimes n}\)</span> to <span class="arithmatex">\(|0\rangle^{\otimes n}\)</span>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$$
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>|\psi_0\rangle = \frac{1}{\sqrt{N}} \sum_{x=0}^{N-1} |x\rangle
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$$
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>|\psi_0\rangle = \frac{1}{\sqrt{N}} \sum_{x=0}^{N-1} |x\rangle
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>$$
 </span></code></pre></div></li>
 <li><strong>The Oracle (<span class="arithmatex">\(O_f\)</span>):</strong> The oracle <span class="arithmatex">\(O_f\)</span> marks the target state <span class="arithmatex">\(|w\rangle\)</span> by flipping its phase, leaving all other states unchanged:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>$$
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>O_f|x\rangle = \begin{cases} -|x\rangle &amp; \text{if } x = w \\ |x\rangle &amp; \text{if } x \neq w \end{cases}
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>$$
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>This is equivalent to applying a $\pi$ phase shift to the target state&#39;s amplitude.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$$
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>O_f|x\rangle = \begin{cases} -|x\rangle &amp; \text{if } x = w \\ |x\rangle &amp; \text{if } x \neq w \end{cases}
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>$$
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>This is equivalent to applying a $\pi$ phase shift to the target state&#39;s amplitude.
 </span></code></pre></div></li>
 <li><strong>The Diffusion Operator (<span class="arithmatex">\(D\)</span>):</strong> The diffusion operator, or Grover operator, is the key to amplification. It performs an <strong>inversion about the mean amplitude</strong>. This operation reflects the state vector about the initial uniform superposition <span class="arithmatex">\(|\psi_0\rangle\)</span>, effectively transferring amplitude from the wrong states to the marked state <span class="arithmatex">\(|w\rangle\)</span>.
-<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>$$
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>D = 2|\psi_0\rangle\langle\psi_0| - I
-</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>$$
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$$
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>D = 2|\psi_0\rangle\langle\psi_0| - I
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>$$
 </span></code></pre></div>
 The <strong>Grover iteration</strong> <span class="arithmatex">\(G = D \cdot O_f\)</span> is applied <span class="arithmatex">\(k \approx \frac{\pi}{4}\sqrt{N}\)</span> times. Each iteration rotates the state vector closer to the target state <span class="arithmatex">\(|w\rangle\)</span>, increasing its probability amplitude until it approaches 1.</li>
 </ol>
 <details class="question">
 <summary>What happens if we apply too many Grover iterations?</summary>
+<p>The algorithm is sensitive to the number of iterations! Too many iterations cause the amplitude to "overshoot" the target and decrease again. The optimal number is <span class="arithmatex">\(\approx \frac{\pi}{4}\sqrt{N}\)</span>. This sensitivity is one practical challenge when the number of solutions is unknown.</p>
 </details>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>The algorithm is sensitive to the number of iterations! Too many iterations cause the amplitude to &quot;overshoot&quot; the target and decrease again. The optimal number is $\approx \frac{\pi}{4}\sqrt{N}$. This sensitivity is one practical challenge when the number of solutions is unknown.
-</span></code></pre></div>
 <h3 id="generalization-quantum-amplitude-amplification"><strong>Generalization: Quantum Amplitude Amplification</strong></h3>
 <p>Grover's algorithm is a specific application of the general technique known as <strong>Quantum Amplitude Amplification</strong>.</p>
 <ul>
@@ -2842,9 +2833,8 @@ The <strong>Grover iteration</strong> <span class="arithmatex">\(G = D \cdot O_f
 <p>Shor's algorithm is arguably the most famous and impactful quantum algorithm, achieving a decisive <strong>exponential speedup</strong> over the best known classical methods for factoring large integers. This capability poses a fundamental threat to modern cryptography, particularly the <strong>RSA encryption</strong> system, which relies on the classical difficulty of factoring large numbers.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Shor's algorithm demonstrates that quantum computers can break widely-used public-key cryptography (RSA), making it perhaps the most practically significant quantum algorithm discovered. It transforms an intractable classical problem into a tractable quantum one through period finding.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Shor&#39;s algorithm demonstrates that quantum computers can break widely-used public-key cryptography (RSA), making it perhaps the most practically significant quantum algorithm discovered. It transforms an intractable classical problem into a tractable quantum one through period finding.
-</span></code></pre></div>
 <h3 id="problem-and-exponential-speedup"><strong>Problem and Exponential Speedup</strong></h3>
 <ul>
 <li><strong>Problem:</strong> The goal is to factor a large composite integer <span class="arithmatex">\(N\)</span>.</li>
@@ -2856,29 +2846,28 @@ The <strong>Grover iteration</strong> <span class="arithmatex">\(G = D \cdot O_f
 <p>The factoring process is converted into three main stages:</p>
 <ol>
 <li><strong>Classical Reduction (Pre-processing):</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>a.  Choose a random integer $a$ such that $1 &lt; a &lt; N$.
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>b.  Compute the greatest common divisor $\gcd(a, N)$ using the classical **Euclidean algorithm**. If $\gcd(a, N) &gt; 1$, a non-trivial factor has been found, and the process stops.
-</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>c.  The problem is now reduced to finding the period $r$ of the function $f(x) = a^x \pmod N$. The period $r$ is the smallest positive integer such that $a^r \equiv 1 \pmod N$.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>a.  Choose a random integer $a$ such that $1 &lt; a &lt; N$.
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>b.  Compute the greatest common divisor $\gcd(a, N)$ using the classical **Euclidean algorithm**. If $\gcd(a, N) &gt; 1$, a non-trivial factor has been found, and the process stops.
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>c.  The problem is now reduced to finding the period $r$ of the function $f(x) = a^x \pmod N$. The period $r$ is the smallest positive integer such that $a^r \equiv 1 \pmod N$.
 </span></code></pre></div></li>
 <li>
 <p><strong>Quantum Core (Period Finding):</strong> This is the core quantum step. It uses the <strong>Quantum Phase Estimation (QPE)</strong> algorithm (a topic covered in the next chapter) to find the period <span class="arithmatex">\(r\)</span>. This step is a direct generalization of the principles demonstrated in Simon's algorithm, employing superposition and the <strong>Quantum Fourier Transform (QFT)</strong> to extract the hidden periodicity.</p>
 </li>
 <li>
 <p><strong>Classical Completion (Post-processing):</strong>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>a.  Once the period $r$ is found: if $r$ is odd, or if $a^{r/2} \equiv -1 \pmod N$, repeat step 1.
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>b.  If $r$ is even and the two conditions above are met, the desired factors of $N$ can be found by calculating the greatest common divisors of $N$ and $a^{r/2} \pm 1$:
-</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>    $$
-</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    \text{Factors} = \gcd(a^{r/2} \pm 1, N)
-</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>    $$
-</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>The $\gcd$ calculation is performed efficiently using the classical Euclidean algorithm.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>a.  Once the period $r$ is found: if $r$ is odd, or if $a^{r/2} \equiv -1 \pmod N$, repeat step 1.
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>b.  If $r$ is even and the two conditions above are met, the desired factors of $N$ can be found by calculating the greatest common divisors of $N$ and $a^{r/2} \pm 1$:
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    $$
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    \text{Factors} = \gcd(a^{r/2} \pm 1, N)
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    $$
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>The $\gcd$ calculation is performed efficiently using the classical Euclidean algorithm.
 </span></code></pre></div></p>
 </li>
 </ol>
 <div class="admonition example">
 <p class="admonition-title">Factoring 15 with Shor's Algorithm</p>
+<p>To factor <span class="arithmatex">\(N=15\)</span>, choose <span class="arithmatex">\(a=7\)</span>. The function <span class="arithmatex">\(f(x) = 7^x \pmod{15}\)</span> has period <span class="arithmatex">\(r=4\)</span> (since <span class="arithmatex">\(7^4 = 2401 \equiv 1 \pmod{15}\)</span>). Then <span class="arithmatex">\(7^{r/2} = 7^2 = 49 \equiv 4 \pmod{15}\)</span>. Computing <span class="arithmatex">\(\gcd(4-1, 15) = \gcd(3, 15) = 3\)</span> and <span class="arithmatex">\(\gcd(4+1, 15) = \gcd(5, 15) = 5\)</span> reveals the factors: 3 and 5.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>To factor $N=15$, choose $a=7$. The function $f(x) = 7^x \pmod{15}$ has period $r=4$ (since $7^4 = 2401 \equiv 1 \pmod{15}$). Then $7^{r/2} = 7^2 = 49 \equiv 4 \pmod{15}$. Computing $\gcd(4-1, 15) = \gcd(3, 15) = 3$ and $\gcd(4+1, 15) = \gcd(5, 15) = 5$ reveals the factors: 3 and 5.
-</span></code></pre></div>
 <h3 id="the-quantum-circuit-structure"><strong>The Quantum Circuit Structure</strong></h3>
 <p>The exponential speedup stems from the efficiency of the <strong>quantum period-finding subroutine</strong>. The circuit relies on:</p>
 <ul>
@@ -2889,17 +2878,16 @@ The <strong>Grover iteration</strong> <span class="arithmatex">\(G = D \cdot O_f
 <p>The ability of the QFT to efficiently extract the global periodicity pattern from the quantum state is the central mathematical insight that grants the exponential speedup.</p>
 <details class="question">
 <summary>When will quantum computers actually break RSA?</summary>
+<p>While Shor's algorithm is polynomial-time, implementing it requires fault-tolerant quantum computers with thousands of logical qubits. Current estimates suggest breaking RSA-2048 requires millions of physical qubits with error correction. This is likely decades away, but has already spurred development of post-quantum cryptography standards.</p>
 </details>
-<h2 id="while-shors-algorithm-is-polynomial-time-implementing-it-requires-fault-tolerant-quantum-computers-with-thousands-of-logical-qubits-current-estimates-suggest-breaking-rsa-2048-requires-millions-of-physical-qubits-with-error-correction-this-is-likely-decades-away-but-has-already-spurred-development-of-post-quantum-cryptography-standards"><div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>While Shor&#39;s algorithm is polynomial-time, implementing it requires fault-tolerant quantum computers with thousands of logical qubits. Current estimates suggest breaking RSA-2048 requires millions of physical qubits with error correction. This is likely decades away, but has already spurred development of post-quantum cryptography standards.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="46-quantum-random-walks"><strong>4.6 Quantum Random Walks</strong></h2>
 <hr />
 <p><strong>Quantum Random Walks (QRWs)</strong> are the quantum mechanical generalization of the classical random walk (CRW). They leverage quantum phenomena—specifically <strong>superposition</strong> and <strong>interference</strong>—to achieve distinct advantages over CRWs, particularly in terms of search efficiency and mixing rates in graph problems.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Quantum random walks replace classical probabilistic hopping with quantum superposition and interference. This allows them to explore graph structures quadratically faster than classical walks, making them powerful tools for graph algorithms and search problems.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Quantum random walks replace classical probabilistic hopping with quantum superposition and interference. This allows them to explore graph structures quadratically faster than classical walks, making them powerful tools for graph algorithms and search problems.
-</span></code></pre></div>
 <h3 id="classical-vs-quantum-random-walks"><strong>Classical vs. Quantum Random Walks</strong></h3>
 <p>In a classical random walk, the walker occupies a single node (state) at any given time, and movement between nodes is governed by classical probability distributions. The walker's path is definite, even if unknown.</p>
 <p>In contrast, a quantum random walk:</p>
@@ -2910,9 +2898,8 @@ The <strong>Grover iteration</strong> <span class="arithmatex">\(G = D \cdot O_f
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Quantum Walk on a Line</p>
+<p>On a 1D line, a classical random walk spreads with variance <span class="arithmatex">\(\propto t\)</span> after <span class="arithmatex">\(t\)</span> steps (standard deviation <span class="arithmatex">\(\propto \sqrt{t}\)</span>). A quantum walk spreads linearly with variance <span class="arithmatex">\(\propto t^2\)</span> (standard deviation <span class="arithmatex">\(\propto t\)</span>), exploring the space much faster due to quantum interference patterns.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>On a 1D line, a classical random walk spreads with variance $\propto t$ after $t$ steps (standard deviation $\propto \sqrt{t}$). A quantum walk spreads linearly with variance $\propto t^2$ (standard deviation $\propto t$), exploring the space much faster due to quantum interference patterns.
-</span></code></pre></div>
 <h3 id="key-advantages-and-applications"><strong>Key Advantages and Applications</strong></h3>
 <p>The primary advantage of a QRW is its ability to achieve <strong>faster mixing and hitting times</strong> on various graphs compared to classical walks.</p>
 <ul>
@@ -2934,33 +2921,31 @@ The <strong>Grover iteration</strong> <span class="arithmatex">\(G = D \cdot O_f
 <p>Both DTQRW and CTQRW are powerful tools used to design algorithms that achieve speedups for specific classes of graph problems where classical methods are inefficient.</p>
 <details class="question">
 <summary>Are quantum walks used in practical quantum algorithms?</summary>
+<p>Yes! Quantum walk frameworks have been used to develop algorithms for spatial search, graph connectivity, and formula evaluation. They also provide alternative constructions for Grover's search and other amplitude amplification tasks, offering different trade-offs in circuit depth and qubit requirements.</p>
 </details>
-<h2 id="yes-quantum-walk-frameworks-have-been-used-to-develop-algorithms-for-spatial-search-graph-connectivity-and-formula-evaluation-they-also-provide-alternative-constructions-for-grovers-search-and-other-amplitude-amplification-tasks-offering-different-trade-offs-in-circuit-depth-and-qubit-requirements"><div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Yes! Quantum walk frameworks have been used to develop algorithms for spatial search, graph connectivity, and formula evaluation. They also provide alternative constructions for Grover&#39;s search and other amplitude amplification tasks, offering different trade-offs in circuit depth and qubit requirements.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="47-quantum-amplitude-amplification"><strong>4.7 Quantum Amplitude Amplification</strong></h2>
 <hr />
 <p>Quantum Amplitude Amplification (QAA) is a powerful, general technique that forms the algebraic backbone of many quantum speedup algorithms, including Grover's search. It generalizes the iterative process of boosting the probability of a desired outcome from any initial quantum state.</p>
 <div class="admonition tip">
 <p class="admonition-title">Key Insight</p>
+<p>Quantum Amplitude Amplification is the generalization of Grover's search—it can boost the success probability of any quantum algorithm from a small value <span class="arithmatex">\(a\)</span> to near-certainty in just <span class="arithmatex">\(O(1/\sqrt{a})\)</span> iterations. This makes it a universal speedup technique applicable across many quantum algorithms.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>Quantum Amplitude Amplification is the generalization of Grover&#39;s search—it can boost the success probability of any quantum algorithm from a small value $a$ to near-certainty in just $O(1/\sqrt{a})$ iterations. This makes it a universal speedup technique applicable across many quantum algorithms.
-</span></code></pre></div>
 <h3 id="core-concept-and-mechanism"><strong>Core Concept and Mechanism</strong></h3>
 <p>QAA addresses the problem of enhancing the success probability of obtaining a desired state <span class="arithmatex">\(|w\rangle\)</span> from an initial quantum state <span class="arithmatex">\(|\psi\rangle\)</span> generated by some preparation circuit.</p>
 <ol>
 <li><strong>Initial State and Success Amplitude:</strong> Assume a quantum operation prepares a state <span class="arithmatex">\(|\psi\rangle\)</span> which can be decomposed into a component in the "success" subspace, spanned by the winning states <span class="arithmatex">\(|w\rangle\)</span>, and a component in the "failure" subspace:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>$$
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>|\psi\rangle = \sqrt{a}|w\rangle + \sqrt{1-a}|f\rangle
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>$$
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>where $a = \langle w|\psi\rangle^2$ is the initial probability of success.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$$
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>|\psi\rangle = \sqrt{a}|w\rangle + \sqrt{1-a}|f\rangle
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>$$
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>where $a = \langle w|\psi\rangle^2$ is the initial probability of success.
 </span></code></pre></div></li>
 <li><strong>Amplification:</strong> QAA boosts this initial success probability <span class="arithmatex">\(a\)</span> to near unity (probability <span class="arithmatex">\(\approx 1\)</span>) in a number of iterations proportional to <span class="arithmatex">\(O(1/\sqrt{a})\)</span>.</li>
 </ol>
 <div class="admonition example">
 <p class="admonition-title">Amplifying Low Success Probabilities</p>
+<p>Suppose a quantum algorithm produces the desired outcome with only 1% probability (<span class="arithmatex">\(a = 0.01\)</span>). Classically, you'd need to run it ~100 times to likely see success. With QAA, you can boost this to &gt;99% success in just <span class="arithmatex">\(O(1/\sqrt{0.01}) = O(10)\)</span> iterations—a 10× speedup.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Suppose a quantum algorithm produces the desired outcome with only 1% probability ($a = 0.01$). Classically, you&#39;d need to run it ~100 times to likely see success. With QAA, you can boost this to &gt;99% success in just $O(1/\sqrt{0.01}) = O(10)$ iterations—a 10× speedup.
-</span></code></pre></div>
 <h3 id="the-iterative-operator"><strong>The Iterative Operator</strong></h3>
 <p>The QAA process works by iteratively applying the <strong>Grover iteration</strong> operator, <span class="arithmatex">\(G\)</span>, which serves as the core amplification step. The operator <span class="arithmatex">\(G\)</span> is composed of two reflections:</p>
 <p>$$
@@ -2981,9 +2966,9 @@ While the full QAA framework is complex, the simplified iterative operator in th
 <p>QAA is vital because it can be used to accelerate a vast array of algorithms beyond simple database search, providing a universal framework for obtaining quadratic speedups in many quantum computations where the problem can be phrased as finding a marked state within a superposition.</p>
 <details class="question">
 <summary>Can QAA be combined with other quantum techniques?</summary>
+<p>Yes! QAA is often combined with quantum phase estimation, quantum walks, and variational algorithms to boost their success rates. It's a modular technique that can be "plugged in" to many quantum algorithms to enhance their performance.</p>
 </details>
-<h2 id="yes-qaa-is-often-combined-with-quantum-phase-estimation-quantum-walks-and-variational-algorithms-to-boost-their-success-rates-its-a-modular-technique-that-can-be-plugged-in-to-many-quantum-algorithms-to-enhance-their-performance"><div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Yes! QAA is often combined with quantum phase estimation, quantum walks, and variational algorithms to boost their success rates. It&#39;s a modular technique that can be &quot;plugged in&quot; to many quantum algorithms to enhance their performance.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="summary-tables"><strong>Summary Tables</strong></h2>
 <hr />
 <h3 id="comparison-of-foundational-quantum-algorithms"><strong>Comparison of Foundational Quantum Algorithms</strong></h3>

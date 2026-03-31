@@ -2635,9 +2635,8 @@
 </table>
 <div class="admonition tip">
 <p class="admonition-title">Choose <code>parameter-shift</code> for Hardware Runs</p>
+<p>Only <code>parameter-shift</code> and <code>finite-diff</code> work on real quantum backends, since they only require standard circuit measurements. <code>backprop</code> and <code>adjoint</code> require access to the simulator's internal state vector.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Only `parameter-shift` and `finite-diff` work on real quantum backends, since they only require standard circuit measurements. `backprop` and `adjoint` require access to the simulator&#39;s internal state vector.
-</span></code></pre></div>
 <h3 id="gradient-transforms-and-higher-order-derivatives"><strong>Gradient Transforms and Higher-Order Derivatives</strong></h3>
 <hr />
 <p>PennyLane's <code>qml.grad</code> and <code>qml.jacobian</code> compute first-order gradients, while <code>qml.hessian</code> computes second-order partial derivatives — all via the parameter-shift rule applied recursively:</p>
@@ -2647,53 +2646,53 @@
 <p>where <span class="arithmatex">\(\theta_{ij}^{++}\)</span> shifts both <span class="arithmatex">\(\theta_i\)</span> and <span class="arithmatex">\(\theta_j\)</span> by <span class="arithmatex">\(+\pi/2\)</span>. Higher-order derivatives scale as <span class="arithmatex">\(4^k\)</span> circuit evaluations for <span class="arithmatex">\(k\)</span>-th order, so they are used sparingly.</p>
 <div class="admonition example">
 <p class="admonition-title">Gradient Descent on a VQC with PennyLane</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 4-parameter VQC trained to maximise ZZ correlation</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">params</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="o">-</span><span class="n">vqc</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">params</span><span class="p">)</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">: cost = </span><span class="si">{</span><span class="o">-</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code>```python
+# 4-parameter VQC trained to maximise ZZ correlation
+params = np.random.uniform(-np.pi, np.pi, 4)
+opt = qml.AdamOptimizer(stepsize=0.1)
+
+for step in range(100):
+    params, cost = opt.step_and_cost(lambda p: -vqc(p), params)
+    if step % 20 == 0:
+        print(f&quot;Step {step}: cost = {-cost:.4f}&quot;)
+</code></pre></div>
 </div>
 <details class="question">
 <summary>Why does PennyLane support JAX as a backend?</summary>
+<p>JAX provides JIT compilation (via XLA) and GPU/TPU acceleration. PennyLane QNodes declared with <code>interface='jax'</code> can be JIT-compiled with <code>jax.jit</code>, batched with <code>jax.vmap</code>, and differentiated with <code>jax.grad</code> — enabling quantum circuits to run with the same efficiency as classical JAX models on accelerators.</p>
 </details>
-<h2 id="jax-provides-jit-compilation-via-xla-and-gputpu-acceleration-pennylane-qnodes-declared-with-interfacejax-can-be-jit-compiled-with-jaxjit-batched-with-jaxvmap-and-differentiated-with-jaxgrad-enabling-quantum-circuits-to-run-with-the-same-efficiency-as-classical-jax-models-on-accelerators"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>JAX provides JIT compilation (via XLA) and GPU/TPU acceleration. PennyLane QNodes declared with `interface=&#39;jax&#39;` can be JIT-compiled with `jax.jit`, batched with `jax.vmap`, and differentiated with `jax.grad` — enabling quantum circuits to run with the same efficiency as classical JAX models on accelerators.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="152-tfq-and-qiskit-machine-learning"><strong>15.2 TFQ and Qiskit Machine Learning</strong></h2>
 <hr />
 <h3 id="tensorflow-quantum-tfq"><strong>TensorFlow Quantum (TFQ)</strong></h3>
 <hr />
 <p>TFQ integrates Cirq circuits into the TensorFlow computation graph, enabling quantum circuits to be used as differentiable Keras layers. The central component is <code>tfq.layers.PQC</code> (Parameterised Quantum Circuit layer):</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_quantum</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfq</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">cirq</span><span class="o">,</span><span class="w"> </span><span class="nn">sympy</span><span class="o">,</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Build a parameterised Cirq circuit</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">GridQubit</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;theta&#39;</span><span class="p">)</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">pqc_circuit</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">Circuit</span><span class="p">(</span><span class="n">cirq</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">)(</span><span class="n">q0</span><span class="p">),</span> <span class="n">cirq</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">))</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Wrap as Keras layer</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">pqc_layer</span> <span class="o">=</span> <span class="n">tfq</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">PQC</span><span class="p">(</span><span class="n">pqc_circuit</span><span class="p">,</span> <span class="n">cirq</span><span class="o">.</span><span class="n">Z</span><span class="p">(</span><span class="n">q0</span><span class="p">))</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># Use in a hybrid model</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">),</span>       <span class="c1"># classical pre-processing</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    <span class="n">pqc_layer</span><span class="p">,</span>                                          <span class="c1"># quantum layer</span>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">),</span>    <span class="c1"># classical classification</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_quantum</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfq</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">cirq</span><span class="o">,</span><span class="w"> </span><span class="nn">sympy</span><span class="o">,</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Build a parameterised Cirq circuit</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">GridQubit</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;theta&#39;</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">pqc_circuit</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">Circuit</span><span class="p">(</span><span class="n">cirq</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">)(</span><span class="n">q0</span><span class="p">),</span> <span class="n">cirq</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">))</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Wrap as Keras layer</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">pqc_layer</span> <span class="o">=</span> <span class="n">tfq</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">PQC</span><span class="p">(</span><span class="n">pqc_circuit</span><span class="p">,</span> <span class="n">cirq</span><span class="o">.</span><span class="n">Z</span><span class="p">(</span><span class="n">q0</span><span class="p">))</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># Use in a hybrid model</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">),</span>       <span class="c1"># classical pre-processing</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">pqc_layer</span><span class="p">,</span>                                          <span class="c1"># quantum layer</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">),</span>    <span class="c1"># classical classification</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="p">])</span>
 </span></code></pre></div>
 <p>TFQ also provides <code>tfq.layers.Expectation</code> and <code>tfq.layers.Sample</code> for flexible measurement strategies, and <code>tfq.layers.ControlledPQC</code> for data re-uploading architectures.</p>
 <div class="admonition tip">
 <p class="admonition-title">Data Re-Uploading in TFQ</p>
+<p>In the <strong>data re-uploading</strong> model, classical input features <span class="arithmatex">\(\vec{x}\)</span> are injected into the circuit multiple times as gate rotation angles — interleaved with trainable parameters. TFQ's <code>ControlledPQC</code> layer enables this pattern natively, allowing the circuit to act as a universal classifier even with a single qubit.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>In the **data re-uploading** model, classical input features $\vec{x}$ are injected into the circuit multiple times as gate rotation angles — interleaved with trainable parameters. TFQ&#39;s `ControlledPQC` layer enables this pattern natively, allowing the circuit to act as a universal classifier even with a single qubit.
-</span></code></pre></div>
 <h3 id="qiskit-machine-learning"><strong>Qiskit Machine Learning</strong></h3>
 <hr />
 <p>IBM's Qiskit Machine Learning library provides PyTorch- and Scikit-learn-compatible neural network building blocks:</p>
@@ -2702,27 +2701,26 @@
 <li><strong><code>SamplerQNN</code></strong> — wraps a circuit + measurement, computes gradients of measurement probability distribution</li>
 <li><strong><code>QNNClassifier</code> / <code>QNNRegressor</code></strong> — Scikit-learn estimator wrappers</li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_machine_learning.neural_networks</span><span class="w"> </span><span class="kn">import</span> <span class="n">EstimatorQNN</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_machine_learning.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">VQC</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">vqc</span> <span class="o">=</span> <span class="n">VQC</span><span class="p">(</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">feature_map</span><span class="o">=</span><span class="n">ZZFeatureMap</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">ansatz</span><span class="o">=</span><span class="n">RealAmplitudes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">reps</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">COBYLA</span><span class="p">(</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">callback</span><span class="o">=</span><span class="n">print_callback</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">)</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">vqc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_machine_learning.neural_networks</span><span class="w"> </span><span class="kn">import</span> <span class="n">EstimatorQNN</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_machine_learning.algorithms</span><span class="w"> </span><span class="kn">import</span> <span class="n">VQC</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">vqc</span> <span class="o">=</span> <span class="n">VQC</span><span class="p">(</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">feature_map</span><span class="o">=</span><span class="n">ZZFeatureMap</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">ansatz</span><span class="o">=</span><span class="n">RealAmplitudes</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">reps</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">optimizer</span><span class="o">=</span><span class="n">COBYLA</span><span class="p">(</span><span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">callback</span><span class="o">=</span><span class="n">print_callback</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">vqc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="admonition example">
 <p class="admonition-title">VQC Binary Classifier with Qiskit ML</p>
+<p>Training a 2-qubit VQC with <code>ZZFeatureMap</code> encoding and <code>RealAmplitudes</code> ansatz on the Iris dataset (2 classes, 2 features): typical training converges in 80–150 COBYLA iterations, achieving 90–95% test accuracy depending on random seed and circuit depth.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Training a 2-qubit VQC with `ZZFeatureMap` encoding and `RealAmplitudes` ansatz on the Iris dataset (2 classes, 2 features): typical training converges in 80–150 COBYLA iterations, achieving 90–95% test accuracy depending on random seed and circuit depth.
-</span></code></pre></div>
 <details class="question">
 <summary>When should you use EstimatorQNN vs SamplerQNN?</summary>
+<p>Use <code>EstimatorQNN</code> when your target output is an expectation value of an observable (e.g., <span class="arithmatex">\(\langle Z \rangle\)</span> for binary classification). Use <code>SamplerQNN</code> when you need the full measurement distribution (e.g., multi-class classification where each basis state corresponds to one class label).</p>
 </details>
-<h2 id="use-estimatorqnn-when-your-target-output-is-an-expectation-value-of-an-observable-eg-langle-z-rangle-for-binary-classification-use-samplerqnn-when-you-need-the-full-measurement-distribution-eg-multi-class-classification-where-each-basis-state-corresponds-to-one-class-label"><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Use `EstimatorQNN` when your target output is an expectation value of an observable (e.g., $\langle Z \rangle$ for binary classification). Use `SamplerQNN` when you need the full measurement distribution (e.g., multi-class classification where each basis state corresponds to one class label).
-</span></code></pre></div></h2>
+<hr />
 <h2 id="153-training-strategies-and-barren-plateaus"><strong>15.3 Training Strategies and Barren Plateaus</strong></h2>
 <hr />
 <h3 id="the-barren-plateau-problem"><strong>The Barren Plateau Problem</strong></h3>
@@ -2734,14 +2732,13 @@
 <p>where <span class="arithmatex">\(n\)</span> is the number of qubits and <span class="arithmatex">\(F(n)\)</span> is a polynomial function. In practice, for <span class="arithmatex">\(n &gt; 20\)</span> qubits, gradients become numerically indistinguishable from zero, rendering gradient-based optimization useless.</p>
 <div class="admonition tip">
 <p class="admonition-title">Diagnosing Barren Plateaus</p>
-</div>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Plot the **gradient variance** as a function of qubit count for your ansatz. If the variance decays exponentially, you have a barren plateau. A polynomial decay indicates a trainable landscape. BPs are more severe for global cost functions ($C = \langle \text{all qubits} \rangle$) than local ones ($C = \sum_k \langle Z_k \rangle$).
-</span></code></pre></div>
-<strong>Known causes of barren plateaus:</strong>
+<p>Plot the <strong>gradient variance</strong> as a function of qubit count for your ansatz. If the variance decays exponentially, you have a barren plateau. A polynomial decay indicates a trainable landscape. BPs are more severe for global cost functions (<span class="arithmatex">\(C = \langle \text{all qubits} \rangle\)</span>) than local ones (<span class="arithmatex">\(C = \sum_k \langle Z_k \rangle\)</span>).</p>
+<p><strong>Known causes of barren plateaus:</strong>
 1. <strong>Hardware-efficient ansätze</strong> with random gate structure — the circuit forms an approximate 2-design, randomizing the parameter landscape
 2. <strong>Global cost functions</strong> — measuring an observable spanning all qubits
 3. <strong>Entanglement saturation</strong> — excessive entanglement makes the quantum state indistinguishable from a Haar-random state
 4. <strong>Classical shadows noise</strong> — noise itself induces BP-like gradient flatness</p>
+</div>
 <h3 id="mitigation-strategies"><strong>Mitigation Strategies</strong></h3>
 <hr />
 <pre class="mermaid"><code>graph TD
@@ -2773,14 +2770,13 @@ U(\vec{\theta}_0) = \mathbf{I} \implies \frac{\partial C}{\partial \theta_k}\big
 <p>The natural gradient adapts step sizes to the local curvature of the quantum state space, converging faster than vanilla gradient descent on ill-conditioned loss landscapes — often requiring 2–5× fewer iterations.</p>
 <div class="admonition example">
 <p class="admonition-title">Natural Gradient vs Vanilla Gradient</p>
+<p>On a 4-qubit VQE with 16 parameters, natural gradient descent with the quantum geometric tensor converges to chemical accuracy in ~60 iterations vs ~200 for vanilla gradient descent with the same step size, at the cost of <span class="arithmatex">\(O(p^2)\)</span> additional circuit evaluations per step (<span class="arithmatex">\(p\)</span> = number of parameters).</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>On a 4-qubit VQE with 16 parameters, natural gradient descent with the quantum geometric tensor converges to chemical accuracy in ~60 iterations vs ~200 for vanilla gradient descent with the same step size, at the cost of $O(p^2)$ additional circuit evaluations per step ($p$ = number of parameters).
-</span></code></pre></div>
 <details class="question">
 <summary>Is natural gradient always preferred over vanilla gradient?</summary>
+<p>Not always. Computing <span class="arithmatex">\(g^{-1}\)</span> requires <span class="arithmatex">\(O(p^2)\)</span> circuit evaluations (<span class="arithmatex">\(p\)</span> = number of parameters) plus matrix inversion. For large circuits with hundreds of parameters, this overhead dominates training time. Practical approximations like the <strong>diagonal QGT</strong> (keeping only <span class="arithmatex">\(g_{ii}\)</span> terms) restore scalability while retaining much of the convergence benefit.</p>
 </details>
-<h2 id="not-always-computing-g-1-requires-op2-circuit-evaluations-p-number-of-parameters-plus-matrix-inversion-for-large-circuits-with-hundreds-of-parameters-this-overhead-dominates-training-time-practical-approximations-like-the-diagonal-qgt-keeping-only-g_ii-terms-restore-scalability-while-retaining-much-of-the-convergence-benefit"><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Not always. Computing $g^{-1}$ requires $O(p^2)$ circuit evaluations ($p$ = number of parameters) plus matrix inversion. For large circuits with hundreds of parameters, this overhead dominates training time. Practical approximations like the **diagonal QGT** (keeping only $g_{ii}$ terms) restore scalability while retaining much of the convergence benefit.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="references"><strong>References</strong></h2>
 <p>[1] Bergholm, V., et al. (2022). <em>PennyLane: Automatic differentiation of hybrid quantum-classical computations</em>. arXiv:1811.04968.</p>
 <p>[2] Broughton, M., et al. (2020). <em>TensorFlow Quantum: A Software Framework for Quantum Machine Learning</em>. arXiv:2003.02989.</p>

@@ -2601,9 +2601,8 @@
 <p>The field of <strong>Quantum Machine Learning (QML)</strong> is motivated by the prospect of harnessing unique quantum mechanical resources—namely <strong>superposition</strong> and <strong>entanglement</strong>—to overcome fundamental limitations in classical machine learning (ML). These motivations fall into three key categories: computational speedups, representational power, and the nature of the data itself.</p>
 <div class="admonition tip">
 <p class="admonition-title">The Quantum ML Promise</p>
+<p>QML doesn't just make classical ML faster—it fundamentally changes what problems are tractable by operating in an exponentially larger computational space where <span class="arithmatex">\(n\)</span> qubits access <span class="arithmatex">\(2^n\)</span> dimensional feature spaces [3].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>QML doesn&#39;t just make classical ML faster—it fundamentally changes what problems are tractable by operating in an exponentially larger computational space where $n$ qubits access $2^n$ dimensional feature spaces [3].
-</span></code></pre></div>
 <h3 id="computational-speedups"><strong>Computational Speedups</strong></h3>
 <hr />
 <p>The primary theoretical motivation for QML is the potential for <strong>provable speedups</strong> in crucial, large-scale computational subroutines that bottleneck classical ML pipelines.</p>
@@ -2615,9 +2614,9 @@
 <p>Algorithms like <strong>Grover's search</strong> provide a quadratic speedup in optimization and search settings, which can be applied to feature selection or model training.</p>
 <div class="admonition example">
 <p class="admonition-title">HHL Speedup in Linear Regression</p>
+<p>For a linear regression problem with <span class="arithmatex">\(N\)</span> data points and <span class="arithmatex">\(d\)</span> features, solving the normal equations requires inverting a <span class="arithmatex">\(d \times d\)</span> matrix classically in <span class="arithmatex">\(O(d^3)\)</span> time. The HHL algorithm can solve this in <span class="arithmatex">\(O(\log(N) \cdot \text{poly}(\kappa))\)</span> time, where <span class="arithmatex">\(\kappa\)</span> is the condition number—an exponential speedup when <span class="arithmatex">\(N\)</span> is large.</p>
 </div>
-<h2 id="for-a-linear-regression-problem-with-n-data-points-and-d-features-solving-the-normal-equations-requires-inverting-a-d-times-d-matrix-classically-in-od3-time-the-hhl-algorithm-can-solve-this-in-ologn-cdot-textpolykappa-time-where-kappa-is-the-condition-numberan-exponential-speedup-when-n-is-large"><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>For a linear regression problem with $N$ data points and $d$ features, solving the normal equations requires inverting a $d \times d$ matrix classically in $O(d^3)$ time. The HHL algorithm can solve this in $O(\log(N) \cdot \text{poly}(\kappa))$ time, where $\kappa$ is the condition number—an exponential speedup when $N$ is large.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="representational-advantage-and-high-dimensional-space"><strong>Representational Advantage and High-Dimensional Space</strong></h3>
 <hr />
 <p>A crucial motivation for QML stems from the exponential scaling of the quantum state space, which directly addresses the classical <strong>curse of dimensionality</strong>.</p>
@@ -2625,23 +2624,23 @@
 <p>A quantum state defined by <span class="arithmatex">\(n\)</span> qubits resides in a complex Hilbert space of dimension <span class="arithmatex">\(2^n\)</span>. This provides a massive capacity for storing and manipulating information: <span class="arithmatex">\(n\)</span> qubits can represent a feature space that is exponentially larger than the number of qubits used.</p>
 <p><strong>Enhanced Expressivity (Quantum Kernels)</strong></p>
 <p>QML leverages this high dimensionality through <strong>Quantum Feature Maps</strong> (or <strong>Quantum Kernels</strong>). These circuits map classical input data into this exponentially large feature space, where complex relationships between data points may become linearly separable. This representational power can lead to enhanced expressiveness and potential better generalization in models like the <strong>Quantum Support Vector Machine (QSVM)</strong>.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Quantum_Feature_Map</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Encode classical data into quantum state</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">ψ</span> <span class="o">=</span> <span class="o">|</span><span class="mi">0</span><span class="err">⟩⊗</span><span class="n">ⁿ</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="c1"># Apply encoding gates</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">Apply</span> <span class="n">R_y</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="n">Apply</span> <span class="n">R_z</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">²</span><span class="p">)</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="c1"># Apply entangling layers</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>            <span class="n">Apply</span> <span class="n">CNOT</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="n">Apply</span> <span class="n">R_y</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="err">·</span> <span class="n">layer</span><span class="p">)</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="k">return</span> <span class="n">ψ</span>  <span class="c1"># State in exponential feature space</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Quantum_Feature_Map</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="c1"># Encode classical data into quantum state</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">ψ</span> <span class="o">=</span> <span class="o">|</span><span class="mi">0</span><span class="err">⟩⊗</span><span class="n">ⁿ</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># Apply encoding gates</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">Apply</span> <span class="n">R_y</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">Apply</span> <span class="n">R_z</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="err">²</span><span class="p">)</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="c1"># Apply entangling layers</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="n">Apply</span> <span class="n">CNOT</span><span class="p">(</span><span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="n">Apply</span> <span class="n">R_y</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="err">·</span> <span class="n">layer</span><span class="p">)</span> <span class="n">to</span> <span class="n">qubit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">return</span> <span class="n">ψ</span>  <span class="c1"># State in exponential feature space</span>
 </span></code></pre></div>
 <hr />
 <h3 id="data-and-modeling-advantages"><strong>Data and Modeling Advantages</strong></h3>
@@ -2653,17 +2652,16 @@
 <p>Classical ML is intractable when trying to simulate or model complex quantum systems. QML offers the potential to use the quantum computer itself as the simulator and learning engine to model these difficult physical problems.</p>
 <details class="question">
 <summary>Why can't we just use classical ML on quantum simulation data?</summary>
+<p>Classical simulation of even 50-qubit quantum systems requires storing <span class="arithmatex">\(2^{50} \approx 10^{15}\)</span> complex amplitudes—far exceeding available memory. QML operates directly on quantum states, bypassing this exponential memory requirement entirely.</p>
 </details>
-<h2 id="classical-simulation-of-even-50-qubit-quantum-systems-requires-storing-250-approx-1015-complex-amplitudesfar-exceeding-available-memory-qml-operates-directly-on-quantum-states-bypassing-this-exponential-memory-requirement-entirely"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Classical simulation of even 50-qubit quantum systems requires storing $2^{50} \approx 10^{15}$ complex amplitudes—far exceeding available memory. QML operates directly on quantum states, bypassing this exponential memory requirement entirely.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="82-bottlenecks-in-classical-machine-learning"><strong>8.2 Bottlenecks in Classical Machine Learning</strong></h2>
 <hr />
 <p>Despite the extraordinary success of classical machine learning (ML) across numerous domains, the paradigm encounters fundamental scaling limitations when dealing with extremely large datasets, high-dimensional feature spaces, and intrinsically quantum phenomena. These bottlenecks serve as the core motivation for developing Quantum Machine Learning (QML) models.</p>
 <div class="admonition tip">
 <p class="admonition-title">Classical Walls</p>
+<p>Classical ML hits three fundamental walls: exponential growth of feature space volume (curse of dimensionality), exponential cost of quantum system simulation, and polynomial-to-exponential complexity of matrix operations in high dimensions [4].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Classical ML hits three fundamental walls: exponential growth of feature space volume (curse of dimensionality), exponential cost of quantum system simulation, and polynomial-to-exponential complexity of matrix operations in high dimensions [4].
-</span></code></pre></div>
 <h3 id="the-curse-of-dimensionality"><strong>The Curse of Dimensionality</strong></h3>
 <hr />
 <p>The most significant theoretical bottleneck is the <strong>curse of dimensionality</strong>. This term describes phenomena that arise when analyzing and organizing data in high-dimensional feature spaces:</p>
@@ -2692,9 +2690,9 @@
 <p>Furthermore, the training of deep classical models on large datasets is often <strong>computationally expensive</strong>. Tasks such as optimizing the kernel matrix in high dimensions—a core operation in Support Vector Machines—can be prohibitively slow, motivating the development of algorithms like the <strong>Quantum Support Vector Machine (QSVM)</strong> to handle these matrix operations more efficiently.</p>
 <div class="admonition example">
 <p class="admonition-title">Classical Simulation Limits</p>
+<p>A 60-qubit quantum system requires <span class="arithmatex">\(2^{60} \approx 10^{18}\)</span> complex numbers (16 bytes each) = 16 exabytes of memory just to store the state vector. The world's fastest supercomputers have ~1 petabyte of RAM—three orders of magnitude too small.</p>
 </div>
-<h2 id="a-60-qubit-quantum-system-requires-260-approx-1018-complex-numbers-16-bytes-each-16-exabytes-of-memory-just-to-store-the-state-vector-the-worlds-fastest-supercomputers-have-1-petabyte-of-ramthree-orders-of-magnitude-too-small"><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>A 60-qubit quantum system requires $2^{60} \approx 10^{18}$ complex numbers (16 bytes each) = 16 exabytes of memory just to store the state vector. The world&#39;s fastest supercomputers have ~1 petabyte of RAM—three orders of magnitude too small.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="motivation-for-the-quantum-paradigm"><strong>Motivation for the Quantum Paradigm</strong></h3>
 <hr />
 <p>The failure of classical methods to scale efficiently in high dimensions and the inability to model quantum systems directly drive the shift toward QML. Quantum computation offers an alternative approach, where:</p>
@@ -2708,9 +2706,8 @@
 <p>Quantum Machine Learning (QML) fundamentally differs from classical ML by replacing core computational components and paradigms with quantum mechanical analogues, resulting in a unique algorithmic structure operating over an exponentially large state space. The distinctions lie primarily in the nature of the data representation, the mathematical operations performed, and the resources leveraged.</p>
 <div class="admonition tip">
 <p class="admonition-title">Paradigm Shift</p>
+<p>QML isn't classical ML with quantum acceleration—it's a fundamentally different computational model where probability amplitudes replace probabilities, unitary matrices replace activation functions, and entanglement replaces feature correlations [5].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>QML isn&#39;t classical ML with quantum acceleration—it&#39;s a fundamentally different computational model where probability amplitudes replace probabilities, unitary matrices replace activation functions, and entanglement replaces feature correlations [5].
-</span></code></pre></div>
 <h3 id="shift-in-mathematical-and-representational-basis"><strong>Shift in Mathematical and Representational Basis</strong></h3>
 <hr />
 <p>QML is built upon <strong>quantum states</strong> and <strong>unitary evolution</strong>, introducing a radical departure from classical information processing:</p>
@@ -2763,9 +2760,9 @@
 <p>Where classical ML models manipulate <strong>probability distributions</strong> (e.g., in Boltzmann Machines), QML models manipulate <strong>amplitude distributions</strong>. The interference effects resulting from amplitude manipulation are essential for finding and amplifying optimal solutions.</p>
 <div class="admonition example">
 <p class="admonition-title">Superposition Advantage</p>
+<p>A classical 10-bit feature vector requires processing <span class="arithmatex">\(2^{10} = 1024\)</span> separate computations to evaluate a function on all possible inputs. A 10-qubit quantum state exists in superposition over all 1024 basis states simultaneously, enabling parallel evaluation in a single quantum operation.</p>
 </div>
-<h2 id="a-classical-10-bit-feature-vector-requires-processing-210-1024-separate-computations-to-evaluate-a-function-on-all-possible-inputs-a-10-qubit-quantum-state-exists-in-superposition-over-all-1024-basis-states-simultaneously-enabling-parallel-evaluation-in-a-single-quantum-operation"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>A classical 10-bit feature vector requires processing $2^{10} = 1024$ separate computations to evaluate a function on all possible inputs. A 10-qubit quantum state exists in superposition over all 1024 basis states simultaneously, enabling parallel evaluation in a single quantum operation.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="hybrid-nature-and-training"><strong>Hybrid Nature and Training</strong></h3>
 <hr />
 <p>The dominant paradigm in QML, the <strong>hybrid quantum-classical model</strong>, further distinguishes it from traditional ML:</p>
@@ -2773,47 +2770,45 @@
 <p>The core of many QML models (like QNNs and QSVMs) is the <strong>Variational Quantum Circuit (VQC)</strong>, a quantum analogue of a neural network. These circuits contain <strong>parameterized quantum gates</strong> whose parameters are optimized.</p>
 <p><strong>Classical Optimization</strong></p>
 <p>Instead of training the entire model on the quantum hardware, the <strong>classical computer</strong> performs the actual <strong>optimization</strong> (e.g., gradient descent) by iteratively adjusting the VQC parameters based on measurements sent back from the quantum processor. This approach mitigates the noise and limited depth of current NISQ quantum computers.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Hybrid_QML_Training</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">VQC</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="c1"># Initialize quantum circuit parameters</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">θ</span> <span class="o">=</span> <span class="n">Random_Initialize</span><span class="p">()</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="c1"># Training loop</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_epochs</span><span class="p">):</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>            <span class="c1"># Quantum step: Encode and process</span>
-</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>            <span class="n">ψ</span> <span class="o">=</span> <span class="n">VQC</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>  <span class="c1"># Quantum circuit execution</span>
-</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>            <span class="n">prediction</span> <span class="o">=</span> <span class="n">Measure</span><span class="p">(</span><span class="n">ψ</span><span class="p">)</span>
-</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>            <span class="c1"># Classical step: Compute loss and gradient</span>
-</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>            <span class="n">loss</span> <span class="o">=</span> <span class="n">Loss_Function</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>            <span class="n">gradient</span> <span class="o">=</span> <span class="n">Compute_Gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
-</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
-</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>            <span class="c1"># Classical optimization</span>
-</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>            <span class="n">θ</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">gradient</span><span class="p">)</span>
-</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>            <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span>
-</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
-</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>        <span class="k">if</span> <span class="n">total_loss</span> <span class="o">&lt;</span> <span class="n">convergence_threshold</span><span class="p">:</span>
-</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>            <span class="k">break</span>
-</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>
-</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>    <span class="k">return</span> <span class="n">θ</span>  <span class="c1"># Optimized parameters</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Hybrid_QML_Training</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">VQC</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># Initialize quantum circuit parameters</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">θ</span> <span class="o">=</span> <span class="n">Random_Initialize</span><span class="p">()</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="c1"># Training loop</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_epochs</span><span class="p">):</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            <span class="c1"># Quantum step: Encode and process</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="n">ψ</span> <span class="o">=</span> <span class="n">VQC</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>  <span class="c1"># Quantum circuit execution</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="n">prediction</span> <span class="o">=</span> <span class="n">Measure</span><span class="p">(</span><span class="n">ψ</span><span class="p">)</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            <span class="c1"># Classical step: Compute loss and gradient</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            <span class="n">loss</span> <span class="o">=</span> <span class="n">Loss_Function</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            <span class="n">gradient</span> <span class="o">=</span> <span class="n">Compute_Gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            <span class="c1"># Classical optimization</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            <span class="n">θ</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">gradient</span><span class="p">)</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>        <span class="k">if</span> <span class="n">total_loss</span> <span class="o">&lt;</span> <span class="n">convergence_threshold</span><span class="p">:</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>            <span class="k">break</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="k">return</span> <span class="n">θ</span>  <span class="c1"># Optimized parameters</span>
 </span></code></pre></div>
 <details class="question">
 <summary>Why use classical optimization instead of quantum optimization?</summary>
+<p>Current NISQ devices have limited circuit depth and high noise levels. Classical optimizers can perform thousands of gradient descent steps reliably, while implementing optimization entirely on quantum hardware would require deep circuits that exceed NISQ capabilities. The hybrid approach exploits the best of both worlds.</p>
+<p>The combination of the exponential Hilbert space and the utilization of quantum phenomena like entanglement and interference defines the distinct identity and potential power of Quantum Machine Learning.</p>
 </details>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Current NISQ devices have limited circuit depth and high noise levels. Classical optimizers can perform thousands of gradient descent steps reliably, while implementing optimization entirely on quantum hardware would require deep circuits that exceed NISQ capabilities. The hybrid approach exploits the best of both worlds.
-</span></code></pre></div>
-The combination of the exponential Hilbert space and the utilization of quantum phenomena like entanglement and interference defines the distinct identity and potential power of Quantum Machine Learning.</p>
 <hr />
 <h2 id="84-quantum-learning-paradigms"><strong>8.4 Quantum Learning Paradigms</strong></h2>
 <hr />
 <p>Quantum Machine Learning (QML), much like its classical counterpart, is categorized into different <strong>learning paradigms</strong> based on the nature of the data and the objective of the learning process. These paradigms guide the design of QML algorithms, which are often structured as <strong>hybrid quantum-classical models</strong> in the current NISQ era.</p>
 <div class="admonition tip">
 <p class="admonition-title">Quantum Paradigm Parallels</p>
+<p>QML mirrors classical ML's taxonomy—supervised, unsupervised, and reinforcement learning—but each paradigm operates in exponentially larger spaces and leverages quantum resources like entanglement for enhanced expressivity [6].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>QML mirrors classical ML&#39;s taxonomy—supervised, unsupervised, and reinforcement learning—but each paradigm operates in exponentially larger spaces and leverages quantum resources like entanglement for enhanced expressivity [6].
-</span></code></pre></div>
 <h3 id="supervised-quantum-learning"><strong>Supervised Quantum Learning</strong></h3>
 <hr />
 <p>In <strong>Supervised Learning</strong>, the goal is to learn a mapping from input data (<span class="arithmatex">\(x\)</span>) to known output labels (<span class="arithmatex">\(y\)</span>), based on a dataset of labeled examples.</p>
@@ -2847,9 +2842,9 @@ The combination of the exponential Hilbert space and the utilization of quantum 
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Quantum PCA Advantage</p>
+<p>For a dataset with <span class="arithmatex">\(N = 2^{20}\)</span> samples and <span class="arithmatex">\(d = 1000\)</span> features, classical PCA requires <span class="arithmatex">\(O(Nd^2 + d^3) \approx 10^{15}\)</span> operations. Quantum PCA (qPCA) using QPE can reduce this to <span class="arithmatex">\(O(\text{poly}(d) \cdot \log N) \approx 10^9\)</span> operations—a million-fold speedup.</p>
 </div>
-<h2 id="for-a-dataset-with-n-220-samples-and-d-1000-features-classical-pca-requires-ond2-d3-approx-1015-operations-quantum-pca-qpca-using-qpe-can-reduce-this-to-otextpolyd-cdot-log-n-approx-109-operationsa-million-fold-speedup"><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>For a dataset with $N = 2^{20}$ samples and $d = 1000$ features, classical PCA requires $O(Nd^2 + d^3) \approx 10^{15}$ operations. Quantum PCA (qPCA) using QPE can reduce this to $O(\text{poly}(d) \cdot \log N) \approx 10^9$ operations—a million-fold speedup.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="quantum-reinforcement-learning-qrl"><strong>Quantum Reinforcement Learning (QRL)</strong></h3>
 <hr />
 <p><strong>Reinforcement Learning</strong> involves an agent learning optimal actions through interaction with an environment, maximizing a cumulative reward.</p>
@@ -2871,9 +2866,8 @@ The combination of the exponential Hilbert space and the utilization of quantum 
 <p>The adoption of Quantum Machine Learning (QML) is driven by the potential for two distinct categories of advantages over classical methods: <strong>provable speedups</strong>, which are mathematically guaranteed, and <strong>heuristic advantages</strong>, which stem from the unique representational power of quantum mechanics.</p>
 <div class="admonition tip">
 <p class="admonition-title">Two Types of Advantage</p>
+<p>Provable advantages (HHL, qPCA, Grover) come with rigorous complexity proofs but often require idealized conditions. Heuristic advantages (quantum kernels, VQC expressivity) lack formal guarantees but show empirical promise on NISQ hardware [7].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Provable advantages (HHL, qPCA, Grover) come with rigorous complexity proofs but often require idealized conditions. Heuristic advantages (quantum kernels, VQC expressivity) lack formal guarantees but show empirical promise on NISQ hardware [7].
-</span></code></pre></div>
 <h3 id="provable-quantum-speedups"><strong>Provable Quantum Speedups</strong></h3>
 <hr />
 <p><strong>Provable speedups</strong> refer to quantum algorithms that have been rigorously demonstrated to solve specific computational problems in an asymptotically shorter time (either polynomially or exponentially shorter) than the best known classical algorithm.</p>
@@ -2892,25 +2886,25 @@ The combination of the exponential Hilbert space and the utilization of quantum 
 <p><strong>Grover's Search (Quadratic Speedup)</strong></p>
 <p>Grover's algorithm provides a <strong>quadratic speedup</strong> (<span class="arithmatex">\(O(\sqrt{N})\)</span> vs. <span class="arithmatex">\(O(N)\)</span>) for unstructured search and optimization. This can be applied to ML optimization settings, such as finding the optimal parameters or performing efficient <strong>feature selection</strong>.</p>
 <p>These provable speedups are guaranteed in the asymptotic limit, assuming the key step of efficiently loading the data into the quantum state (the <strong>data loading bottleneck</strong>) can be resolved.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">HHL_Algorithm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="c1"># Encode matrix A and vector b into quantum states</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">ρ_A</span> <span class="o">=</span> <span class="n">Quantum_Matrix_Encoding</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="o">|</span><span class="n">b</span><span class="err">⟩</span> <span class="o">=</span> <span class="n">Quantum_Vector_Encoding</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="c1"># Apply Quantum Phase Estimation to A</span>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="o">|</span><span class="n">λ</span><span class="err">⟩</span><span class="o">|</span><span class="n">ψ</span><span class="err">⟩</span> <span class="o">=</span> <span class="n">QPE</span><span class="p">(</span><span class="n">ρ_A</span><span class="p">,</span> <span class="n">precision_bits</span><span class="p">)</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="c1"># Controlled rotation based on eigenvalues</span>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    <span class="k">for</span> <span class="n">each</span> <span class="n">eigenvalue</span> <span class="n">λ</span><span class="p">:</span>
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        <span class="n">Apply</span> <span class="n">R_y</span><span class="p">(</span><span class="n">arcsin</span><span class="p">(</span><span class="n">C</span><span class="o">/</span><span class="n">λ</span><span class="p">))</span> <span class="n">controlled</span> <span class="n">on</span> <span class="o">|</span><span class="n">λ</span><span class="err">⟩</span>
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>    <span class="c1"># Uncompute QPE</span>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>    <span class="n">Apply</span> <span class="n">QPE_inverse</span><span class="p">()</span>
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
-</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="c1"># Measure and extract solution</span>
-</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="o">|</span><span class="n">x</span><span class="err">⟩</span> <span class="o">=</span> <span class="n">Post_Select_Success</span><span class="p">()</span>
-</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
-</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>    <span class="k">return</span> <span class="o">|</span><span class="n">x</span><span class="err">⟩</span>  <span class="c1"># Quantum state encoding solution</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">HHL_Algorithm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Encode matrix A and vector b into quantum states</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">ρ_A</span> <span class="o">=</span> <span class="n">Quantum_Matrix_Encoding</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="o">|</span><span class="n">b</span><span class="err">⟩</span> <span class="o">=</span> <span class="n">Quantum_Vector_Encoding</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="c1"># Apply Quantum Phase Estimation to A</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="o">|</span><span class="n">λ</span><span class="err">⟩</span><span class="o">|</span><span class="n">ψ</span><span class="err">⟩</span> <span class="o">=</span> <span class="n">QPE</span><span class="p">(</span><span class="n">ρ_A</span><span class="p">,</span> <span class="n">precision_bits</span><span class="p">)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="c1"># Controlled rotation based on eigenvalues</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">for</span> <span class="n">each</span> <span class="n">eigenvalue</span> <span class="n">λ</span><span class="p">:</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="n">Apply</span> <span class="n">R_y</span><span class="p">(</span><span class="n">arcsin</span><span class="p">(</span><span class="n">C</span><span class="o">/</span><span class="n">λ</span><span class="p">))</span> <span class="n">controlled</span> <span class="n">on</span> <span class="o">|</span><span class="n">λ</span><span class="err">⟩</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="c1"># Uncompute QPE</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">Apply</span> <span class="n">QPE_inverse</span><span class="p">()</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="c1"># Measure and extract solution</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="o">|</span><span class="n">x</span><span class="err">⟩</span> <span class="o">=</span> <span class="n">Post_Select_Success</span><span class="p">()</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="k">return</span> <span class="o">|</span><span class="n">x</span><span class="err">⟩</span>  <span class="c1"># Quantum state encoding solution</span>
 </span></code></pre></div>
 <hr />
 <h3 id="heuristic-quantum-advantages"><strong>Heuristic Quantum Advantages</strong></h3>
@@ -2929,19 +2923,17 @@ K_Q(x_i, x_j) = |\langle \phi(x_j) | \phi(x_i) \rangle|^2
 <p>The use of <strong>entanglement</strong> introduces non-classical correlations, which some research suggests can lead to QML models with enhanced ability to generalize from limited training data.</p>
 <details class="question">
 <summary>Why aren't heuristic advantages formally proven?</summary>
+<p>Heuristic advantages depend on problem-specific properties (data distribution, feature correlations) that vary across applications. Unlike provable speedups based on computational complexity theory, heuristic benefits emerge from quantum mechanical properties (entanglement, interference) whose impact on generalization and expressivity is difficult to formalize for arbitrary datasets.</p>
+<p>While not mathematically guaranteed to be exponentially faster for all inputs, these heuristic advantages are the primary reason for experimenting with hybrid QML models on current NISQ hardware.</p>
 </details>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Heuristic advantages depend on problem-specific properties (data distribution, feature correlations) that vary across applications. Unlike provable speedups based on computational complexity theory, heuristic benefits emerge from quantum mechanical properties (entanglement, interference) whose impact on generalization and expressivity is difficult to formalize for arbitrary datasets.
-</span></code></pre></div>
-While not mathematically guaranteed to be exponentially faster for all inputs, these heuristic advantages are the primary reason for experimenting with hybrid QML models on current NISQ hardware.</p>
 <hr />
 <h2 id="86-practical-considerations"><strong>8.6 Practical Considerations</strong></h2>
 <hr />
 <p>While the theoretical promise of Quantum Machine Learning (QML) is immense, the field operates today under significant constraints imposed by current hardware technology. These <strong>practical considerations</strong> govern which QML models are feasible and why the hybrid quantum-classical paradigm is currently dominant.</p>
 <div class="admonition tip">
 <p class="admonition-title">NISQ Reality Check</p>
+<p>The gap between theoretical QML promises and practical implementation is dominated by three factors: limited qubit counts (~100s), shallow circuit depths (~10-100 gates), and the data loading bottleneck that can negate exponential speedups [8].</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>The gap between theoretical QML promises and practical implementation is dominated by three factors: limited qubit counts (~100s), shallow circuit depths (~10-100 gates), and the data loading bottleneck that can negate exponential speedups [8].
-</span></code></pre></div>
 <h3 id="constraints-of-nisq-devices"><strong>Constraints of NISQ Devices</strong></h3>
 <hr />
 <p>QML research and deployment are fundamentally limited by the characteristics of <strong>Noisy Intermediate-Scale Quantum (NISQ) devices</strong>:</p>
@@ -2993,9 +2985,9 @@ While not mathematically guaranteed to be exponentially faster for all inputs, t
 <p>To achieve a true end-to-end quantum advantage, this data loading step must also be performed efficiently, often relying on structured data that can be loaded with <span class="arithmatex">\(\text{poly}(n)\)</span> gates.</p>
 <div class="admonition example">
 <p class="admonition-title">Data Loading Reality</p>
+<p>To load a general 20-qubit quantum state (1,048,576 complex amplitudes) requires at least <span class="arithmatex">\(O(2^{20})\)</span> operations classically. Even if HHL solves a linear system in <span class="arithmatex">\(O(20^2) = 400\)</span> quantum operations, the initial loading dominates the total runtime, negating the quantum advantage.</p>
 </div>
-<h2 id="to-load-a-general-20-qubit-quantum-state-1048576-complex-amplitudes-requires-at-least-o220-operations-classically-even-if-hhl-solves-a-linear-system-in-o202-400-quantum-operations-the-initial-loading-dominates-the-total-runtime-negating-the-quantum-advantage"><div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>To load a general 20-qubit quantum state (1,048,576 complex amplitudes) requires at least $O(2^{20})$ operations classically. Even if HHL solves a linear system in $O(20^2) = 400$ quantum operations, the initial loading dominates the total runtime, negating the quantum advantage.
-</span></code></pre></div></h2>
+<hr />
 <h3 id="dominance-of-hybrid-models"><strong>Dominance of Hybrid Models</strong></h3>
 <hr />
 <p>These hardware and loading constraints explain why <strong>hybrid quantum-classical models</strong> remain the most promising path forward for QML.</p>

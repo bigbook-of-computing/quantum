@@ -2592,13 +2592,12 @@
 <p><strong>Qiskit</strong> is IBM's open-source quantum development kit and the de-facto industry standard for quantum circuit construction, simulation, and hardware execution. At its core, Qiskit provides four layers of abstraction: <strong>Terra</strong> (circuit building and transpilation), <strong>Aer</strong> (high-performance classical simulation), <strong>Runtime</strong> (cloud-execution service), and an expanding set of application libraries. This section focuses on the transpiler — Qiskit's most powerful and often underused component.</p>
 <div class="admonition tip">
 <p class="admonition-title">Why Transpilation Matters</p>
+<p>Real quantum hardware only supports a sparse native gate set (e.g., <code>{CX, RZ, SX, X}</code>) and a fixed qubit-connectivity graph. The transpiler translates any logical circuit into this restricted form while minimising circuit depth and gate count — directly impacting fidelity on noisy hardware.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Real quantum hardware only supports a sparse native gate set (e.g., `{CX, RZ, SX, X}`) and a fixed qubit-connectivity graph. The transpiler translates any logical circuit into this restricted form while minimising circuit depth and gate count — directly impacting fidelity on noisy hardware.
-</span></code></pre></div>
 <h3 id="the-transpiler-pipeline"><strong>The Transpiler Pipeline</strong></h3>
 <hr />
 <p>Qiskit's transpiler is a multi-stage optimization pipeline exposed through <code>qiskit.compiler.transpile()</code>. Each stage applies a sequence of <strong>transformation passes</strong> to the circuit's intermediate representation (IR):</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Logical</span> <span class="n">Circuit</span> <span class="err">→</span> <span class="n">Unroll</span> <span class="err">→</span> <span class="n">Translate</span> <span class="err">→</span> <span class="n">Layout</span> <span class="err">→</span> <span class="n">Routing</span> <span class="err">→</span> <span class="n">Optimise</span> <span class="err">→</span> <span class="n">Schedule</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Logical</span> <span class="n">Circuit</span> <span class="err">→</span> <span class="n">Unroll</span> <span class="err">→</span> <span class="n">Translate</span> <span class="err">→</span> <span class="n">Layout</span> <span class="err">→</span> <span class="n">Routing</span> <span class="err">→</span> <span class="n">Optimise</span> <span class="err">→</span> <span class="n">Schedule</span>
 </span></code></pre></div>
 <p><strong>Key stages:</strong></p>
 <table>
@@ -2644,47 +2643,45 @@
 <p>Higher levels invoke more expensive heuristics (like SABRE for routing) but produce shallower circuits better suited to noise-limited hardware.</p>
 <div class="admonition example">
 <p class="admonition-title">GHZ Circuit Transpilation</p>
+<p>A 3-qubit GHZ state <span class="arithmatex">\(|\text{GHZ}\rangle = \tfrac{1}{\sqrt{2}}(|000\rangle + |111\rangle)\)</span> uses one Hadamard and two CNOTs logically. After transpilation to <code>{CX, RZ, SX, X}</code> at level 1, the depth becomes 6 and gate count rises to 8 due to basis decomposition — but CNOT count stays at 2, preserving entanglement structure.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>A 3-qubit GHZ state $|\text{GHZ}\rangle = \tfrac{1}{\sqrt{2}}(|000\rangle + |111\rangle)$ uses one Hadamard and two CNOTs logically. After transpilation to `{CX, RZ, SX, X}` at level 1, the depth becomes 6 and gate count rises to 8 due to basis decomposition — but CNOT count stays at 2, preserving entanglement structure.
-</span></code></pre></div>
 <details class="question">
 <summary>Why does CNOT count matter more than total gate count on real hardware?</summary>
+<p>Two-qubit gates (CNOTs) have dramatically higher error rates (~1%) compared to single-qubit gates (~0.1%) on superconducting platforms. Minimising CNOT count therefore has a much larger impact on circuit fidelity than reducing single-qubit gate counts.</p>
 </details>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Two-qubit gates (CNOTs) have dramatically higher error rates (~1%) compared to single-qubit gates (~0.1%) on superconducting platforms. Minimising CNOT count therefore has a much larger impact on circuit fidelity than reducing single-qubit gate counts.
-</span></code></pre></div>
 <h3 id="pass-manager-and-custom-passes"><strong>Pass Manager and Custom Passes</strong></h3>
 <hr />
 <p>For fine-grained control, Qiskit exposes a <code>PassManager</code> that lets developers compose any ordered sequence of transformation passes:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.transpiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">PassManager</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.transpiler.passes</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommutativeCancellation</span><span class="p">,</span> <span class="n">Optimize1qGatesDecomposition</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">([</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">Optimize1qGatesDecomposition</span><span class="p">(),</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">CommutativeCancellation</span><span class="p">(),</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">])</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">optimised_qc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">my_circuit</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.transpiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">PassManager</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.transpiler.passes</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommutativeCancellation</span><span class="p">,</span> <span class="n">Optimize1qGatesDecomposition</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">pm</span> <span class="o">=</span> <span class="n">PassManager</span><span class="p">([</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">Optimize1qGatesDecomposition</span><span class="p">(),</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">CommutativeCancellation</span><span class="p">(),</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">])</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">optimised_qc</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">my_circuit</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Custom passes can be written by subclassing <code>TransformationPass</code> or <code>AnalysisPass</code>, enabling domain-specific optimisations such as gate fusion for variational algorithms or qubit permutation for error-mitigation protocols.</p>
 <div class="admonition tip">
 <p class="admonition-title">SabreLayout for Connectivity-Aware Placement</p>
+<p>The SABRE (Swap-based Bidirectional heuristic search for Efficient quantum circuit Routing) algorithm finds qubit layouts that minimise SWAP insertion cost. Using <code>layout_method='sabre'</code> at optimization level 2 typically reduces SWAP overhead by 20–40% versus the default dense layout.</p>
 </div>
-<h2 id="the-sabre-swap-based-bidirectional-heuristic-search-for-efficient-quantum-circuit-routing-algorithm-finds-qubit-layouts-that-minimise-swap-insertion-cost-using-layout_methodsabre-at-optimization-level-2-typically-reduces-swap-overhead-by-2040-versus-the-default-dense-layout"><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>The SABRE (Swap-based Bidirectional heuristic search for Efficient quantum circuit Routing) algorithm finds qubit layouts that minimise SWAP insertion cost. Using `layout_method=&#39;sabre&#39;` at optimization level 2 typically reduces SWAP overhead by 20–40% versus the default dense layout.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="72-cirq-and-tensorflow-quantum"><strong>7.2 Cirq and TensorFlow Quantum</strong></h2>
 <hr />
 <p><strong>Cirq</strong> is Google's open-source framework for writing, simulating, and running quantum programs on Google's Sycamore processors. Unlike Qiskit's gate-level API, Cirq is notable for its <strong>moment-based circuit representation</strong>: circuits are collections of <em>moments</em> — discrete time steps containing simultaneously executable gates — which maps directly onto the physical execution model of gate-based hardware.</p>
 <h3 id="cirq-circuit-model"><strong>Cirq Circuit Model</strong></h3>
 <hr />
 <p>In Cirq, circuits are built from <code>cirq.Qubit</code> objects, operations, and moments:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">cirq</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">LineQubit</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">circuit</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">Circuit</span><span class="p">([</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">q0</span><span class="p">),</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">),</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">),</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;result&#39;</span><span class="p">)</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">cirq</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">LineQubit</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">circuit</span> <span class="o">=</span> <span class="n">cirq</span><span class="o">.</span><span class="n">Circuit</span><span class="p">([</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">q0</span><span class="p">),</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">),</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">),</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">cirq</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="n">q0</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;result&#39;</span><span class="p">)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">])</span>
 </span></code></pre></div>
 <p>Cirq's native gate set maps well to Google's processor, which natively supports <code>{CZ, √X, Rz, Phased-X}</code>. The <code>cirq.google.optimized_for_sycamore()</code> function applies device-specific compilation passes analogous to Qiskit's transpiler.</p>
 <div class="arithmatex">\[
@@ -2692,9 +2689,8 @@
 \]</div>
 <div class="admonition tip">
 <p class="admonition-title">Moment-Based Circuit Representation</p>
+<p>By explicitly encoding time steps, Cirq makes circuit scheduling transparent: two gates in the same moment execute simultaneously. This enables precise control over parallelism and is essential for advanced error-mitigation techniques that require deterministic execution schedules.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>By explicitly encoding time steps, Cirq makes circuit scheduling transparent: two gates in the same moment execute simultaneously. This enables precise control over parallelism and is essential for advanced error-mitigation techniques that require deterministic execution schedules.
-</span></code></pre></div>
 <h3 id="tensorflow-quantum-tfq"><strong>TensorFlow Quantum (TFQ)</strong></h3>
 <hr />
 <p><strong>TensorFlow Quantum</strong> extends Cirq with tight integration into the TensorFlow machine learning ecosystem. TFQ adds three key capabilities:</p>
@@ -2703,41 +2699,40 @@
 <li><strong>Differentiable quantum layers</strong> — <code>tfq.layers.PQC</code> wraps a parameterised Cirq circuit as a Keras layer with gradient support via parameter-shift or finite-difference rules</li>
 <li><strong>Batch execution</strong> — simultaneously simulate multiple circuit instances with different parameter settings, critical for mini-batch QML training</li>
 </ol>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_quantum</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfq</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">string</span><span class="p">),</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">tfq</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">PQC</span><span class="p">(</span><span class="n">my_circuit</span><span class="p">,</span> <span class="n">my_observables</span><span class="p">),</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">])</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_quantum</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfq</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">string</span><span class="p">),</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">tfq</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">PQC</span><span class="p">(</span><span class="n">my_circuit</span><span class="p">,</span> <span class="n">my_observables</span><span class="p">),</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">])</span>
 </span></code></pre></div>
 <div class="admonition example">
 <p class="admonition-title">Hybrid Quantum-Classical Training with TFQ</p>
+<p>A typical TFQ workflow: classical preprocessing → feature encoding into Cirq circuit parameters → quantum expectation value computation → classical classification head. TensorFlow's autodiff handles gradients through the entire hybrid model via TFQ's parameter-shift layer.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>A typical TFQ workflow: classical preprocessing → feature encoding into Cirq circuit parameters → quantum expectation value computation → classical classification head. TensorFlow&#39;s autodiff handles gradients through the entire hybrid model via TFQ&#39;s parameter-shift layer.
-</span></code></pre></div>
 <details class="question">
 <summary>What is the advantage of TFQ over a standalone Cirq simulator for QML?</summary>
+<p>TFQ batches thousands of circuit evaluations in a single GPU kernel call, making it orders of magnitude faster than sequential Cirq simulations for training variational classifiers. It also handles the gradient computation automatically within TensorFlow's computation graph.</p>
 </details>
-<h2 id="tfq-batches-thousands-of-circuit-evaluations-in-a-single-gpu-kernel-call-making-it-orders-of-magnitude-faster-than-sequential-cirq-simulations-for-training-variational-classifiers-it-also-handles-the-gradient-computation-automatically-within-tensorflows-computation-graph"><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>TFQ batches thousands of circuit evaluations in a single GPU kernel call, making it orders of magnitude faster than sequential Cirq simulations for training variational classifiers. It also handles the gradient computation automatically within TensorFlow&#39;s computation graph.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="73-pennylane-and-differentiable-programming"><strong>7.3 PennyLane and Differentiable Programming</strong></h2>
 <hr />
 <p><strong>PennyLane</strong> (by Xanadu) was designed from the ground up as a <strong>differentiable quantum programming</strong> library. Its central innovation is the <strong>QNode</strong> — a quantum function that behaves like a Python callable and supports automatic differentiation through classical ML frameworks (PyTorch, JAX, TensorFlow).</p>
 <h3 id="devices-and-qnodes"><strong>Devices and QNodes</strong></h3>
 <hr />
 <p>PennyLane's device abstraction allows the same circuit code to run on diverse backends:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qml</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;default.qubit&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pennylane</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qml</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;default.qubit&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </span></code></pre></div>
 <p>Available devices include <code>default.qubit</code> (pure-state simulation), <code>default.mixed</code> (density matrix), <code>qiskit.aer</code> (via plugin), <code>lightning.qubit</code> (C++-accelerated), and hardware backends via cloud plugins.</p>
 <h3 id="the-parameter-shift-rule"><strong>The Parameter-Shift Rule</strong></h3>
@@ -2749,33 +2744,33 @@
 <p>This rule applies to any gate of the form <span class="arithmatex">\(U(\theta) = e^{-i\theta G}\)</span> where <span class="arithmatex">\(G\)</span> is a generator with eigenvalues <span class="arithmatex">\(\pm 1/2\)</span>. Since the gradient is computed from two circuit evaluations (shifted by <span class="arithmatex">\(\pm\pi/2\)</span>), it is <strong>hardware-compatible</strong> — no access to internal circuit states is required.</p>
 <div class="admonition tip">
 <p class="admonition-title">Exact Gradients on Real Hardware</p>
+<p>Unlike finite-difference methods (<span class="arithmatex">\(\nabla \approx \frac{f(\theta+\epsilon)-f(\theta)}{\epsilon}\)</span>), parameter-shift gradients are exact (up to shot noise) and require only two circuit evaluations per parameter. This makes PennyLane uniquely suited for gradient-based optimization directly on quantum hardware.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Unlike finite-difference methods ($\nabla \approx \frac{f(\theta+\epsilon)-f(\theta)}{\epsilon}$), parameter-shift gradients are exact (up to shot noise) and require only two circuit evaluations per parameter. This makes PennyLane uniquely suited for gradient-based optimization directly on quantum hardware.
-</span></code></pre></div>
 <div class="admonition example">
 <p class="admonition-title">VQC Gradient with PyTorch Autodiff</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;default.qubit&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span> <span class="n">interface</span><span class="o">=</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="n">diff_method</span><span class="o">=</span><span class="s2">&quot;parameter-shift&quot;</span><span class="p">)</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="n">loss</span> <span class="o">=</span> <span class="n">circuit</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">theta</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>  <span class="c1"># exact gradient via parameter-shift</span>
-</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code>```python
+import torch
+dev = qml.device(&quot;default.qubit&quot;, wires=1)
+
+@qml.qnode(dev, interface=&quot;torch&quot;, diff_method=&quot;parameter-shift&quot;)
+def circuit(theta):
+    qml.RY(theta, wires=0)
+    return qml.expval(qml.PauliZ(0))
+
+theta = torch.tensor(0.5, requires_grad=True)
+loss = circuit(theta)
+loss.backward()
+print(theta.grad)  # exact gradient via parameter-shift
+</code></pre></div>
 </div>
 <h3 id="plugin-ecosystem"><strong>Plugin Ecosystem</strong></h3>
 <hr />
 <p>PennyLane's extensibility is enabled by a plugin architecture that wraps third-party backends as PennyLane devices. Notable plugins include <code>pennylane-qiskit</code> (IBM hardware), <code>pennylane-braket</code> (AWS backend), and <code>pennylane-lightning-gpu</code> (GPU-accelerated simulation). This write-once, run-anywhere model is PennyLane's defining advantage for algorithm development and benchmarking.</p>
 <details class="question">
 <summary>Can PennyLane be used for classical deep learning tasks?</summary>
+<p>Yes — PennyLane circuits can be embedded as layers inside standard PyTorch or Keras models, enabling true hybrid architectures where quantum layers and classical layers share the same gradient tape. This is particularly useful for quantum transfer learning, where a pretrained classical CNN is extended with a small quantum layer.</p>
 </details>
-<h2 id="yes-pennylane-circuits-can-be-embedded-as-layers-inside-standard-pytorch-or-keras-models-enabling-true-hybrid-architectures-where-quantum-layers-and-classical-layers-share-the-same-gradient-tape-this-is-particularly-useful-for-quantum-transfer-learning-where-a-pretrained-classical-cnn-is-extended-with-a-small-quantum-layer"><div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Yes — PennyLane circuits can be embedded as layers inside standard PyTorch or Keras models, enabling true hybrid architectures where quantum layers and classical layers share the same gradient tape. This is particularly useful for quantum transfer learning, where a pretrained classical CNN is extended with a small quantum layer.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="74-specialised-cloud-platforms"><strong>7.4 Specialised &amp; Cloud Platforms</strong></h2>
 <hr />
 <p>Beyond the three major open-source frameworks above, the quantum computing landscape includes several specialised platforms that offer unique hardware access or domain-specific abstractions. These cloud services democratise access to cutting-edge quantum processors without requiring physical lab infrastructure.</p>
@@ -2799,19 +2794,17 @@
 <p><strong>Quantinuum's H2-1 processor</strong> (32 trapped-ion qubits, all-to-all connectivity) achieves the industry's best published two-qubit gate fidelities (~99.8%), making it the preferred hardware for small-depth, high-fidelity algorithm testing [3].</p>
 <div class="admonition tip">
 <p class="admonition-title">Choosing a Platform</p>
+<p>Use Qiskit + IBM for broad ecosystem support and abundant free cloud credits; use PennyLane when gradient-based optimisation or framework interoperability is the priority; use IonQ/Quantinuum via Braket or Azure when native high-fidelity two-qubit gates matter more than qubit count.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Use Qiskit + IBM for broad ecosystem support and abundant free cloud credits; use PennyLane when gradient-based optimisation or framework interoperability is the priority; use IonQ/Quantinuum via Braket or Azure when native high-fidelity two-qubit gates matter more than qubit count.
-</span></code></pre></div>
 <div class="admonition example">
 <p class="admonition-title">Cross-Platform Portability</p>
+<p>The same Bell-pair circuit can be run on four different backends by simply swapping device strings — <code>"default.qubit"</code> (PennyLane simulation), <code>"qiskit.aer"</code> (noise simulation), <code>"braket.local.qubit"</code> (Braket local), and <code>"braket.aws.qubit"</code> (real hardware) — with no algorithm-level code changes.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>The same Bell-pair circuit can be run on four different backends by simply swapping device strings — `&quot;default.qubit&quot;` (PennyLane simulation), `&quot;qiskit.aer&quot;` (noise simulation), `&quot;braket.local.qubit&quot;` (Braket local), and `&quot;braket.aws.qubit&quot;` (real hardware) — with no algorithm-level code changes.
-</span></code></pre></div>
 <details class="question">
 <summary>What is the main connectivity advantage of trapped-ion computers over superconducting chips?</summary>
+<p>Trapped-ion qubits are connected via laser-mediated phonon interactions, giving <strong>all-to-all connectivity</strong> — any two qubit in the register can interact directly without SWAP routing. Superconducting chips typically have sparse nearest-neighbour graphs (e.g., IBM's heavy-hex lattice), which require additional SWAP gates for non-adjacent qubit interactions and increase effective circuit depth.</p>
 </details>
-<h2 id="trapped-ion-qubits-are-connected-via-laser-mediated-phonon-interactions-giving-all-to-all-connectivity-any-two-qubit-in-the-register-can-interact-directly-without-swap-routing-superconducting-chips-typically-have-sparse-nearest-neighbour-graphs-eg-ibms-heavy-hex-lattice-which-require-additional-swap-gates-for-non-adjacent-qubit-interactions-and-increase-effective-circuit-depth"><div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Trapped-ion qubits are connected via laser-mediated phonon interactions, giving **all-to-all connectivity** — any two qubit in the register can interact directly without SWAP routing. Superconducting chips typically have sparse nearest-neighbour graphs (e.g., IBM&#39;s heavy-hex lattice), which require additional SWAP gates for non-adjacent qubit interactions and increase effective circuit depth.
-</span></code></pre></div></h2>
+<hr />
 <h2 id="references"><strong>References</strong></h2>
 <p>[1] Aleksandrowicz, G., et al. (2019). <em>Qiskit: An Open-source Framework for Quantum Computing</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.2562110">https://doi.org/10.5281/zenodo.2562110</a></p>
 <p>[2] Broughton, M., et al. (2020). <em>TensorFlow Quantum: A Software Framework for Quantum Machine Learning</em>. arXiv:2003.02989.</p>
