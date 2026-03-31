@@ -2,7 +2,6 @@ site_name: Big Book of Computing | Quantum Computing
 site_description: A comprehensive guide to the foundations of quantum computing
 site_author: Big Book of Computing
 site_url: https://bigbookofcomputing.github.io
-site_language: en
 
 repo_url: https://github.com/bigbookofcomputing/quantum
 
@@ -73,6 +72,7 @@ markdown_extensions:
   
 theme:
   name: 'material'
+  language: en
   #custom_dir: overrides
   highlightjs: true
   hljs_languages: [python]
@@ -185,71 +185,70 @@ extra:
 
 
 nav:
-- Home: index.md
+- Home: home.md
 - Contents: chapters/contents.md
 - Introduction: chapters/introduction.md
-
 - Chapters:
-  - Chapter-1 Introduction: chapters/chapter-1/Chapter-1-Essay.md
-  - Chapter-2 State and Operators: chapters/chapter-2/Chapter-2-Essay.md
-  - Chapter-3 Gate and Circuits: chapters/chapter-3/Chapter-3-Essay.md
-  - Chapter-4 Quantum Algorithms: chapters/chapter-4/Chapter-4-Essay.md
-  - Chapter-5 Quantum Fourier Transform: chapters/chapter-5/Chapter-5-Essay.md
-  - Chapter-6 Variational Algorithms: chapters/chapter-6/Chapter-6-Essay.md
-  - Chapter-7 Quantum Tools: chapters/chapter-7/Chapter-7-Essay.md
-  - Chapter-8 Quantum Machine Learning and Optimization: chapters/chapter-8/Chapter-8-Essay.md
-  - Chapter-9 Encoding Classical Data into Quantum States: chapters/chapter-9/Chapter-9-Essay.md
-  - Chapter-10 Variational Quantum Classifiers: chapters/chapter-10/Chapter-10-Essay.md
-  - Chapter-11 Supervised Quantum Machine Learning: chapters/chapter-11/Chapter-11-Essay.md
-  - Chapter-12 Unsupervised Quantum Machine Learning: chapters/chapter-12/Chapter-12-Essay.md
-  - Chapter-13 Quantum Reinforcement Learning: chapters/chapter-13/Chapter-13-Essay.md  
-  - Chapter-14 QUBO Family of Problems: chapters/chapter-14/Chapter-14-Essay.md
-  - Chapter-15 Quantum Data Pipeline: chapters/chapter-15/Chapter-15-Essay.md
-  - Chapter-16 Quantum Simulation: chapters/chapter-16/Chapter-16-Essay.md
-  - Chapter-17 Quantum Chemistry: chapters/chapter-17/Chapter-17-Essay.md
-  - Chapter-18 Quantum Finance: chapters/chapter-18/Chapter-18-Essay.md
-  - Chapter-19 Quantum Hardware: chapters/chapter-19/Chapter-19-Essay.md
-  - Chapter-20 Quantum Error Correction: chapters/chapter-20/Chapter-20-Essay.md
+  - Chapter-1 Introduction: chapters/chapter-1/essay.md
+  - Chapter-2 State and Operators: chapters/chapter-2/essay.md
+  - Chapter-3 Gate and Circuits: chapters/chapter-3/essay.md
+  - Chapter-4 Quantum Algorithms: chapters/chapter-4/essay.md
+  - Chapter-5 Quantum Fourier Transform: chapters/chapter-5/essay.md
+  - Chapter-6 Variational Algorithms: chapters/chapter-6/essay.md
+  - Chapter-7 Quantum Tools: chapters/chapter-7/essay.md
+  - Chapter-8 Quantum Machine Learning and Optimization: chapters/chapter-8/essay.md
+  - Chapter-9 Encoding Classical Data into Quantum States: chapters/chapter-9/essay.md
+  - Chapter-10 Variational Quantum Classifiers: chapters/chapter-10/essay.md
+  - Chapter-11 Supervised Quantum Machine Learning: chapters/chapter-11/essay.md
+  - Chapter-12 Unsupervised Quantum Machine Learning: chapters/chapter-12/essay.md
+  - Chapter-13 Quantum Reinforcement Learning: chapters/chapter-13/essay.md  
+  - Chapter-14 QUBO Family of Problems: chapters/chapter-14/essay.md
+  - Chapter-15 Quantum Data Pipeline: chapters/chapter-15/essay.md
+  - Chapter-16 Quantum Simulation: chapters/chapter-16/essay.md
+  - Chapter-17 Quantum Chemistry: chapters/chapter-17/essay.md
+  - Chapter-18 Quantum Finance: chapters/chapter-18/essay.md
+  - Chapter-19 Quantum Hardware: chapters/chapter-19/essay.md
+  - Chapter-20 Quantum Error Correction: chapters/chapter-20/essay.md
 - WorkBooks:
-  - Chapter-1 Introduction: chapters/chapter-1/Chapter-1-Workbook.md
-  - Chapter-2 State and Operators: chapters/chapter-2/Chapter-2-Workbook.md
-  - Chapter-3 Gate and Circuits: chapters/chapter-3/Chapter-3-Workbook.md
-  - Chapter-4 Quantum Algorithms: chapters/chapter-4/Chapter-4-Workbook.md
-  - Chapter-5 Quantum Fourier Transform: chapters/chapter-5/Chapter-5-Workbook.md
-  - Chapter-6 Variational Algorithms: chapters/chapter-6/Chapter-6-Workbook.md
-  - Chapter-7 Quantum Tools: chapters/chapter-7/Chapter-7-Workbook.md
-  - Chapter-8 Quantum Machine Learning and Optimization: chapters/chapter-8/Chapter-8-Workbook.md
-  - Chapter-9 Encoding Classical Data into Quantum States: chapters/chapter-9/Chapter-9-Workbook.md
-  - Chapter-10 Variational Quantum Classifiers: chapters/chapter-10/Chapter-10-Workbook.md
-  - Chapter-11 Supervised Quantum Machine Learning: chapters/chapter-11/Chapter-11-Workbook.md
-  - Chapter-12 Unsupervised Quantum Machine Learning: chapters/chapter-12/Chapter-12-Workbook.md
-  - Chapter-13 Quantum Reinforcement Learning: chapters/chapter-13/Chapter-13-Workbook.md  
-  - Chapter-14 QUBO Family of Problems: chapters/chapter-14/Chapter-14-Workbook.md
-  - Chapter-15 Quantum Data Pipeline: chapters/chapter-15/Chapter-15-Workbook.md
-  - Chapter-16 Quantum Simulation: chapters/chapter-16/Chapter-16-Workbook.md
-  - Chapter-17 Quantum Chemistry: chapters/chapter-17/Chapter-17-Workbook.md
-  - Chapter-18 Quantum Finance: chapters/chapter-18/Chapter-18-Workbook.md
-  - Chapter-19 Quantum Hardware: chapters/chapter-19/Chapter-19-Workbook.md
-  - Chapter-20 Quantum Error Correction: chapters/chapter-20/Chapter-20-Workbook.md
+  - Chapter-1 Introduction: chapters/chapter-1/workbook.md
+  - Chapter-2 State and Operators: chapters/chapter-2/workbook.md
+  - Chapter-3 Gate and Circuits: chapters/chapter-3/workbook.md
+  - Chapter-4 Quantum Algorithms: chapters/chapter-4/workbook.md
+  - Chapter-5 Quantum Fourier Transform: chapters/chapter-5/workbook.md
+  - Chapter-6 Variational Algorithms: chapters/chapter-6/workbook.md
+  - Chapter-7 Quantum Tools: chapters/chapter-7/workbook.md
+  - Chapter-8 Quantum Machine Learning and Optimization: chapters/chapter-8/workbook.md
+  - Chapter-9 Encoding Classical Data into Quantum States: chapters/chapter-9/workbook.md
+  - Chapter-10 Variational Quantum Classifiers: chapters/chapter-10/workbook.md
+  - Chapter-11 Supervised Quantum Machine Learning: chapters/chapter-11/workbook.md
+  - Chapter-12 Unsupervised Quantum Machine Learning: chapters/chapter-12/workbook.md
+  - Chapter-13 Quantum Reinforcement Learning: chapters/chapter-13/workbook.md  
+  - Chapter-14 QUBO Family of Problems: chapters/chapter-14/workbook.md
+  - Chapter-15 Quantum Data Pipeline: chapters/chapter-15/workbook.md
+  - Chapter-16 Quantum Simulation: chapters/chapter-16/workbook.md
+  - Chapter-17 Quantum Chemistry: chapters/chapter-17/workbook.md
+  - Chapter-18 Quantum Finance: chapters/chapter-18/workbook.md
+  - Chapter-19 Quantum Hardware: chapters/chapter-19/workbook.md
+  - Chapter-20 Quantum Error Correction: chapters/chapter-20/workbook.md
 - CodeBooks:
-  - Chapter-1 Introduction: chapters/chapter-1/Chapter-1-Codebook.md
-  - Chapter-2 State and Operators: chapters/chapter-2/Chapter-2-Codebook.md
-  - Chapter-3 Gate and Circuits: chapters/chapter-3/Chapter-3-Codebook.md
-  - Chapter-4 Quantum Algorithms: chapters/chapter-4/Chapter-4-Codebook.md
-  - Chapter-5 Quantum Fourier Transform: chapters/chapter-5/Chapter-5-Codebook.md
-  - Chapter-6 Variational Algorithms: chapters/chapter-6/Chapter-6-Codebook.md
-  - Chapter-7 Quantum Tools: chapters/chapter-7/Chapter-7-Codebook.md
-  - Chapter-8 Quantum Machine Learning and Optimization: chapters/chapter-8/Chapter-8-Codebook.md
-  - Chapter-9 Encoding Classical Data into Quantum States: chapters/chapter-9/Chapter-9-Codebook.md 
-  - Chapter-10 Variational Quantum Classifiers: chapters/chapter-10/Chapter-10-Codebook.md
-  - Chapter-11 Supervised Quantum Machine Learning: chapters/chapter-11/Chapter-11-Codebook.md
-  - Chapter-12 Unsupervised Quantum Machine Learning: chapters/chapter-12/Chapter-12-Codebook.md
-  - Chapter-13 Quantum Reinforcement Learning: chapters/chapter-13/Chapter-13-Codebook.md
-  - Chapter-14 QUBO Family of Problems: chapters/chapter-14/Chapter-14-Codebook.md
-  - Chapter-15 Quantum Data Pipeline: chapters/chapter-15/Chapter-15-Codebook.md
-  - Chapter-16 Quantum Simulation: chapters/chapter-16/Chapter-16-Codebook.md
-  - Chapter-17 Quantum Chemistry: chapters/chapter-17/Chapter-17-Codebook.md
-  - Chapter-18 Quantum Finance: chapters/chapter-18/Chapter-18-Codebook.md
-  - Chapter-19 Quantum Hardware: chapters/chapter-19/Chapter-19-Codebook.md
-  - Chapter-20 Quantum Error Correction: chapters/chapter-20/Chapter-20-Codebook.md
+  - Chapter-1 Introduction: chapters/chapter-1/codebook.md
+  - Chapter-2 State and Operators: chapters/chapter-2/codebook.md
+  - Chapter-3 Gate and Circuits: chapters/chapter-3/codebook.md
+  - Chapter-4 Quantum Algorithms: chapters/chapter-4/codebook.md
+  - Chapter-5 Quantum Fourier Transform: chapters/chapter-5/codebook.md
+  - Chapter-6 Variational Algorithms: chapters/chapter-6/codebook.md
+  - Chapter-7 Quantum Tools: chapters/chapter-7/codebook.md
+  - Chapter-8 Quantum Machine Learning and Optimization: chapters/chapter-8/codebook.md
+  - Chapter-9 Encoding Classical Data into Quantum States: chapters/chapter-9/codebook.md 
+  - Chapter-10 Variational Quantum Classifiers: chapters/chapter-10/codebook.md
+  - Chapter-11 Supervised Quantum Machine Learning: chapters/chapter-11/codebook.md
+  - Chapter-12 Unsupervised Quantum Machine Learning: chapters/chapter-12/codebook.md
+  - Chapter-13 Quantum Reinforcement Learning: chapters/chapter-13/codebook.md
+  - Chapter-14 QUBO Family of Problems: chapters/chapter-14/codebook.md
+  - Chapter-15 Quantum Data Pipeline: chapters/chapter-15/codebook.md
+  - Chapter-16 Quantum Simulation: chapters/chapter-16/codebook.md
+  - Chapter-17 Quantum Chemistry: chapters/chapter-17/codebook.md
+  - Chapter-18 Quantum Finance: chapters/chapter-18/codebook.md
+  - Chapter-19 Quantum Hardware: chapters/chapter-19/codebook.md
+  - Chapter-20 Quantum Error Correction: chapters/chapter-20/codebook.md
 
