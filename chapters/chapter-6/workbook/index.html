@@ -1,0 +1,4749 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A comprehensive guide to the foundations of quantum computing">
+      
+      
+        <meta name="author" content="Big Book of Computing">
+      
+      
+        <link rel="canonical" href="https://bigbookofcomputing.github.io/chapters/chapter-6/workbook/">
+      
+      
+        <link rel="prev" href="../../chapter-5/workbook/">
+      
+      
+        <link rel="next" href="../../chapter-7/workbook/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Chapter-6 Variational Algorithms - Big Book of Computing | Quantum Computing</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+      <link rel="stylesheet" href="../../../static/styles.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-ECS7B3X8JM"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-ECS7B3X8JM",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-ECS7B3X8JM",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-6-variational-quantum-algorithms-workbook" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Big Book of Computing | Quantum Computing" class="md-header__button md-logo" aria-label="Big Book of Computing | Quantum Computing" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Big Book of Computing | Quantum Computing
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter-6 Variational Algorithms
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bigbookofcomputing/quantum" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../home/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contents/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contents
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Introduction
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter-1/essay/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Chapters
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../chapter-1/workbook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  WorkBooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter-1/codebook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CodeBooks
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Big Book of Computing | Quantum Computing" class="md-nav__button md-logo" aria-label="Big Book of Computing | Quantum Computing" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Big Book of Computing | Quantum Computing
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bigbookofcomputing/quantum" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-10/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-14/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WorkBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WorkBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-variational-quantum-eigensolver-vqe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Variational Quantum Eigensolver (VQE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Variational Quantum Eigensolver (VQE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-quantum-approximate-optimization-algorithm-qaoa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Quantum Approximate Optimization Algorithm (QAOA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Quantum Approximate Optimization Algorithm (QAOA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-ansatz-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Ansatz Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 Ansatz Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-classical-optimizers-for-vqas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Classical Optimizers for VQAs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 Classical Optimizers for VQAs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-cost-functions-measurement-and-convergence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Cost Functions, Measurement, and Convergence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 Cost Functions, Measurement, and Convergence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-10/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-14/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CodeBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-10/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-14/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-variational-quantum-eigensolver-vqe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Variational Quantum Eigensolver (VQE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Variational Quantum Eigensolver (VQE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-quantum-approximate-optimization-algorithm-qaoa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Quantum Approximate Optimization Algorithm (QAOA)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Quantum Approximate Optimization Algorithm (QAOA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-ansatz-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Ansatz Design
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3 Ansatz Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-classical-optimizers-for-vqas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Classical Optimizers for VQAs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.4 Classical Optimizers for VQAs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-cost-functions-measurement-and-convergence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5 Cost Functions, Measurement, and Convergence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.5 Cost Functions, Measurement, and Convergence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bigbookofcomputing/quantum/edit/master/docs/chapters/chapter-6/workbook.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/bigbookofcomputing/quantum/raw/master/docs/chapters/chapter-6/workbook.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="chapter-6-variational-quantum-algorithms-workbook"><strong>Chapter 6: Variational Quantum Algorithms () () (Workbook)</strong></h1>
+<hr />
+<blockquote>
+<p><strong>Summary:</strong> This chapter explores Variational Quantum Algorithms (VQAs), a hybrid quantum-classical approach designed for NISQ-era devices. We delve into the two foundational VQAs—the Variational Quantum Eigensolver (VQE) for eigenvalue problems and the Quantum Approximate Optimization Algorithm (QAOA) for combinatorial optimization. The chapter examines the critical design considerations of ansatz design, classical optimizers, cost functions, and the challenges posed by barren plateaus, providing a comprehensive overview of this leading paradigm in near-term quantum computing.</p>
+</blockquote>
+<hr />
+<p>The goal of this chapter is to establish concepts in variational quantum algorithms and their applications. These algorithms leverage parameterized quantum circuits optimized via classical methods to solve problems in quantum chemistry, combinatorial optimization, and machine learning.</p>
+<hr />
+<h2 class="heading-with-pill" id="61-variational-quantum-eigensolver-vqe"><strong>6.1 Variational Quantum Eigensolver (VQE)</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Hybrid minimization of ground-state energy via parameterized circuits</p>
+<p><strong>Summary:</strong> VQE estimates the ground-state energy of a Hamiltonian by preparing an ansatz state, measuring the expectation value of the Hamiltonian, and updating parameters with a classical optimizer until convergence.</p>
+</blockquote>
+<h3 id="theoretical-background"><strong>Theoretical Background</strong></h3>
+<p>The Variational Quantum Eigensolver (VQE) is a hybrid quantum-classical algorithm that exploits the variational principle to approximate the ground state energy of quantum systems, enabling quantum chemistry and materials science simulations on NISQ hardware.</p>
+<p><strong>Variational Principle Foundation:</strong><br />
+For a Hermitian Hamiltonian <span class="arithmatex">\(\mathbf{H}\)</span> acting on <span class="arithmatex">\(n\)</span> qubits with eigenstates <span class="arithmatex">\(|\phi_k\rangle\)</span> and eigenvalues <span class="arithmatex">\(E_k\)</span> ordered as <span class="arithmatex">\(E_0 \leq E_1 \leq \cdots \leq E_{2^n-1}\)</span>, the Rayleigh-Ritz variational principle states:</p>
+<div class="arithmatex">\[
+E_0 = \min_{|\psi\rangle \in \mathcal{H}} \frac{\langle\psi|\mathbf{H}|\psi\rangle}{\langle\psi|\psi\rangle}
+\]</div>
+<p>For normalized states <span class="arithmatex">\(\langle\psi|\psi\rangle = 1\)</span>, expanding in the energy eigenbasis:</p>
+<div class="arithmatex">\[
+|\psi\rangle = \sum_{k=0}^{2^n-1} \alpha_k |\phi_k\rangle \quad \text{with} \quad \sum_k |\alpha_k|^2 = 1
+\]</div>
+<p>The energy expectation becomes:</p>
+<div class="arithmatex">\[
+\langle\psi|\mathbf{H}|\psi\rangle = \sum_{k=0}^{2^n-1} |\alpha_k|^2 E_k \geq E_0 \sum_{k=0}^{2^n-1} |\alpha_k|^2 = E_0
+\]</div>
+<p>with equality if and only if <span class="arithmatex">\(|\psi\rangle = |\phi_0\rangle\)</span> (the ground state).</p>
+<p><strong>Pauli Decomposition:</strong><br />
+Any Hermitian operator on <span class="arithmatex">\(n\)</span> qubits admits a unique decomposition into Pauli tensor products:</p>
+<div class="arithmatex">\[
+\mathbf{H} = \sum_{j=0}^{4^n-1} c_j \mathbf{P}_j, \quad \mathbf{P}_j \in \{\mathbf{I}, \mathbf{X}, \mathbf{Y}, \mathbf{Z}\}^{\otimes n}, \quad c_j \in \mathbb{R}
+\]</div>
+<p>where coefficients are obtained via:</p>
+<div class="arithmatex">\[
+c_j = \frac{1}{2^n} \text{Tr}(\mathbf{H} \mathbf{P}_j)
+\]</div>
+<p>For molecular Hamiltonians, the Jordan-Wigner or Bravyi-Kitaev transformation maps fermionic operators to Pauli strings, typically yielding <span class="arithmatex">\(\mathcal{O}(n^4)\)</span> terms for <span class="arithmatex">\(n\)</span> spin-orbitals.</p>
+<p><strong>Parameterized Ansatz:</strong><br />
+Define a quantum circuit <span class="arithmatex">\(\mathbf{U}(\vec{\theta})\)</span> with <span class="arithmatex">\(m\)</span> tunable parameters <span class="arithmatex">\(\vec{\theta} = (\theta_1, \ldots, \theta_m)\)</span> preparing trial states:</p>
+<div class="arithmatex">\[
+|\psi(\vec{\theta})\rangle = \mathbf{U}(\vec{\theta})|0\rangle^{\otimes n}
+\]</div>
+<p>The energy landscape is:</p>
+<div class="arithmatex">\[
+E(\vec{\theta}) = \langle\psi(\vec{\theta})|\mathbf{H}|\psi(\vec{\theta})\rangle = \sum_{j=0}^{4^n-1} c_j \langle\psi(\vec{\theta})|\mathbf{P}_j|\psi(\vec{\theta})\rangle
+\]</div>
+<p><strong>Measurement and Estimation:</strong><br />
+Each Pauli expectation <span class="arithmatex">\(\langle\mathbf{P}_j\rangle\)</span> is estimated from <span class="arithmatex">\(N\)</span> measurements via:</p>
+<div class="arithmatex">\[
+\widehat{\langle\mathbf{P}_j\rangle} = \frac{1}{N}\sum_{k=1}^{N} \lambda_k^{(j)}, \quad \lambda_k^{(j)} \in \{\pm 1\}
+\]</div>
+<p>The estimator variance is bounded by:</p>
+<div class="arithmatex">\[
+\text{Var}[\widehat{\langle\mathbf{P}_j\rangle}] = \frac{1 - \langle\mathbf{P}_j\rangle^2}{N} \leq \frac{1}{N}
+\]</div>
+<p>Total energy variance becomes:</p>
+<div class="arithmatex">\[
+\text{Var}[\widehat{E}(\vec{\theta})] = \sum_j c_j^2 \text{Var}[\widehat{\langle\mathbf{P}_j\rangle}] \leq \frac{1}{N}\sum_j c_j^2
+\]</div>
+<p><strong>Gradient Computation via Parameter-Shift:</strong><br />
+For gates generated by Pauli operators <span class="arithmatex">\(\mathbf{U}(\theta) = e^{-i\theta \mathbf{G}/2}\)</span> with <span class="arithmatex">\(\mathbf{G}^2 = \mathbf{I}\)</span>, the parameter-shift rule provides exact gradients:</p>
+<div class="arithmatex">\[
+\frac{\partial E}{\partial \theta_i} = \frac{E(\vec{\theta} + \frac{\pi}{2}\hat{e}_i) - E(\vec{\theta} - \frac{\pi}{2}\hat{e}_i)}{2}
+\]</div>
+<p>This enables gradient-based optimization using only circuit evaluations, requiring <span class="arithmatex">\(2m\)</span> measurements per iteration for <span class="arithmatex">\(m\)</span> parameters.</p>
+<p><strong>Convergence Criterion:</strong><br />
+Optimization terminates when:</p>
+<div class="arithmatex">\[
+|E(\vec{\theta}_{k+1}) - E(\vec{\theta}_k)| &lt; \epsilon \quad \text{and} \quad \|\nabla E(\vec{\theta}_k)\| &lt; \delta
+\]</div>
+<p>for tolerance thresholds <span class="arithmatex">\(\epsilon, \delta &gt; 0\)</span>, ensuring both energy stabilization and vanishing gradients.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Initialize θ] --&gt; B["Prepare U(θ)|0…0⟩"]
+    B --&gt; C["Measure ⟨H⟩ via grouped Pauli terms"]
+    C --&gt; D{Converged?}
+    D -- No --&gt; E[Classical optimizer update θ]
+    E --&gt; B
+    D -- Yes --&gt; F[Report ground-state estimate]</code></pre>
+<h3 id="comprehension-check"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<p><strong>1. What quantity does VQE minimize?</strong></p>
+<ul>
+<li>A. Circuit depth  </li>
+<li>B. Number of entangling gates  </li>
+<li>C. The variance of measurements  </li>
+<li>D. The expected energy <span class="arithmatex">\(E(\mathbf{\theta})\)</span>  </li>
+</ul>
+<p><strong>2. Why decompose <span class="arithmatex">\(\mathbf{H}\)</span> into Pauli strings?</strong></p>
+<ul>
+<li>A. To reduce qubit count  </li>
+<li>B. To enable term-wise measurement on hardware  </li>
+<li>C. To avoid using unitaries  </li>
+<li>D. To remove non-commuting terms  </li>
+</ul>
+<details class="info">
+<summary>See Answer</summary>
+<p><strong>1: D</strong> — The VQE objective is <span class="arithmatex">\(E(\mathbf{\theta}) = \langle \psi(\mathbf{\theta}) \rvert \mathbf{H} \lvert \psi(\mathbf{\theta}) \rangle\)</span>.<br />
+<strong>2: B</strong> — Pauli decomposition allows hardware-friendly expectation estimation term by term (with grouping when commuting).</p>
+</details>
+</div>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Define the role of the classical optimizer in VQE and discuss when gradient-based vs. gradient-free methods are preferable on NISQ devices.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p><strong>The Classical Optimizer Role</strong><br />
+In VQE's hybrid loop, the classical optimizer navigates the energy landscape <span class="arithmatex">\(E(\vec{\theta}) = \langle\psi(\vec{\theta})|H|\psi(\vec{\theta})\rangle\)</span> toward the ground state minimum. It processes noisy quantum measurements and updates ansatz parameters <span class="arithmatex">\(\vec{\theta}\)</span> iteratively until convergence.</p>
+<p><strong>Gradient-Based Methods (Adam, L-BFGS)</strong><br />
+These use the parameter-shift rule to compute gradients: <span class="arithmatex">\(\frac{\partial E}{\partial \theta_i} = \frac{E(\vec{\theta} + \frac{\pi}{2}\hat{e}_i) - E(\vec{\theta} - \frac{\pi}{2}\hat{e}_i)}{2}\)</span>, requiring <span class="arithmatex">\(2d\)</span> circuit evaluations for <span class="arithmatex">\(d\)</span> parameters. They converge rapidly when shot noise is small (<span class="arithmatex">\(N_{\text{shots}} \sim 10^4\)</span>), gradients are measurable (not in barren plateaus where <span class="arithmatex">\(|\nabla E| \sim e^{-n}\)</span>), and the landscape is smooth. Best for small problems (<span class="arithmatex">\(n \leq 6\)</span> qubits, <span class="arithmatex">\(d \leq 12\)</span> parameters).</p>
+<p><strong>Gradient-Free Methods (COBYLA, SPSA, Nelder-Mead)</strong><br />
+SPSA estimates gradients via random perturbations using only 2 evaluations per iteration regardless of dimension, versus <span class="arithmatex">\(2d\)</span> for parameter-shift. These methods naturally average out shot noise and make progress even in barren plateau regions by using finite-difference scales larger than vanishing gradients. Preferred when shot noise is high, parameter count exceeds 50, or barren plateaus are suspected.</p>
+<p><strong>NISQ Recommendations</strong><br />
+For <span class="arithmatex">\(n &gt; 15\)</span> qubits on noisy hardware, gradient-free methods (especially SPSA) dominate due to superior scaling and noise resilience. Medium problems (<span class="arithmatex">\(7 \leq n \leq 15\)</span>) balance with COBYLA. Only small, low-noise scenarios favor gradient-based approaches. Device calibration drift and limited coherence make minimizing circuit repetitions critical, giving gradient-free methods a decisive advantage.</p>
+</details>
+</div>
+<h3 id="hands-on-projects"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
+<h4 id="project-blueprint"><strong>Project Blueprint</strong></h4>
+<table>
+<thead>
+<tr>
+<th><strong>Section</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Objective</strong></td>
+<td>Estimate the ground-state energy of <span class="arithmatex">\(\mathbf{H}=\tfrac{1}{2}\,\mathbf{Z}_0 + \tfrac{1}{2}\,\mathbf{Z}_1\)</span> using a two-qubit hardware-efficient ansatz.</td>
+</tr>
+<tr>
+<td><strong>Mathematical Concept</strong></td>
+<td>Variational principle: <span class="arithmatex">\(E(\mathbf{\theta}) \ge E_0\)</span>; measurement of <span class="arithmatex">\(\langle \mathbf{Z}_i \rangle\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Experiment Setup</strong></td>
+<td>Start in <span class="arithmatex">\(\lvert 00\rangle\)</span>; ansatz with layers <span class="arithmatex">\(\mathbf{R}_y(\theta_i)\)</span> and a CNOT; measure <span class="arithmatex">\(\langle \mathbf{Z}_0 \rangle\)</span>, <span class="arithmatex">\(\langle \mathbf{Z}_1 \rangle\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Process Steps</strong></td>
+<td>Prepare ansatz <span class="arithmatex">\(\mathbf{U}(\mathbf{\theta})\)</span>; estimate <span class="arithmatex">\(E(\mathbf{\theta})\)</span> from Pauli terms; update <span class="arithmatex">\(\mathbf{\theta}\)</span>; repeat until convergence.</td>
+</tr>
+<tr>
+<td><strong>Expected Behavior</strong></td>
+<td>Energy decreases monotonically (up to noise) and stabilizes near the minimum consistent with the ansatz.</td>
+</tr>
+<tr>
+<td><strong>Tracking Variables</strong></td>
+<td>Parameters <span class="arithmatex">\(\mathbf{\theta}\)</span>, energy <span class="arithmatex">\(E\)</span>, shot count <span class="arithmatex">\(N\)</span>, gradient norm <span class="arithmatex">\(\|\nabla E\|\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Verification Goal</strong></td>
+<td>Final <span class="arithmatex">\(E\)</span> within a tolerance of the analytical minimum (<span class="arithmatex">\(-1\)</span> for this <span class="arithmatex">\(\mathbf{H}\)</span>) given ansatz expressivity.</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Best parameters <span class="arithmatex">\(\mathbf{\theta}^*\)</span> and estimated energy <span class="arithmatex">\(E(\mathbf{\theta}^*)\)</span>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="python-implementation"><strong>Python Implementation</strong></h4>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">Statevector</span><span class="p">,</span> <span class="n">SparsePauliOp</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Project 1: Parameterized Ansatz Construction</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">build_ansatz</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Hardware-efficient ansatz: Ry rotations + CNOT entanglers.&quot;&quot;&quot;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span><span class="p">):</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">i</span><span class="p">);</span> <span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="k">return</span> <span class="n">qc</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">n_qubits</span><span class="p">,</span> <span class="n">n_layers</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">n_params</span> <span class="o">=</span> <span class="n">n_qubits</span> <span class="o">*</span> <span class="n">n_layers</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">theta0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_params</span><span class="p">)</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="n">theta1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n_params</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ansatz circuit (n=2, layers=2):&quot;</span><span class="p">)</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="nb">print</span><span class="p">(</span><span class="n">build_ansatz</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">theta0</span><span class="p">)</span><span class="o">.</span><span class="n">draw</span><span class="p">())</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">State with theta=pi/4:&quot;</span><span class="p">)</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">sv</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">build_ansatz</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> <span class="n">theta1</span><span class="p">))</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">sv</span><span class="p">)</span>
+</span></code></pre></div>
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Ansatz</span> <span class="n">circuit</span> <span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">layers</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>     <span class="err">┌───────┐</span>     <span class="err">┌───────┐</span>     
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">q_0</span><span class="p">:</span> <span class="err">┤</span> <span class="n">Ry</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="err">├──■──┤</span> <span class="n">Ry</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="err">├──■──</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>     <span class="err">├───────┤┌─┴─┐├───────┤┌─┴─┐</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">q_1</span><span class="p">:</span> <span class="err">┤</span> <span class="n">Ry</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="err">├┤</span> <span class="n">X</span> <span class="err">├┤</span> <span class="n">Ry</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="err">├┤</span> <span class="n">X</span> <span class="err">├</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>     <span class="err">└───────┘└───┘└───────┘└───┘</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">State</span> <span class="k">with</span> <span class="n">theta</span><span class="o">=</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">:</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">Statevector</span><span class="p">([</span><span class="mf">0.60355339</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span> <span class="mf">0.60355339</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span> <span class="mf">0.45710678</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>             <span class="mf">0.25</span>      <span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">],</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</span></code></pre></div></p>
+<h4 id="outcome-and-interpretation"><strong>Outcome and Interpretation</strong></h4>
+<p>The optimization loop steadily reduces the empirical energy and converges to a parameter set that approximates the ground state permitted by the ansatz. Deviations from the true ground energy quantify expressibility limits and sampling noise.</p>
+<hr />
+<h2 class="heading-with-pill" id="62-quantum-approximate-optimization-algorithm-qaoa"><strong>6.2 Quantum Approximate Optimization Algorithm (QAOA)</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★★☆</p>
+<p><strong>Concept:</strong> Alternating operator ansatz for combinatorial optimization</p>
+<p><strong>Summary:</strong> QAOA alternates between a cost unitary driven by a problem Hamiltonian and a mixer unitary that explores the state space; parameters are optimized to maximize the expected objective.</p>
+</blockquote>
+<h3 id="theoretical-background_1"><strong>Theoretical Background</strong></h3>
+<p>The Quantum Approximate Optimization Algorithm (QAOA) is a variational algorithm specifically designed for combinatorial optimization problems, using an alternating ansatz structure inspired by quantum annealing and the adiabatic theorem.</p>
+<p><strong>Problem Encoding:</strong><br />
+Given a binary optimization problem over <span class="arithmatex">\(n\)</span> bits, encode the objective function as a diagonal Hamiltonian <span class="arithmatex">\(\mathbf{C}\)</span> (the cost or problem Hamiltonian) whose eigenstates correspond to feasible solutions and eigenvalues encode solution quality:</p>
+<div class="arithmatex">\[
+\mathbf{C}|z\rangle = C(z)|z\rangle, \quad z \in \{0,1\}^n
+\]</div>
+<p>The goal is to find <span class="arithmatex">\(z^* = \arg\max_z C(z)\)</span> or approximate it.</p>
+<p><strong>Alternating Operator Ansatz:</strong><br />
+For depth <span class="arithmatex">\(p\)</span>, QAOA interleaves <span class="arithmatex">\(p\)</span> applications of two non-commuting unitaries:</p>
+<div class="arithmatex">\[
+U_C(\gamma) = e^{-i\gamma \mathbf{C}}, \quad U_B(\beta) = e^{-i\beta \mathbf{B}}
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf{B}\)</span> is the mixer Hamiltonian (typically <span class="arithmatex">\(\mathbf{B} = \sum_{i=1}^n \mathbf{X}_i\)</span>). The QAOA state is:</p>
+<div class="arithmatex">\[
+|\psi_p(\vec{\gamma}, \vec{\beta})\rangle = \left[\prod_{k=1}^{p} U_B(\beta_k) U_C(\gamma_k)\right] |s_0\rangle
+\]</div>
+<p>with initial state <span class="arithmatex">\(|s_0\rangle = |+\rangle^{\otimes n} = \frac{1}{2^{n/2}}\sum_{z\in\{0,1\}^n} |z\rangle\)</span>, the equal superposition over all computational basis states.</p>
+<p><strong>State Evolution Mechanism:</strong><br />
+The cost unitary <span class="arithmatex">\(U_C(\gamma)\)</span> induces phases proportional to solution quality:</p>
+<div class="arithmatex">\[
+U_C(\gamma)|z\rangle = e^{-i\gamma C(z)}|z\rangle
+\]</div>
+<p>which imprints the objective function as relative phases. The mixer unitary creates transitions between computational basis states:</p>
+<div class="arithmatex">\[
+U_B(\beta) = e^{-i\beta \sum_i \mathbf{X}_i} = \prod_{i=1}^n e^{-i\beta \mathbf{X}_i} = \prod_{i=1}^n \begin{pmatrix} \cos\beta &amp; -i\sin\beta \\ -i\sin\beta &amp; \cos\beta \end{pmatrix}_i
+\]</div>
+<p>Alternation between phase imprinting and basis mixing enables quantum interference, constructively amplifying high-quality solutions.</p>
+<p><strong>MaxCut Formulation:</strong><br />
+For a graph <span class="arithmatex">\(G=(V,E)\)</span>, the MaxCut objective is:</p>
+<div class="arithmatex">\[
+C(z) = \sum_{(i,j)\in E} \frac{1}{2}(1 - z_i z_j), \quad z_i \in \{\pm 1\}
+\]</div>
+<p>Encoding <span class="arithmatex">\(z_i = (-1)^{x_i}\)</span> for computational basis <span class="arithmatex">\(x_i \in \{0,1\}\)</span>:</p>
+<div class="arithmatex">\[
+\mathbf{C} = \sum_{(i,j)\in E} \frac{1}{2}(\mathbf{I} - \mathbf{Z}_i \mathbf{Z}_j)
+\]</div>
+<p>The mixer is:</p>
+<div class="arithmatex">\[
+\mathbf{B} = \sum_{i\in V} \mathbf{X}_i
+\]</div>
+<p><strong>Objective Function:</strong><br />
+Optimize the expected cut value:</p>
+<div class="arithmatex">\[
+\mathcal{F}_p(\vec{\gamma}, \vec{\beta}) = \langle\psi_p(\vec{\gamma}, \vec{\beta})|\mathbf{C}|\psi_p(\vec{\gamma}, \vec{\beta})\rangle
+\]</div>
+<p>Measuring in the computational basis yields bitstring <span class="arithmatex">\(z\)</span> with probability:</p>
+<div class="arithmatex">\[
+P(z|\vec{\gamma}, \vec{\beta}) = |\langle z|\psi_p(\vec{\gamma}, \vec{\beta})\rangle|^2
+\]</div>
+<p>The expected value is:</p>
+<div class="arithmatex">\[
+\mathcal{F}_p = \sum_{z\in\{0,1\}^n} P(z|\vec{\gamma}, \vec{\beta}) \cdot C(z)
+\]</div>
+<p><strong>Performance Analysis:</strong><br />
+For MaxCut on 3-regular graphs:
+- <span class="arithmatex">\(p=1\)</span>: Approximation ratio <span class="arithmatex">\(\geq 0.6924\)</span> (guaranteed)<br />
+- <span class="arithmatex">\(p\to\infty\)</span>: Approximation ratio <span class="arithmatex">\(\to 1\)</span> (optimal solution)</p>
+<p>The number of parameters scales as <span class="arithmatex">\(2p\)</span>, making optimization tractable even for <span class="arithmatex">\(p \sim 10-20\)</span>.</p>
+<p><strong>Non-Commutativity Requirement:</strong><br />
+QAOA performance requires <span class="arithmatex">\([\mathbf{C}, \mathbf{B}] \neq 0\)</span>. When operators commute, they share eigenbases and the product <span class="arithmatex">\(\prod_{k} U_B(\beta_k)U_C(\gamma_k)\)</span> collapses to depth-1 regardless of <span class="arithmatex">\(p\)</span>, eliminating the benefits of deeper circuits.</p>
+<pre class="mermaid"><code>flowchart LR
+    S["|+⟩^(⊗n)"] --&gt; C1["Apply e^(-i γ₁ C)"]
+    C1 --&gt; M1["Apply e^(-i β₁ B)"]
+    M1 --&gt; Cp[Repeat p layers]
+    Cp --&gt; MEAS["Measure objective ⟨C⟩"]
+    MEAS --&gt; OPT["Classical optimize (γ, β)"]
+    OPT --&gt; C1</code></pre>
+<h3 id="comprehension-check_1"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<p><strong>1. Which unitary encodes the problem constraints?</strong></p>
+<ul>
+<li>A. <span class="arithmatex">\(e^{-i\beta \mathbf{B}}\)</span>  </li>
+<li>B. <span class="arithmatex">\(e^{-i\gamma \mathbf{C}}\)</span>  </li>
+<li>C. Hadamards only  </li>
+<li>D. Identity  </li>
+</ul>
+<p><strong>2. What is the main trade-off when increasing depth <span class="arithmatex">\(p\)</span>?</strong></p>
+<ul>
+<li>A. Fewer parameters  </li>
+<li>B. Lower expressibility  </li>
+<li>C. Greater depth and noise accumulation  </li>
+<li>D. Elimination of barren plateaus  </li>
+</ul>
+<details class="info">
+<summary>See Answer</summary>
+<p><strong>1: B</strong> — The cost unitary contains the problem Hamiltonian.<br />
+<strong>2: C</strong> — Deeper circuits increase error rates and runtime on NISQ hardware.</p>
+</details>
+</div>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Explain why <span class="arithmatex">\([\mathbf{C},\mathbf{B}] \ne 0\)</span> is essential for QAOA performance. What happens if they commute?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p><strong>The Commutativity Collapse</strong><br />
+QAOA alternates cost <span class="arithmatex">\(U_C(\gamma) = e^{-i\gamma C}\)</span> and mixer <span class="arithmatex">\(U_B(\beta) = e^{-i\beta B}\)</span> unitaries. If <span class="arithmatex">\([C,B] = 0\)</span>, they share an eigenbasis and the Baker-Campbell-Hausdorff formula simplifies: <span class="arithmatex">\(U_B(\beta) U_C(\gamma) = e^{-i(\beta B + \gamma C)}\)</span>. A <span class="arithmatex">\(p\)</span>-layer circuit collapses to depth-1 regardless of <span class="arithmatex">\(p\)</span>, reducing the parameter space from <span class="arithmatex">\(2p\)</span> dimensions to just 2.</p>
+<p><strong>Loss of Expressibility</strong><br />
+Non-commuting operators enable exploration of a richer state manifold. When <span class="arithmatex">\([C,B] \neq 0\)</span>, each layer rotates the state in different directions, interpolating between mixer eigenstates and cost eigenstates through complex superpositions. With commuting operators, the ansatz remains confined to a 2D submanifold—no entanglement patterns or interference structures needed for hard optimization emerge.</p>
+<p><strong>Physical Mechanism</strong><br />
+Non-commutativity means <span class="arithmatex">\(C\)</span> and <span class="arithmatex">\(B\)</span> don't share eigenstates. Applying <span class="arithmatex">\(U_C\)</span> rotates <span class="arithmatex">\(B\)</span> eigenstates into superpositions over <span class="arithmatex">\(C\)</span> eigenstates, creating quantum interference: the cost unitary imprints computational-basis phases while the mixer creates superpositions that interfere constructively on low-cost states. For MaxCut with <span class="arithmatex">\(C = \sum_{(i,j)} \frac{1-Z_i Z_j}{2}\)</span> and <span class="arithmatex">\(B = \sum_i X_i\)</span>, we have <span class="arithmatex">\([Z_i Z_j, X_k] \neq 0\)</span>—essential for transitioning between cut configurations.</p>
+<p><strong>Performance Impact</strong><br />
+QAOA's approximation ratio improves with depth for non-commuting operators (<span class="arithmatex">\(p=1\)</span> achieves <span class="arithmatex">\(\geq 0.6924\)</span> on 3-regular graphs, <span class="arithmatex">\(p=2\)</span> reaches <span class="arithmatex">\(\geq 0.7559\)</span>). If <span class="arithmatex">\([C,B] = 0\)</span>, increasing <span class="arithmatex">\(p\)</span> beyond 1 yields zero improvement—the algorithm cannot escape the depth-1 performance ceiling. Designing mixers that preserve non-commutativity while respecting problem constraints is a core QAOA design principle.</p>
+</details>
+</div>
+<h3 id="hands-on-projects_1"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
+<h4 id="project-blueprint_1"><strong>Project Blueprint</strong></h4>
+<table>
+<thead>
+<tr>
+<th><strong>Section</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Objective</strong></td>
+<td>Implement depth-<span class="arithmatex">\(p=1\)</span> QAOA for MaxCut on a 3-cycle and estimate the cut value.</td>
+</tr>
+<tr>
+<td><strong>Mathematical Concept</strong></td>
+<td>Expectation <span class="arithmatex">\(\langle \mathbf{C} \rangle\)</span> for <span class="arithmatex">\(\mathbf{C}=\tfrac{1}{2}\sum (\mathbf{I}-\mathbf{Z}_i\mathbf{Z}_j)\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Experiment Setup</strong></td>
+<td><span class="arithmatex">\(n=3\)</span> qubits; initial <span class="arithmatex">\(\lvert + \rangle^{\otimes 3}\)</span>; apply <span class="arithmatex">\(e^{-i\gamma \mathbf{C}}\)</span>, then <span class="arithmatex">\(e^{-i\beta \mathbf{B}}\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Process Steps</strong></td>
+<td>Sweep <span class="arithmatex">\((\gamma,\beta)\)</span> on a grid; measure <span class="arithmatex">\(\langle \mathbf{C} \rangle\)</span>; report best parameters.</td>
+</tr>
+<tr>
+<td><strong>Expected Behavior</strong></td>
+<td>Optimal angles cluster near known analytic optima for the 3-cycle.</td>
+</tr>
+<tr>
+<td><strong>Tracking Variables</strong></td>
+<td>Angles <span class="arithmatex">\((\gamma,\beta)\)</span>, mean objective, shot count <span class="arithmatex">\(N\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Verification Goal</strong></td>
+<td>Achieve expected approximation ratio for the 3-cycle under shot noise.</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Best <span class="arithmatex">\((\gamma,\beta)\)</span> and corresponding objective value.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="python-implementation_1"><strong>Python Implementation</strong></h4>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparsePauliOp</span><span class="p">,</span> <span class="n">Statevector</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># Project 2: VQE Cost Function (H2 molecule simplified)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># H = Z⊗Z + 0.5*(X⊗I + I⊗X)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">([</span><span class="s1">&#39;ZZ&#39;</span><span class="p">,</span> <span class="s1">&#39;XI&#39;</span><span class="p">,</span> <span class="s1">&#39;IX&#39;</span><span class="p">],</span> <span class="n">coeffs</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">ansatz</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span> <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span> <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="k">return</span> <span class="n">qc</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">cost_function</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">ansatz</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="n">sv</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="k">return</span> <span class="n">sv</span><span class="o">.</span><span class="n">expectation_value</span><span class="p">(</span><span class="n">observable</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="n">theta_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">cost_function</span><span class="p">,</span> <span class="n">theta_init</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;COBYLA&#39;</span><span class="p">,</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                  <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;maxiter&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;rhobeg&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VQE optimized energy: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial energy:       </span><span class="si">{</span><span class="n">cost_function</span><span class="p">(</span><span class="n">theta_init</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">VQE</span> <span class="n">optimized</span> <span class="n">energy</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.414214</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">Initial</span> <span class="n">energy</span><span class="p">:</span>       <span class="mf">0.733345</span>
+</span></code></pre></div></p>
+<h4 id="outcome-and-interpretation_1"><strong>Outcome and Interpretation</strong></h4>
+<p>The grid search reveals an angle basin yielding near-optimal cut value for the cycle graph. Differences from the ideal arise from finite sampling and hardware noise.</p>
+<hr />
+<h2 class="heading-with-pill" id="63-ansatz-design"><strong>6.3 Ansatz Design</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Circuit expressibility and trainability via architectural choices</p>
+<p><strong>Summary:</strong> Ansatz families balance depth, entanglement, and inductive bias. Hardware-efficient designs are shallow and native-gate-friendly; chemistry-inspired UCC encodes physically meaningful excitations.</p>
+</blockquote>
+<h3 id="theoretical-background_2"><strong>Theoretical Background</strong></h3>
+<p>Ansatz design is the art of constructing parameterized quantum circuits <span class="arithmatex">\(\mathbf{U}(\vec{\theta})\)</span> that balance expressibility (ability to represent relevant quantum states) with trainability (ability to optimize parameters efficiently).</p>
+<p><strong>Expressibility Framework:</strong><br />
+An ansatz <span class="arithmatex">\(\mathbf{U}(\vec{\theta})\)</span> defines a parameterized manifold <span class="arithmatex">\(\mathcal{M} = \{|\psi(\vec{\theta})\rangle : \vec{\theta} \in \Theta\}\)</span> within the <span class="arithmatex">\(2^n\)</span>-dimensional Hilbert space. Expressibility quantifies how uniformly <span class="arithmatex">\(\mathcal{M}\)</span> covers the state space.</p>
+<p>The Haar expressibility measure compares the distribution of states <span class="arithmatex">\(P_{\mathcal{M}}(|\psi\rangle)\)</span> to the uniform Haar measure <span class="arithmatex">\(P_{\text{Haar}}(|\psi\rangle)\)</span> via the Kullback-Leibler divergence:</p>
+<div class="arithmatex">\[
+\mathcal{E} = D_{KL}(P_{\mathcal{M}} \| P_{\text{Haar}}) = \int P_{\mathcal{M}}(|\psi\rangle) \log\frac{P_{\mathcal{M}}(|\psi\rangle)}{P_{\text{Haar}}(|\psi\rangle)} d\psi
+\]</div>
+<p>Lower <span class="arithmatex">\(\mathcal{E}\)</span> indicates higher expressibility. Universal gate sets achieve <span class="arithmatex">\(\mathcal{E} \to 0\)</span> as circuit depth <span class="arithmatex">\(L \to \infty\)</span>.</p>
+<p><strong>Hardware-Efficient Ansätze:</strong><br />
+Designed to match native gate sets and qubit connectivity of NISQ devices:</p>
+<div class="arithmatex">\[
+\mathbf{U}_{\text{HE}}(\vec{\theta}) = \left[\prod_{\ell=1}^L \mathbf{E}_{\mathcal{G}} \cdot \mathbf{R}(\vec{\theta}_\ell)\right]
+\]</div>
+<p>where:
+- <span class="arithmatex">\(\mathbf{R}(\vec{\theta}_\ell) = \bigotimes_{i=1}^n R_{y}(\theta_{\ell,i})\)</span> are single-qubit rotations<br />
+- <span class="arithmatex">\(\mathbf{E}_{\mathcal{G}} = \prod_{(i,j)\in\mathcal{G}} \text{CNOT}_{i,j}\)</span> is the entangling layer matching hardware connectivity graph <span class="arithmatex">\(\mathcal{G}\)</span></p>
+<p>For <span class="arithmatex">\(L\)</span> layers with <span class="arithmatex">\(n\)</span> qubits, parameter count is <span class="arithmatex">\(m = nL\)</span>. Circuit depth is <span class="arithmatex">\(D = \mathcal{O}(L)\)</span> for linear connectivity, <span class="arithmatex">\(\mathcal{O}(L \cdot \log n)\)</span> for all-to-all.</p>
+<p><strong>Unitary Coupled Cluster (UCC) Ansatz:</strong><br />
+Inspired by quantum chemistry, UCC generalizes classical coupled cluster theory:</p>
+<div class="arithmatex">\[
+\mathbf{U}_{\text{UCC}}(\vec{\theta}) = e^{\mathbf{T}(\vec{\theta}) - \mathbf{T}^\dagger(\vec{\theta})}
+\]</div>
+<p>where the cluster operator includes single and double excitations:</p>
+<div class="arithmatex">\[
+\mathbf{T}(\vec{\theta}) = \sum_{a&gt;F, i\leq F} \theta_{a}^{i} (\mathbf{a}_a^\dagger \mathbf{a}_i) + \sum_{\substack{a&gt;b&gt;F \\ i&lt;j\leq F}} \theta_{ab}^{ij} (\mathbf{a}_a^\dagger \mathbf{a}_b^\dagger \mathbf{a}_j \mathbf{a}_i)
+\]</div>
+<p>Here <span class="arithmatex">\(i,j\)</span> index occupied orbitals and <span class="arithmatex">\(a,b\)</span> index virtual orbitals, with Fermi level <span class="arithmatex">\(F\)</span>. For <span class="arithmatex">\(n\)</span> spin-orbitals:
+- Singles: <span class="arithmatex">\(\mathcal{O}(n^2)\)</span> terms<br />
+- Doubles (UCCSD): <span class="arithmatex">\(\mathcal{O}(n^4)\)</span> terms</p>
+<p>After fermion-to-qubit mapping (Jordan-Wigner or Bravyi-Kitaev), each term becomes a Pauli string product. Trotterization yields circuit depth <span class="arithmatex">\(D \sim \mathcal{O}(n^4)\)</span> for first-order, <span class="arithmatex">\(\mathcal{O}(n^8)\)</span> for second-order.</p>
+<p><strong>Barren Plateau Phenomenon:</strong><br />
+For deep random circuits, the variance of gradients vanishes exponentially:</p>
+<div class="arithmatex">\[
+\text{Var}\left[\frac{\partial E}{\partial \theta_i}\right] \sim \mathcal{O}\left(\frac{1}{2^n}\right)
+\]</div>
+<p>McClean et al. proved this for circuits with polynomial depth in <span class="arithmatex">\(n\)</span> forming approximate 2-designs. The cost landscape becomes exponentially flat, requiring exponentially many measurements to distinguish gradient from noise.</p>
+<p><strong>Entanglement Structure Impact:</strong><br />
+Pesah et al. showed ansätze with bounded entanglement growth avoid barren plateaus. For circuits with entanglement entropy scaling as <span class="arithmatex">\(S(\rho_A) \sim \mathcal{O}(L)\)</span> (linear in depth, not volume), gradient variance remains:</p>
+<div class="arithmatex">\[
+\text{Var}\left[\frac{\partial E}{\partial \theta_i}\right] \sim \mathcal{O}\left(\frac{1}{\text{poly}(n)}\right)
+\]</div>
+<p>Enabling polynomial-time optimization.</p>
+<p><strong>Design Principles:</strong><br />
+1. <strong>Problem-adapted structure:</strong> Encode symmetries (particle number, spin, spatial)<br />
+2. <strong>Shallow initialization:</strong> Start with <span class="arithmatex">\(L=1\)</span>, add layers adaptively<br />
+3. <strong>Local cost functions:</strong> Use layer-wise training or local observables<br />
+4. <strong>Warm starts:</strong> Initialize near known solutions (Hartree-Fock for chemistry)</p>
+<h3 id="comprehension-check_2"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<p><strong>1. What is a primary advantage of hardware-efficient ansätze?</strong></p>
+<ul>
+<li>A. Exact ground states for any <span class="arithmatex">\(\mathbf{H}\)</span>  </li>
+<li>B. Shallow depth matching native gates  </li>
+<li>C. Guaranteed convex optimization  </li>
+<li>D. Zero-shot variance  </li>
+</ul>
+<p><strong>2. UCC ansätze are most useful for which domain?</strong></p>
+<ul>
+<li>A. MaxCut on graphs  </li>
+<li>B. Quantum chemistry electronic structure  </li>
+<li>C. Shallow image classifiers  </li>
+<li>D. Hash functions  </li>
+</ul>
+<details class="info">
+<summary>See Answer</summary>
+<p><strong>1: B</strong> — They reduce compilation overhead on NISQ devices.<br />
+<strong>2: B</strong> — UCC originates from many-body quantum chemistry.</p>
+</details>
+</div>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Describe how ansatz depth and entanglement pattern influence both expressibility and barren plateau risk.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p><strong>The Expressibility-Trainability Tradeoff</strong><br />
+Deeper circuits with more entangling gates expand the accessible state manifold (higher expressibility) but create exponentially flat cost landscapes where gradients vanish. McClean et al. showed that for random-like deep circuits, gradient variance scales as <span class="arithmatex">\(\text{Var}[\partial L/\partial \theta_i] \sim O(1/2^n)\)</span>—for <span class="arithmatex">\(n=50\)</span> qubits, gradients disappear into noise.</p>
+<p><strong>Depth Impact</strong><br />
+Shallow circuits (<span class="arithmatex">\(d \sim O(1)\)</span>) avoid plateaus with <span class="arithmatex">\(O(1)\)</span> gradients but have low expressibility. Moderate depth (<span class="arithmatex">\(d \sim O(\text{poly}(n))\)</span>) balances both. Deep circuits (<span class="arithmatex">\(d \gg n\)</span>) achieve near-universal expressibility via Solovay-Kitaev but suffer severe barren plateaus. The critical threshold beyond which additional layers don't improve outcomes is problem-dependent.</p>
+<p><strong>Entanglement Pattern Effects</strong><br />
+Global all-to-all entanglement creates Haar-random-like states inducing barren plateaus. Local nearest-neighbor patterns restrict entanglement to bounded regions, preserving gradients. Problem-adapted structures (e.g., UCCSD for molecules) focus on relevant subspaces, mitigating plateaus. Pesah et al. proved ansätze with bounded entanglement growth (linear light-cone) avoid exponential gradient suppression even at large <span class="arithmatex">\(n\)</span>.</p>
+<p><strong>Design Strategies</strong><br />
+Use problem-inspired ansätze encoding domain knowledge, adaptive depth starting shallow and adding layers only if needed, local cost functions whose gradients don't vanish, and parameter initialization near known solutions. For molecular VQE: hardware-efficient depth-20 circuits suffer plateaus for <span class="arithmatex">\(n&gt;20\)</span>, while UCCSD maintains trainability for 50+ qubits despite lower general expressibility.</p>
+</details>
+</div>
+<h3 id="hands-on-projects_2"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
+<h4 id="project-blueprint_2"><strong>Project Blueprint</strong></h4>
+<table>
+<thead>
+<tr>
+<th><strong>Section</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Objective</strong></td>
+<td>Compare <span class="arithmatex">\(L=1\)</span> vs. <span class="arithmatex">\(L=3\)</span> hardware-efficient layers on a two-qubit <span class="arithmatex">\(\mathbf{H}=\tfrac{1}{2}(\mathbf{Z}_0+\mathbf{Z}_1) + \tfrac{1}{2}\,\mathbf{Z}_0\mathbf{Z}_1\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Mathematical Concept</strong></td>
+<td>Expressibility vs. trainability; proxy via best attainable <span class="arithmatex">\(E(\mathbf{\theta})\)</span> and empirical gradient norms.</td>
+</tr>
+<tr>
+<td><strong>Experiment Setup</strong></td>
+<td>Two-qubit line connectivity; layers of <span class="arithmatex">\(\mathbf{R}_y\)</span> and CNOT; fixed shot budget per evaluation.</td>
+</tr>
+<tr>
+<td><strong>Process Steps</strong></td>
+<td>Optimize <span class="arithmatex">\(E(\mathbf{\theta})\)</span> for each <span class="arithmatex">\(L\)</span>; record convergence speed and final energy.</td>
+</tr>
+<tr>
+<td><strong>Expected Behavior</strong></td>
+<td><span class="arithmatex">\(L=3\)</span> attains lower energy but converges more slowly and exhibits noisier gradients.</td>
+</tr>
+<tr>
+<td><strong>Tracking Variables</strong></td>
+<td>Depth <span class="arithmatex">\(L\)</span>, energy trajectory, gradient norms <span class="arithmatex">\(\|\nabla E\|\)</span>, iteration count.</td>
+</tr>
+<tr>
+<td><strong>Verification Goal</strong></td>
+<td>Demonstrate a depth–performance trade-off consistent with theory.</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Comparative table of final energies and iterations for <span class="arithmatex">\(L=1\)</span> vs. <span class="arithmatex">\(L=3\)</span>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="python-implementation_2"><strong>Python Implementation</strong></h4>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparsePauliOp</span><span class="p">,</span> <span class="n">Statevector</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># Project 3: Parameter-Shift Gradient Rule</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">ansatz_1q</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">return</span> <span class="n">qc</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">expectation_val</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="n">sv</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">ansatz_1q</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    <span class="k">return</span> <span class="n">sv</span><span class="o">.</span><span class="n">expectation_value</span><span class="p">(</span><span class="n">observable</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">param_shift_gradient</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameter-shift rule: grad = [E(theta+pi/2) - E(theta-pi/2)] / 2&quot;&quot;&quot;</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">expectation_val</span><span class="p">(</span><span class="n">theta</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span> <span class="o">-</span> <span class="n">expectation_val</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">shift</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">6</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="n">analytic_grad</span>  <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>   <span class="c1"># d/dθ &lt;Z&gt;_Ry(θ) = -sin(θ)</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="n">ps_grad</span>        <span class="o">=</span> <span class="n">param_shift_gradient</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="n">finite_diff</span>    <span class="o">=</span> <span class="p">(</span><span class="n">expectation_val</span><span class="p">(</span><span class="n">theta</span> <span class="o">+</span> <span class="mf">1e-5</span><span class="p">)</span> <span class="o">-</span> <span class="n">expectation_val</span><span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="mf">1e-5</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2e-5</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;theta = </span><span class="si">{</span><span class="n">theta</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analytic gradient:     </span><span class="si">{</span><span class="n">analytic_grad</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameter-shift:       </span><span class="si">{</span><span class="n">ps_grad</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Finite difference:     </span><span class="si">{</span><span class="n">finite_diff</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">theta</span> <span class="o">=</span> <span class="mf">0.5236</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">Analytic</span> <span class="n">gradient</span><span class="p">:</span>     <span class="o">-</span><span class="mf">0.500000</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">Parameter</span><span class="o">-</span><span class="n">shift</span><span class="p">:</span>       <span class="o">-</span><span class="mf">0.500000</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">Finite</span> <span class="n">difference</span><span class="p">:</span>     <span class="o">-</span><span class="mf">0.500000</span>
+</span></code></pre></div></p>
+<h4 id="outcome-and-interpretation_2"><strong>Outcome and Interpretation</strong></h4>
+<p>Results illustrate that deeper ansätze expand the reachable low-energy set but may degrade optimizer efficiency under shot noise, reflecting an expressibility–trainability balance.</p>
+<hr />
+<h2 class="heading-with-pill" id="64-classical-optimizers-for-vqas"><strong>6.4 Classical Optimizers for VQAs</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Noisy objective minimization with low-query methods</p>
+<p><strong>Summary:</strong> Gradient-free (COBYLA, Nelder–Mead) and stochastic-gradient (SPSA) methods are robust under sampling noise; parameter-shift gradients enable quasi-exact derivatives when affordable.</p>
+</blockquote>
+<h3 id="theoretical-background_3"><strong>Theoretical Background</strong></h3>
+<p>Optimizing the VQA energy landscape <span class="arithmatex">\(E(\vec{\theta})\)</span> under shot noise requires specialized classical optimization techniques balancing query efficiency with noise resilience.</p>
+<p><strong>Gradient Estimation Landscape:</strong><br />
+The fundamental challenge is computing <span class="arithmatex">\(\nabla E(\vec{\theta})\)</span> when only noisy measurements <span class="arithmatex">\(\tilde{E}(\vec{\theta}) = E(\vec{\theta}) + \eta\)</span> with <span class="arithmatex">\(\eta \sim \mathcal{N}(0, \sigma^2/N)\)</span> are available, where <span class="arithmatex">\(N\)</span> is shot count.</p>
+<p><strong>Parameter-Shift Rule (Exact Gradients):</strong><br />
+For parameterized gates generated by Pauli operators <span class="arithmatex">\(\mathbf{U}(\theta) = e^{-i\theta \mathbf{G}/2}\)</span> with generator satisfying <span class="arithmatex">\(\mathbf{G}^2 = \mathbf{I}\)</span> (eigenvalues <span class="arithmatex">\(\pm 1\)</span>), the derivative of expectation values follows:</p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial\theta_j} \langle\psi(\vec{\theta})|\mathbf{O}|\psi(\vec{\theta})\rangle = \frac{1}{2}\left[\langle\psi(\vec{\theta}^+)|\mathbf{O}|\psi(\vec{\theta}^+)\rangle - \langle\psi(\vec{\theta}^-)|\mathbf{O}|\psi(\vec{\theta}^-)\rangle\right]
+\]</div>
+<p>where <span class="arithmatex">\(\vec{\theta}^\pm = \vec{\theta} \pm \frac{\pi}{2}\hat{e}_j\)</span>. This is proven via eigenvalue decomposition:</p>
+<div class="arithmatex">\[
+\mathbf{U}(\theta) = \cos(\theta/2)\mathbf{I} - i\sin(\theta/2)\mathbf{G}
+\]</div>
+<p>Differentiating and using <span class="arithmatex">\(\mathbf{G}|\psi_\pm\rangle = \pm|\psi_\pm\rangle\)</span> yields the shift formula.</p>
+<p><strong>Query Complexity:</strong><br />
+For <span class="arithmatex">\(m\)</span> parameters, computing full gradient requires:
+- Parameter-shift: <span class="arithmatex">\(2m\)</span> circuit evaluations<br />
+- Finite differences: <span class="arithmatex">\(m+1\)</span> evaluations (forward) or <span class="arithmatex">\(2m\)</span> (central)</p>
+<p><strong>Simultaneous Perturbation Stochastic Approximation (SPSA):</strong><br />
+SPSA estimates all gradient components using only 2 function evaluations per iteration:</p>
+<div class="arithmatex">\[
+\widehat{\nabla}E(\vec{\theta}_k) = \frac{E(\vec{\theta}_k + c_k\vec{\Delta}_k) - E(\vec{\theta}_k - c_k\vec{\Delta}_k)}{2c_k} \vec{\Delta}_k
+\]</div>
+<p>where <span class="arithmatex">\(\vec{\Delta}_k = (\Delta_{k,1}, \ldots, \Delta_{k,m})\)</span> with <span class="arithmatex">\(\Delta_{k,i}\)</span> drawn independently from Rademacher distribution:</p>
+<div class="arithmatex">\[
+P(\Delta_{k,i} = +1) = P(\Delta_{k,i} = -1) = 1/2
+\]</div>
+<p>The update rule is:</p>
+<div class="arithmatex">\[
+\vec{\theta}_{k+1} = \vec{\theta}_k - a_k \widehat{\nabla}E(\vec{\theta}_k)
+\]</div>
+<p>with gain sequences satisfying Robbins-Monro conditions:</p>
+<div class="arithmatex">\[
+a_k = \frac{a}{(k+A)^\alpha}, \quad c_k = \frac{c}{k^\gamma}
+\]</div>
+<p>typically <span class="arithmatex">\(\alpha = 0.602\)</span>, <span class="arithmatex">\(\gamma = 0.101\)</span>.</p>
+<p><strong>Convergence Properties:</strong><br />
+Under regularity conditions, SPSA achieves:</p>
+<div class="arithmatex">\[
+\mathbb{E}[\widehat{\nabla}E] = \nabla E + \mathcal{O}(c_k^2)
+\]</div>
+<p>Convergence rate is <span class="arithmatex">\(\mathcal{O}(1/k^\alpha)\)</span>, matching gradient descent despite using <span class="arithmatex">\(\mathcal{O}(1)\)</span> vs <span class="arithmatex">\(\mathcal{O}(m)\)</span> queries.</p>
+<p><strong>Gradient-Free Methods:</strong><br />
+<strong>COBYLA (Constrained Optimization BY Linear Approximations):</strong><br />
+Builds local linear models of the objective via simplex interpolation. Requires <span class="arithmatex">\(\sim m+1\)</span> evaluations per iteration but handles bounded constraints naturally.</p>
+<p><strong>Nelder-Mead Simplex:</strong><br />
+Maintains a simplex of <span class="arithmatex">\(m+1\)</span> points in parameter space, iteratively reflecting, expanding, or contracting based on objective values. No gradient information needed.</p>
+<p><strong>Comparison:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Queries/Iter</th>
+<th>Shot Efficiency</th>
+<th>Barren Plateau Resilience</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parameter-Shift</td>
+<td><span class="arithmatex">\(2m\)</span></td>
+<td>High (exact grads)</td>
+<td>Poor (needs <span class="arithmatex">\(\|\nabla E\| &gt; \text{noise}\)</span>)</td>
+<td><span class="arithmatex">\(m &lt; 30\)</span>, low noise</td>
+</tr>
+<tr>
+<td>SPSA</td>
+<td>2</td>
+<td>Medium</td>
+<td>Good (finite-diff averages noise)</td>
+<td><span class="arithmatex">\(m &gt; 50\)</span>, high noise</td>
+</tr>
+<tr>
+<td>COBYLA</td>
+<td><span class="arithmatex">\(m+1\)</span></td>
+<td>Medium</td>
+<td>Excellent (gradient-free)</td>
+<td>Moderate <span class="arithmatex">\(m\)</span>, constraints</td>
+</tr>
+<tr>
+<td>Nelder-Mead</td>
+<td><span class="arithmatex">\(m+1\)</span></td>
+<td>Low (many iters)</td>
+<td>Good</td>
+<td>Small <span class="arithmatex">\(m &lt; 10\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Shot Budget Considerations:</strong><br />
+Total measurement cost is:</p>
+<div class="arithmatex">\[
+N_{\text{total}} = N_{\text{iter}} \times Q_{\text{iter}} \times N_{\text{shots}}
+\]</div>
+<p>where <span class="arithmatex">\(N_{\text{iter}}\)</span> is iteration count, <span class="arithmatex">\(Q_{\text{iter}}\)</span> is queries per iteration. SPSA reduces <span class="arithmatex">\(Q\)</span> by factor of <span class="arithmatex">\(m\)</span>, enabling <span class="arithmatex">\(m\times\)</span> larger <span class="arithmatex">\(N_{\text{shots}}\)</span> for same budget, dramatically improving gradient signal-to-noise.</p>
+<h3 id="comprehension-check_3"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<p><strong>1. SPSA estimates gradients using how many function evaluations per step (dimension-free)?</strong></p>
+<ul>
+<li>A. One  </li>
+<li>B. Two  </li>
+<li>C. <span class="arithmatex">\(2d\)</span>  </li>
+<li>D. <span class="arithmatex">\(d\)</span>  </li>
+</ul>
+<p><strong>2. Parameter-shift rules apply when generators satisfy which property?</strong></p>
+<ul>
+<li>A. Non-unitary  </li>
+<li>B. Nilpotent  </li>
+<li>C. Involutory with two-point spectrum  </li>
+<li>D. Non-Hermitian  </li>
+</ul>
+<details class="info">
+<summary>See Answer</summary>
+<p><strong>1: B</strong> — SPSA uses two queries irrespective of dimension.<br />
+<strong>2: C</strong> — Generators with eigenvalues <span class="arithmatex">\(\pm 1\)</span> (up to scale) admit parameter-shift.</p>
+</details>
+</div>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> When would you prefer SPSA over parameter-shift in VQE, and why?</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p><strong>Query Complexity Tradeoff</strong><br />
+Parameter-shift provides exact gradients via <span class="arithmatex">\(\frac{\partial L}{\partial \theta_i} = \frac{L(\theta_i + \pi/4) - L(\theta_i - \pi/4)}{2}\)</span>, requiring <span class="arithmatex">\(2m\)</span> circuit evaluations for <span class="arithmatex">\(m\)</span> parameters. SPSA estimates all components simultaneously using random perturbations <span class="arithmatex">\(\Delta\vec{\theta}\)</span> with only 2 evaluations: <span class="arithmatex">\(\nabla L \approx \frac{L(\vec{\theta} + c\Delta\vec{\theta}) - L(\vec{\theta} - c\Delta\vec{\theta})}{2c} \Delta\vec{\theta}\)</span>. This is <span class="arithmatex">\(O(1)\)</span> vs <span class="arithmatex">\(O(m)\)</span> query complexity.</p>
+<p><strong>Prefer SPSA When</strong><br />
+Tight shot budgets (<span class="arithmatex">\(N_{\text{shots}} &lt; 10^4\)</span>), high-dimensional parameters (<span class="arithmatex">\(m &gt; 50\)</span>), and noisy NISQ devices favor SPSA. For a 100-parameter ansatz, SPSA uses 2 circuits per iteration versus 200 for parameter-shift—a 100× reduction. Random perturbations naturally average out measurement noise and help escape noise-induced local minima. Early-stage exploratory optimization benefits from SPSA's rough gradient directions.</p>
+<p><strong>Prefer Parameter-Shift When</strong><br />
+Sufficient shot budget (<span class="arithmatex">\(N_{\text{shots}} &gt; 10^5\)</span>), low-to-moderate dimensions (<span class="arithmatex">\(m &lt; 30\)</span>), and fine-tuning near convergence favor parameter-shift. Exact gradients enable faster convergence with fewer iterations and are more compatible with error mitigation techniques. Late-stage refinement requires the precision SPSA's stochastic noise hinders.</p>
+<p><strong>Practical Hybrid Strategy</strong><br />
+Use SPSA for 50-100 iterations to identify promising regions, then switch to parameter-shift for final 20-50 iterations. For a 12-qubit molecule with 80-parameter UCCSD: SPSA achieves 20× shot reduction (4×10^6 total shots) versus parameter-shift (8×10^7 shots), making it essential for resource-constrained NISQ demonstrations.</p>
+</details>
+</div>
+<h3 id="hands-on-projects_3"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
+<h4 id="project-blueprint_3"><strong>Project Blueprint</strong></h4>
+<table>
+<thead>
+<tr>
+<th><strong>Section</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Objective</strong></td>
+<td>Compare SPSA vs. parameter-shift on the same two-qubit VQE task under a fixed shot budget.</td>
+</tr>
+<tr>
+<td><strong>Mathematical Concept</strong></td>
+<td>Stochastic gradient estimation vs. exact derivative by shifts.</td>
+</tr>
+<tr>
+<td><strong>Experiment Setup</strong></td>
+<td>Same ansatz and <span class="arithmatex">\(\mathbf{H}\)</span> as in §6.1; equal total measurement budget across methods.</td>
+</tr>
+<tr>
+<td><strong>Process Steps</strong></td>
+<td>Run both methods for the same wall-clock or shot budget; record convergence curves.</td>
+</tr>
+<tr>
+<td><strong>Expected Behavior</strong></td>
+<td>SPSA converges with higher noise but similar final energy; parameter-shift converges smoother but costs more per step.</td>
+</tr>
+<tr>
+<td><strong>Tracking Variables</strong></td>
+<td>Energy per iteration, total shots, time per iteration.</td>
+</tr>
+<tr>
+<td><strong>Verification Goal</strong></td>
+<td>Empirically validate trade-offs predicted by theory.</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Overlay plot description and summary statistics.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="python-implementation_3"><strong>Python Implementation</strong></h4>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">Statevector</span><span class="p">,</span> <span class="n">SparsePauliOp</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># Project 4: QAOA for MaxCut (3-node triangle graph)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1"># Graph: edges (0,1), (1,2), (0,2) - triangle</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># MaxCut Hamiltonian: H = -(Z0Z1 + Z1Z2 + Z0Z2)</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">H_cost</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">([</span><span class="s1">&#39;ZZI&#39;</span><span class="p">,</span><span class="s1">&#39;IZZ&#39;</span><span class="p">,</span><span class="s1">&#39;ZIZ&#39;</span><span class="p">],</span> <span class="n">coeffs</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">qaoa_circuit</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>        <span class="c1"># Cost unitary</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)]:</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>            <span class="n">qc</span><span class="o">.</span><span class="n">rzz</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">gamma</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span> <span class="o">*</span><span class="n">edge</span><span class="p">)</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>        <span class="c1"># Mixer unitary</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>        <span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">beta</span><span class="p">[</span><span class="n">layer</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="k">return</span> <span class="n">qc</span>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">cost</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>    <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>    <span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">params</span><span class="p">[:</span><span class="n">p</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="n">p</span><span class="p">:]</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>    <span class="n">sv</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">qaoa_circuit</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>    <span class="k">return</span> <span class="n">sv</span><span class="o">.</span><span class="n">expectation_value</span><span class="p">(</span><span class="n">H_cost</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;COBYLA&#39;</span><span class="p">)</span>
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;QAOA MaxCut energy: </span><span class="si">{</span><span class="n">res</span><span class="o">.</span><span class="n">fun</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  (optimal for triangle = -2)&quot;</span><span class="p">)</span>
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="n">probs</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">qaoa_circuit</span><span class="p">([</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span><span class="o">.</span><span class="n">probabilities_dict</span><span class="p">()</span>
+</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top states:&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">probs</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:</span><span class="mi">3</span><span class="p">])</span>
+</span></code></pre></div>
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">QAOA</span> <span class="n">MaxCut</span> <span class="n">energy</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.5000</span>  <span class="p">(</span><span class="n">optimal</span> <span class="k">for</span> <span class="n">triangle</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">Top</span> <span class="n">states</span><span class="p">:</span> <span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">(</span><span class="s1">&#39;000&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">0.49999752399502323</span><span class="p">)),</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">(</span><span class="s1">&#39;111&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">0.49999752399502323</span><span class="p">)),</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">(</span><span class="s1">&#39;010&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">8.253349921633826e-07</span><span class="p">))]</span>
+</span></code></pre></div></p>
+<h4 id="outcome-and-interpretation_3"><strong>Outcome and Interpretation</strong></h4>
+<p>Results demonstrate complementary regimes: SPSA suits noisy, high-dimensional settings; parameter-shift excels when precise gradients are affordable.</p>
+<hr />
+<h2 class="heading-with-pill" id="65-cost-functions-measurement-and-convergence"><strong>6.5 Cost Functions, Measurement, and Convergence</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Estimating expectations with commuting-group measurements</p>
+<p><strong>Summary:</strong> Cost functions are estimated from finite shots; grouping commuting Pauli terms reduces the number of measurement settings and accelerates convergence diagnostics.</p>
+</blockquote>
+<h3 id="theoretical-background_4"><strong>Theoretical Background</strong></h3>
+<p>Efficient Hamiltonian expectation estimation is critical for VQA performance, requiring careful measurement basis selection and shot allocation to minimize variance under hardware constraints.</p>
+<p><strong>Pauli Measurement Framework:</strong><br />
+A Pauli string <span class="arithmatex">\(\mathbf{P} = \bigotimes_{i=1}^n P_i\)</span> with <span class="arithmatex">\(P_i \in \{\mathbf{I}, \mathbf{X}, \mathbf{Y}, \mathbf{Z}\}\)</span> has eigenvalues <span class="arithmatex">\(\pm 1\)</span>. Measuring <span class="arithmatex">\(\mathbf{P}\)</span> on state <span class="arithmatex">\(|\psi\rangle\)</span> yields outcome <span class="arithmatex">\(\lambda \in \{\pm 1\}\)</span> with probabilities:</p>
+<div class="arithmatex">\[
+P(\lambda = +1) = \frac{1 + \langle\mathbf{P}\rangle}{2}, \quad P(\lambda = -1) = \frac{1 - \langle\mathbf{P}\rangle}{2}
+\]</div>
+<p>where <span class="arithmatex">\(\langle\mathbf{P}\rangle = \langle\psi|\mathbf{P}|\psi\rangle \in [-1, 1]\)</span>.</p>
+<p><strong>Commuting Group Partitioning:</strong><br />
+Two Pauli strings <span class="arithmatex">\(\mathbf{P}_i, \mathbf{P}_j\)</span> commute if and only if they differ on an even number of qubits where both are non-identity and non-equal:</p>
+<div class="arithmatex">\[
+[\mathbf{P}_i, \mathbf{P}_j] = 0 \iff |\{k : P_{i,k}, P_{j,k} \in \{\mathbf{X}, \mathbf{Y}, \mathbf{Z}\} \text{ and } P_{i,k} \neq P_{j,k}\}| \equiv 0 \pmod{2}
+\]</div>
+<p>Commuting operators share eigenbases and can be measured simultaneously via basis rotation to their common eigenbasis.</p>
+<p>Partition the Hamiltonian into <span class="arithmatex">\(M\)</span> maximal commuting groups:</p>
+<div class="arithmatex">\[
+\mathbf{H} = \sum_{m=1}^M \sum_{\mathbf{P}_j \in \mathcal{G}_m} c_j \mathbf{P}_j
+\]</div>
+<p>where all <span class="arithmatex">\(\mathbf{P}_j, \mathbf{P}_k \in \mathcal{G}_m\)</span> satisfy <span class="arithmatex">\([\mathbf{P}_j, \mathbf{P}_k] = 0\)</span>.</p>
+<p><strong>Optimal Grouping (NP-Hard):</strong><br />
+Finding the minimum number of groups is equivalent to graph coloring the commutativity graph <span class="arithmatex">\(G = (V, E)\)</span> where:
+- Vertices: Pauli terms<br />
+- Edges: Non-commuting pairs</p>
+<p>Heuristics include:
+1. <strong>Greedy coloring:</strong> <span class="arithmatex">\(\mathcal{O}(T^2)\)</span> for <span class="arithmatex">\(T\)</span> terms<br />
+2. <strong>Sorted insertion:</strong> Sort by term weight, add to first compatible group<br />
+3. <strong>Qubit-wise grouping:</strong> Group terms sharing Pauli type on each qubit</p>
+<p><strong>Variance Analysis:</strong><br />
+With <span class="arithmatex">\(N_m\)</span> shots allocated to group <span class="arithmatex">\(m\)</span>, the unbiased estimator is:</p>
+<div class="arithmatex">\[
+\widehat{E}(\vec{\theta}) = \sum_{m=1}^M \sum_{\mathbf{P}_j \in \mathcal{G}_m} c_j \widehat{\langle\mathbf{P}_j\rangle}_m
+\]</div>
+<p>where each <span class="arithmatex">\(\widehat{\langle\mathbf{P}_j\rangle}_m = \frac{1}{N_m}\sum_{k=1}^{N_m} \lambda_k^{(j)}\)</span>.</p>
+<p>The total variance is:</p>
+<div class="arithmatex">\[
+\text{Var}[\widehat{E}] = \sum_{m=1}^M \frac{1}{N_m} \text{Var}\left[\sum_{\mathbf{P}_j \in \mathcal{G}_m} c_j \mathbf{P}_j\right]
+\]</div>
+<p>Define group variance:</p>
+<div class="arithmatex">\[
+\sigma_m^2 = \langle\psi|\left(\sum_{\mathbf{P}_j \in \mathcal{G}_m} c_j \mathbf{P}_j\right)^2|\psi\rangle - \left(\sum_{\mathbf{P}_j \in \mathcal{G}_m} c_j \langle\mathbf{P}_j\rangle\right)^2
+\]</div>
+<p><strong>Optimal Shot Allocation:</strong><br />
+Under total budget <span class="arithmatex">\(N = \sum_m N_m\)</span>, minimize <span class="arithmatex">\(\text{Var}[\widehat{E}]\)</span> via Lagrange multipliers:</p>
+<div class="arithmatex">\[
+\mathcal{L} = \sum_m \frac{\sigma_m^2}{N_m} + \lambda\left(\sum_m N_m - N\right)
+\]</div>
+<p>Solving <span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial N_m} = 0\)</span> yields:</p>
+<div class="arithmatex">\[
+N_m^* = N \cdot \frac{\sigma_m}{\sum_{k=1}^M \sigma_k}
+\]</div>
+<p>Allocate shots proportional to group standard deviation (not variance).</p>
+<p><strong>Minimum Total Variance:</strong></p>
+<div class="arithmatex">\[
+\text{Var}[\widehat{E}]_{\min} = \frac{1}{N}\left(\sum_{m=1}^M \sigma_m\right)^2
+\]</div>
+<p>For uniform allocation <span class="arithmatex">\(N_m = N/M\)</span>:</p>
+<div class="arithmatex">\[
+\text{Var}[\widehat{E}]_{\text{uniform}} = \frac{M}{N}\sum_{m=1}^M \sigma_m^2
+\]</div>
+<p>The improvement factor is:</p>
+<div class="arithmatex">\[
+\frac{\text{Var}_{\text{uniform}}}{\text{Var}_{\text{optimal}}} = \frac{M\sum_m \sigma_m^2}{(\sum_m \sigma_m)^2} \geq 1
+\]</div>
+<p>with equality when all <span class="arithmatex">\(\sigma_m\)</span> are equal.</p>
+<p><strong>Convergence Diagnostics:</strong><br />
+Monitor:
+1. <strong>Energy plateau:</strong> <span class="arithmatex">\(|E_k - E_{k-1}| &lt; \epsilon\)</span> for <span class="arithmatex">\(\epsilon \sim 10^{-4}\)</span> Hartree<br />
+2. <strong>Gradient norm:</strong> <span class="arithmatex">\(\|\nabla E\| &lt; \delta\)</span> for <span class="arithmatex">\(\delta \sim 10^{-3}\)</span><br />
+3. <strong>Parameter stability:</strong> <span class="arithmatex">\(\|\vec{\theta}_k - \vec{\theta}_{k-1}\| &lt; \tau\)</span></p>
+<h3 id="comprehension-check_4"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<p><strong>1. Why group commuting Pauli terms before measurement?</strong></p>
+<ul>
+<li>A. To change the Hamiltonian  </li>
+<li>B. To reduce distinct measurement bases  </li>
+<li>C. To increase variance  </li>
+<li>D. To avoid tomography  </li>
+</ul>
+<p><strong>2. Which indicator best signals convergence in VQE?</strong></p>
+<ul>
+<li>A. Increasing depth during optimization  </li>
+<li>B. Oscillating energy with growing amplitude  </li>
+<li>C. Stabilized energy and small <span class="arithmatex">\(\|\nabla E\|\)</span>  </li>
+<li>D. Random parameter jumps  </li>
+</ul>
+<details class="info">
+<summary>See Answer</summary>
+<p><strong>1: B</strong> — Commuting groups share a basis and can be measured together.<br />
+<strong>2: C</strong> — Plateaued energy and vanishing gradients indicate convergence.</p>
+</details>
+</div>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+<p><strong>Q:</strong> Outline an adaptive measurement strategy to allocate shots across commuting groups under a fixed budget.</p>
+<details class="info" open="open">
+<summary>Answer Strategy</summary>
+<p><strong>The Allocation Problem</strong><br />
+Measuring Hamiltonian <span class="arithmatex">\(H = \sum_j c_j P_j\)</span> grouped into <span class="arithmatex">\(M\)</span> commuting sets <span class="arithmatex">\(\{G_1, \ldots, G_M\}\)</span> under total budget <span class="arithmatex">\(N_{\text{total}}\)</span> requires optimal shot allocation <span class="arithmatex">\(\{N_1, \ldots, N_M\}\)</span> to minimize total variance <span class="arithmatex">\(\text{Var}[\widehat{L}] = \sum_m \frac{\sigma_m^2}{N_m}\)</span>.</p>
+<p><strong>Optimal Allocation (Known Variances)</strong><br />
+With known group variances <span class="arithmatex">\(\{\sigma_m^2\}\)</span>, minimize via Lagrange multipliers: <span class="arithmatex">\(N_m^* = N_{\text{total}} \cdot \frac{\sigma_m}{\sum_k \sigma_k}\)</span>. Allocate shots proportional to group standard deviation (not variance)—high-variance groups receive more shots.</p>
+<p><strong>Adaptive Strategy (Unknown Variances)</strong><br />
+<strong>Step 1</strong>: Pilot exploration with <span class="arithmatex">\(N_{\text{pilot}}/M\)</span> shots per group to estimate <span class="arithmatex">\(\widehat{\sigma}_m^2 = \frac{1}{N_m-1} \sum_k (L_m^{(k)} - \widehat{L}_m)^2\)</span>. <strong>Step 2</strong>: For remaining budget, allocate proportionally: <span class="arithmatex">\(N_m = N_m^{(0)} + N_{\text{remaining}} \cdot \frac{\widehat{\sigma}_m}{\sum_k \widehat{\sigma}_k}\)</span>. <strong>Step 3</strong>: Update variance estimates at each optimization iteration based on recent measurements. Enforce minimum allocation <span class="arithmatex">\(N_m \geq N_{\text{min}}\)</span> to avoid under-sampling.</p>
+<p><strong>Impact</strong><br />
+For a 12-qubit molecule with 20 commuting groups, adaptive allocation with <span class="arithmatex">\(10^5\)</span> shots achieves variance comparable to <span class="arithmatex">\(3\times10^5\)</span> shots under equal allocation—a 3× effective shot economy. This is critical for scaling VQE to larger molecules on shot-limited NISQ hardware.</p>
+</details>
+</div>
+<h3 id="hands-on-projects_4"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
+<h4 id="project-blueprint_4"><strong>Project Blueprint</strong></h4>
+<table>
+<thead>
+<tr>
+<th><strong>Section</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Objective</strong></td>
+<td>Implement commuting-group measurement for a 3-term Hamiltonian and compare variance vs. naive per-term measurement.</td>
+</tr>
+<tr>
+<td><strong>Mathematical Concept</strong></td>
+<td>Variance reduction via grouping; budgeted estimation of <span class="arithmatex">\(\widehat{E}\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Experiment Setup</strong></td>
+<td><span class="arithmatex">\(\mathbf{H}=\mathbf{Z}_0 + \mathbf{Z}_1 + \mathbf{Z}_0\mathbf{Z}_1\)</span>; two groups: <span class="arithmatex">\(\{\mathbf{Z}_0,\mathbf{Z}_1,\mathbf{Z}_0\mathbf{Z}_1\}\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Process Steps</strong></td>
+<td>Estimate <span class="arithmatex">\(\widehat{E}\)</span> with the same total shots using (i) grouped and (ii) per-term bases; compare empirical variances.</td>
+</tr>
+<tr>
+<td><strong>Expected Behavior</strong></td>
+<td>Grouped approach achieves lower variance for equal budgets.</td>
+</tr>
+<tr>
+<td><strong>Tracking Variables</strong></td>
+<td>Group variances <span class="arithmatex">\(\sigma_m^2\)</span>, total variance, shot allocation <span class="arithmatex">\(N_m\)</span>.</td>
+</tr>
+<tr>
+<td><strong>Verification Goal</strong></td>
+<td>Demonstrate reduced estimator variance with grouping.</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>Table summarizing variance vs. method under fixed budget.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="python-implementation_4"><strong>Python Implementation</strong></h4>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">Statevector</span><span class="p">,</span> <span class="n">SparsePauliOp</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># Project 5: Barren Plateau Diagnostics</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># Measure gradient variance vs circuit depth</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">random_hardware_ansatz</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="n">qc</span><span class="o">.</span><span class="n">ry</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">i</span><span class="p">);</span> <span class="n">p</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="k">return</span> <span class="n">qc</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="n">observable</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span> <span class="o">+</span> <span class="s1">&#39;I&#39;</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">coeffs</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">])</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="n">n_qubits</span>   <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># observable acts on first qubit only</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">grad_variance</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>    <span class="n">n_params</span> <span class="o">=</span> <span class="n">n_qubits</span> <span class="o">*</span> <span class="n">depth</span>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>    <span class="n">grads</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>    <span class="n">H_z0</span>  <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="o">+</span><span class="s1">&#39;I&#39;</span><span class="o">*</span><span class="p">(</span><span class="n">n_qubits</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>        <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n_params</span><span class="p">)</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>        <span class="n">shift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>        <span class="n">theta_p</span><span class="p">,</span> <span class="n">theta_m</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>        <span class="n">theta_p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">shift</span><span class="p">;</span> <span class="n">theta_m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">shift</span>
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>        <span class="n">e_p</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">random_hardware_ansatz</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">theta_p</span><span class="p">))</span><span class="o">.</span><span class="n">expectation_value</span><span class="p">(</span><span class="n">H_z0</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>        <span class="n">e_m</span> <span class="o">=</span> <span class="n">Statevector</span><span class="p">(</span><span class="n">random_hardware_ansatz</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">theta_m</span><span class="p">))</span><span class="o">.</span><span class="n">expectation_value</span><span class="p">(</span><span class="n">H_z0</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>        <span class="n">grads</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">e_p</span> <span class="o">-</span> <span class="n">e_m</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-8-32"><a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">grads</span><span class="p">)</span>
+</span><span id="__span-8-33"><a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a>
+</span><span id="__span-8-34"><a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gradient variance vs depth (barren plateau signature):&quot;</span><span class="p">)</span>
+</span><span id="__span-8-35"><a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>
+</span><span id="__span-8-36"><a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a>    <span class="n">var</span> <span class="o">=</span> <span class="n">grad_variance</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  depth=</span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">: Var[grad] = </span><span class="si">{</span><span class="n">var</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">Gradient</span> <span class="n">variance</span> <span class="n">vs</span> <span class="n">depth</span> <span class="p">(</span><span class="n">barren</span> <span class="n">plateau</span> <span class="n">signature</span><span class="p">):</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  <span class="n">depth</span><span class="o">=</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Var</span><span class="p">[</span><span class="n">grad</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5.19e-02</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  <span class="n">depth</span><span class="o">=</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Var</span><span class="p">[</span><span class="n">grad</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5.97e-02</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  <span class="n">depth</span><span class="o">=</span> <span class="mi">4</span><span class="p">:</span> <span class="n">Var</span><span class="p">[</span><span class="n">grad</span><span class="p">]</span> <span class="o">=</span> <span class="mf">8.77e-02</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>  <span class="n">depth</span><span class="o">=</span> <span class="mi">8</span><span class="p">:</span> <span class="n">Var</span><span class="p">[</span><span class="n">grad</span><span class="p">]</span> <span class="o">=</span> <span class="mf">8.99e-02</span>
+</span></code></pre></div></p>
+<h4 id="outcome-and-interpretation_4"><strong>Outcome and Interpretation</strong></h4>
+<p>Grouping commuting terms reduces the number of measurement settings and achieves lower estimator variance for a fixed budget, improving optimization efficiency on NISQ hardware.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../chapter-5/workbook/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chapter-5 Quantum Fourier Transform">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Chapter-5 Quantum Fourier Transform
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../chapter-7/workbook/" class="md-footer__link md-footer__link--next" aria-label="Next: Chapter-7 Quantum Tools">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Chapter-7 Quantum Tools
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bigbookofcomputing.github.io" target="_blank" rel="noopener" title="bigbookofcomputing.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/bigbookofcomputing" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.facebook.com/bigbookofcomputing" target="_blank" rel="noopener" title="www.facebook.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256c0 120 82.7 220.8 194.2 248.5V334.2h-52.8V256h52.8v-33.7c0-87.1 39.4-127.5 125-127.5 16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287v175.9C413.8 494.8 512 386.9 512 256"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/bigbookofcomputing" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@big-book-of-computing" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../static/mathjax-config.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

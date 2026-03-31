@@ -1,0 +1,3876 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A comprehensive guide to the foundations of quantum computing">
+      
+      
+        <meta name="author" content="Big Book of Computing">
+      
+      
+        <link rel="canonical" href="https://bigbookofcomputing.github.io/chapters/chapter-14/workbook/">
+      
+      
+        <link rel="prev" href="../../chapter-13/workbook/">
+      
+      
+        <link rel="next" href="../../chapter-15/workbook/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Chapter-14 QUBO Family of Problems - Big Book of Computing | Quantum Computing</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+      <link rel="stylesheet" href="../../../static/styles.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-ECS7B3X8JM"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-ECS7B3X8JM",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-ECS7B3X8JM",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-14-quantum-optimization-qubo-family-workbook" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Big Book of Computing | Quantum Computing" class="md-header__button md-logo" aria-label="Big Book of Computing | Quantum Computing" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Big Book of Computing | Quantum Computing
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter-14 QUBO Family of Problems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bigbookofcomputing/quantum" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../home/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contents/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contents
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Introduction
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter-1/essay/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Chapters
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../chapter-1/workbook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  WorkBooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter-1/codebook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CodeBooks
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Big Book of Computing | Quantum Computing" class="md-nav__button md-logo" aria-label="Big Book of Computing | Quantum Computing" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Big Book of Computing | Quantum Computing
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bigbookofcomputing/quantum" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-6/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-10/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WorkBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WorkBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-6/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-10/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#141-qubo-and-the-ising-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 QUBO and the Ising Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.1 QUBO and the Ising Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explain-the-practical-necessity-of-the-mathematical-equivalence-between-qubo-and-the-ising-model-in-the-context-of-commercial-quantum-hardware-info-answer-strategy-the-equivalence-is-a-crucial-bridge-between-how-we-formulate-problems-and-how-quantum-hardware-solves-them-1-problem-formulation-qubo-many-real-world-optimization-problems-in-business-logistics-and-finance-are-most-naturally-expressed-using-binary-variables-x_i-in-0-1-which-is-the-language-of-qubo-for-example-should-we-include-this-asset-in-the-portfolio-or-not-2-hardware-operation-ising-quantum-hardware-especially-quantum-annealers-is-physically-built-to-find-the-lowest-energy-state-of-a-system-of-interacting-spins-z_i-in-1-1-this-is-the-language-of-the-ising-model-3-the-necessary-translator-the-mathematical-equivalence-acts-as-a-compiler-it-translates-the-problem-from-its-natural-binary-language-qubo-into-the-spin-based-language-ising-that-the-quantum-hardware-physically-understands-without-this-bridge-we-could-not-solve-practical-business-problems-on-these-specialized-quantum-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware. ???+ info &quot;Answer Strategy&quot; The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them. 1. **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, &quot;Should we include this asset in the portfolio or not?&quot; 2. **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model. 3. **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#142-adiabatic-and-variational-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Adiabatic and Variational Optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.2 Adiabatic and Variational Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-and-contrast-quantum-annealing-and-qaoa-as-approaches-to-quantum-optimization-info-answer-strategy-both-are-leading-methods-for-quantum-optimization-but-they-differ-fundamentally-in-their-approach-and-hardware-requirements-feature-quantum-annealing-qa-qaoa-process-analog-a-continuous-physical-process-that-slowly-morphs-a-simple-energy-landscape-into-the-complex-problem-landscape-digital-a-gate-based-discrete-approximation-of-an-adiabatic-evolution-broken-into-steps-hardware-specialized-runs-on-quantum-annealers-eg-d-wave-universal-runs-on-general-purpose-gate-based-quantum-computers-eg-ibm-google-control-simple-the-main-control-knob-is-the-total-annealing-evolution-time-its-largely-a-fire-and-forget-process-complex-variational-requires-a-classical-optimization-loop-to-tune-a-set-of-2p-circuit-parameters-vecgamma-vecbeta-guarantees-theoretical-the-adiabatic-theorem-guarantees-finding-the-ground-state-if-the-evolution-is-infinitely-slow-barring-thermal-noise-and-small-energy-gaps-heuristic-performance-depends-heavily-on-the-circuit-depth-p-and-the-success-of-the-classical-optimizer-there-is-no-guarantee-of-finding-the-optimal-solution-in-short-annealing-is-an-analog-hardware-specific-approach-with-strong-theoretical-backing-while-qaoa-is-a-digital-flexible-and-hardware-agnostic-variational-algorithm-designed-for-the-nisq-era" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization. ???+ info &quot;Answer Strategy&quot; Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements. | Feature | Quantum Annealing (QA) | QAOA | | :--- | :--- | :--- | | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. | | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). | | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It&#39;s largely a &quot;fire-and-forget&quot; process. | **Complex &amp; Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. | | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. | **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#143-application-portfolio-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Application: Portfolio Optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.3 Application: Portfolio Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-portfolio-manager-asks-you-why-they-should-consider-a-quantum-approach-for-portfolio-optimization-over-classical-solvers-what-is-the-potential-long-term-advantage-you-would-highlight-info-answer-strategy-the-key-long-term-advantage-is-the-potential-to-handle-the-combinatorial-explosion-inherent-in-portfolio-selection-more-effectively-than-any-classical-computer-1-the-scaling-problem-with-n-assets-there-are-2n-possible-portfolios-as-the-number-of-available-assets-grows-this-search-space-becomes-astronomically-large-making-it-impossible-for-classical-computers-to-check-every-combination-classical-solvers-must-rely-on-heuristics-and-approximations-that-may-miss-the-true-optimal-portfolio-2-the-quantum-promise-quantum-optimization-algorithms-like-qaoa-or-quantum-annealing-are-designed-to-navigate-these-massive-combinatorial-spaces-by-using-principles-like-superposition-and-entanglement-they-can-explore-a-vast-number-of-possibilities-simultaneously-this-offers-the-potential-to-find-higher-quality-portfolios-ie-better-riskreturn-profiles-that-are-inaccessible-to-classical-methods-3-the-important-caveat-its-crucial-to-be-transparent-that-this-is-a-future-facing-advantage-todays-nisq-era-quantum-computers-are-not-yet-large-or-robust-enough-to-outperform-state-of-the-art-classical-solvers-on-this-problem-the-advantage-is-predicated-on-the-future-development-of-larger-fault-tolerant-quantum-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight? ???+ info &quot;Answer Strategy&quot; The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer. 1. **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio. 2. **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods. 3. **The Important Caveat:** It&#39;s crucial to be transparent that this is a **future-facing advantage**. Today&#39;s NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#144-constraint-encoding-with-penalty-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Constraint Encoding with Penalty Terms
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.4 Constraint Encoding with Penalty Terms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-main-challenge-in-choosing-the-penalty-factor-lambda-what-happens-if-its-too-small-or-too-large-info-answer-strategy-the-main-challenge-is-the-goldilocks-problem-the-penalty-factor-lambda-must-be-finely-tuned-to-be-just-right-it-needs-to-be-strong-enough-to-enforce-the-constraint-without-overwhelming-the-original-problem-if-lambda-is-too-small-effect-the-penalty-for-violating-the-constraint-is-insignificant-result-the-optimizer-may-find-a-solution-that-has-a-great-objective-score-but-is-invalid-because-it-breaks-the-rule-eg-a-portfolio-that-is-over-budget-the-constraint-is-treated-as-a-weak-suggestion-not-a-hard-rule-if-lambda-is-too-large-effect-the-penalty-term-dominates-the-entire-cost-function-drowning-out-the-original-objective-the-energy-landscape-becomes-a-flat-plain-of-valid-solutions-surrounded-by-massive-penalty-walls-result-the-optimizer-will-certainly-find-a-valid-solution-but-it-will-likely-not-be-the-optimal-one-the-subtle-variations-in-the-original-cost-function-that-guide-the-search-for-the-best-solution-are-lost-in-the-noise-of-the-huge-penalty-values-this-can-also-make-the-problem-numerically-unstable-and-harder-for-the-solver-to-handle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the main challenge in choosing the penalty factor $\lambda$? What happens if it&#39;s too small or too large? ???+ info &quot;Answer Strategy&quot; The main challenge is the &quot;Goldilocks problem&quot;: the penalty factor $\lambda$ must be finely tuned to be &quot;just right.&quot; It needs to be strong enough to enforce the constraint without overwhelming the original problem. * **If $\lambda$ is too small:** * **Effect:** The penalty for violating the constraint is insignificant. * **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule. * **If $\lambda$ is too large:** * **Effect:** The penalty term dominates the entire cost function, &quot;drowning out&quot; the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls. * **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#145-from-theory-to-practice-qubo-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.5 From Theory to Practice: QUBO Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.5 From Theory to Practice: QUBO Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint-qubo-to-ising-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint: QUBO to Ising Conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint-max-cut-qubo-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint: Max-Cut QUBO Formulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint-penalty-constraint-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint: Penalty Constraint Encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CodeBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-6/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-10/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#141-qubo-and-the-ising-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.1 QUBO and the Ising Model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.1 QUBO and the Ising Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explain-the-practical-necessity-of-the-mathematical-equivalence-between-qubo-and-the-ising-model-in-the-context-of-commercial-quantum-hardware-info-answer-strategy-the-equivalence-is-a-crucial-bridge-between-how-we-formulate-problems-and-how-quantum-hardware-solves-them-1-problem-formulation-qubo-many-real-world-optimization-problems-in-business-logistics-and-finance-are-most-naturally-expressed-using-binary-variables-x_i-in-0-1-which-is-the-language-of-qubo-for-example-should-we-include-this-asset-in-the-portfolio-or-not-2-hardware-operation-ising-quantum-hardware-especially-quantum-annealers-is-physically-built-to-find-the-lowest-energy-state-of-a-system-of-interacting-spins-z_i-in-1-1-this-is-the-language-of-the-ising-model-3-the-necessary-translator-the-mathematical-equivalence-acts-as-a-compiler-it-translates-the-problem-from-its-natural-binary-language-qubo-into-the-spin-based-language-ising-that-the-quantum-hardware-physically-understands-without-this-bridge-we-could-not-solve-practical-business-problems-on-these-specialized-quantum-devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware. ???+ info &quot;Answer Strategy&quot; The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them. 1. **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, &quot;Should we include this asset in the portfolio or not?&quot; 2. **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model. 3. **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#142-adiabatic-and-variational-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.2 Adiabatic and Variational Optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.2 Adiabatic and Variational Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-and-contrast-quantum-annealing-and-qaoa-as-approaches-to-quantum-optimization-info-answer-strategy-both-are-leading-methods-for-quantum-optimization-but-they-differ-fundamentally-in-their-approach-and-hardware-requirements-feature-quantum-annealing-qa-qaoa-process-analog-a-continuous-physical-process-that-slowly-morphs-a-simple-energy-landscape-into-the-complex-problem-landscape-digital-a-gate-based-discrete-approximation-of-an-adiabatic-evolution-broken-into-steps-hardware-specialized-runs-on-quantum-annealers-eg-d-wave-universal-runs-on-general-purpose-gate-based-quantum-computers-eg-ibm-google-control-simple-the-main-control-knob-is-the-total-annealing-evolution-time-its-largely-a-fire-and-forget-process-complex-variational-requires-a-classical-optimization-loop-to-tune-a-set-of-2p-circuit-parameters-vecgamma-vecbeta-guarantees-theoretical-the-adiabatic-theorem-guarantees-finding-the-ground-state-if-the-evolution-is-infinitely-slow-barring-thermal-noise-and-small-energy-gaps-heuristic-performance-depends-heavily-on-the-circuit-depth-p-and-the-success-of-the-classical-optimizer-there-is-no-guarantee-of-finding-the-optimal-solution-in-short-annealing-is-an-analog-hardware-specific-approach-with-strong-theoretical-backing-while-qaoa-is-a-digital-flexible-and-hardware-agnostic-variational-algorithm-designed-for-the-nisq-era" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization. ???+ info &quot;Answer Strategy&quot; Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements. | Feature | Quantum Annealing (QA) | QAOA | | :--- | :--- | :--- | | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. | | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). | | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It&#39;s largely a &quot;fire-and-forget&quot; process. | **Complex &amp; Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. | | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. | **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#143-application-portfolio-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.3 Application: Portfolio Optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.3 Application: Portfolio Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-portfolio-manager-asks-you-why-they-should-consider-a-quantum-approach-for-portfolio-optimization-over-classical-solvers-what-is-the-potential-long-term-advantage-you-would-highlight-info-answer-strategy-the-key-long-term-advantage-is-the-potential-to-handle-the-combinatorial-explosion-inherent-in-portfolio-selection-more-effectively-than-any-classical-computer-1-the-scaling-problem-with-n-assets-there-are-2n-possible-portfolios-as-the-number-of-available-assets-grows-this-search-space-becomes-astronomically-large-making-it-impossible-for-classical-computers-to-check-every-combination-classical-solvers-must-rely-on-heuristics-and-approximations-that-may-miss-the-true-optimal-portfolio-2-the-quantum-promise-quantum-optimization-algorithms-like-qaoa-or-quantum-annealing-are-designed-to-navigate-these-massive-combinatorial-spaces-by-using-principles-like-superposition-and-entanglement-they-can-explore-a-vast-number-of-possibilities-simultaneously-this-offers-the-potential-to-find-higher-quality-portfolios-ie-better-riskreturn-profiles-that-are-inaccessible-to-classical-methods-3-the-important-caveat-its-crucial-to-be-transparent-that-this-is-a-future-facing-advantage-todays-nisq-era-quantum-computers-are-not-yet-large-or-robust-enough-to-outperform-state-of-the-art-classical-solvers-on-this-problem-the-advantage-is-predicated-on-the-future-development-of-larger-fault-tolerant-quantum-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight? ???+ info &quot;Answer Strategy&quot; The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer. 1. **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio. 2. **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods. 3. **The Important Caveat:** It&#39;s crucial to be transparent that this is a **future-facing advantage**. Today&#39;s NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#144-constraint-encoding-with-penalty-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.4 Constraint Encoding with Penalty Terms
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.4 Constraint Encoding with Penalty Terms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theoretical-background_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theoretical Background
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehension-check_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprehension Check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-main-challenge-in-choosing-the-penalty-factor-lambda-what-happens-if-its-too-small-or-too-large-info-answer-strategy-the-main-challenge-is-the-goldilocks-problem-the-penalty-factor-lambda-must-be-finely-tuned-to-be-just-right-it-needs-to-be-strong-enough-to-enforce-the-constraint-without-overwhelming-the-original-problem-if-lambda-is-too-small-effect-the-penalty-for-violating-the-constraint-is-insignificant-result-the-optimizer-may-find-a-solution-that-has-a-great-objective-score-but-is-invalid-because-it-breaks-the-rule-eg-a-portfolio-that-is-over-budget-the-constraint-is-treated-as-a-weak-suggestion-not-a-hard-rule-if-lambda-is-too-large-effect-the-penalty-term-dominates-the-entire-cost-function-drowning-out-the-original-objective-the-energy-landscape-becomes-a-flat-plain-of-valid-solutions-surrounded-by-massive-penalty-walls-result-the-optimizer-will-certainly-find-a-valid-solution-but-it-will-likely-not-be-the-optimal-one-the-subtle-variations-in-the-original-cost-function-that-guide-the-search-for-the-best-solution-are-lost-in-the-noise-of-the-huge-penalty-values-this-can-also-make-the-problem-numerically-unstable-and-harder-for-the-solver-to-handle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the main challenge in choosing the penalty factor $\lambda$? What happens if it&#39;s too small or too large? ???+ info &quot;Answer Strategy&quot; The main challenge is the &quot;Goldilocks problem&quot;: the penalty factor $\lambda$ must be finely tuned to be &quot;just right.&quot; It needs to be strong enough to enforce the constraint without overwhelming the original problem. * **If $\lambda$ is too small:** * **Effect:** The penalty for violating the constraint is insignificant. * **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule. * **If $\lambda$ is too large:** * **Effect:** The penalty term dominates the entire cost function, &quot;drowning out&quot; the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls. * **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#145-from-theory-to-practice-qubo-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14.5 From Theory to Practice: QUBO Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14.5 From Theory to Practice: QUBO Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hands-on-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-On Projects
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hands-On Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint-qubo-to-ising-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint: QUBO to Ising Conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint-max-cut-qubo-formulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint: Max-Cut QUBO Formulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-blueprint-penalty-constraint-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project Blueprint: Penalty Constraint Encoding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outcome-and-interpretation_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outcome and Interpretation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bigbookofcomputing/quantum/edit/master/docs/chapters/chapter-14/workbook.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/bigbookofcomputing/quantum/raw/master/docs/chapters/chapter-14/workbook.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="chapter-14-quantum-optimization-qubo-family-workbook"><strong>Chapter 14: Quantum Optimization (QUBO-Family) () () (Workbook)</strong></h1>
+<hr />
+<blockquote>
+<p><strong>Summary:</strong> This chapter explores quantum optimization, focusing on the QUBO (Quadratic Unconstrained Binary Optimization) and Ising model formulations, which provide a universal language for mapping NP-hard problems onto quantum hardware. We examine the two primary quantum approaches: Adiabatic Quantum Optimization (AQO), realized in quantum annealers, which slowly evolves a system to its optimal ground state; and the Quantum Approximate Optimization Algorithm (QAOA), a gate-based variational method for NISQ devices. By detailing the mathematical foundations and practical applications of these frameworks, the chapter provides a guide to leveraging near-term quantum computers for solving complex optimization challenges.</p>
+</blockquote>
+<hr />
+<p>The goal of this chapter is to establish the foundational concepts and techniques of Quantum Optimization, exploring how quantum computing can enhance traditional optimization frameworks.</p>
+<hr />
+<h2 class="heading-with-pill" id="141-qubo-and-the-ising-model"><strong>14.1 QUBO and the Ising Model</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Equivalent Optimization Frameworks</p>
+<p><strong>Summary:</strong> Many complex optimization problems can be formulated as a Quadratic Unconstrained Binary Optimization (QUBO) problem. This framework is mathematically equivalent to the Ising model from physics, allowing problems expressed with binary variables to be solved on quantum hardware that operates on spin variables.</p>
+</blockquote>
+<hr />
+<h3 id="theoretical-background"><strong>Theoretical Background</strong></h3>
+<p>The core idea in quantum optimization is to map a real-world problem onto a mathematical structure that a quantum computer can solve. Two such equivalent structures are dominant:</p>
+<p><strong>Quadratic Unconstrained Binary Optimization (QUBO):</strong> </p>
+<p>This framework is used to minimize a cost function of the form:</p>
+<div class="arithmatex">\[
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>C(\mathbf{x}) = \mathbf{x}^T \mathbf{Q} \mathbf{x} = \sum_{i,j} Q_{ij} x_i x_j
+</span></code></pre></div>
+\]</div>
+<p>Here, <span class="arithmatex">\(\mathbf{x}\)</span> is a vector of binary variables, <span class="arithmatex">\(x_i \in \{0, 1\}\)</span>, and <span class="arithmatex">\(\mathbf{Q}\)</span> is a real-valued matrix that defines the problem's cost landscape. The goal is to find the binary vector <span class="arithmatex">\(\mathbf{x}\)</span> that minimizes <span class="arithmatex">\(C(\mathbf{x})\)</span>.</p>
+<p><strong>Ising Model:</strong> </p>
+<p>Originating from statistical mechanics, the Ising model describes the energy of a system of interacting spins. Its energy function (Hamiltonian) is:</p>
+<div class="arithmatex">\[
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>E(\mathbf{z}) = \sum_{i &lt; j} J_{ij} z_i z_j + \sum_i h_i z_i
+</span></code></pre></div>
+\]</div>
+<p>Here, <span class="arithmatex">\(\mathbf{z}\)</span> is a vector of spin variables, <span class="arithmatex">\(z_i \in \{-1, 1\}\)</span>, <span class="arithmatex">\(J_{ij}\)</span> are the coupling strengths between spins, and <span class="arithmatex">\(h_i\)</span> are external fields. Nature seeks the lowest energy state, which corresponds to the optimal solution.</p>
+<p>The two models are mathematically equivalent via the simple transformation:</p>
+<div class="arithmatex">\[
+z_i = 2x_i - 1 \quad \iff \quad x_i = \frac{z_i + 1}{2}
+\]</div>
+<p>This mapping is crucial because many real-world problems are naturally expressed in binary terms (QUBO), while quantum optimizers (especially annealers) are physically built to find the ground state of an Ising Hamiltonian.</p>
+<hr />
+<h3 id="comprehension-check"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<ol>
+<li>The mapping <span class="arithmatex">\(z_i = 2x_i - 1\)</span> is used to convert a QUBO problem into an equivalent Ising model. This changes the domain of the variables from binary (<span class="arithmatex">\(x_i \in \{0, 1\}\)</span>) to:</li>
+</ol>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    - A. Real numbers $z_i \in [0, 1]$.
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    - B. Spin variables $z_i \in \{-1, 1\}$.
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    - C. Continuous angles $z_i \in [0, 2\pi]$.
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>??? info &quot;See Answer&quot;
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    **Correct: B**. The transformation maps binary variables to spin variables.
+</span></code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+</div>
+<h2 id="explain-the-practical-necessity-of-the-mathematical-equivalence-between-qubo-and-the-ising-model-in-the-context-of-commercial-quantum-hardware-info-answer-strategy-the-equivalence-is-a-crucial-bridge-between-how-we-formulate-problems-and-how-quantum-hardware-solves-them-1-problem-formulation-qubo-many-real-world-optimization-problems-in-business-logistics-and-finance-are-most-naturally-expressed-using-binary-variables-x_i-in-0-1-which-is-the-language-of-qubo-for-example-should-we-include-this-asset-in-the-portfolio-or-not-2-hardware-operation-ising-quantum-hardware-especially-quantum-annealers-is-physically-built-to-find-the-lowest-energy-state-of-a-system-of-interacting-spins-z_i-in-1-1-this-is-the-language-of-the-ising-model-3-the-necessary-translator-the-mathematical-equivalence-acts-as-a-compiler-it-translates-the-problem-from-its-natural-binary-language-qubo-into-the-spin-based-language-ising-that-the-quantum-hardware-physically-understands-without-this-bridge-we-could-not-solve-practical-business-problems-on-these-specialized-quantum-devices"><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware.
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>???+ info &quot;Answer Strategy&quot;
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them.
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    1.  **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, &quot;Should we include this asset in the portfolio or not?&quot;
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    2.  **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model.
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    3.  **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
+</span></code></pre></div></h2>
+<h2 class="heading-with-pill" id="142-adiabatic-and-variational-optimization"><strong>14.2 Adiabatic and Variational Optimization</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★★☆</p>
+<p><strong>Concept:</strong> Quantum Solution Finding via Evolution</p>
+<p><strong>Summary:</strong> Adiabatic Quantum Optimization (AQO) finds solutions by slowly evolving a simple initial Hamiltonian to a complex problem Hamiltonian. The Quantum Approximate Optimization Algorithm (QAOA) is a variational, gate-based alternative that approximates this process for near-term quantum devices.</p>
+</blockquote>
+<hr />
+<h3 id="theoretical-background_1"><strong>Theoretical Background</strong></h3>
+<p>Once a problem is in the Ising form, we need a quantum algorithm to find its ground state.</p>
+<p><strong>1. Adiabatic Quantum Optimization (AQO) &amp; Quantum Annealing:</strong></p>
+<p>AQO is based on the <strong>Adiabatic Theorem</strong>. The process is as follows:
+-   Start with a simple initial Hamiltonian, <span class="arithmatex">\(H_0\)</span>, whose ground state is easy to prepare. A common choice is <span class="arithmatex">\(H_0 = \sum_i X_i\)</span>, where the ground state is an equal superposition of all possible solutions.
+-   Define the problem Hamiltonian, <span class="arithmatex">\(H_P\)</span>, which is the Ising model of our problem. Its ground state is the optimal solution we seek.
+-   Slowly evolve the system's Hamiltonian over a total time <span class="arithmatex">\(T\)</span>:</p>
+<div class="arithmatex">\[
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>H(t) = \left(1 - \frac{t}{T}\right) H_0 + \left(\frac{t}{T}\right) H_P
+</span></code></pre></div>
+\]</div>
+<ul>
+<li>The Adiabatic Theorem guarantees that if the evolution is sufficiently slow (i.e., <span class="arithmatex">\(T\)</span> is large enough), the system will remain in the ground state throughout the process. At <span class="arithmatex">\(t=T\)</span>, the system will be in the ground state of <span class="arithmatex">\(H_P\)</span>, and measuring it reveals the solution. <strong>Quantum Annealing</strong> is the physical implementation of this principle.</li>
+</ul>
+<p><strong>2. Quantum Approximate Optimization Algorithm (QAOA):</strong></p>
+<p>QAOA is a hybrid, variational algorithm designed for NISQ-era devices. It approximates the adiabatic evolution with a fixed-depth quantum circuit.
+-   The circuit consists of <span class="arithmatex">\(p\)</span> alternating layers of two unitary operators:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>-   $U_C(\gamma) = e^{-i\gamma H_P}$: The **cost unitary**, which applies phases based on the problem Hamiltonian.
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>-   $U_B(\beta) = e^{-i\beta H_0}$: The **mixer unitary**, which drives transitions between solutions.
+</span></code></pre></div>
+-   The full state is prepared as <span class="arithmatex">\(|\psi(\vec{\gamma}, \vec{\beta})\rangle = U_B(\beta_p)U_C(\gamma_p) \cdots U_B(\beta_1)U_C(\gamma_1) |s_0\rangle\)</span>.
+-   A classical optimizer then tunes the <span class="arithmatex">\(2p\)</span> angles <span class="arithmatex">\((\vec{\gamma}, \vec{\beta})\)</span> to minimize the expected energy <span class="arithmatex">\(\langle \psi | H_P | \psi \rangle\)</span>.</p>
+<hr />
+<h3 id="comprehension-check_1"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<ol>
+<li>In the QAOA circuit, the two alternating unitaries <span class="arithmatex">\(U_C(\gamma)\)</span> and <span class="arithmatex">\(U_B(\beta)\)</span> correspond to the effects of which two Hamiltonians from the adiabatic process?</li>
+</ol>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>    - A. The Entanglement Hamiltonian and the Phase Hamiltonian.
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    - B. The Problem Hamiltonian ($H_P$) and the Initial Hamiltonian ($H_0$).
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    - C. The Identity and the X gate.
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>??? info &quot;See Answer&quot;
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    **Correct: B**. $U_C$ evolves under the problem Hamiltonian, and $U_B$ evolves under the initial/mixer Hamiltonian.
+</span></code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+</div>
+<h2 id="compare-and-contrast-quantum-annealing-and-qaoa-as-approaches-to-quantum-optimization-info-answer-strategy-both-are-leading-methods-for-quantum-optimization-but-they-differ-fundamentally-in-their-approach-and-hardware-requirements-feature-quantum-annealing-qa-qaoa-process-analog-a-continuous-physical-process-that-slowly-morphs-a-simple-energy-landscape-into-the-complex-problem-landscape-digital-a-gate-based-discrete-approximation-of-an-adiabatic-evolution-broken-into-steps-hardware-specialized-runs-on-quantum-annealers-eg-d-wave-universal-runs-on-general-purpose-gate-based-quantum-computers-eg-ibm-google-control-simple-the-main-control-knob-is-the-total-annealing-evolution-time-its-largely-a-fire-and-forget-process-complex-variational-requires-a-classical-optimization-loop-to-tune-a-set-of-2p-circuit-parameters-vecgamma-vecbeta-guarantees-theoretical-the-adiabatic-theorem-guarantees-finding-the-ground-state-if-the-evolution-is-infinitely-slow-barring-thermal-noise-and-small-energy-gaps-heuristic-performance-depends-heavily-on-the-circuit-depth-p-and-the-success-of-the-classical-optimizer-there-is-no-guarantee-of-finding-the-optimal-solution-in-short-annealing-is-an-analog-hardware-specific-approach-with-strong-theoretical-backing-while-qaoa-is-a-digital-flexible-and-hardware-agnostic-variational-algorithm-designed-for-the-nisq-era"><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization.
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>???+ info &quot;Answer Strategy&quot;
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements.
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    | Feature | Quantum Annealing (QA) | QAOA |
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    | :--- | :--- | :--- |
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. |
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). |
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It&#39;s largely a &quot;fire-and-forget&quot; process. | **Complex &amp; Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. |
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. |
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
+</span></code></pre></div></h2>
+<h2 class="heading-with-pill" id="143-application-portfolio-optimization"><strong>14.3 Application: Portfolio Optimization</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Balancing Risk and Return with QUBO</p>
+<p><strong>Summary:</strong> Portfolio optimization is a classic finance problem that maps well to QUBO. The objective is to select a subset of assets that maximizes expected return while minimizing risk, which is defined by the covariance between assets.</p>
+</blockquote>
+<hr />
+<h3 id="theoretical-background_2"><strong>Theoretical Background</strong></h3>
+<p>A key application of QUBO is in finance, specifically <strong>portfolio optimization</strong>. Given a set of <span class="arithmatex">\(n\)</span> assets, we want to choose which ones to include in our portfolio.</p>
+<p>Let <span class="arithmatex">\(x_i \in \{0, 1\}\)</span> be a binary variable where <span class="arithmatex">\(x_i=1\)</span> means we select asset <span class="arithmatex">\(i\)</span>. The goal is to balance two competing factors:</p>
+<ol>
+<li><strong>Expected Return:</strong> We want to maximize the total return. This is modeled by a vector <span class="arithmatex">\(\mathbf{\mu}\)</span>, where <span class="arithmatex">\(\mu_i\)</span> is the expected return of asset <span class="arithmatex">\(i\)</span>. The total return is <span class="arithmatex">\(\sum_i \mu_i x_i\)</span>.</li>
+<li><strong>Risk:</strong> We want to minimize the portfolio's volatility. This is captured by the <strong>covariance matrix</strong> <span class="arithmatex">\(\mathbf{\Sigma}\)</span>, where <span class="arithmatex">\(\Sigma_{ij}\)</span> measures how asset <span class="arithmatex">\(i\)</span> and asset <span class="arithmatex">\(j\)</span> move together. The total risk is <span class="arithmatex">\(\mathbf{x}^T \mathbf{\Sigma} \mathbf{x}\)</span>.</li>
+</ol>
+<p>The combined objective function to be minimized is:</p>
+<div class="arithmatex">\[
+\text{Minimize} \quad C(\mathbf{x}) = \underbrace{-\mathbf{\mu}^T \mathbf{x}}_{\text{Maximize Return}} + \underbrace{q \cdot \mathbf{x}^T \mathbf{\Sigma} \mathbf{x}}_{\text{Minimize Risk}}
+\]</div>
+<p>Here, <span class="arithmatex">\(q\)</span> is a risk-aversion parameter that balances the trade-off. This expression is already in the QUBO form, where the matrix <span class="arithmatex">\(\mathbf{Q}\)</span> is constructed from the covariance matrix <span class="arithmatex">\(\mathbf{\Sigma}\)</span> and the return vector <span class="arithmatex">\(\mathbf{\mu}\)</span>. Solving this QUBO gives the optimal portfolio <span class="arithmatex">\(\mathbf{x}\)</span>.</p>
+<hr />
+<h3 id="comprehension-check_2"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<ol>
+<li>In the quantum formulation of Portfolio Optimization, the risk of the portfolio is primarily encoded by which component?</li>
+</ol>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>    - A. The expected return vector $\mathbf{\mu}$.
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    - B. The selection vector $\mathbf{x}$.
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    - C. The covariance matrix $\mathbf{\Sigma}$.
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>??? info &quot;See Answer&quot;
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    **Correct: C**. The covariance matrix defines the risk arising from assets moving together.
+</span></code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+</div>
+<h2 id="a-portfolio-manager-asks-you-why-they-should-consider-a-quantum-approach-for-portfolio-optimization-over-classical-solvers-what-is-the-potential-long-term-advantage-you-would-highlight-info-answer-strategy-the-key-long-term-advantage-is-the-potential-to-handle-the-combinatorial-explosion-inherent-in-portfolio-selection-more-effectively-than-any-classical-computer-1-the-scaling-problem-with-n-assets-there-are-2n-possible-portfolios-as-the-number-of-available-assets-grows-this-search-space-becomes-astronomically-large-making-it-impossible-for-classical-computers-to-check-every-combination-classical-solvers-must-rely-on-heuristics-and-approximations-that-may-miss-the-true-optimal-portfolio-2-the-quantum-promise-quantum-optimization-algorithms-like-qaoa-or-quantum-annealing-are-designed-to-navigate-these-massive-combinatorial-spaces-by-using-principles-like-superposition-and-entanglement-they-can-explore-a-vast-number-of-possibilities-simultaneously-this-offers-the-potential-to-find-higher-quality-portfolios-ie-better-riskreturn-profiles-that-are-inaccessible-to-classical-methods-3-the-important-caveat-its-crucial-to-be-transparent-that-this-is-a-future-facing-advantage-todays-nisq-era-quantum-computers-are-not-yet-large-or-robust-enough-to-outperform-state-of-the-art-classical-solvers-on-this-problem-the-advantage-is-predicated-on-the-future-development-of-larger-fault-tolerant-quantum-hardware"><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight?
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>???+ info &quot;Answer Strategy&quot;
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer.
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    1.  **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio.
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    2.  **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods.
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    3.  **The Important Caveat:** It&#39;s crucial to be transparent that this is a **future-facing advantage**. Today&#39;s NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
+</span></code></pre></div></h2>
+<h2 class="heading-with-pill" id="144-constraint-encoding-with-penalty-terms"><strong>14.4 Constraint Encoding with Penalty Terms</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Enforcing Rules in Optimization Problems</p>
+<p><strong>Summary:</strong> Real-world optimization problems have constraints (e.g., budget limits). In QUBO, these are handled by adding a large penalty term to the cost function. This term is designed to be zero when the constraint is satisfied and very large when it is violated, effectively forcing the optimizer to find valid solutions.</p>
+</blockquote>
+<hr />
+<h3 id="theoretical-background_3"><strong>Theoretical Background</strong></h3>
+<p>QUBO stands for <em>Unconstrained</em> Binary Optimization, but most real-world problems have constraints. For example, in portfolio optimization, we might have a budget limiting us to select exactly <span class="arithmatex">\(B\)</span> assets.</p>
+<p>The standard way to handle a constraint is to add a <strong>penalty term</strong> to the objective function. The full objective becomes:</p>
+<div class="arithmatex">\[
+C_{\text{total}}(\mathbf{x}) = C_{\text{objective}}(\mathbf{x}) + \lambda \cdot P(\mathbf{x})
+\]</div>
+<ul>
+<li><span class="arithmatex">\(C_{\text{objective}}(\mathbf{x})\)</span> is the original QUBO objective (e.g., risk vs. return).</li>
+<li><span class="arithmatex">\(P(\mathbf{x})\)</span> is the penalty function, which must be a polynomial in <span class="arithmatex">\(x_i\)</span> that is zero if the constraint is satisfied and positive if it is violated.</li>
+<li><span class="arithmatex">\(\lambda\)</span> is a large positive constant, the <strong>penalty factor</strong>. Its job is to make any violation of the constraint so costly that the minimizer will always prefer solutions where <span class="arithmatex">\(P(\mathbf{x})=0\)</span>.</li>
+</ul>
+<p>For example, to enforce the constraint "select exactly <span class="arithmatex">\(B\)</span> assets" (<span class="arithmatex">\(\sum_i x_i = B\)</span>), the penalty function is:</p>
+<div class="arithmatex">\[
+P(\mathbf{x}) = \left( \sum_i x_i - B \right)^2
+\]</div>
+<p>This term is zero if and only if the constraint is met. Expanding this quadratic term and adding it to the original QUBO matrix <span class="arithmatex">\(\mathbf{Q}\)</span> yields a new, larger QUBO that encodes the constraint directly into the cost landscape.</p>
+<hr />
+<h3 id="comprehension-check_3"><strong>Comprehension Check</strong></h3>
+<div class="admonition note">
+<p class="admonition-title">Quiz</p>
+<ol>
+<li>The most common method for handling a budget constraint in a QUBO formulation is to:</li>
+</ol>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>    - A. Use a continuous variable solver.
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    - B. Add a penalty term to the cost function.
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    - C. Enforce the constraint with the $H_0$ Hamiltonian.
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>??? info &quot;See Answer&quot;
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    **Correct: B**. A penalty term makes invalid solutions have a very high cost.
+</span></code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Interview-Style Question</p>
+</div>
+<h2 id="what-is-the-main-challenge-in-choosing-the-penalty-factor-lambda-what-happens-if-its-too-small-or-too-large-info-answer-strategy-the-main-challenge-is-the-goldilocks-problem-the-penalty-factor-lambda-must-be-finely-tuned-to-be-just-right-it-needs-to-be-strong-enough-to-enforce-the-constraint-without-overwhelming-the-original-problem-if-lambda-is-too-small-effect-the-penalty-for-violating-the-constraint-is-insignificant-result-the-optimizer-may-find-a-solution-that-has-a-great-objective-score-but-is-invalid-because-it-breaks-the-rule-eg-a-portfolio-that-is-over-budget-the-constraint-is-treated-as-a-weak-suggestion-not-a-hard-rule-if-lambda-is-too-large-effect-the-penalty-term-dominates-the-entire-cost-function-drowning-out-the-original-objective-the-energy-landscape-becomes-a-flat-plain-of-valid-solutions-surrounded-by-massive-penalty-walls-result-the-optimizer-will-certainly-find-a-valid-solution-but-it-will-likely-not-be-the-optimal-one-the-subtle-variations-in-the-original-cost-function-that-guide-the-search-for-the-best-solution-are-lost-in-the-noise-of-the-huge-penalty-values-this-can-also-make-the-problem-numerically-unstable-and-harder-for-the-solver-to-handle"><div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>What is the main challenge in choosing the penalty factor $\lambda$? What happens if it&#39;s too small or too large?
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>???+ info &quot;Answer Strategy&quot;
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    The main challenge is the &quot;Goldilocks problem&quot;: the penalty factor $\lambda$ must be finely tuned to be &quot;just right.&quot; It needs to be strong enough to enforce the constraint without overwhelming the original problem.
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    *   **If $\lambda$ is too small:**
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        *   **Effect:** The penalty for violating the constraint is insignificant.
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        *   **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule.
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    *   **If $\lambda$ is too large:**
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>        *   **Effect:** The penalty term dominates the entire cost function, &quot;drowning out&quot; the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls.
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        *   **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
+</span></code></pre></div></h2>
+<h2 class="heading-with-pill" id="145-from-theory-to-practice-qubo-projects"><strong>14.5 From Theory to Practice: QUBO Projects</strong></h2>
+<blockquote>
+<p><strong>Difficulty:</strong> ★★★☆☆</p>
+<p><strong>Concept:</strong> Applying QUBO Principles to Concrete Problems</p>
+<p><strong>Summary:</strong> These projects provide hands-on experience in converting problems into the QUBO and Ising frameworks, defining QUBO matrices for classic problems like Max-Cut, and implementing constraints using penalty methods.</p>
+</blockquote>
+<hr />
+<h3 id="hands-on-projects"><strong><i class="fa-solid fa-flask"></i> Hands-On Projects</strong></h3>
+<h4 id="project-blueprint-qubo-to-ising-conversion">Project Blueprint: QUBO to Ising Conversion</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Objective</strong></td>
+<td style="text-align: left;">Convert a simple QUBO objective function into its equivalent Ising model formulation.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mathematical Concept</strong></td>
+<td style="text-align: left;">The transformation <span class="arithmatex">\(x_i = (z_i + 1)/2\)</span> maps binary variables to spin variables.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Experiment Setup</strong></td>
+<td style="text-align: left;">QUBO cost function: <span class="arithmatex">\(C(x) = x_1 x_2 - 3x_1\)</span>, where <span class="arithmatex">\(x_1, x_2 \in \{0, 1\}\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Process Steps</strong></td>
+<td style="text-align: left;">1. Substitute <span class="arithmatex">\(x_i = (z_i + 1)/2\)</span> into <span class="arithmatex">\(C(x)\)</span>. <br> 2. Algebraically expand and simplify the expression. <br> 3. Group terms to match the Ising form <span class="arithmatex">\(E(z) = J_{12} z_1 z_2 + h_1 z_1 + h_2 z_2 + \text{Const}\)</span>. <br> 4. Identify the coefficients <span class="arithmatex">\(J_{12}\)</span>, <span class="arithmatex">\(h_1\)</span>, and <span class="arithmatex">\(h_2\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Expected Behavior</strong></td>
+<td style="text-align: left;">The binary objective function will be perfectly transformed into a spin-based energy function with specific coupling and field terms.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Verification Goal</strong></td>
+<td style="text-align: left;">Find the numerical values for <span class="arithmatex">\(J_{12}\)</span>, <span class="arithmatex">\(h_1\)</span>, and <span class="arithmatex">\(h_2\)</span>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="python-implementation"><strong>Python Implementation</strong></h4>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Project: QUBO Formulation and Brute-Force Solver</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># MaxCut on a weighted 4-node graph → QUBO form</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># Graph adjacency (weighted)</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">],</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="p">[</span><span class="mi">0</span>  <span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="p">])</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="c1"># QUBO matrix: Q_ij = -W_ij + delta_ij * sum_k W_ik</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">maxcut_qubo</span><span class="p">(</span><span class="n">W</span><span class="p">):</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>                <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>  <span class="c1"># diagonal: -degree</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>            <span class="k">elif</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>                <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>    <span class="k">return</span> <span class="n">Q</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="n">Q</span> <span class="o">=</span> <span class="n">maxcut_qubo</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QUBO matrix Q:&quot;</span><span class="p">)</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="c1"># Brute-force: find binary vector x minimizing x^T Q x</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="n">best_x</span><span class="p">,</span> <span class="n">best_val</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="k">for</span> <span class="n">bits</span> <span class="ow">in</span> <span class="n">product</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a>    <span class="n">val</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">x</span>
+</span><span id="__span-12-41"><a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a>    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">best_val</span><span class="p">:</span>
+</span><span id="__span-12-42"><a id="__codelineno-12-42" name="__codelineno-12-42" href="#__codelineno-12-42"></a>        <span class="n">best_val</span><span class="p">,</span> <span class="n">best_x</span> <span class="o">=</span> <span class="n">val</span><span class="p">,</span> <span class="n">bits</span>
+</span><span id="__span-12-43"><a id="__codelineno-12-43" name="__codelineno-12-43" href="#__codelineno-12-43"></a>
+</span><span id="__span-12-44"><a id="__codelineno-12-44" name="__codelineno-12-44" href="#__codelineno-12-44"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimal partition: </span><span class="si">{</span><span class="n">best_x</span><span class="si">}</span><span class="s2">  (QUBO objective = </span><span class="si">{</span><span class="n">best_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span id="__span-12-45"><a id="__codelineno-12-45" name="__codelineno-12-45" href="#__codelineno-12-45"></a><span class="n">cut_value</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-12-46"><a id="__codelineno-12-46" name="__codelineno-12-46" href="#__codelineno-12-46"></a>                <span class="k">if</span> <span class="n">best_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">best_x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span><span id="__span-12-47"><a id="__codelineno-12-47" name="__codelineno-12-47" href="#__codelineno-12-47"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MaxCut value: </span><span class="si">{</span><span class="n">cut_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<strong>Sample Output:</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">QUBO</span> <span class="n">matrix</span> <span class="n">Q</span><span class="p">:</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">[[</span><span class="o">-</span><span class="mf">1.5</span>  <span class="mf">1.</span>   <span class="mf">0.5</span>  <span class="mf">0.</span> <span class="p">]</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a> <span class="p">[</span> <span class="mf">0.</span>  <span class="o">-</span><span class="mf">2.5</span>  <span class="mf">0.</span>   <span class="mf">1.5</span><span class="p">]</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a> <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.</span>  <span class="o">-</span><span class="mf">1.5</span>  <span class="mf">1.</span> <span class="p">]</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a> <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.</span>   <span class="mf">0.</span>  <span class="o">-</span><span class="mf">2.5</span><span class="p">]]</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">Optimal</span> <span class="n">partition</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="p">(</span><span class="n">QUBO</span> <span class="n">objective</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.000</span><span class="p">)</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">MaxCut</span> <span class="n">value</span><span class="p">:</span> <span class="mf">4.0</span>
+</span></code></pre></div></p>
+<h4 id="outcome-and-interpretation">Outcome and Interpretation</h4>
+<p>The QUBO function <span class="arithmatex">\(C(x) = x_1 x_2 - 3x_1\)</span> is equivalent to the Ising model <span class="arithmatex">\(E(z) = 0.25 z_1 z_2 - 1.25 z_1 + 0.25 z_2 - 1.25\)</span>. This demonstrates how a binary optimization problem can be directly translated into the language of interacting spins, ready for a quantum annealer.</p>
+<hr />
+<h4 id="project-blueprint-max-cut-qubo-formulation">Project Blueprint: Max-Cut QUBO Formulation</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Objective</strong></td>
+<td style="text-align: left;">Define the QUBO matrix <span class="arithmatex">\(\mathbf{Q}\)</span> that represents the Max-Cut problem for a simple graph.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mathematical Concept</strong></td>
+<td style="text-align: left;">The Max-Cut objective is to partition nodes into two sets to maximize the number of edges between them. This is equivalent to minimizing the number of edges <em>within</em> the same set.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Experiment Setup</strong></td>
+<td style="text-align: left;">A 3-node complete graph (triangle) with edges (1,2), (2,3), and (1,3). Let <span class="arithmatex">\(x_i=0\)</span> for one partition and <span class="arithmatex">\(x_i=1\)</span> for the other. An edge <span class="arithmatex">\((i,j)\)</span> is <em>not</em> cut if <span class="arithmatex">\(x_i=x_j\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Process Steps</strong></td>
+<td style="text-align: left;">1. Write the cost function to minimize: <span class="arithmatex">\(C(x) = (x_1-x_2)^2 + (x_2-x_3)^2 + (x_1-x_3)^2\)</span>. This penalizes nodes in the same partition. <br> 2. Expand the expression: <span class="arithmatex">\(C(x) = (x_1^2 - 2x_1x_2 + x_2^2) + \dots\)</span> <br> 3. Use the identity <span class="arithmatex">\(x_i^2 = x_i\)</span> for binary variables to simplify into the form <span class="arithmatex">\(\mathbf{x}^T \mathbf{Q} \mathbf{x}\)</span>. <br> 4. Construct the <span class="arithmatex">\(3 \times 3\)</span> QUBO matrix <span class="arithmatex">\(\mathbf{Q}\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Expected Behavior</strong></td>
+<td style="text-align: left;">The resulting <span class="arithmatex">\(\mathbf{Q}\)</span> matrix will encode the graph structure. Evaluating <span class="arithmatex">\(\mathbf{x}^T \mathbf{Q} \mathbf{x}\)</span> for different partitions will show that partitions cutting more edges have a lower cost.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Verification Goal</strong></td>
+<td style="text-align: left;">Show that the partition <span class="arithmatex">\(x=(1,0,1)^T\)</span> (2 edges cut) has a lower cost than <span class="arithmatex">\(x=(1,1,1)^T\)</span> (0 edges cut).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="outcome-and-interpretation_1">Outcome and Interpretation</h4>
+<p>The cost function simplifies to <span class="arithmatex">\(C(x) = 2(x_1+x_2+x_3) - 2(x_1x_2 + x_2x_3 + x_1x_3)\)</span>. This can be represented by a QUBO matrix. This project shows how a graph problem can be directly translated into the algebraic QUBO format, demonstrating the broad applicability of the framework.</p>
+<hr />
+<h4 id="project-blueprint-penalty-constraint-encoding">Project Blueprint: Penalty Constraint Encoding</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Objective</strong></td>
+<td style="text-align: left;">Use a penalty term to enforce a hard constraint in a QUBO objective.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Mathematical Concept</strong></td>
+<td style="text-align: left;">The total cost is <span class="arithmatex">\(C(x) = C_{\text{obj}} + \lambda \cdot (\text{constraint})^2\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Experiment Setup</strong></td>
+<td style="text-align: left;">Objective: Minimize <span class="arithmatex">\(C_{\text{obj}} = 2x_1 + 3x_2\)</span>. Constraint: <span class="arithmatex">\(x_1 + x_2 = 1\)</span>. Penalty factor <span class="arithmatex">\(\lambda=10\)</span>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Process Steps</strong></td>
+<td style="text-align: left;">1. Define the penalty function: <span class="arithmatex">\(P(x) = (x_1 + x_2 - 1)^2\)</span>. <br> 2. Write the total cost function: <span class="arithmatex">\(C(x) = 2x_1 + 3x_2 + 10(x_1 + x_2 - 1)^2\)</span>. <br> 3. Expand and simplify <span class="arithmatex">\(C(x)\)</span> into the standard QUBO form, using <span class="arithmatex">\(x_i^2=x_i\)</span>. <br> 4. Evaluate <span class="arithmatex">\(C(x)\)</span> for all four binary configurations: (0,0), (0,1), (1,0), (1,1).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Expected Behavior</strong></td>
+<td style="text-align: left;">The configurations that violate the constraint, (0,0) and (1,1), will have a very high cost due to the penalty, while the valid configurations, (0,1) and (1,0), will have much lower costs.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Verification Goal</strong></td>
+<td style="text-align: left;">Show that the minimum cost corresponds to the valid configuration <span class="arithmatex">\((1,0)\)</span>, which correctly minimizes the original objective <span class="arithmatex">\(2x_1+3x_2\)</span> while satisfying the constraint.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="outcome-and-interpretation_2">Outcome and Interpretation</h4>
+<ul>
+<li><span class="arithmatex">\(C(0,0) = 0 + 10(-1)^2 = 10\)</span>.</li>
+<li><span class="arithmatex">\(C(0,1) = 3 + 10(0)^2 = 3\)</span>.</li>
+<li><span class="arithmatex">\(C(1,0) = 2 + 10(0)^2 = 2\)</span>. <strong>(Minimum)</strong></li>
+<li><span class="arithmatex">\(C(1,1) = 5 + 10(1)^2 = 15\)</span>.</li>
+</ul>
+<p>The penalty method successfully forces the solution away from the invalid states (0,0) and (1,1), and the optimizer correctly identifies (1,0) as the optimal valid solution. This demonstrates the power of penalty methods to handle constrained problems within the QUBO framework.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../chapter-13/workbook/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chapter-13 Quantum Reinforcement Learning">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Chapter-13 Quantum Reinforcement Learning
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../chapter-15/workbook/" class="md-footer__link md-footer__link--next" aria-label="Next: Chapter-15 Quantum Data Pipeline">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Chapter-15 Quantum Data Pipeline
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bigbookofcomputing.github.io" target="_blank" rel="noopener" title="bigbookofcomputing.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/bigbookofcomputing" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.facebook.com/bigbookofcomputing" target="_blank" rel="noopener" title="www.facebook.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256c0 120 82.7 220.8 194.2 248.5V334.2h-52.8V256h52.8v-33.7c0-87.1 39.4-127.5 125-127.5 16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287v175.9C413.8 494.8 512 386.9 512 256"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/bigbookofcomputing" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@big-book-of-computing" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../static/mathjax-config.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

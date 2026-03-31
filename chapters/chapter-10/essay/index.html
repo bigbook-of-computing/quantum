@@ -1,0 +1,3355 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A comprehensive guide to the foundations of quantum computing">
+      
+      
+        <meta name="author" content="Big Book of Computing">
+      
+      
+        <link rel="canonical" href="https://bigbookofcomputing.github.io/chapters/chapter-10/essay/">
+      
+      
+        <link rel="prev" href="../../chapter-9/essay/">
+      
+      
+        <link rel="next" href="../../chapter-11/essay/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Chapter-10 Variational Quantum Classifiers - Big Book of Computing | Quantum Computing</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+      <link rel="stylesheet" href="../../../static/styles.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-ECS7B3X8JM"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-ECS7B3X8JM",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-ECS7B3X8JM",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-10-variational-quantum-circuits" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Big Book of Computing | Quantum Computing" class="md-header__button md-logo" aria-label="Big Book of Computing | Quantum Computing" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Big Book of Computing | Quantum Computing
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter-10 Variational Quantum Classifiers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bigbookofcomputing/quantum" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../home/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contents/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contents
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Introduction
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../chapter-1/essay/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Chapters
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter-1/workbook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  WorkBooks
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../chapter-1/codebook/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CodeBooks
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Big Book of Computing | Quantum Computing" class="md-nav__button md-logo" aria-label="Big Book of Computing | Quantum Computing" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Big Book of Computing | Quantum Computing
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bigbookofcomputing/quantum" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapters
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chapters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-6/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-14/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/essay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WorkBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    WorkBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-6/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-14/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/workbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CodeBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CodeBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-1/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-1 Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-2/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-2 State and Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-3/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-3 Gate and Circuits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-4/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-4 Quantum Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-5/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-5 Quantum Fourier Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-6/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-6 Variational Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-7/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-7 Quantum Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-8/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-8 Quantum Machine Learning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-9/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-9 Encoding Classical Data into Quantum States
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-10 Variational Quantum Classifiers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-11/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-11 Supervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-12/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-12 Unsupervised Quantum Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-13/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-13 Quantum Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-14/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-14 QUBO Family of Problems
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-15/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-15 Quantum Data Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-16/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-16 Quantum Simulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-17/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-17 Quantum Chemistry
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-18/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-18 Quantum Finance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-19/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-19 Quantum Hardware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../chapter-20/codebook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter-20 Quantum Error Correction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/bigbookofcomputing/quantum/edit/master/docs/chapters/chapter-10/essay.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/bigbookofcomputing/quantum/raw/master/docs/chapters/chapter-10/essay.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="chapter-10-variational-quantum-circuits"><strong>Chapter 10: Variational Quantum Circuits</strong></h1>
+<hr />
+<h1 id="introduction"><strong>Introduction</strong></h1>
+<p>Variational Quantum Circuits (VQCs) represent the bridge between the promise of quantum computing and the pragmatic reality of Noisy Intermediate-Scale Quantum (NISQ) hardware. Unlike idealized fault-tolerant quantum algorithms that require millions of qubits and perfect error correction, VQCs are designed to extract value from today's imperfect quantum processors through a powerful hybrid quantum-classical paradigm.</p>
+<p>At their core, VQCs are parameterized quantum circuits that learn optimal solutions by iteratively adjusting quantum gate parameters through classical optimization. This approach mirrors classical machine learning: just as neural networks adjust weights to minimize loss functions, VQCs tune rotation angles to minimize quantum cost functions. The key difference lies in the exponential expressivity of quantum Hilbert space, which enables VQCs to potentially capture patterns and correlations that are computationally intractable for classical models.</p>
+<p>This chapter deconstructs the anatomy of VQCs, examining their three-stage architecture (encoding, parameterization, and measurement), exploring the design principles of circuit ansätze that balance expressibility with trainability, and confronting the fundamental challenges—particularly the devastating barren plateau problem—that constrain their practical deployment. Understanding VQCs is essential for navigating the landscape of near-term quantum machine learning and variational algorithms [1, 2].</p>
+<hr />
+<h1 id="chapter-10-outline"><strong>Chapter 10: Outline</strong></h1>
+<table>
+<thead>
+<tr>
+<th><strong>Sec.</strong></th>
+<th><strong>Title</strong></th>
+<th><strong>Core Ideas &amp; Examples</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>10.1</strong></td>
+<td><strong>Parameterized Quantum Circuits</strong></td>
+<td>Three-stage VQC architecture: data encoding <span class="arithmatex">\(U_\phi(x)\)</span>, trainable unitary <span class="arithmatex">\(U(\vec{\theta})\)</span>, measurement layer; quantum analogue of neural networks; expectation value computation.</td>
+</tr>
+<tr>
+<td><strong>10.2</strong></td>
+<td><strong>Circuit Ansätze for Learning</strong></td>
+<td>Hardware-efficient (NISQ-compatible shallow circuits), problem-inspired (UCC, QAOA), layered ansätze; rotation + entanglement layer structure; expressibility vs. trainability trade-off.</td>
+</tr>
+<tr>
+<td><strong>10.3</strong></td>
+<td><strong>Hybrid Classical-Quantum Models</strong></td>
+<td>NISQ-era paradigm: quantum processor for state evolution, classical optimizer for parameter updates; noise mitigation through shallow quantum circuits; Adam, COBYLA, SPSA optimizers.</td>
+</tr>
+<tr>
+<td><strong>10.4</strong></td>
+<td><strong>Training and Optimization</strong></td>
+<td>Parameter shift rule for gradient computation; gradient-based (Adam, SGD) vs. gradient-free (COBYLA, Nelder-Mead) optimizers; SPSA for noisy environments; local minima challenges.</td>
+</tr>
+<tr>
+<td><strong>10.5</strong></td>
+<td><strong>Barren Plateaus and Mitigation</strong></td>
+<td>Exponential gradient vanishing with circuit depth/width; causes (random initialization, excessive entanglement); mitigation (shallow circuits, structured ansätze, layer-wise training, identity initialization).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="101-parameterized-quantum-circuits"><strong>10.1 Parameterized Quantum Circuits</strong></h2>
+<hr />
+<p>The foundation of quantum machine learning and variational algorithms is the <strong>Parameterized Quantum Circuit (PQC)</strong>, commonly referred to as a <strong>Variational Quantum Circuit (VQC)</strong>. A VQC is a <strong>hybrid quantum-classical model</strong> designed to be the trainable core of an algorithm, where the quantum hardware performs the complex state transformation and the classical hardware executes the optimization.</p>
+<div class="admonition tip">
+<p class="admonition-title">VQCs as Quantum Neural Networks</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Think of a VQC as a quantum neural network: the encoding layer is the input, the parameterized gates are trainable weights, entangling gates are activation functions, and measurement extracts the output. The entire circuit learns by gradient descent [3].
+</span></code></pre></div>
+<h3 id="structural-stages-of-a-vqc"><strong>Structural Stages of a VQC</strong></h3>
+<hr />
+<p>A VQC operates in three sequential, interconnected layers, transforming classical input data <span class="arithmatex">\(x\)</span> into a classical output value (e.g., a cost or a classification probability):</p>
+<p><strong>1. Data Encoding Layer (<span class="arithmatex">\(U_\phi(x)\)</span>)</strong></p>
+<p>This is the <strong>input pipeline</strong> of the VQC.</p>
+<ul>
+<li><strong>Purpose:</strong> Acts as a <strong>quantum feature map</strong> that converts the classical input data <span class="arithmatex">\(x\)</span> into a quantum state, embedding the information into the high-dimensional Hilbert space.</li>
+<li><strong>Mechanism:</strong> It is composed of fixed unitary gates whose parameters are functions of the input data <span class="arithmatex">\(x\)</span> (e.g., Angle Encoding, Hamiltonian Encoding). It is not optimized during training.</li>
+</ul>
+<p><strong>2. Parameterized Unitary Layer (<span class="arithmatex">\(U(\vec{\theta})\)</span>)</strong></p>
+<p>This is the <strong>trainable core</strong> of the circuit.</p>
+<ul>
+<li><strong>Purpose:</strong> To <strong>learn patterns</strong> and relationships inherent in the encoded data.</li>
+<li><strong>Mechanism:</strong> Composed of rotation gates (<span class="arithmatex">\(R_x, R_y, R_z\)</span>) and entanglement gates (CNOT) whose angles are set by the <strong>trainable parameters</strong> <span class="arithmatex">\(\vec{\theta}\)</span>. These parameters are iteratively adjusted by the classical optimizer. This layer determines the VQC's expressibility (ability to reach a solution).</li>
+</ul>
+<p><strong>3. Measurement Layer</strong></p>
+<p>This final stage extracts the classical information necessary to calculate the cost.</p>
+<ul>
+<li><strong>Purpose:</strong> To calculate the <strong>expectation value</strong> of a designated observable (e.g., the Hamiltonian <span class="arithmatex">\(H\)</span> for VQE, or Pauli <span class="arithmatex">\(Z\)</span> for classification).</li>
+<li><strong>Mechanism:</strong> The quantum state collapses, and the resulting classical bit string statistics are used to compute the expected output, <span class="arithmatex">\(C(x, \vec{\theta})\)</span>.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A[Classical Input x] --&gt; B["Encoding Layer U_φ(x)"]
+    B --&gt; C["Parameterized Layer U(θ)"]
+    C --&gt; D[Measurement]
+    D --&gt; E[Expectation Value]
+    E --&gt; F[Classical Optimizer]
+    F --&gt;|Update θ| C</code></pre>
+<hr />
+<h3 id="mathematical-formulation"><strong>Mathematical Formulation</strong></h3>
+<hr />
+<p>The final quantum state of the VQC, <span class="arithmatex">\(|\psi(x, \vec{\theta})\rangle\)</span>, is the sequential application of the two primary unitary layers to the initial state <span class="arithmatex">\(|0\rangle^{\otimes n}\)</span>:</p>
+<div class="arithmatex">\[
+|\psi(x, \vec{\theta})\rangle = U(\vec{\theta}) U_\phi(x) |0\rangle^{\otimes n}
+\]</div>
+<p>The final measured output <span class="arithmatex">\(f(x, \vec{\theta})\)</span> is the expectation value of an observable <span class="arithmatex">\(H\)</span>:</p>
+<div class="arithmatex">\[
+f(x, \vec{\theta}) = \langle \psi(x, \vec{\theta}) | H | \psi(x, \vec{\theta}) \rangle
+\]</div>
+<p>The classical optimization process minimizes a loss function:</p>
+<div class="arithmatex">\[
+L(\vec{\theta}) = \sum_i (f(x_i, \vec{\theta}) - y_i)^2
+\]</div>
+<p>where <span class="arithmatex">\(y_i\)</span> is the target label.</p>
+<div class="admonition example">
+<p class="admonition-title">VQC for Binary Classification</p>
+</div>
+<h2 id="for-classifying-data-point-x-into-classes-1-1-1-encode-u_phix0rangleotimes-n-maps-x-to-quantum-state-2-transform-uvectheta-applies-trainable-rotations-and-entanglement-3-measure-compute-langle-z_0-rangle-expectation-of-pauli-z-on-qubit-0-4-classify-prediction-signlangle-z_0-rangle-5-train-minimize-lvectheta-sum_i-langle-z_0-rangle_i-y_i2-using-classical-optimizer"><div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>For classifying data point $x$ into classes $\{-1, +1\}$:
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>1. **Encode:** $U_\phi(x)|0\rangle^{\otimes n}$ maps $x$ to quantum state
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>2. **Transform:** $U(\vec{\theta})$ applies trainable rotations and entanglement
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>3. **Measure:** Compute $\langle Z_0 \rangle$ (expectation of Pauli-Z on qubit 0)
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>4. **Classify:** Prediction = sign($\langle Z_0 \rangle$)
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>5. **Train:** Minimize $L(\vec{\theta}) = \sum_i (\langle Z_0 \rangle_i - y_i)^2$ using classical optimizer
+</span></code></pre></div></h2>
+<h3 id="analogy-to-classical-neural-networks"><strong>Analogy to Classical Neural Networks</strong></h3>
+<hr />
+<p>The VQC serves as the quantum analogue of a classical feedforward neural network:</p>
+<ul>
+<li>The <strong>Data Encoding Layer (<span class="arithmatex">\(U_\phi(x)\)</span>)</strong> is analogous to the <strong>input layer</strong> and <strong>fixed feature map</strong>.</li>
+<li>The <strong>Parameterized Unitary Layer (<span class="arithmatex">\(U(\vec{\theta})\)</span>)</strong> is analogous to the <strong>hidden layers</strong> with adjustable weights.</li>
+<li>The <strong>Entangling Gates</strong> (CNOTs) serve as the <strong>non-linear activation functions</strong>, generating the required complexity and expressivity.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">VQC_Forward_Pass</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Initialize quantum state</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">state</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="c1"># Stage 1: Data Encoding Layer (fixed, data-dependent)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Angle encoding</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="c1"># Stage 2: Parameterized Unitary Layer (trainable)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">param_idx</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="c1"># Rotation layer (trainable parameters)</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="c1"># Entangling layer (fixed structure)</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="c1"># Stage 3: Measurement Layer</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="n">observable</span> <span class="o">=</span> <span class="n">Pauli_Z</span><span class="p">(</span><span class="n">qubit</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Measure Z on first qubit</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="n">expectation</span> <span class="o">=</span> <span class="n">Measure_Expectation</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">observable</span><span class="p">)</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="k">return</span> <span class="n">expectation</span>
+</span></code></pre></div>
+<hr />
+<h2 id="102-circuit-ansatze-for-learning"><strong>10.2 Circuit Ansätze for Learning</strong></h2>
+<hr />
+<p>An <strong>ansatz</strong> is a pre-defined template for the <strong>Parameterized Unitary Layer</strong> <span class="arithmatex">\(U(\vec{\theta})\)</span> in a Variational Quantum Circuit (VQC). It is a structured sequence of fixed gates and trainable rotations that determines the <strong>expressibility</strong> (the ability to generate complex target states) and <strong>trainability</strong> (the ease of finding optimal parameters) of the model.</p>
+<div class="admonition tip">
+<p class="admonition-title">Ansatz Design is Everything</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>The choice of ansatz is not a mere implementation detail—it fundamentally determines whether your VQC will train successfully or get stuck in barren plateaus. Structured, problem-inspired ansätze often outperform deep random circuits [4].
+</span></code></pre></div>
+<h3 id="structure-and-design-principles"><strong>Structure and Design Principles</strong></h3>
+<hr />
+<p>Ansätze are constructed by alternating layers of two basic components to ensure both local transformation and global correlation:</p>
+<p><strong>1. Rotation Layers (Parametric)</strong></p>
+<p>These consist of single-qubit parameterized gates, such as <span class="arithmatex">\(R_y(\theta)\)</span>, applied to every qubit. These layers provide the <strong>tunable parameters</strong> <span class="arithmatex">\(\vec{\theta}\)</span> that the classical optimizer adjusts during training.</p>
+<p><strong>2. Entangling Layers (Fixed)</strong></p>
+<p>These consist of non-parameterized multi-qubit gates, typically <strong>CNOTs</strong>, applied in chains or blocks. The purpose of these layers is to introduce the necessary <strong>entanglement</strong> and non-linearity that allows the circuit to capture correlations between qubits.</p>
+<p>The overall structure involves repeating these layers <span class="arithmatex">\(L\)</span> times, where <span class="arithmatex">\(L\)</span> determines the circuit's depth.</p>
+<hr />
+<h3 id="types-of-ansatze"><strong>Types of Ansätze</strong></h3>
+<hr />
+<p>Ansätze are generally categorized based on their design philosophy and applicability:</p>
+<p><strong>Hardware-Efficient Ansatz</strong></p>
+<p>This design is pragmatic, prioritizing performance on current hardware over theoretical rigor.</p>
+<ul>
+<li><strong>Structure:</strong> It consists of alternating layers of single-qubit rotations and fixed entanglement layers (e.g., CNOTs) <strong>tailored to the specific physical connectivity</strong> of the quantum device (e.g., nearest-neighbor chains).</li>
+<li><strong>Advantage:</strong> <strong>Shallow depth</strong> and high compatibility, making it feasible for noise-limited NISQ devices.</li>
+<li><strong>Disadvantage:</strong> Requires many parameters (<span class="arithmatex">\(\vec{\theta}\)</span>) to achieve high expressivity.</li>
+</ul>
+<p><strong>Problem-Inspired Ansatz</strong></p>
+<p>This type utilizes <strong>domain knowledge</strong> to guide its structure, often resulting in more efficient training.</p>
+<ul>
+<li><strong>Structure:</strong> The circuit template is constructed to reflect known symmetries or physical constraints of the problem (e.g., the Unitary Coupled Cluster (UCC) ansatz for chemistry, or the alternating Cost/Mixer structure of QAOA).</li>
+<li><strong>Advantage:</strong> Significantly <strong>reduces the number of tunable parameters</strong> <span class="arithmatex">\(\vec{\theta}\)</span> by encoding known information. This specialization often improves the likelihood of convergence and helps mitigate <strong>Barren Plateaus</strong>.</li>
+</ul>
+<p><strong>Layered or Generic Ansatz</strong></p>
+<p>This structure involves applying universal gates to every qubit in a simple repeating fashion, often used as a baseline for classification.</p>
+<ul>
+<li><strong>Structure:</strong> Alternates layers of all-to-all entanglement (or fixed patterns) and rotation blocks. An example is alternating <span class="arithmatex">\(R_y(\theta)\)</span> on all qubits and CNOTs on adjacent pairs.</li>
+</ul>
+<details class="question">
+<summary>Why do entangling gates act like activation functions in neural networks?</summary>
+</details>
+<h2 id="entangling-gates-create-non-linear-correlations-between-qubits-by-coupling-their-states-similar-to-how-relu-or-sigmoid-functions-introduce-non-linearity-in-neural-networks-without-entanglement-the-circuit-would-only-produce-separable-product-states-limiting-expressivity-to-linear-transformations"><div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Entangling gates create non-linear correlations between qubits by coupling their states, similar to how ReLU or sigmoid functions introduce non-linearity in neural networks. Without entanglement, the circuit would only produce separable (product) states, limiting expressivity to linear transformations.
+</span></code></pre></div></h2>
+<h3 id="importance-for-trainability-barren-plateaus"><strong>Importance for Trainability (Barren Plateaus)</strong></h3>
+<hr />
+<p>The choice of ansatz is the primary tool for mitigating the <strong>Barren Plateau</strong> problem. Barren plateaus occur when the gradients vanish exponentially, stalling training.</p>
+<p><strong>Mitigation</strong></p>
+<p>Structured, local, and <strong>shallow circuits</strong> (like hardware-efficient ansätze) are preferred because they restrict the search space, maintaining higher gradients and ensuring the classical optimizer can still effectively update the parameters <span class="arithmatex">\(\vec{\theta}\)</span>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Hardware_Efficient_Ansatz</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="c1"># theta is flattened parameter vector</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">param_idx</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="c1"># Rotation layer: single-qubit gates</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="n">Apply_R_y</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="n">Apply_R_z</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="n">param_idx</span><span class="p">])</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="n">param_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="c1"># Entangling layer: nearest-neighbor CNOTs</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>            <span class="n">Apply_CNOT</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="k">return</span> <span class="n">qubits</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="n">Problem_Inspired_Ansatz_QAOA</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    <span class="c1"># QAOA ansatz with mixer (beta) and cost (gamma) parameters</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    <span class="n">qubits</span> <span class="o">=</span> <span class="n">Initialize_Register</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">)</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    <span class="c1"># Initialize in equal superposition</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>        <span class="n">Apply_H</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        <span class="c1"># Cost Hamiltonian layer (problem-dependent)</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>            <span class="n">Apply_ZZ_Rotation</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">gamma</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>        <span class="c1"># Mixer Hamiltonian layer (driver)</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">):</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>            <span class="n">Apply_R_x</span><span class="p">(</span><span class="n">qubits</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">beta</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>    <span class="k">return</span> <span class="n">qubits</span>
+</span></code></pre></div>
+<hr />
+<h2 id="103-hybrid-classical-quantum-models"><strong>10.3 Hybrid Classical-Quantum Models</strong></h2>
+<hr />
+<p>Variational Quantum Circuits (VQCs) are not standalone algorithms; they function as the quantum processor within <strong>hybrid quantum-classical models</strong>. This model is the dominant paradigm for current computation on <strong>NISQ (Noisy Intermediate-Scale Quantum)</strong> devices, pragmatically dividing the computational workload between the quantum processor and the conventional classical computer.</p>
+<div class="admonition tip">
+<p class="admonition-title">Why Hybrid Models Dominate NISQ</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Quantum hardware excels at exploring exponential Hilbert spaces but is terrible at iterative optimization (noise, decoherence, limited coherence time). Classical computers excel at optimization but cannot efficiently simulate quantum states. Hybrid models exploit the best of both worlds [5].
+</span></code></pre></div>
+<h3 id="the-hybrid-workflow"><strong>The Hybrid Workflow</strong></h3>
+<hr />
+<p>The hybrid model partitions tasks based on the resource required, allowing each processor to handle the computationally intensive part it excels at:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Processor</th>
+<th style="text-align: left;">Time Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Data Encoding Layer</strong> (<span class="arithmatex">\(U_\phi(x)\)</span>)</td>
+<td style="text-align: left;">Converts classical input data <span class="arithmatex">\(x\)</span> into a quantum feature state.</td>
+<td style="text-align: left;">Quantum (Fixed Unitary)</td>
+<td style="text-align: left;">Depends on the encoding (e.g., poly(<span class="arithmatex">\(n\)</span>))</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Parameterized Unitary Layer</strong> (<span class="arithmatex">\(U(\vec{\theta})\)</span>)</td>
+<td style="text-align: left;">Applies trainable rotations and entanglement to learn data patterns.</td>
+<td style="text-align: left;">Quantum (Trainable Unitary)</td>
+<td style="text-align: left;">poly(<span class="arithmatex">\(n\)</span>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Measurement and Cost Computation</strong> (<span class="arithmatex">\(C(\vec{\theta})\)</span>)</td>
+<td style="text-align: left;">Calculates the expectation value of the observable.</td>
+<td style="text-align: left;">Quantum (Final Measurement)</td>
+<td style="text-align: left;">Requires multiple shots</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Parameter Update and Optimization</strong></td>
+<td style="text-align: left;">Determines the next, improved parameter vector <span class="arithmatex">\(\vec{\theta}'\)</span> using the calculated cost.</td>
+<td style="text-align: left;"><strong>Classical Computer</strong> (CPU/GPU)</td>
+<td style="text-align: left;">Varies (e.g., Adam, COBYLA)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="the-training-loop-and-role-division"><strong>The Training Loop and Role Division</strong></h3>
+<hr />
+<p>The training of a VQC is an iterative process governed by a classical feedback loop:</p>
+<p><strong>1. Initialization</strong></p>
+<p>The classical computer initializes the parameter vector <span class="arithmatex">\(\vec{\theta}\)</span>.</p>
+<p><strong>2. Quantum Evaluation</strong></p>
+<p>The quantum computer runs the VQC using the current <span class="arithmatex">\(\vec{\theta}\)</span> and measures the output statistics (e.g., number of times <span class="arithmatex">\(|1\rangle\)</span> is observed). This process yields the cost value <span class="arithmatex">\(C(\vec{\theta})\)</span>.</p>
+<p><strong>3. Classical Optimization</strong></p>
+<p>The classical optimizer (e.g., Adam, COBYLA, or SPSA) takes the cost <span class="arithmatex">\(C(\vec{\theta})\)</span> and calculates the updated parameters <span class="arithmatex">\(\vec{\theta}'\)</span> that minimize the associated loss function. The parameter update is the <strong>specific role</strong> of the classical optimizer.</p>
+<p><strong>4. Repetition</strong></p>
+<p>The loop repeats steps 2 and 3 until the cost converges to a minimum or reaches a defined tolerance.</p>
+<pre class="mermaid"><code>flowchart TD
+    A[Initialize Parameters θ] --&gt; B["Quantum: Encode Data U_φ(x)"]
+    B --&gt; C["Quantum: Apply U(θ)"]
+    C --&gt; D[Quantum: Measure Observable]
+    D --&gt; E["Classical: Compute Cost C(θ)"]
+    E --&gt; F{Converged?}
+    F --&gt;|No| G["Classical: Update θ ← θ - α∇C"]
+    G --&gt; B
+    F --&gt;|Yes| H[Return Optimal θ*]</code></pre>
+<div class="admonition example">
+<p class="admonition-title">VQC Training Loop Pseudo-code</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>VQC_Training_Loop(data, labels, initial_theta, max_iterations):
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    theta = initial_theta
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    for iteration in range(max_iterations):
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        # Quantum execution: evaluate cost
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        total_cost = 0
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        for (x, y) in zip(data, labels):
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>            # Run VQC on quantum hardware
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>            prediction = VQC_Forward_Pass(x, theta)
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>            total_cost += (prediction - y)^2
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        # Classical optimization: compute gradient and update
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        if using_gradient_based_optimizer:
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>            gradient = Parameter_Shift_Rule(theta, data, labels)
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>            theta = theta - learning_rate * gradient
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        else:
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>            # Gradient-free (e.g., COBYLA)
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>            theta = Optimizer_Step(theta, total_cost)
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>        # Check convergence
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>        if total_cost &lt; tolerance:
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>            break
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>    return theta
+</span></code></pre></div>
+</div>
+<hr />
+<h3 id="advantages-for-nisq"><strong>Advantages for NISQ</strong></h3>
+<hr />
+<p>The hybrid model is dominant because it addresses the primary limitations of current quantum hardware:</p>
+<p><strong>Noise Mitigation</strong></p>
+<p>The quantum computer only performs the <strong>shallow</strong> part of the computation (feature extraction and unitary evolution, which scales polynomially). The deeper, iterative, high-precision task of optimization is handled classically, minimizing the exposure of the quantum state to noise and decoherence.</p>
+<p><strong>Computational Efficiency</strong></p>
+<p>The exponential number of repetitions inherent in optimization is handled by classical hardware, which is optimized for running iterative algorithms, while the quantum processor is reserved for the task of exploring the exponential Hilbert space.</p>
+<hr />
+<h2 id="104-training-and-optimization"><strong>10.4 Training and Optimization</strong></h2>
+<hr />
+<p>Training a Variational Quantum Circuit (VQC) involves the critical step of using a classical optimizer to find the parameter vector <span class="arithmatex">\(\vec{\theta}\)</span> that minimizes the measured cost function <span class="arithmatex">\(C(\vec{\theta})\)</span>. This process relies on efficiently calculating or approximating the gradient of the cost function, often through quantum mechanical methods.</p>
+<div class="admonition tip">
+<p class="admonition-title">The Parameter Shift Rule: Quantum Backpropagation</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Classical neural networks use backpropagation to compute gradients. Quantum circuits use the parameter shift rule—a quantum-native method that analytically computes gradients by running the circuit twice with shifted parameters [6].
+</span></code></pre></div>
+<h3 id="gradient-based-optimization-and-the-parameter-shift-rule"><strong>Gradient-Based Optimization and the Parameter Shift Rule</strong></h3>
+<hr />
+<p>Gradient-based optimizers (e.g., <strong>Adam, SGD, RMSProp</strong>) require the gradient (<span class="arithmatex">\(\frac{\partial C}{\partial \theta_k}\)</span>) to determine the steepest descent direction in the parameter space. Since the VQC output is probabilistic and its parameters are angles, the gradient cannot be computed using standard classical backpropagation.</p>
+<p>The primary method for calculating the analytic gradient on a quantum computer is the <strong>Parameter Shift Rule</strong>:</p>
+<p><strong>Mechanism</strong></p>
+<p>This rule allows the derivative of the expectation value <span class="arithmatex">\(C(\theta_k)\)</span> with respect to a gate parameter <span class="arithmatex">\(\theta_k\)</span> to be calculated using only two measurements of the quantum circuit, with the parameter shifted by a fixed value (often <span class="arithmatex">\(\pm \pi/2\)</span>).</p>
+<p><strong>Formula</strong></p>
+<p>For a simple rotation gate, the gradient is given by:</p>
+<div class="arithmatex">\[
+\frac{\partial C}{\partial \theta_k} = \frac{C(\theta_k + s) - C(\theta_k - s)}{2 \sin(s)}
+\]</div>
+<p>where <span class="arithmatex">\(s\)</span> is the shift angle (typically <span class="arithmatex">\(s=\pi/2\)</span>). The gradient calculation thus involves <strong>two evaluations of the quantum circuit</strong> per parameter.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">Parameter_Shift_Rule</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">π</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="c1"># Compute gradient of cost w.r.t. theta[k]</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">theta_plus</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">theta_plus</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">shift</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">theta_minus</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">theta_minus</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-=</span> <span class="n">shift</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="c1"># Evaluate cost at shifted parameters</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">cost_plus</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">(</span><span class="n">theta_plus</span><span class="p">)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">cost_minus</span> <span class="o">=</span> <span class="n">cost_function</span><span class="p">(</span><span class="n">theta_minus</span><span class="p">)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="c1"># Compute gradient</span>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="n">gradient</span> <span class="o">=</span> <span class="p">(</span><span class="n">cost_plus</span> <span class="o">-</span> <span class="n">cost_minus</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">shift</span><span class="p">))</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="k">return</span> <span class="n">gradient</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="n">Compute_Full_Gradient</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">):</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>    <span class="c1"># Compute gradient for all parameters</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>    <span class="n">num_params</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>    <span class="n">gradient</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_params</span><span class="p">)</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_params</span><span class="p">):</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        <span class="n">gradient</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter_Shift_Rule</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">cost_function</span><span class="p">)</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>    <span class="k">return</span> <span class="n">gradient</span>
+</span></code></pre></div>
+<hr />
+<h3 id="gradient-free-and-stochastic-optimizers"><strong>Gradient-Free and Stochastic Optimizers</strong></h3>
+<hr />
+<p>When the cost of calculating the full gradient via the Parameter Shift Rule is too high, or when the measurement noise is significant, alternatives are used:</p>
+<p><strong>Gradient-Free Optimizers</strong></p>
+<p>Methods like <strong>COBYLA, Nelder-Mead, or Powell</strong> do not calculate the gradient at all. They infer the best direction by sampling and comparing the cost function value at neighboring points. They are often more robust to <strong>noise-induced fluctuations</strong> but can converge slower than gradient-based methods in clean environments.</p>
+<p><strong>Stochastic Optimizers</strong></p>
+<p>Methods like <strong>SPSA (Simultaneous Perturbation Stochastic Approximation)</strong> estimate the gradient using only a small, fixed number of noisy measurements (usually two per iteration), regardless of the number of parameters. This makes SPSA highly efficient in terms of quantum circuit executions, particularly for circuits with a large number of parameters.</p>
+<details class="question">
+<summary>When should you use COBYLA instead of Adam for VQC training?</summary>
+</details>
+<h2 id="use-cobyla-when-1-measurement-noise-is-high-and-gradient-estimates-are-unreliable-2-the-number-of-parameters-is-small-50-or-3-the-cost-landscape-is-highly-non-convex-with-many-local-minima-adam-is-preferred-when-gradients-are-reliable-and-you-need-faster-convergence-with-many-parameters"><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Use COBYLA when: (1) measurement noise is high and gradient estimates are unreliable, (2) the number of parameters is small (&lt;50), or (3) the cost landscape is highly non-convex with many local minima. Adam is preferred when gradients are reliable and you need faster convergence with many parameters.
+</span></code></pre></div></h2>
+<h3 id="challenges-to-optimization"><strong>Challenges to Optimization</strong></h3>
+<hr />
+<p>VQC optimization is hampered by two primary challenges:</p>
+<p><strong>1. Local Minima</strong></p>
+<p>The highly complex, non-convex nature of the cost landscape means optimizers can become trapped in <strong>local minima</strong> rather than reaching the desired global minimum.</p>
+<p><strong>2. Barren Plateaus</strong></p>
+<p>This is a severe problem where the cost function gradients vanish exponentially as the circuit size or depth increases. When this occurs, parameter updates halt, making training impossible. Mitigations include using <strong>shallow circuits</strong> and <strong>structured initialization</strong>.</p>
+<hr />
+<h2 id="105-barren-plateaus-and-mitigation"><strong>10.5 Barren Plateaus and Mitigation</strong></h2>
+<hr />
+<p><strong>Barren plateaus</strong> are a critical, inherent issue in training large <strong>Variational Quantum Circuits (VQCs)</strong>, representing an exponential vanishing of gradients across the optimization landscape. This issue directly impacts the <strong>trainability</strong> of VQCs.</p>
+<div class="admonition tip">
+<p class="admonition-title">The Barren Plateau Crisis</p>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Barren plateaus are the quantum equivalent of the vanishing gradient problem in deep classical neural networks, but exponentially worse. Random deep quantum circuits become exponentially flat—gradients vanish as $\exp(-n)$ where $n$ is the number of qubits [7].
+</span></code></pre></div>
+<h3 id="the-phenomenon"><strong>The Phenomenon</strong></h3>
+<hr />
+<p>A barren plateau occurs when the variance of the partial derivative (<span class="arithmatex">\(\frac{\partial C}{\partial \theta_k}\)</span>) of the cost function <span class="arithmatex">\(C(\vec{\theta})\)</span> drops exponentially with the number of qubits (<span class="arithmatex">\(n\)</span>) or the circuit depth.</p>
+<p><strong>Consequence</strong></p>
+<p>When the gradient approaches zero across the entire parameter space, the optimizer cannot determine which direction to move to minimize the cost, effectively stalling the training process.</p>
+<p><strong>Cause</strong></p>
+<p>Barren plateaus are caused by the <strong>random initialization</strong> of parameters in deep circuits and the resulting <strong>excessive entanglement</strong>, which spreads information thinly across the exponentially large Hilbert space, making local changes (<span class="arithmatex">\(\partial \theta_k\)</span>) undetectable.</p>
+<p>Mathematically, for randomly initialized circuits with global cost functions, the gradient variance scales as:</p>
+<div class="arithmatex">\[
+\text{Var}\left[\frac{\partial C}{\partial \theta_k}\right] \in O(2^{-n})
+\]</div>
+<p>This exponential suppression makes gradient-based training infeasible for large systems.</p>
+<hr />
+<h3 id="mitigation-strategies"><strong>Mitigation Strategies</strong></h3>
+<hr />
+<p>Mitigation strategies focus on controlling the structural design and initial conditions of the VQC to maintain sufficiently large, non-vanishing gradients:</p>
+<p><strong>1. Structural Control</strong></p>
+<ul>
+<li><strong>Use Shallow Circuits:</strong> Limiting the <strong>circuit depth</strong> prevents excessive entanglement and maintains larger gradients, which is essential for NISQ devices.</li>
+<li><strong>Structured Ansatz:</strong> Employing <strong>problem-inspired</strong> or <strong>structured ansätze</strong> (Section 10.2), rather than randomly initialized deep circuits, helps restrict the search space to a local region that is more trainable.</li>
+<li><strong>Local Cost Functions:</strong> Using cost functions that depend only on a few qubits (rather than global observables) can prevent barren plateaus by localizing the gradient information.</li>
+</ul>
+<p><strong>2. Initialization Control</strong></p>
+<ul>
+<li><strong>Initialize Near Identity:</strong> Starting the VQC with parameters close to the identity operation (e.g., <span class="arithmatex">\(\vec{\theta} \approx \vec{0}\)</span>) ensures that the state does not become maximally entangled immediately.</li>
+<li><strong>Layer-wise Training:</strong> Training the circuit layer by layer, rather than optimizing all parameters simultaneously, can help manage entanglement growth and maintain non-vanishing gradients.</li>
+</ul>
+<p><strong>3. Advanced Techniques</strong></p>
+<ul>
+<li><strong>Parameter Correlation:</strong> Correlating parameters across different layers can create structure that avoids barren plateaus.</li>
+<li><strong>Pre-training:</strong> Using classical simulations or simplified quantum circuits to pre-train parameters before deploying on full quantum hardware.</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    A[Random Deep Circuit] --&gt; B{Check Gradient Variance}
+    B --&gt;|Var ∇C ~ exp -n| C[Barren Plateau!]
+    C --&gt; D[Mitigation Strategy]
+    D --&gt; E[Shallow Circuit]
+    D --&gt; F[Problem-Inspired Ansatz]
+    D --&gt; G[Local Cost Function]
+    D --&gt; H[Identity Initialization]
+    E --&gt; I[Trainable VQC]
+    F --&gt; I
+    G --&gt; I
+    H --&gt; I
+    B --&gt;|Var ∇C ~ poly n| I</code></pre>
+<div class="admonition example">
+<p class="admonition-title">Barren Plateau Detection</p>
+</div>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>To detect if your VQC suffers from barren plateaus:
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>1. **Sample gradients:** Compute $\frac{\partial C}{\partial \theta_k}$ for multiple random $\vec{\theta}$
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>2. **Calculate variance:** $\text{Var}[\nabla C] = \frac{1}{K}\sum_{k=1}^{K}(\nabla_k C)^2 - (\frac{1}{K}\sum_{k=1}^{K}\nabla_k C)^2$
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>3. **Check scaling:** If $\text{Var}[\nabla C] \propto 2^{-n}$, you have a barren plateau
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>4. **Mitigate:** Switch to shallow, structured ansatz or local cost function
+</span></code></pre></div>
+The challenge of barren plateaus reinforces the current necessity of designing <strong>shallow, localized VQCs</strong> for quantum machine learning.</p>
+<hr />
+<h3 id="summary-comparison-of-vqc-components-and-challenges"><strong>Summary: Comparison of VQC Components and Challenges</strong></h3>
+<hr />
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Aspect</th>
+<th style="text-align: left;">Component / Concept</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Critical Role &amp; Constraints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>I. VQC Structure</strong></td>
+<td style="text-align: left;"><strong>Data Encoding Layer</strong> (<span class="arithmatex">\(U_\phi(x)\)</span>)</td>
+<td style="text-align: left;"><strong>Input pipeline</strong>; a non-trainable quantum feature map that converts classical data <span class="arithmatex">\(x\)</span> into a high-dimensional quantum state.</td>
+<td style="text-align: left;">Must efficiently <strong>embed data</strong> without exponential circuit depth (data loading bottleneck).</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Parameterized Unitary Layer</strong> (<span class="arithmatex">\(U(\vec{\theta})\)</span>)</td>
+<td style="text-align: left;"><strong>Trainable core</strong> composed of alternating layers of parameterized rotations (e.g., <span class="arithmatex">\(R_y(\theta)\)</span>) and fixed entanglement (CNOTs).</td>
+<td style="text-align: left;">Unitary nature ensures <strong>probability conservation</strong> during learning. The parameters <span class="arithmatex">\(\vec{\theta}\)</span> are adjusted classically.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Measurement Layer</strong></td>
+<td style="text-align: left;">Extracts classical output (<span class="arithmatex">\(f(x, \vec{\theta})\)</span>) by calculating the <strong>expectation value</strong> of a target observable (e.g., <span class="arithmatex">\(H\)</span> or <span class="arithmatex">\(Z\)</span>).</td>
+<td style="text-align: left;">Requires <strong>shot-based estimation</strong> (finite sampling), introducing statistical noise.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>II. The Ansatz (<span class="arithmatex">\(U(\vec{\theta})\)</span>)</strong></td>
+<td style="text-align: left;"><strong>Hardware-Efficient Ansatz</strong></td>
+<td style="text-align: left;">Shallow structure tailored to the physical <strong>connectivity</strong> of the NISQ device.</td>
+<td style="text-align: left;">Practical solution for <strong>NISQ devices</strong> due to minimal depth, but may require many parameters.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Problem-Inspired Ansatz</strong></td>
+<td style="text-align: left;">Structure guided by known symmetries or physical constraints (e.g., QAOA mixer/cost blocks).</td>
+<td style="text-align: left;"><strong>Reduces parameter count</strong> and often improves <strong>trainability</strong> by restricting the search space.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>III. Training and Optimization</strong></td>
+<td style="text-align: left;"><strong>Hybrid Model</strong></td>
+<td style="text-align: left;">Workflow that splits tasks: <strong>Quantum</strong> calculates expectation value; <strong>Classical</strong> updates parameters <span class="arithmatex">\(\vec{\theta}\)</span>.</td>
+<td style="text-align: left;">Dominant paradigm to minimize quantum exposure to <strong>noise and decoherence</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Parameter Shift Rule</strong></td>
+<td style="text-align: left;">Quantum method to calculate the <strong>analytic gradient</strong> (<span class="arithmatex">\(\frac{\partial C}{\partial \theta_k}\)</span>) by running the circuit twice with shifted parameter values (e.g., <span class="arithmatex">\(\pm \pi/2\)</span>).</td>
+<td style="text-align: left;">Necessary for <strong>gradient-based optimizers</strong> (e.g., Adam), avoiding classical backpropagation complexity.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>SPSA/COBYLA</strong></td>
+<td style="text-align: left;"><strong>Stochastic</strong> (SPSA) and <strong>Gradient-Free</strong> (COBYLA) classical optimizers.</td>
+<td style="text-align: left;">Preferred in <strong>noisy environments</strong> as they are more robust to shot-noise fluctuations than traditional gradient methods.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>IV. Core Challenges</strong></td>
+<td style="text-align: left;"><strong>Barren Plateaus</strong></td>
+<td style="text-align: left;">Phenomenon where the <strong>gradient of the cost function vanishes exponentially</strong> with circuit depth or width (<span class="arithmatex">\(\text{Var}[\nabla C] \sim 2^{-n}\)</span>).</td>
+<td style="text-align: left;">Occurs due to <strong>random initialization</strong> and excessive entanglement; halts training. Mitigation requires <strong>shallow, structured circuits</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Convergence</strong></td>
+<td style="text-align: left;">Achieved when the cost <span class="arithmatex">\(C(\vec{\theta})\)</span> <strong>plateaus</strong> or the parameter updates stabilize.</td>
+<td style="text-align: left;">Optimization seeks a minimum within the constraints of <strong>statistical fluctuation</strong> and <strong>hardware noise</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Measurement Optimization</strong></td>
+<td style="text-align: left;">Technique of <strong>grouping commuting Pauli strings</strong> in the Hamiltonian for simultaneous measurement.</td>
+<td style="text-align: left;">Essential to <strong>reduce overhead</strong> (total shot count) and accelerate the training loop.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="references"><strong>References</strong></h2>
+<hr />
+<p>[1] Cerezo, M., Arrasmith, A., Babbush, R., Benjamin, S. C., Endo, S., Fujii, K., ... &amp; Coles, P. J. (2021). "Variational quantum algorithms." <em>Nature Reviews Physics</em>, 3(9), 625-644.</p>
+<p>[2] Schuld, M., &amp; Petruccione, F. (2018). <em>Supervised Learning with Quantum Computers</em>. Springer.</p>
+<p>[3] Benedetti, M., Lloyd, E., Sack, S., &amp; Fiorentini, M. (2019). "Parameterized quantum circuits as machine learning models." <em>Quantum Science and Technology</em>, 4(4), 043001.</p>
+<p>[4] Sim, S., Johnson, P. D., &amp; Aspuru-Guzik, A. (2019). "Expressibility and entangling capability of parameterized quantum circuits for hybrid quantum-classical algorithms." <em>Advanced Quantum Technologies</em>, 2(12), 1900070.</p>
+<p>[5] Farhi, E., &amp; Neven, H. (2018). "Classification with quantum neural networks on near term processors." <em>arXiv preprint arXiv:1802.06002</em>.</p>
+<p>[6] Mitarai, K., Negoro, M., Kitagawa, M., &amp; Fujii, K. (2018). "Quantum circuit learning." <em>Physical Review A</em>, 98(3), 032309.</p>
+<p>[7] McClean, J. R., Boixo, S., Smelyanskiy, V. N., Babbush, R., &amp; Neven, H. (2018). "Barren plateaus in quantum neural network training landscapes." <em>Nature Communications</em>, 9(1), 4812.</p>
+<p>[8] Kandala, A., Mezzacapo, A., Temme, K., Takita, M., Brink, M., Chow, J. M., &amp; Gambetta, J. M. (2017). "Hardware-efficient variational quantum eigensolver for small molecules and quantum magnets." <em>Nature</em>, 549(7671), 242-246.</p>
+<p>[9] Grant, E., Wossnig, L., Ostaszewski, M., &amp; Benedetti, M. (2019). "An initialization strategy for addressing barren plateaus in parametrized quantum circuits." <em>Quantum</em>, 3, 214.</p>
+<p>[10] Biamonte, J., Wittek, P., Pancotti, N., Rebentrost, P., Wiebe, N., &amp; Lloyd, S. (2017). "Quantum machine learning." <em>Nature</em>, 549(7671), 195-202.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../chapter-9/essay/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Chapter-9 Encoding Classical Data into Quantum States">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Chapter-9 Encoding Classical Data into Quantum States
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../chapter-11/essay/" class="md-footer__link md-footer__link--next" aria-label="Next: Chapter-11 Supervised Quantum Machine Learning">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Chapter-11 Supervised Quantum Machine Learning
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bigbookofcomputing.github.io" target="_blank" rel="noopener" title="bigbookofcomputing.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://x.com/bigbookofcomputing" target="_blank" rel="noopener" title="x.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.facebook.com/bigbookofcomputing" target="_blank" rel="noopener" title="www.facebook.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256c0 120 82.7 220.8 194.2 248.5V334.2h-52.8V256h52.8v-33.7c0-87.1 39.4-127.5 125-127.5 16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287v175.9C413.8 494.8 512 386.9 512 256"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/bigbookofcomputing" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/@big-book-of-computing" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../static/mathjax-config.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
