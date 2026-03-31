@@ -45,10 +45,8 @@ $$
 Exact Gaussian loading on $n$ qubits requires $O(2^n)$ gates, which is too deep for NISQ. Approximate loading using **log-normal QCBMs** (quantum circuit Born machines) or Taylor-expansion circuits reduces this to $O(n \cdot \text{poly}(\log 1/\epsilon))$ gates.
 
 !!! tip "Amplitude Encoding vs Basis Encoding"
-```
-**Amplitude encoding** stores $N = 2^n$ values in the amplitudes of $n$ qubits — exponentially compact but exponentially expensive to prepare exactly. **Basis encoding** stores one value per qubit — easier to prepare but uses $O(N)$ qubits. For finance, amplitude encoding is preferred because the expectation value is computed naturally via measurement.
-
-```
+    **Amplitude encoding** stores $N = 2^n$ values in the amplitudes of $n$ qubits — exponentially compact but exponentially expensive to prepare exactly. **Basis encoding** stores one value per qubit — easier to prepare but uses $O(N)$ qubits. For finance, amplitude encoding is preferred because the expectation value is computed naturally via measurement.
+    
 ### **Option Payoff Encoding**
 
 ---
@@ -68,15 +66,11 @@ $$
 Classical estimation of this probability by repeated circuit execution converges as $O(1/\sqrt{N_{\text{shots}}})$ — identical to classical Monte Carlo. The quantum advantage enters with Quantum Amplitude Estimation, described next.
 
 !!! example "European Call Option Pricing"
-```
-For a 4-qubit asset distribution ($2^4 = 16$ price levels from $S_{\text{min}}=0$ to $S_{\text{max}}=2$ normalised) with strike $K = 1.0$: after preparing the Gaussian state and encoding the call payoff on an ancilla, the probability of measuring ancilla = 1 gives (after rescaling) the normalised Black-Scholes option price. A 5-qubit circuit estimates this with standard error $\sigma_{\text{MC}} \approx 0.05$ using 1000 shots.
-
-```
+    For a 4-qubit asset distribution ($2^4 = 16$ price levels from $S_{\text{min}}=0$ to $S_{\text{max}}=2$ normalised) with strike $K = 1.0$: after preparing the Gaussian state and encoding the call payoff on an ancilla, the probability of measuring ancilla = 1 gives (after rescaling) the normalised Black-Scholes option price. A 5-qubit circuit estimates this with standard error $\sigma_{\text{MC}} \approx 0.05$ using 1000 shots.
+    
 ??? question "Why does exact amplitude loading require exponentially many gates?"
-```
-Loading $N$ arbitrary amplitudes $\alpha_0, \ldots, \alpha_{N-1}$ into $\log_2 N$ qubits requires a unitary with $N-1$ degrees of freedom. Exactly encoding this unitary requires $O(N)$ CNOT gates (the circuit complexity lower bound for arbitrary state preparation). For a 20-qubit register ($N = 2^{20} \approx 10^6$), exact loading needs $\sim 10^6$ gates — far beyond NISQ depth limits.
-
-```
+    Loading $N$ arbitrary amplitudes $\alpha_0, \ldots, \alpha_{N-1}$ into $\log_2 N$ qubits requires a unitary with $N-1$ degrees of freedom. Exactly encoding this unitary requires $O(N)$ CNOT gates (the circuit complexity lower bound for arbitrary state preparation). For a 20-qubit register ($N = 2^{20} \approx 10^6$), exact loading needs $\sim 10^6$ gates — far beyond NISQ depth limits.
+    
 ---
 
 ## **18.2 Quantum Amplitude Estimation**
@@ -116,24 +110,18 @@ $$
 This provides **quadratic speedup**: classical Monte Carlo needs $N_{\text{samples}} = O(1/\epsilon^2)$ samples for error $\epsilon$; QAE needs only $N_Q = O(1/\epsilon)$ Grover iterations.
 
 !!! tip "Iterative QAE for NISQ"
-```
-Classical QPE-based QAE requires a deep circuit (many ancilla qubits + controlled-$Q^{2^k}$ gates). **Iterative QAE** (IQAE) achieves the same $O(1/\epsilon)$ query complexity using only single-ancilla circuits via maximum likelihood estimation over multiple short runs — compatible with current NISQ hardware.
-
-```
+    Classical QPE-based QAE requires a deep circuit (many ancilla qubits + controlled-$Q^{2^k}$ gates). **Iterative QAE** (IQAE) achieves the same $O(1/\epsilon)$ query complexity using only single-ancilla circuits via maximum likelihood estimation over multiple short runs — compatible with current NISQ hardware.
+    
 !!! example "QAE for Option Pricing Speedup"
-```
-For option pricing to 1% accuracy ($\epsilon = 0.01$):
-- Classical Monte Carlo: $N = O(1/0.01^2) = 10,000$ simulations
-- QAE: $N_Q = O(1/0.01) = 100$ Grover iterations × depth scaling = ~100× fewer oracle calls (ignoring circuit depth overhead)
-
-In practice, the quantum circuit depth overhead reduces the effective speedup for near-term NISQ devices, but fault-tolerant estimates project a 100–1000× advantage for high-accuracy pricing.
-
-```
+    For option pricing to 1% accuracy ($\epsilon = 0.01$):
+    - Classical Monte Carlo: $N = O(1/0.01^2) = 10,000$ simulations
+    - QAE: $N_Q = O(1/0.01) = 100$ Grover iterations × depth scaling = ~100× fewer oracle calls (ignoring circuit depth overhead)
+    
+    In practice, the quantum circuit depth overhead reduces the effective speedup for near-term NISQ devices, but fault-tolerant estimates project a 100–1000× advantage for high-accuracy pricing.
+    
 ??? question "Does quantum speedup apply to all Monte Carlo problems, or only option pricing?"
-```
-QAE provides quadratic speedup for any problem expressible as estimating the expectation value $\mathbb{E}[f(X)]$ where $X$ is sampled from a distribution encodable as quantum amplitudes. This includes: option pricing, risk measures (VaR, CVaR), credit default modelling, and Monte Carlo integration. It does NOT apply to problems requiring sequential path-dependent sampling where each step depends on prior outcomes.
-
-```
+    QAE provides quadratic speedup for any problem expressible as estimating the expectation value $\mathbb{E}[f(X)]$ where $X$ is sampled from a distribution encodable as quantum amplitudes. This includes: option pricing, risk measures (VaR, CVaR), credit default modelling, and Monte Carlo integration. It does NOT apply to problems requiring sequential path-dependent sampling where each step depends on prior outcomes.
+    
 ---
 
 ## **18.3 Portfolio Risk and CVaR Estimation**
@@ -190,20 +178,14 @@ $$
 This QUBO can be solved with QAOA (Chapter 6), where the cost Hamiltonian encodes the portfolio variance and the expected return penalty. For a portfolio of $M = 8$ assets with binary fractional weights, QAOA with $p=3$ layers achieves near-optimal portfolios in simulation and has been demonstrated on hardware [3].
 
 !!! tip "Quantum Advantage Timeline for Finance"
-```
-Near-term (NISQ): quantum speedup for CVaR estimation demonstrated on hardware at O(10)-qubit scale, but classical advantage for realistic portfolio sizes. Mid-term (logical qubits): quadratic speedup for option pricing becomes practical at ~1000 logical qubits. Long-term (fault-tolerant): full quantum advantage for large Monte Carlo problems requiring >10^6 samples.
-
-```
+    Near-term (NISQ): quantum speedup for CVaR estimation demonstrated on hardware at O(10)-qubit scale, but classical advantage for realistic portfolio sizes. Mid-term (logical qubits): quadratic speedup for option pricing becomes practical at ~1000 logical qubits. Long-term (fault-tolerant): full quantum advantage for large Monte Carlo problems requiring >10^6 samples.
+    
 !!! example "CVaR Estimation on 2-qubit Portfolio"
-```
-2-asset, 4-scenario portfolio with returns $\{-2, -1, +1, +2\}$ and uniform probabilities. 95% CVaR = expected loss in bottom 5% = $-2$ (worst scenario). Quantum circuit: 2 distribution qubits + 1 ancilla. After amplitude estimation on the ancilla amplitude $a = P(L = -2) = 0.25$, CVaR at 75% confidence = $(-2 \times 0.25 + (-1) \times 0.25) / 0.50 = -1.5$.
-
-```
+    2-asset, 4-scenario portfolio with returns $\{-2, -1, +1, +2\}$ and uniform probabilities. 95% CVaR = expected loss in bottom 5% = $-2$ (worst scenario). Quantum circuit: 2 distribution qubits + 1 ancilla. After amplitude estimation on the ancilla amplitude $a = P(L = -2) = 0.25$, CVaR at 75% confidence = $(-2 \times 0.25 + (-1) \times 0.25) / 0.50 = -1.5$.
+    
 ??? question "Is quantum finance a near-term or long-term application?"
-```
-Quantum finance sits in between. The theoretical quadratic speedup from QAE is well-established but requires fault-tolerant hardware for industrial-scale problems. Near-term NISQ demonstrations exist at the 10–50 qubit level for toy problems. Practical financial advantage requires ~1000 logical qubits to price complex derivatives (e.g., path-dependent options) faster than state-of-the-art classical GPUs running Monte Carlo.
-
-```
+    Quantum finance sits in between. The theoretical quadratic speedup from QAE is well-established but requires fault-tolerant hardware for industrial-scale problems. Near-term NISQ demonstrations exist at the 10–50 qubit level for toy problems. Practical financial advantage requires ~1000 logical qubits to price complex derivatives (e.g., path-dependent options) faster than state-of-the-art classical GPUs running Monte Carlo.
+    
 ---
 
 ## **References**

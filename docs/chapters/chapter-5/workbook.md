@@ -1,4 +1,4 @@
-# **Chapter 5: Quantum Fourier Transform and Phase Estimation () () (Workbook)**
+# **Chapter 5: Quantum Fourier Transform and Phase Estimation (Workbook)**
 
 ---
 
@@ -83,53 +83,49 @@ implemented by reversing gate order and conjugating rotations: $R_m \to R_m^\dag
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. What is $\omega_N$ in the QFT definition?**
-
-- A. A normalization constant  
-- B. A twiddle factor/root of unity  
-- C. A probability amplitude  
-- D. A diffusion parameter  
-
+    **1. What is $\omega_N$ in the QFT definition?**
+    
+    - A. A normalization constant  
+    - B. A twiddle factor/root of unity  
+    - C. A probability amplitude  
+    - D. A diffusion parameter  
+    
 ??? info "See Answer"
-    **Correct: B.** $\omega_N=e^{2\pi i/N}$.
-
-**2. Asymptotic gate count of a straightforward QFT circuit on $n$ qubits is:**
-
-- A. $\mathcal{O}(n)$  
-- B. $\mathcal{O}(n^2)$  
-- C. $\mathcal{O}(2^n)$  
-- D. $\mathcal{O}(n\log n)$  
-
+        **Correct: B.** $\omega_N=e^{2\pi i/N}$.
+    
+    **2. Asymptotic gate count of a straightforward QFT circuit on $n$ qubits is:**
+    
+    - A. $\mathcal{O}(n)$  
+    - B. $\mathcal{O}(n^2)$  
+    - C. $\mathcal{O}(2^n)$  
+    - D. $\mathcal{O}(n\log n)$  
+    
 ??? info "See Answer"
-    **Correct: B.** Using Hadamards and controlled rotations yields $\mathcal{O}(n^2)$ gates.
-
-```
+        **Correct: B.** Using Hadamards and controlled rotations yields $\mathcal{O}(n^2)$ gates.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why does the QFT not, by itself, provide a general exponential speedup when compared to the classical FFT?
-
-???+ info "Answer Strategy"
-    **The QFT Transformation:**  
-    The Quantum Fourier Transform implements $\text{QFT}|j\rangle = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1} e^{2\pi ijk/N}|k\rangle$ using $\mathcal{O}(n^2)$ gates, exponentially faster than classical FFT's $\mathcal{O}(N \log N)$ operations. However, this apparent speedup has a critical limitation.
     
-    $$
-    \text{QFT}|j\rangle = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1} e^{2\pi ijk/N}|k\rangle
-    $$
-
-    **The Measurement Bottleneck:**  
-    While QFT efficiently transforms amplitudes $|\psi\rangle = \sum_j \alpha_j|j\rangle \to \sum_k \tilde{\alpha}_k|k\rangle$, measurement collapses to a single outcome $|k_0\rangle$ with probability $|\tilde{\alpha}_{k_0}|^2$. Extracting all $N$ Fourier coefficients requires $\mathcal{O}(N)$ measurements, negating the speedup. Classical FFT outputs all coefficients explicitly in $\mathcal{O}(N \log N)$ operations.
-
-    **When QFT Provides Advantage:**  
-    QFT becomes powerful when embedded in larger algorithms exploiting interference patterns before measurement. QPE uses QFT to concentrate probability into binary phase representations. Shor's algorithm creates peaks at $k = 0, N/r, 2N/r, \ldots$ enabling period extraction. HHL manipulates eigenvalue-dependent phases.
+    **Q:** Why does the QFT not, by itself, provide a general exponential speedup when compared to the classical FFT?
     
-    **Conclusion:**  
-    QFT alone doesn't replace classical FFT due to measurement limitations. Exponential advantage emerges when QFT enables algorithmic structures that concentrate probability into polynomially many outcomes, making measurement informative.
-
-```
+    ???+ info "Answer Strategy"
+        **The QFT Transformation:**  
+        The Quantum Fourier Transform implements $\text{QFT}|j\rangle = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1} e^{2\pi ijk/N}|k\rangle$ using $\mathcal{O}(n^2)$ gates, exponentially faster than classical FFT's $\mathcal{O}(N \log N)$ operations. However, this apparent speedup has a critical limitation.
+        
+        $$
+        \text{QFT}|j\rangle = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1} e^{2\pi ijk/N}|k\rangle
+        $$
+    
+        **The Measurement Bottleneck:**  
+        While QFT efficiently transforms amplitudes $|\psi\rangle = \sum_j \alpha_j|j\rangle \to \sum_k \tilde{\alpha}_k|k\rangle$, measurement collapses to a single outcome $|k_0\rangle$ with probability $|\tilde{\alpha}_{k_0}|^2$. Extracting all $N$ Fourier coefficients requires $\mathcal{O}(N)$ measurements, negating the speedup. Classical FFT outputs all coefficients explicitly in $\mathcal{O}(N \log N)$ operations.
+    
+        **When QFT Provides Advantage:**  
+        QFT becomes powerful when embedded in larger algorithms exploiting interference patterns before measurement. QPE uses QFT to concentrate probability into binary phase representations. Shor's algorithm creates peaks at $k = 0, N/r, 2N/r, \ldots$ enabling period extraction. HHL manipulates eigenvalue-dependent phases.
+        
+        **Conclusion:**  
+        QFT alone doesn't replace classical FFT due to measurement limitations. Exponential advantage emerges when QFT enables algorithmic structures that concentrate probability into polynomially many outcomes, making measurement informative.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -291,50 +287,46 @@ Thus QPE succeeds with probability $> 40\%$ even for inexact phases, and repeati
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which operation prepares the counting register?**
-
-- A. $\mathrm{QFT}^{-1}$  
-- B. Hadamards  
-- C. SWAPs  
-- D. Controlled-NOTs  
-
+    **1. Which operation prepares the counting register?**
+    
+    - A. $\mathrm{QFT}^{-1}$  
+    - B. Hadamards  
+    - C. SWAPs  
+    - D. Controlled-NOTs  
+    
 ??? info "See Answer"
-    **Correct: B.** $\mathbf{H}^{\otimes n}$ creates the uniform superposition.
-
-**2. Why use powers $U^{2^j}$?**
-
-- A. To reduce depth  
-- B. To linearize the phase  
-- C. To encode successive binary digits of $\phi$  
-- D. To avoid entanglement  
-
+        **Correct: B.** $\mathbf{H}^{\otimes n}$ creates the uniform superposition.
+    
+    **2. Why use powers $U^{2^j}$?**
+    
+    - A. To reduce depth  
+    - B. To linearize the phase  
+    - C. To encode successive binary digits of $\phi$  
+    - D. To avoid entanglement  
+    
 ??? info "See Answer"
-    **Correct: C.** Exponential powers map bits of $\phi$ into separable phase patterns decodable by $\mathrm{QFT}^{-1}$.
-
-```
+        **Correct: C.** Exponential powers map bits of $\phi$ into separable phase patterns decodable by $\mathrm{QFT}^{-1}$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** What happens when $|\psi\rangle$ is not an eigenstate of $U$?
-
-???+ info "Answer Strategy"
-    **Eigenstate Decomposition:**  
-    QPE extracts eigenphase $\phi$ when the target is an eigenstate $U|\psi_\phi\rangle = e^{2\pi i \phi}|\psi_\phi\rangle$. For non-eigenstates, decompose as $|\psi\rangle = \sum_j c_j |\psi_j\rangle$ where $|\psi_j\rangle$ are eigenstates with eigenvalues $e^{2\pi i \phi_j}$.
     
-    $$
-    |\psi\rangle = \sum_j c_j |\psi_j\rangle \quad \xrightarrow{\text{QPE}} \quad \sum_j c_j |\tilde{\phi}_j\rangle \otimes |\psi_j\rangle
-    $$
-
-    **Probabilistic Outcome:**  
-    Measurement yields phase estimate $|\tilde{\phi}_j\rangle$ with probability $P(\phi_j) = |c_j|^2 = |\langle \psi_j|\psi\rangle|^2$, the overlap with eigenstate $|\psi_j\rangle$. This produces a random sample from the eigenphase distribution weighted by state projections.
-
-    **Practical Consequences:**  
-    Repeated runs yield different phases with probabilities $|c_j|^2$, sampling the eigenspectrum $\{(\phi_j, |c_j|^2)\}$. In Shor's algorithm, $|1\rangle$ decomposes over eigenstates of $U_a$, sampling uniformly from $\{k/r : k = 0, 1, \ldots, r-1\}$. Continued fractions extract period $r$ from sampled $k/r$. Post-selection on target measurements can prepare specific eigenstates with success probability $|c_k|^2$.
-
-```
+    **Q:** What happens when $|\psi\rangle$ is not an eigenstate of $U$?
+    
+    ???+ info "Answer Strategy"
+        **Eigenstate Decomposition:**  
+        QPE extracts eigenphase $\phi$ when the target is an eigenstate $U|\psi_\phi\rangle = e^{2\pi i \phi}|\psi_\phi\rangle$. For non-eigenstates, decompose as $|\psi\rangle = \sum_j c_j |\psi_j\rangle$ where $|\psi_j\rangle$ are eigenstates with eigenvalues $e^{2\pi i \phi_j}$.
+        
+        $$
+        |\psi\rangle = \sum_j c_j |\psi_j\rangle \quad \xrightarrow{\text{QPE}} \quad \sum_j c_j |\tilde{\phi}_j\rangle \otimes |\psi_j\rangle
+        $$
+    
+        **Probabilistic Outcome:**  
+        Measurement yields phase estimate $|\tilde{\phi}_j\rangle$ with probability $P(\phi_j) = |c_j|^2 = |\langle \psi_j|\psi\rangle|^2$, the overlap with eigenstate $|\psi_j\rangle$. This produces a random sample from the eigenphase distribution weighted by state projections.
+    
+        **Practical Consequences:**  
+        Repeated runs yield different phases with probabilities $|c_j|^2$, sampling the eigenspectrum $\{(\phi_j, |c_j|^2)\}$. In Shor's algorithm, $|1\rangle$ decomposes over eigenstates of $U_a$, sampling uniformly from $\{k/r : k = 0, 1, \ldots, r-1\}$. Continued fractions extract period $r$ from sampled $k/r$. Post-selection on target measurements can prepare specific eigenstates with success probability $|c_k|^2$.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -485,53 +477,49 @@ Inverse QFT on controls decodes binary digits of $\phi$ while target remains fac
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which control-state is convenient for kickback?**
-
-- A. $|0\rangle$  
-- B. $|1\rangle$  
-- C. $|+\rangle$ or $|{-}\rangle$  
-- D. $|i\rangle$  
-
+    **1. Which control-state is convenient for kickback?**
+    
+    - A. $|0\rangle$  
+    - B. $|1\rangle$  
+    - C. $|+\rangle$ or $|{-}\rangle$  
+    - D. $|i\rangle$  
+    
 ??? info "See Answer"
-    **Correct: C.** Superposition states convert unitary action to relative phase.
-
-**2. After kickback, how is phase read out?**
-
-- A. Direct measurement  
-- B. Apply Hadamard(s) to map phase to amplitudes  
-- C. Apply SWAPs  
-- D. Use CZ  
-
+        **Correct: C.** Superposition states convert unitary action to relative phase.
+    
+    **2. After kickback, how is phase read out?**
+    
+    - A. Direct measurement  
+    - B. Apply Hadamard(s) to map phase to amplitudes  
+    - C. Apply SWAPs  
+    - D. Use CZ  
+    
 ??? info "See Answer"
-    **Correct: B.** Interference via Hadamards converts phase information into measurable probabilities.
-
-```
+        **Correct: B.** Interference via Hadamards converts phase information into measurable probabilities.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why is kickback critical for reducing multi-qubit eigenphase information to single-qubit interference?
-
-???+ info "Answer Strategy"
-    **The Information Localization Problem:**  
-    Phase $\phi$ from eigenvalue $e^{2\pi i \phi}$ is a global property of multi-qubit state $|\psi\rangle$—directly unmeasurable. Phase kickback transduces this into an observable quantity in a control register.
     
-    $$
-    \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |\psi\rangle \xrightarrow{\text{ctrl-}U} \frac{1}{\sqrt{2}}(|0\rangle + e^{2\pi i \phi}|1\rangle) \otimes |\psi\rangle
-    $$
-
-    **Single-Qubit Interference:**  
-    Eigenphase kicks back to control qubit's relative phase: $|\phi_{\text{ctrl}}\rangle = R_z(2\pi\phi) \cdot |+\rangle$. Applying Hadamard yields measurement probabilities $P(0) = \cos^2(\pi\phi)$, enabling single-qubit interferometric phase estimation. The target register remains unchanged and factored out.
-
-    **Collective Decoding via QFT:**  
-    In QPE with $n$ controls, each experiences controlled-$U^{2^j}$, creating $\frac{1}{\sqrt{2^n}}\sum_k e^{2\pi i k\phi}|k\rangle \otimes |\psi\rangle$. Target register is unentangled. Inverse QFT acts as matched filter, concentrating probability into $|\tilde{\phi}\rangle$, the $n$-bit binary representation of $\phi$, achieving exponential precision with polynomial gates.
+    **Q:** Why is kickback critical for reducing multi-qubit eigenphase information to single-qubit interference?
     
-    **Key Advantage:**  
-    Without kickback, controlled operations entangle control and target, destroying clean interference. Kickback preserves separability, enabling control-only interferometry while target stores eigenstate unchanged—the architectural principle underlying quantum phase estimation algorithms.
-
-```
+    ???+ info "Answer Strategy"
+        **The Information Localization Problem:**  
+        Phase $\phi$ from eigenvalue $e^{2\pi i \phi}$ is a global property of multi-qubit state $|\psi\rangle$—directly unmeasurable. Phase kickback transduces this into an observable quantity in a control register.
+        
+        $$
+        \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |\psi\rangle \xrightarrow{\text{ctrl-}U} \frac{1}{\sqrt{2}}(|0\rangle + e^{2\pi i \phi}|1\rangle) \otimes |\psi\rangle
+        $$
+    
+        **Single-Qubit Interference:**  
+        Eigenphase kicks back to control qubit's relative phase: $|\phi_{\text{ctrl}}\rangle = R_z(2\pi\phi) \cdot |+\rangle$. Applying Hadamard yields measurement probabilities $P(0) = \cos^2(\pi\phi)$, enabling single-qubit interferometric phase estimation. The target register remains unchanged and factored out.
+    
+        **Collective Decoding via QFT:**  
+        In QPE with $n$ controls, each experiences controlled-$U^{2^j}$, creating $\frac{1}{\sqrt{2^n}}\sum_k e^{2\pi i k\phi}|k\rangle \otimes |\psi\rangle$. Target register is unentangled. Inverse QFT acts as matched filter, concentrating probability into $|\tilde{\phi}\rangle$, the $n$-bit binary representation of $\phi$, achieving exponential precision with polynomial gates.
+        
+        **Key Advantage:**  
+        Without kickback, controlled operations entangle control and target, destroying clean interference. Kickback preserves separability, enabling control-only interferometry while target stores eigenstate unchanged—the architectural principle underlying quantum phase estimation algorithms.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -687,53 +675,49 @@ yields nontrivial factors with probability $\geq 1/2$ over random choice of $a$.
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Order finding seeks:**
-
-- A. Minimal $r$ with $a^r\equiv1\pmod N$  
-- B. Minimal $r$ with $a^r\equiv0\pmod N$  
-- C. $\gcd(a,N)$  
-- D. A discrete log  
-
+    **1. Order finding seeks:**
+    
+    - A. Minimal $r$ with $a^r\equiv1\pmod N$  
+    - B. Minimal $r$ with $a^r\equiv0\pmod N$  
+    - C. $\gcd(a,N)$  
+    - D. A discrete log  
+    
 ??? info "See Answer"
-    **Correct: A.** The multiplicative order.
-
-**2. The classical finishing step uses:**
-
-- A. Euclid’s algorithm  
-- B. FFT  
-- C. Gradient descent  
-- D. Simulated annealing  
-
+        **Correct: A.** The multiplicative order.
+    
+    **2. The classical finishing step uses:**
+    
+    - A. Euclid’s algorithm  
+    - B. FFT  
+    - C. Gradient descent  
+    - D. Simulated annealing  
+    
 ??? info "See Answer"
-    **Correct: A.** $\gcd$ computations extract factors from $a^{r/2}\pm1$.
-
-```
+        **Correct: A.** $\gcd$ computations extract factors from $a^{r/2}\pm1$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why is continued-fraction decoding necessary after QPE in order finding?
-
-???+ info "Answer Strategy"
-    **The Rational Approximation Problem:**  
-    QPE estimates eigenphase $\phi = k/r$ to $n$ bits, yielding measurement $m \approx 2^n \cdot k/r$. Direct division $m/2^n$ gives decimal approximation like $0.748031...$ but doesn't reveal underlying fraction $k/r$. Naively rounding is unreliable among exponentially many possible fractions.
     
-    $$
-    \left|\frac{k}{r} - \frac{m}{2^n}\right| \leq \frac{1}{2^{n+1}} < \frac{1}{2r^2}
-    $$
-
-    **Continued Fractions Algorithm:**  
-    Continued fraction expansion produces convergents $p_i/q_i$ that are best rational approximations. Fundamental theorem: if $|x - k/r| \leq 1/(2r^2)$, then $k/r$ appears as a convergent. For QPE output $m/2^n$, compute convergents, check $q_i \leq N$ and verify $a^{q_i} \equiv 1 \pmod{N}$ to find order $r$.
-
-    **Robustness and Efficiency:**  
-    Continued fractions automatically find simplest fraction closest to measured value in $\mathcal{O}(\log N)$ operations. Handles measurement errors gracefully—even if $m$ is off by units, correct $k/r$ remains a convergent. Example: $N=15$, $a=2$, $r=4$. QPE yields $m=64$, giving $1/4$ with convergent denominator $q=4$. Checking $2^4 \equiv 1 \pmod{15}$ confirms $r=4$.
+    **Q:** Why is continued-fraction decoding necessary after QPE in order finding?
     
-    **Why Alternatives Fail:**  
-    Brute force testing all $r \leq N$ requires $\mathcal{O}(N)$ complexity, eliminating quantum advantage. Rounding heuristics fail for large $r$ or common factors. Continued fractions uniquely extract denominators efficiently from finite-precision approximations.
-
-```
+    ???+ info "Answer Strategy"
+        **The Rational Approximation Problem:**  
+        QPE estimates eigenphase $\phi = k/r$ to $n$ bits, yielding measurement $m \approx 2^n \cdot k/r$. Direct division $m/2^n$ gives decimal approximation like $0.748031...$ but doesn't reveal underlying fraction $k/r$. Naively rounding is unreliable among exponentially many possible fractions.
+        
+        $$
+        \left|\frac{k}{r} - \frac{m}{2^n}\right| \leq \frac{1}{2^{n+1}} < \frac{1}{2r^2}
+        $$
+    
+        **Continued Fractions Algorithm:**  
+        Continued fraction expansion produces convergents $p_i/q_i$ that are best rational approximations. Fundamental theorem: if $|x - k/r| \leq 1/(2r^2)$, then $k/r$ appears as a convergent. For QPE output $m/2^n$, compute convergents, check $q_i \leq N$ and verify $a^{q_i} \equiv 1 \pmod{N}$ to find order $r$.
+    
+        **Robustness and Efficiency:**  
+        Continued fractions automatically find simplest fraction closest to measured value in $\mathcal{O}(\log N)$ operations. Handles measurement errors gracefully—even if $m$ is off by units, correct $k/r$ remains a convergent. Example: $N=15$, $a=2$, $r=4$. QPE yields $m=64$, giving $1/4$ with convergent denominator $q=4$. Checking $2^4 \equiv 1 \pmod{15}$ confirms $r=4$.
+        
+        **Why Alternatives Fail:**  
+        Brute force testing all $r \leq N$ requires $\mathcal{O}(N)$ complexity, eliminating quantum advantage. Rounding heuristics fail for large $r$ or common factors. Continued fractions uniquely extract denominators efficiently from finite-precision approximations.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -888,53 +872,49 @@ Typically $t \in [8, 15]$ for $n \in [10, 25]$ qubits on current NISQ devices.
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Approximating QFT mainly reduces:**
-
-- A. Width  
-- B. Depth and two-qubit gates  
-- C. Classical post-processing  
-- D. Measurement shots  
-
+    **1. Approximating QFT mainly reduces:**
+    
+    - A. Width  
+    - B. Depth and two-qubit gates  
+    - C. Classical post-processing  
+    - D. Measurement shots  
+    
 ??? info "See Answer"
-    **Correct: B.** Small-angle rotations are costly and sensitive to noise.
-
-**2. The trade-off of approximation is:**
-
-- A. No change  
-- B. Bounded phase error  
-- C. Fewer qubits  
-- D. Exact results  
-
+        **Correct: B.** Small-angle rotations are costly and sensitive to noise.
+    
+    **2. The trade-off of approximation is:**
+    
+    - A. No change  
+    - B. Bounded phase error  
+    - C. Fewer qubits  
+    - D. Exact results  
+    
 ??? info "See Answer"
-    **Correct: B.** Errors grow with dropped angles but can be analytically bounded.
-
-```
+        **Correct: B.** Errors grow with dropped angles but can be analytically bounded.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** When would you prefer an approximate QFT in QPE on NISQ hardware?
-
-???+ info "Answer Strategy"
-    **The Depth-Precision Trade-off:**  
-    Exact QFT requires $\mathcal{O}(n^2)$ gates including controlled rotations $R_k(\theta)$ with angles $\theta_j = 2\pi/2^j$. For large $j$, rotations become tiny ($\theta_{15} \approx 0.0002$ rad). On NISQ devices with gate errors $\epsilon_{\text{gate}} \sim 10^{-3}$ and coherence $T_2 \sim 50-500~\mu$s, these small rotations are overwhelmed by noise.
     
-    $$
-    |\delta\phi| \lesssim \frac{1}{2^m}
-    $$
-
-    **When to Use Approximate QFT:**  
-    Omit rotations with $j > m$ when noise magnitude exceeds signal. For Shor's algorithm factoring $N \sim 2048$ needing $\sim 22$ bits, exact QFT requires $\sim 484$ gates exceeding typical depth budget of $\sim 200$ gates. Approximate QFT truncating to $m = 15$ uses $\sim 225$ gates, fitting within coherence limits while providing sufficient $1/2^{15}$ precision for continued fractions.
-
-    **Circuit Depth Reduction:**  
-    Approximate QFT reduces gate count from $\mathcal{O}(n^2)$ to $\mathcal{O}(nm)$ and depth proportionally. Example: $n=20$, $m=10$ reduces gates from $\sim 400$ to $\sim 200$ and depth from $\sim 190$ to $\sim 95$. Choose $m$ where $1/2^m \sim \epsilon_{\text{hw}}$ (matching noise floor) and $1/2^m < \epsilon_{\text{app}}$ (meeting application requirements).
+    **Q:** When would you prefer an approximate QFT in QPE on NISQ hardware?
     
-    **Practical Decision:**  
-    On IBM Quantum with $\epsilon_{\text{hw}} \sim 10^{-3}$ and depth budget $\sim 150$ gates, use $m = 12$ yielding precision $1/2^{12} \approx 2.4 \times 10^{-4}$ and depth $\sim 132$ gates. Exact QFT would require $\sim 288$ gates, guaranteed failure. On fault-tolerant devices with $\epsilon_{\text{gate}} < 10^{-10}$, use exact QFT for maximum precision.
-
-```
+    ???+ info "Answer Strategy"
+        **The Depth-Precision Trade-off:**  
+        Exact QFT requires $\mathcal{O}(n^2)$ gates including controlled rotations $R_k(\theta)$ with angles $\theta_j = 2\pi/2^j$. For large $j$, rotations become tiny ($\theta_{15} \approx 0.0002$ rad). On NISQ devices with gate errors $\epsilon_{\text{gate}} \sim 10^{-3}$ and coherence $T_2 \sim 50-500~\mu$s, these small rotations are overwhelmed by noise.
+        
+        $$
+        |\delta\phi| \lesssim \frac{1}{2^m}
+        $$
+    
+        **When to Use Approximate QFT:**  
+        Omit rotations with $j > m$ when noise magnitude exceeds signal. For Shor's algorithm factoring $N \sim 2048$ needing $\sim 22$ bits, exact QFT requires $\sim 484$ gates exceeding typical depth budget of $\sim 200$ gates. Approximate QFT truncating to $m = 15$ uses $\sim 225$ gates, fitting within coherence limits while providing sufficient $1/2^{15}$ precision for continued fractions.
+    
+        **Circuit Depth Reduction:**  
+        Approximate QFT reduces gate count from $\mathcal{O}(n^2)$ to $\mathcal{O}(nm)$ and depth proportionally. Example: $n=20$, $m=10$ reduces gates from $\sim 400$ to $\sim 200$ and depth from $\sim 190$ to $\sim 95$. Choose $m$ where $1/2^m \sim \epsilon_{\text{hw}}$ (matching noise floor) and $1/2^m < \epsilon_{\text{app}}$ (meeting application requirements).
+        
+        **Practical Decision:**  
+        On IBM Quantum with $\epsilon_{\text{hw}} \sim 10^{-3}$ and depth budget $\sim 150$ gates, use $m = 12$ yielding precision $1/2^{12} \approx 2.4 \times 10^{-4}$ and depth $\sim 132$ gates. Exact QFT would require $\sim 288$ gates, guaranteed failure. On fault-tolerant devices with $\epsilon_{\text{gate}} < 10^{-10}$, use exact QFT for maximum precision.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**

@@ -27,10 +27,8 @@ The transformation of classical data into quantum states represents one of the m
 **Basis encoding** is the most direct and simplest technique for mapping classical binary data onto a quantum state. It establishes a one-to-one correspondence between the classical bit string and the computational basis states of a quantum register.
 
 !!! tip "Simplicity at a Cost"
-```
-Basis encoding is the quantum equivalent of one-hot encoding—straightforward to implement but informationally sparse. It's ideal for representing discrete labels or indices, not continuous numerical features [3].
-
-```
+    Basis encoding is the quantum equivalent of one-hot encoding—straightforward to implement but informationally sparse. It's ideal for representing discrete labels or indices, not continuous numerical features [3].
+    
 ### **Mathematical Formulation and Mechanism**
 
 ---
@@ -54,32 +52,27 @@ $$
 To represent $N$ distinct classical values (e.g., indices or categorical labels), this method requires the minimum number of qubits, $n = \log_2(N)$.
 
 !!! example "Basis Encoding in Action"
-```
-Encoding the 3-bit string `101` requires three qubits, resulting in the state $|101\rangle$. This state has an amplitude of 1 for the index $5$ ($|101\rangle$) and 0 for all other indices.
-
-Circuit implementation:
-```
-|0⟩ ──X──  → |1⟩
-|0⟩ ─────  → |0⟩  
-|0⟩ ──X──  → |1⟩
-Result: |101⟩
-```
-
-```
-```python
-Basis_Encoding(binary_string):
-    # Initialize n-qubit register to |0⟩⊗ⁿ
-    qubits = Initialize_Register(n)
+    Encoding the 3-bit string `101` requires three qubits, resulting in the state $|101\rangle$. This state has an amplitude of 1 for the index $5$ ($|101\rangle$) and 0 for all other indices.
     
-    # Apply X gate where bit is 1
-    for i in range(n):
-        if binary_string[i] == '1':
-            Apply_X(qubits[i])
+    Circuit implementation:
+    |0⟩ ──X──  → |1⟩
+    |0⟩ ─────  → |0⟩  
+    |0⟩ ──X──  → |1⟩
+    Result: |101⟩
     
-    # Result: |b₀b₁...bₙ₋₁⟩
-    return qubits
-```
-
+    ```python
+    Basis_Encoding(binary_string):
+        # Initialize n-qubit register to |0⟩⊗ⁿ
+        qubits = Initialize_Register(n)
+        
+        # Apply X gate where bit is 1
+        for i in range(n):
+            if binary_string[i] == '1':
+                Apply_X(qubits[i])
+        
+        # Result: |b₀b₁...bₙ₋₁⟩
+        return qubits
+    
 ---
 
 ### **Advantages and Suitability**
@@ -111,10 +104,8 @@ It fails to encode numerical relationships or magnitude differences into the qua
 When encoding the **features** of a dataset (rather than indices), basis encoding requires **one qubit per feature bit**. For high-dimensional datasets with many features, this linear scaling quickly exhausts the available qubits on current hardware.
 
 ??? question "When would you prefer basis encoding over amplitude encoding?"
-```
-Use basis encoding when your data represents discrete categories or indices (e.g., classifying images into 10 categories requires only 4 qubits: $\log_2(10) \approx 4$), when you need extremely shallow circuits, or when the numerical magnitude relationships between values are irrelevant to your algorithm.
-
-```
+    Use basis encoding when your data represents discrete categories or indices (e.g., classifying images into 10 categories requires only 4 qubits: $\log_2(10) \approx 4$), when you need extremely shallow circuits, or when the numerical magnitude relationships between values are irrelevant to your algorithm.
+    
 ---
 
 ## **9.2 Amplitude Encoding**
@@ -124,10 +115,8 @@ Use basis encoding when your data represents discrete categories or indices (e.g
 **Amplitude encoding** is the most **compact** method for mapping classical data onto a quantum state. It achieves an exponential level of data compression by storing classical values in the **probability amplitudes** of the quantum state vector.
 
 !!! tip "Exponential Compression"
-```
-Amplitude encoding is the holy grail of quantum data compression: $n$ qubits can store $2^n$ classical values. But like all holy grails, it's incredibly difficult to obtain—the state preparation problem is the bottleneck [4].
-
-```
+    Amplitude encoding is the holy grail of quantum data compression: $n$ qubits can store $2^n$ classical values. But like all holy grails, it's incredibly difficult to obtain—the state preparation problem is the bottleneck [4].
+    
 ---
 
 ### **Mathematical Formulation and Mechanism**
@@ -191,10 +180,8 @@ When encoding the **features** of a dataset (rather than indices), basis encodin
 **Amplitude encoding** is the most **compact** method for mapping classical data onto a quantum state. It achieves an exponential level of data compression by storing classical values in the **probability amplitudes** of the quantum state vector.
 
 !!! tip "Exponential Compression"
-```
-Amplitude encoding is the holy grail of data compression—store $2^{10} = 1024$ values in just 10 qubits! But preparing this exponentially compressed state is the bottleneck that makes or breaks quantum advantage [3].
-
-```
+    Amplitude encoding is the holy grail of data compression—store $2^{10} = 1024$ values in just 10 qubits! But preparing this exponentially compressed state is the bottleneck that makes or breaks quantum advantage [3].
+    
 ### **Mathematical Formulation and Compression**
 
 ---
@@ -248,16 +235,14 @@ If a classical algorithm can process the $N$ data points in $O(N)$ time, the qua
 Amplitude encoding is most effective when the data has a specific, simple **structure** that allows the state to be prepared in polynomial ($O(\text{poly}(n))$) time, or when the cost of subsequent quantum processing is so high that it justifies the exponential setup cost.
 
 !!! example "The Bottleneck in Practice"
-```
-Consider encoding a 1024-dimensional vector (10 qubits):
-- **Compression:** 1024 classical values → 10 qubits (exponential compression!)
-- **Preparation cost:** $O(2^{10}) = 1024$ quantum gates for arbitrary data
-- **Subsequent algorithm:** HHL solves linear system in $O(100)$ gates
-- **Net result:** Total cost dominated by 1024-gate preparation, not 100-gate algorithm
-
-The quantum speedup is negated unless data has structure enabling $O(\text{poly}(10))$ preparation.
-
-```
+    Consider encoding a 1024-dimensional vector (10 qubits):
+    - **Compression:** 1024 classical values → 10 qubits (exponential compression!)
+    - **Preparation cost:** $O(2^{10}) = 1024$ quantum gates for arbitrary data
+    - **Subsequent algorithm:** HHL solves linear system in $O(100)$ gates
+    - **Net result:** Total cost dominated by 1024-gate preparation, not 100-gate algorithm
+    
+    The quantum speedup is negated unless data has structure enabling $O(\text{poly}(10))$ preparation.
+    
 ---
 
 ### **Challenges**
@@ -308,10 +293,8 @@ Amplitude encoding remains crucial because it underpins the potential for expone
 **Angle encoding**, also known as **parametric rotation encoding**, is the simplest and most common method used in current **Variational Quantum Circuits (VQCs)**. It maps classical numerical features directly onto the **rotation angle** of a single-qubit gate.
 
 !!! tip "NISQ-Era Workhorse"
-```
-Angle encoding sacrifices the exponential compression of amplitude encoding for shallow circuits that actually work on noisy quantum hardware. It's the pragmatic choice for variational quantum algorithms [5].
-
-```
+    Angle encoding sacrifices the exponential compression of amplitude encoding for shallow circuits that actually work on noisy quantum hardware. It's the pragmatic choice for variational quantum algorithms [5].
+    
 ### **Mathematical Formulation and Mechanism**
 
 ---
@@ -339,19 +322,15 @@ $$
 $$
 
 !!! example "Angle Encoding a 3D Feature Vector"
-```
-For the feature vector $\vec{x} = (0.5, 1.2, 2.0)$:
-
-```
-Qubit 0: |0⟩ ─ R_y(0.5) ─ → cos(0.25)|0⟩ + sin(0.25)|1⟩
-Qubit 1: |0⟩ ─ R_y(1.2) ─ → cos(0.6)|0⟩ + sin(0.6)|1⟩
-Qubit 2: |0⟩ ─ R_y(2.0) ─ → cos(1.0)|0⟩ + sin(1.0)|1⟩
-```
-
-Circuit depth: 1 (just rotation layer)
-Qubits required: 3 (one per feature)
-
-```
+    For the feature vector $\vec{x} = (0.5, 1.2, 2.0)$:
+    
+    Qubit 0: |0⟩ ─ R_y(0.5) ─ → cos(0.25)|0⟩ + sin(0.25)|1⟩
+    Qubit 1: |0⟩ ─ R_y(1.2) ─ → cos(0.6)|0⟩ + sin(0.6)|1⟩
+    Qubit 2: |0⟩ ─ R_y(2.0) ─ → cos(1.0)|0⟩ + sin(1.0)|1⟩
+    
+    Circuit depth: 1 (just rotation layer)
+    Qubits required: 3 (one per feature)
+    
 ---
 
 ### **Advantages and Trade-offs**
@@ -410,12 +389,10 @@ Angle_Encoding_VQC(x, num_layers):
 ```
 
 ??? question "Why use $R_y$ instead of $R_x$ or $R_z$ for angle encoding?"
-```
-$R_y$ rotations are preferred because they create superpositions of $|0\rangle$ and $|1\rangle$ with real-valued amplitudes, avoiding the phase complexities of $R_z$ and providing more direct geometric interpretability than $R_x$. Additionally, $R_y$ naturally produces probability distributions that are smooth functions of the input angle.
-
-```
-Angle encoding is often combined with two-qubit entangling gates (like CNOT) to form the basic layers of a parameterized VQC, enabling the subsequent creation of expressive **Quantum Feature Maps** (Section 9.5).
-
+    $R_y$ rotations are preferred because they create superpositions of $|0\rangle$ and $|1\rangle$ with real-valued amplitudes, avoiding the phase complexities of $R_z$ and providing more direct geometric interpretability than $R_x$. Additionally, $R_y$ naturally produces probability distributions that are smooth functions of the input angle.
+    
+    Angle encoding is often combined with two-qubit entangling gates (like CNOT) to form the basic layers of a parameterized VQC, enabling the subsequent creation of expressive **Quantum Feature Maps** (Section 9.5).
+    
 ---
 
 ## **9.4 Hamiltonian Encoding**
@@ -425,10 +402,8 @@ Angle encoding is often combined with two-qubit entangling gates (like CNOT) to 
 **Hamiltonian encoding** (or dynamics encoding) embeds classical data not as an instantaneous state, but as a parameter within the system's **evolution operator**.
 
 !!! tip "Physics-Inspired Encoding"
-```
-Hamiltonian encoding is the natural choice when your data describes a physical system or when you want to exploit the rich structure of quantum dynamics. It's quantum simulation meeting machine learning [6].
-
-```
+    Hamiltonian encoding is the natural choice when your data describes a physical system or when you want to exploit the rich structure of quantum dynamics. It's quantum simulation meeting machine learning [6].
+    
 ### **Mechanism and Structural Encoding**
 
 ---
@@ -521,10 +496,8 @@ Hamiltonian encoding is the foundation for many **quantum simulation algorithms*
 **Quantum Feature Maps** are the most general and powerful encoding method. They map classical data $\vec{x}$ to a high-dimensional quantum state $|\phi(\vec{x})\rangle$ in a Hilbert space, explicitly designed to enable **quantum kernels** for classification and regression tasks.
 
 !!! tip "The Power of Kernels"
-```
-Quantum feature maps are quantum computing's answer to the kernel trick in classical machine learning. By mapping data to an exponentially large Hilbert space, they can discover patterns invisible to classical polynomial kernels [8].
-
-```
+    Quantum feature maps are quantum computing's answer to the kernel trick in classical machine learning. By mapping data to an exponentially large Hilbert space, they can discover patterns invisible to classical polynomial kernels [8].
+    
 ### **Mechanism and Mathematical Formalism**
 
 ---
@@ -585,18 +558,16 @@ This kernel can be calculated on a quantum computer by preparing the states $|\p
 The quantum kernel $K(\vec{x}_1, \vec{x}_2)$ corresponds to a feature map in an exponentially large Hilbert space (dimension $2^n$ for $n$ qubits). This allows quantum feature maps to implicitly compute kernel functions that are intractable for classical computers [9].
 
 !!! example "Quantum Kernel SVM Workflow"
-```
-Given dataset $\{(\vec{x}_1, y_1), \ldots, (\vec{x}_M, y_M)\}$ where $y_i \in \{-1, +1\}$:
-
-1. **Encode each data point** on quantum computer: $|\phi(\vec{x}_i)\rangle = U_{\phi}(\vec{x}_i)|0\rangle^{\otimes n}$
-2. **Compute kernel matrix** $K_{ij} = |\langle\phi(\vec{x}_i)|\phi(\vec{x}_j)\rangle|^2$ for all pairs $(i,j)$
-3. **Train classical SVM** using kernel matrix $K$
-4. **Predict new point** $\vec{x}_{\text{new}}$:
-    - Encode $|\phi(\vec{x}_{\text{new}})\rangle$ on quantum computer
-    - Compute kernel $K(\vec{x}_{\text{new}}, \vec{x}_i)$ for all training points
-    - Use SVM decision function: $f(\vec{x}_{\text{new}}) = \sum_i \alpha_i y_i K(\vec{x}_{\text{new}}, \vec{x}_i) + b$
-
-```
+    Given dataset $\{(\vec{x}_1, y_1), \ldots, (\vec{x}_M, y_M)\}$ where $y_i \in \{-1, +1\}$:
+    
+    1. **Encode each data point** on quantum computer: $|\phi(\vec{x}_i)\rangle = U_{\phi}(\vec{x}_i)|0\rangle^{\otimes n}$
+    2. **Compute kernel matrix** $K_{ij} = |\langle\phi(\vec{x}_i)|\phi(\vec{x}_j)\rangle|^2$ for all pairs $(i,j)$
+    3. **Train classical SVM** using kernel matrix $K$
+    4. **Predict new point** $\vec{x}_{\text{new}}$:
+        - Encode $|\phi(\vec{x}_{\text{new}})\rangle$ on quantum computer
+        - Compute kernel $K(\vec{x}_{\text{new}}, \vec{x}_i)$ for all training points
+        - Use SVM decision function: $f(\vec{x}_{\text{new}}) = \sum_i \alpha_i y_i K(\vec{x}_{\text{new}}, \vec{x}_i) + b$
+    
 ---
 
 ### **Advantages for Classification**
@@ -650,12 +621,10 @@ Compute_Quantum_Kernel(x1, x2, feature_map, num_qubits):
 ```
 
 ??? question "How do quantum feature maps relate to the classical kernel trick?"
-```
-Both quantum feature maps and the classical kernel trick compute inner products in high-dimensional spaces without explicitly constructing feature vectors. The quantum advantage comes from the exponential dimensionality ($2^n$) of the Hilbert space, which allows quantum kernels to potentially capture correlations that are computationally hard for classical polynomial kernels to represent.
-
-```
-Quantum feature maps are the cornerstone of **quantum kernel methods** and serve as the encoding foundation for **quantum neural networks (QNNs)** used in supervised and unsupervised learning tasks.
-
+    Both quantum feature maps and the classical kernel trick compute inner products in high-dimensional spaces without explicitly constructing feature vectors. The quantum advantage comes from the exponential dimensionality ($2^n$) of the Hilbert space, which allows quantum kernels to potentially capture correlations that are computationally hard for classical polynomial kernels to represent.
+    
+    Quantum feature maps are the cornerstone of **quantum kernel methods** and serve as the encoding foundation for **quantum neural networks (QNNs)** used in supervised and unsupervised learning tasks.
+    
 ---
 
 ### **Summary: Comparison of Quantum Data Encoding Techniques**

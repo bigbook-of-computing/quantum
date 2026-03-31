@@ -1,4 +1,4 @@
-# **Chapter 8: Quantum Machine Learning Foundations () () (Codebook)**
+# **Chapter 8: Quantum Machine Learning Foundations (Codebook)**
 
 Quantum Machine Learning (QML) merges parametrised quantum circuits with classical optimisation to learn patterns encoded in quantum states. This chapter establishes three core primitives: kernel estimation, variational classification, and data re-uploading.
 

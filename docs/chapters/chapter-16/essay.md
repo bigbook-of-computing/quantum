@@ -28,10 +28,8 @@ This chapter develops the theoretical and practical foundations of quantum simul
 Before running experiments on costly and noisy quantum hardware, researchers use **classical quantum simulators** — software that exactly or approximately simulates quantum circuit execution. Understanding the capabilities and limitations of each simulation strategy is essential for managing the quantum development workflow.
 
 !!! tip "Simulator vs Hardware Decision Rule"
-```
-Use classical simulators for algorithm development and debugging ($n \leq 30$ qubits). Move to noisy simulation (FakeBackend, noise models) for NISQ algorithm validation ($n \leq 20$). Use real quantum hardware only for experiments that specifically require authentic noise characteristics or exceed classical simulator capacity.
-
-```
+    Use classical simulators for algorithm development and debugging ($n \leq 30$ qubits). Move to noisy simulation (FakeBackend, noise models) for NISQ algorithm validation ($n \leq 20$). Use real quantum hardware only for experiments that specifically require authentic noise characteristics or exceed classical simulator capacity.
+    
 ### **Types of Classical Quantum Simulators**
 
 ---
@@ -70,17 +68,13 @@ sim = AerSimulator(noise_model=noise_model)
 This allows NISQ algorithm testing with realistic noise floors before consuming costly hardware shots.
 
 !!! example "Fidelity Degradation under Depolarising Noise"
-```
-A 3-qubit GHZ state ideally has fidelity 1. Under depolarising noise rate $p = 0.01$ per CNOT, fidelity degrades as:
-$F \approx (1-p)^{N_{\text{CNOT}}} \approx (0.99)^2 = 0.98$
-Under realistic FakeBackend noise (including T1/T2, readout errors), measured GHZ fidelity drops to ~0.85 for even this simple 2-CNOT circuit.
-
-```
+    A 3-qubit GHZ state ideally has fidelity 1. Under depolarising noise rate $p = 0.01$ per CNOT, fidelity degrades as:
+    $F \approx (1-p)^{N_{\text{CNOT}}} \approx (0.99)^2 = 0.98$
+    Under realistic FakeBackend noise (including T1/T2, readout errors), measured GHZ fidelity drops to ~0.85 for even this simple 2-CNOT circuit.
+    
 ??? question "Why does MPS simulation fail for highly entangled states even at small qubit counts?"
-```
-MPS simulation works by representing the quantum state as a tensor network with limited **bond dimension** $\chi$. States with low entanglement (area-law states) are compressed accurately. But for volume-law entangled states — common in quantum chaos, QFT, and random circuits — the exact representation requires exponentially large $\chi$, negating the classical simulation advantage.
-
-```
+    MPS simulation works by representing the quantum state as a tensor network with limited **bond dimension** $\chi$. States with low entanglement (area-law states) are compressed accurately. But for volume-law entangled states — common in quantum chaos, QFT, and random circuits — the exact representation requires exponentially large $\chi$, negating the classical simulation advantage.
+    
 ---
 
 ## **16.2 Trotterization and Time Evolution**
@@ -125,20 +119,14 @@ The error scaling of $k$-th order Suzuki formulas:
 | $2k$-th | $O(t^{2k+1}/r^{2k})$ | $5^{k-1} \cdot 2L$ unitaries |
 
 !!! tip "Trotter Step Count vs Circuit Depth"
-```
-Increasing Trotter steps $r$ improves accuracy but increases circuit depth proportionally. On NISQ hardware, excessive depth causes decoherence errors that can outweigh Trotter approximation errors. The optimal $r$ balances these two error sources and is hardware-dependent.
-
-```
+    Increasing Trotter steps $r$ improves accuracy but increases circuit depth proportionally. On NISQ hardware, excessive depth causes decoherence errors that can outweigh Trotter approximation errors. The optimal $r$ balances these two error sources and is hardware-dependent.
+    
 !!! example "Ising Model Trotter Circuit"
-```
-For a 1D transverse-field Ising model $H = J\sum_i Z_i Z_{i+1} + h\sum_i X_i$, each Trotter step alternates between ZZ-interaction layers (implemented with `RZZ` gates) and transverse-field layers (single-qubit `RX` gates). The per-step circuit depth for $n$ qubits is $O(n)$, giving total depth $O(nrt)$.
-
-```
+    For a 1D transverse-field Ising model $H = J\sum_i Z_i Z_{i+1} + h\sum_i X_i$, each Trotter step alternates between ZZ-interaction layers (implemented with `RZZ` gates) and transverse-field layers (single-qubit `RX` gates). The per-step circuit depth for $n$ qubits is $O(n)$, giving total depth $O(nrt)$.
+    
 ??? question "What makes Trotterization unsuitable for fault-tolerant quantum simulation of chemistry?"
-```
-For accurate quantum chemistry simulation, Trotter error must be controlled to chemical accuracy (~1 mHartree). Achieving this requires $r \sim 10^8$–$10^{10}$ Trotter steps for realistic molecular Hamiltonians, making the circuit depth astronomically large. Alternative methods (LCU, QSVT) achieve exponentially better scaling.
-
-```
+    For accurate quantum chemistry simulation, Trotter error must be controlled to chemical accuracy (~1 mHartree). Achieving this requires $r \sim 10^8$–$10^{10}$ Trotter steps for realistic molecular Hamiltonians, making the circuit depth astronomically large. Alternative methods (LCU, QSVT) achieve exponentially better scaling.
+    
 ---
 
 ## **16.3 Hamiltonian Simulation Methods**
@@ -176,10 +164,8 @@ graph TD
 QSVT reduces Hamiltonian simulation to polynomial approximation theory: simulate $e^{-iHt}$ by applying a degree-$d$ Chebyshev polynomial to $H$'s eigenvalues, where $d = O(t + \log(1/\epsilon))$ — optimal in both evolution time and precision.
 
 !!! tip "QSVT for Fault-Tolerant Simulations"
-```
-QSVT provides the best-known gate complexity for Hamiltonian simulation: $O\left((t \|H\|_{\text{max}} + \frac{\log 1/\epsilon}{\log \log 1/\epsilon})\right)$ gates. It is the preferred method for fault-tolerant quantum simulation of chemistry and materials, where $\|H\|$ can be large but $t$ is small.
-
-```
+    QSVT provides the best-known gate complexity for Hamiltonian simulation: $O\left((t \|H\|_{\text{max}} + \frac{\log 1/\epsilon}{\log \log 1/\epsilon})\right)$ gates. It is the preferred method for fault-tolerant quantum simulation of chemistry and materials, where $\|H\|$ can be large but $t$ is small.
+    
 ---
 
 ## **16.4 Fermionic Systems and Qubit Encoding**
@@ -219,12 +205,10 @@ $$
 The long Pauli strings (of length $O(n)$) make JW-mapped operators non-local, leading to $O(n)$-qubit Pauli strings and $O(n)$-depth circuits for each Hamiltonian term.
 
 !!! example "H₂ Molecule in Jordan-Wigner Encoding"
-```
-The hydrogen molecule in a minimal (STO-3G) basis requires 4 spin-orbitals → 4 qubits. After JW mapping and symmetry reduction, the Hamiltonian simplifies to:
-$$H = c_0 I + c_1 Z_0 + c_2 Z_1 + c_3 Z_0 Z_1 + c_4 (X_0 X_1 + Y_0 Y_1)$$
-This 5-term Hamiltonian is directly measurable on a 2-qubit system after additional symmetry reduction.
-
-```
+    The hydrogen molecule in a minimal (STO-3G) basis requires 4 spin-orbitals → 4 qubits. After JW mapping and symmetry reduction, the Hamiltonian simplifies to:
+    $$H = c_0 I + c_1 Z_0 + c_2 Z_1 + c_3 Z_0 Z_1 + c_4 (X_0 X_1 + Y_0 Y_1)$$
+    This 5-term Hamiltonian is directly measurable on a 2-qubit system after additional symmetry reduction.
+    
 ### **Bravyi-Kitaev Transformation**
 
 ---
@@ -232,15 +216,11 @@ This 5-term Hamiltonian is directly measurable on a 2-qubit system after additio
 The **Bravyi-Kitaev (BK)** transformation reduces the average Pauli string length from $O(n)$ (JW) to $O(\log n)$ by encoding both occupation and parity information hierarchically. For a system with $n$ molecular orbitals, BK achieves $O(n \log n)$ total Pauli weight vs JW's $O(n^2)$, translating directly to shallower circuits [3].
 
 !!! tip "When to Use Which Mapping"
-```
-JW is simpler to implement and debug, making it the default for small molecules. For larger molecules ($n > 20$ orbitals) where circuit depth is critical, BK's logarithmic Pauli-string scaling offers meaningful depth reductions. The **parity mapping** is another option that symmetrically balances locality at $O(\sqrt{n})$ string length.
-
-```
+    JW is simpler to implement and debug, making it the default for small molecules. For larger molecules ($n > 20$ orbitals) where circuit depth is critical, BK's logarithmic Pauli-string scaling offers meaningful depth reductions. The **parity mapping** is another option that symmetrically balances locality at $O(\sqrt{n})$ string length.
+    
 ??? question "Why is the fermion-to-qubit mapping a fundamental bottleneck for quantum chemistry simulations?"
-```
-The Hamiltonian term count scales as $O(n^4)$ in the number of spin-orbitals. Even with BK's logarithmic locality improvement, measuring all terms in the Hamiltonian requires $O(n^4)$ circuit evaluations per energy estimation step. For industrial molecules with $n = 100$–$1000$ spin-orbitals, this represents the dominant cost in VQE-based quantum chemistry simulations.
-
-```
+    The Hamiltonian term count scales as $O(n^4)$ in the number of spin-orbitals. Even with BK's logarithmic locality improvement, measuring all terms in the Hamiltonian requires $O(n^4)$ circuit evaluations per energy estimation step. For industrial molecules with $n = 100$–$1000$ spin-orbitals, this represents the dominant cost in VQE-based quantum chemistry simulations.
+    
 ---
 
 ## **References**

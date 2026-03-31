@@ -97,15 +97,13 @@ R_t
 $$
 
 !!! example "QRL Policy Circuit"
-```
-For a grid-world environment with $4 \times 4 = 16$ states and 4 actions (up, down, left, right):
-
-1. **Encode state:** Map state index to $\log_2(16) = 4$ qubits using basis encoding
-2. **Apply PQC:** Variational layers with parameters $\vec{\theta}$ create superposition over actions
-3. **Measure:** Measurement probabilities $P(a) = |\langle a|\psi\rangle|^2$ define policy $\pi_{\vec{\theta}}(a|s)$
-4. **Sample action:** Classical sampling from measurement distribution yields $a_t$
-
-```
+    For a grid-world environment with $4 \times 4 = 16$ states and 4 actions (up, down, left, right):
+    
+    1. **Encode state:** Map state index to $\log_2(16) = 4$ qubits using basis encoding
+    2. **Apply PQC:** Variational layers with parameters $\vec{\theta}$ create superposition over actions
+    3. **Measure:** Measurement probabilities $P(a) = |\langle a|\psi\rangle|^2$ define policy $\pi_{\vec{\theta}}(a|s)$
+    4. **Sample action:** Classical sampling from measurement distribution yields $a_t$
+    
 ---
 
 ### **The Hybrid Nature**
@@ -170,10 +168,8 @@ QRL_Training_Loop(environment, initial_theta, max_episodes):
 **Quantum Policy Gradient (QPG) Methods** are a class of Quantum Reinforcement Learning (QRL) algorithms that adapt the structure of classical policy optimization by using a **Parameterized Quantum Circuit (PQC)** to model the agent's stochastic policy. The goal is to maximize the expected cumulative reward by iteratively updating the PQC parameters based on the observed returns.
 
 !!! tip "Why Policy Gradients in QRL?"
-```
-Policy gradient methods are naturally suited to quantum implementation because they only require sampling from the policy (measurement) and computing gradients (Parameter Shift Rule). Unlike value-based methods, they don't require storing a Q-table, making them ideal for continuous or large action spaces [4].
-
-```
+    Policy gradient methods are naturally suited to quantum implementation because they only require sampling from the policy (measurement) and computing gradients (Parameter Shift Rule). Unlike value-based methods, they don't require storing a Q-table, making them ideal for continuous or large action spaces [4].
+    
 ### **Policy Representation and Action Sampling**
 
 ---
@@ -299,10 +295,8 @@ Quantum_Policy_Gradient(environment, initial_theta, num_episodes):
 ```
 
 ??? question "Why use the Parameter Shift Rule instead of classical finite differences?"
-```
-The Parameter Shift Rule exploits the analytic structure of quantum gates to compute exact gradients (up to sampling noise) without approximation error. Classical finite differences require choosing a step size $\epsilon$ and suffer from truncation error. For quantum circuits, the Parameter Shift Rule is both more accurate and naturally suited to the hardware.
-
-```
+    The Parameter Shift Rule exploits the analytic structure of quantum gates to compute exact gradients (up to sampling noise) without approximation error. Classical finite differences require choosing a step size $\epsilon$ and suffer from truncation error. For quantum circuits, the Parameter Shift Rule is both more accurate and naturally suited to the hardware.
+    
 ---
 
 ## **13.3 Quantum Value Iteration**
@@ -312,10 +306,8 @@ The Parameter Shift Rule exploits the analytic structure of quantum gates to com
 **Quantum Value Iteration** (QVI) encompasses QRL methods where the primary goal is to approximate the **optimal value function**, $V^*(s)$, or the **optimal action-value function**, $Q^*(s, a)$, using parameterized quantum circuits (PQCs). These methods are foundational to Q-Learning and Deep Q-Networks (DQNs) in the quantum domain.
 
 !!! tip "Value-Based vs. Policy-Based QRL"
-```
-Value-based methods (QVI) learn to estimate the value of states/actions, then derive policy greedily. Policy-based methods (QPG) directly optimize the policy. QVI is better when you need explicit value estimates; QPG is better for continuous actions or stochastic optimal policies [5].
-
-```
+    Value-based methods (QVI) learn to estimate the value of states/actions, then derive policy greedily. Policy-based methods (QPG) directly optimize the policy. QVI is better when you need explicit value estimates; QPG is better for continuous actions or stochastic optimal policies [5].
+    
 ### **Value Function Approximation**
 
 ---
@@ -458,15 +450,13 @@ VQ_DQN_Training(environment, initial_theta, max_steps):
 ```
 
 !!! example "VQ-DQN for CartPole"
-```
-Classic CartPole environment: 4D continuous state (position, velocity, angle, angular velocity), 2 discrete actions (left, right).
-
-- **State encoding:** Amplitude encoding of 4 features into 2 qubits
-- **VQC:** 3-layer ansatz with $RY$, $RZ$ rotations and CNOT entanglement
-- **Q-value extraction:** Two separate measurements or two output qubits for $Q(s, \text{left})$ and $Q(s, \text{right})$
-- **Training:** Experience replay buffer with 10,000 transitions, target network updated every 100 steps
-
-```
+    Classic CartPole environment: 4D continuous state (position, velocity, angle, angular velocity), 2 discrete actions (left, right).
+    
+    - **State encoding:** Amplitude encoding of 4 features into 2 qubits
+    - **VQC:** 3-layer ansatz with $RY$, $RZ$ rotations and CNOT entanglement
+    - **Q-value extraction:** Two separate measurements or two output qubits for $Q(s, \text{left})$ and $Q(s, \text{right})$
+    - **Training:** Experience replay buffer with 10,000 transitions, target network updated every 100 steps
+    
 ---
 
 ## **13.4 Quantum Exploration Strategies**
@@ -476,10 +466,8 @@ Classic CartPole environment: 4D continuous state (position, velocity, angle, an
 Exploration is fundamental to reinforcement learning—without exploring the state-action space, an agent cannot discover optimal policies. Classical RL uses stochastic exploration strategies like $\epsilon$-greedy or Boltzmann exploration. Quantum RL introduces **coherent exploration** mechanisms that exploit quantum superposition and interference to navigate state spaces in fundamentally different ways.
 
 !!! tip "Coherent vs. Stochastic Exploration"
-```
-Classical exploration adds random noise to decisions. Quantum exploration maintains coherent superposition over exploration paths, allowing interference to bias the search toward promising regions. This is the difference between flipping coins versus quantum walking [6].
-
-```
+    Classical exploration adds random noise to decisions. Quantum exploration maintains coherent superposition over exploration paths, allowing interference to bias the search toward promising regions. This is the difference between flipping coins versus quantum walking [6].
+    
 ### **Non-Classical Exploration Mechanisms**
 
 ---
@@ -582,10 +570,8 @@ Amplitude_Amplification_Policy(state, high_reward_actions, num_iterations):
 ```
 
 ??? question "How much speedup can Quantum Random Walks provide over classical random walks?"
-```
-For certain graph structures, QRWs can achieve quadratic speedup in hitting time. For example, on a hypercube, classical random walk requires $O(N \log N)$ steps to hit all vertices, while QRW requires $O(\sqrt{N} \log N)$ steps. However, the speedup is graph-dependent and not universal.
-
-```
+    For certain graph structures, QRWs can achieve quadratic speedup in hitting time. For example, on a hypercube, classical random walk requires $O(N \log N)$ steps to hit all vertices, while QRW requires $O(\sqrt{N} \log N)$ steps. However, the speedup is graph-dependent and not universal.
+    
 ---
 
 ## **13.5 Quantum Agent Architectures**
@@ -595,10 +581,8 @@ For certain graph structures, QRWs can achieve quadratic speedup in hitting time
 A **Quantum Agent Architecture** defines the structure of the computational components that govern a QRL agent's interaction with its environment. The architecture is inherently a **hybrid system**, utilizing classical processors for iterative learning and optimization, while reserving quantum resources for complex state representation and action generation.
 
 !!! tip "Hybrid Architecture Necessity"
-```
-Current quantum hardware cannot run full RL loops autonomously. The hybrid approach leverages quantum advantage where it matters most (function approximation in exponential space) while using classical processors for tasks they excel at (optimization, environment simulation, memory management) [7].
-
-```
+    Current quantum hardware cannot run full RL loops autonomously. The hybrid approach leverages quantum advantage where it matters most (function approximation in exponential space) while using classical processors for tasks they excel at (optimization, environment simulation, memory management) [7].
+    
 ### **Core Hybrid Components**
 
 ---
@@ -634,16 +618,14 @@ The environment itself is modeled by a second quantum circuit or simulator, allo
 In advanced applications, the agent interacts directly with a **physical quantum device**. The environment's state ($s_t$) might be a measurement of the device's fidelity, and the action ($a_t$) might be a parameter adjustment (e.g., adjusting laser pulse sequences), allowing the agent to perform **adaptive quantum experiments** autonomously.
 
 !!! example "Adaptive Quantum Control"
-```
-Task: Optimize quantum gate fidelity by adjusting pulse parameters.
-
-- **State $s_t$:** Current gate fidelity estimate from process tomography
-- **Action $a_t$:** Adjustment to pulse amplitude, duration, or phase
-- **Reward $r_t$:** Negative infidelity: $r_t = -(1 - F_{\text{gate}})$
-- **QRL agent:** Learns optimal pulse sequences faster than grid search or gradient-free optimization
-- **Result:** Automated calibration of quantum hardware
-
-```
+    Task: Optimize quantum gate fidelity by adjusting pulse parameters.
+    
+    - **State $s_t$:** Current gate fidelity estimate from process tomography
+    - **Action $a_t$:** Adjustment to pulse amplitude, duration, or phase
+    - **Reward $r_t$:** Negative infidelity: $r_t = -(1 - F_{\text{gate}})$
+    - **QRL agent:** Learns optimal pulse sequences faster than grid search or gradient-free optimization
+    - **Result:** Automated calibration of quantum hardware
+    
 ---
 
 ### **Advanced Architectures**

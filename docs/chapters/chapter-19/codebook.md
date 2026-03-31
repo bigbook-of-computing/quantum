@@ -1,4 +1,4 @@
-# **Chapter 19: Superconducting Qubits and Hardware () () (Codebook)**
+# **Chapter 19: Superconducting Qubits and Hardware (Codebook)**
 
 Superconducting qubits are the dominant hardware platform for near-term quantum computers. This chapter explores FakeBackend device properties, transpilation for real connectivity, and custom noise models that replicate T1/T2 decoherence observed in real devices.
 

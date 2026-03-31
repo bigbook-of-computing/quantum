@@ -1,4 +1,4 @@
-# **Chapter 12: Quantum Unsupervised Learning () () (Workbook)**
+# **Chapter 12: Quantum Unsupervised Learning (Workbook)**
 
 ---
 
@@ -233,32 +233,28 @@ Seminal qPCA implementation using:
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  The primary quantum subroutine used in qPCA to extract the eigenvalues of the data density matrix is:
-    2.  A key requirement for running qPCA is the ability to efficiently prepare and utilize multiple copies of what structure?
-
-```
+    
+        1.  The primary quantum subroutine used in qPCA to extract the eigenvalues of the data density matrix is:
+        2.  A key requirement for running qPCA is the ability to efficiently prepare and utilize multiple copies of what structure?
+    
 ??? info "See Answer"
-
-    1.  **Quantum Phase Estimation (QPE).** QPE is used to find the eigenvalues of the unitary $e^{-i\rho t}$, which directly relate to the eigenvalues of the density matrix $\rho$.
-    2.  **The data density matrix $\rho$.** The algorithm's efficiency hinges on the ability to prepare this state representation of the classical data.
-
-```
+    
+        1.  **Quantum Phase Estimation (QPE).** QPE is used to find the eigenvalues of the unitary $e^{-i\rho t}$, which directly relate to the eigenvalues of the density matrix $\rho$.
+        2.  **The data density matrix $\rho$.** The algorithm's efficiency hinges on the ability to prepare this state representation of the classical data.
+    
 !!! abstract "Interview-Style Question"
-
-```
-Explain where the potential exponential speedup in qPCA originates, contrasting it with the complexity of classical PCA.
-
-???+ info "Answer Strategy"
-    The potential for exponential speedup in qPCA comes from a fundamental shift in the computational approach, moving from classical matrix operations to quantum state manipulation.
-
-    1.  **Classical Bottleneck:** Classical PCA requires diagonalizing an $N \times N$ covariance matrix, a task that scales polynomially with the data dimension $N$ (e.g., as $O(N^3)$). This becomes prohibitively expensive for very large datasets.
-    2.  **Quantum Advantage:** qPCA bypasses this direct diagonalization. It instead uses the **Quantum Phase Estimation (QPE)** algorithm to find the eigenvalues of the data's density matrix. The complexity of QPE scales polynomially with $\log N$, not $N$.
-    3.  **The Trade-off:** This exponential speedup is conditional on a critical assumption: the ability to efficiently prepare the quantum state (the density matrix) that represents the classical data. If this state preparation is itself classically hard, the advantage is lost.
-
-    In short, qPCA trades a classical problem that scales with matrix size for a quantum problem that scales with the number of qubits needed to represent it, offering an exponential advantage for high-dimensional data.
-
-```
+    
+    Explain where the potential exponential speedup in qPCA originates, contrasting it with the complexity of classical PCA.
+    
+    ???+ info "Answer Strategy"
+        The potential for exponential speedup in qPCA comes from a fundamental shift in the computational approach, moving from classical matrix operations to quantum state manipulation.
+    
+        1.  **Classical Bottleneck:** Classical PCA requires diagonalizing an $N \times N$ covariance matrix, a task that scales polynomially with the data dimension $N$ (e.g., as $O(N^3)$). This becomes prohibitively expensive for very large datasets.
+        2.  **Quantum Advantage:** qPCA bypasses this direct diagonalization. It instead uses the **Quantum Phase Estimation (QPE)** algorithm to find the eigenvalues of the data's density matrix. The complexity of QPE scales polynomially with $\log N$, not $N$.
+        3.  **The Trade-off:** This exponential speedup is conditional on a critical assumption: the ability to efficiently prepare the quantum state (the density matrix) that represents the classical data. If this state preparation is itself classically hard, the advantage is lost.
+    
+        In short, qPCA trades a classical problem that scales with matrix size for a quantum problem that scales with the number of qubits needed to represent it, offering an exponential advantage for high-dimensional data.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -591,32 +587,28 @@ Assign partial membership probabilities using quantum amplitude estimation.
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  In Quantum k-means, the dissimilarity between a data point and a centroid is calculated using what property of their quantum states?
-    2.  What is the primary computational bottleneck in classical k-means that quantum versions aim to accelerate?
-
-```
+    
+        1.  In Quantum k-means, the dissimilarity between a data point and a centroid is calculated using what property of their quantum states?
+        2.  What is the primary computational bottleneck in classical k-means that quantum versions aim to accelerate?
+    
 ??? info "See Answer"
-
-    1.  The **fidelity** or **squared overlap** ($|\langle \psi(x) | \psi(c) \rangle|^2$) of their corresponding quantum states. The distance is typically a function of this value, like $\sqrt{1 - |\text{overlap}|^2}$.
-    2.  The requirement to **calculate the distance** between every data point and every cluster centroid in each iteration of the algorithm.
-
-```
+    
+        1.  The **fidelity** or **squared overlap** ($|\langle \psi(x) | \psi(c) \rangle|^2$) of their corresponding quantum states. The distance is typically a function of this value, like $\sqrt{1 - |\text{overlap}|^2}$.
+        2.  The requirement to **calculate the distance** between every data point and every cluster centroid in each iteration of the algorithm.
+    
 !!! abstract "Interview-Style Question"
-
-```
-A colleague suggests that since the Swap Test provides the distance, a quantum computer can run the entire k-Means algorithm with exponential speedup. What is a more nuanced take on this claim?
-
-???+ info "Answer Strategy"
-    The claim is an oversimplification. While quantum methods can accelerate a key part of the k-Means algorithm, the overall speedup is more nuanced due to the algorithm's hybrid nature.
-
-    1.  **Acknowledge the Quantum Step:** The core idea is valid. Using quantum subroutines like the Swap Test to calculate distances between data points and centroids is where the potential for a significant speedup lies. This step can be faster than its classical counterpart.
-    2.  **Identify the Classical Bottlenecks:** The quantum k-Means algorithm is **hybrid**. Several crucial steps remain classical:
-        *   **Data Loading (I/O):** Loading the classical data into quantum states can be a major bottleneck that limits overall performance.
-        *   **Centroid Recalculation:** After points are assigned to clusters, the new centroids must be computed. This is a classical computation that must be performed in each iteration.
-    3.  **Conclusion on Speedup:** The overall speedup is constrained by these classical components. Therefore, while the quantum distance calculation offers a significant advantage, the total speedup for the *entire* k-Means algorithm is not guaranteed to be exponential. It is a potential polynomial improvement on a specific subroutine, leading to a valuable but not unlimited, overall performance gain.
-
-```
+    
+    A colleague suggests that since the Swap Test provides the distance, a quantum computer can run the entire k-Means algorithm with exponential speedup. What is a more nuanced take on this claim?
+    
+    ???+ info "Answer Strategy"
+        The claim is an oversimplification. While quantum methods can accelerate a key part of the k-Means algorithm, the overall speedup is more nuanced due to the algorithm's hybrid nature.
+    
+        1.  **Acknowledge the Quantum Step:** The core idea is valid. Using quantum subroutines like the Swap Test to calculate distances between data points and centroids is where the potential for a significant speedup lies. This step can be faster than its classical counterpart.
+        2.  **Identify the Classical Bottlenecks:** The quantum k-Means algorithm is **hybrid**. Several crucial steps remain classical:
+            *   **Data Loading (I/O):** Loading the classical data into quantum states can be a major bottleneck that limits overall performance.
+            *   **Centroid Recalculation:** After points are assigned to clusters, the new centroids must be computed. This is a classical computation that must be performed in each iteration.
+        3.  **Conclusion on Speedup:** The overall speedup is constrained by these classical components. Therefore, while the quantum distance calculation offers a significant advantage, the total speedup for the *entire* k-Means algorithm is not guaranteed to be exponential. It is a potential polynomial improvement on a specific subroutine, leading to a valuable but not unlimited, overall performance gain.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -981,36 +973,32 @@ Classical Boltzmann machine: requires exponentially many connections
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  In a QBM, the probability distribution over states is defined by the energy levels of what quantum object?
-    2.  QBMs are particularly advantageous for generative modeling because they can naturally encode what property of the data using quantum mechanics?
-
-```
+    
+        1.  In a QBM, the probability distribution over states is defined by the energy levels of what quantum object?
+        2.  QBMs are particularly advantageous for generative modeling because they can naturally encode what property of the data using quantum mechanics?
+    
 ??? info "See Answer"
-
-    1.  A **parameterized Hamiltonian $H(\theta)$**. The probability of a state is related to its energy eigenvalue through the Boltzmann distribution.
-    2.  **Complex correlations** via **entanglement**. Entanglement allows the model to capture statistical dependencies between variables that are difficult for classical models to represent.
-
-```
+    
+        1.  A **parameterized Hamiltonian $H(\theta)$**. The probability of a state is related to its energy eigenvalue through the Boltzmann distribution.
+        2.  **Complex correlations** via **entanglement**. Entanglement allows the model to capture statistical dependencies between variables that are difficult for classical models to represent.
+    
 !!! abstract "Interview-Style Question"
-
-```
-Explain the conceptual difference between a Quantum Boltzmann Machine (QBM) and a Variational Quantum Circuit (VQC) used for supervised classification.
-
-???+ info "Answer Strategy"
-    The key difference lies in their fundamental purpose and the type of task they are designed to solve.
-
-    1.  **Model Type and Goal:**
-        *   **VQC (Discriminative):** A VQC used for classification is a **discriminative model**. Its goal is to learn a *decision boundary* that separates different classes of data. It learns a mapping from an input to a specific output label ($f: x \to y$).
-        *   **QBM (Generative):** A QBM is a **generative model**. Its goal is to learn the *underlying probability distribution* of the dataset itself, $P(x)$. It is not trying to classify data, but to understand and replicate its structure.
-
-    2.  **Function and Output:**
-        *   **VQC:** Takes a data point as input and outputs a **prediction** (e.g., "Class A" or "Class B").
-        *   **QBM:** Does not take an input in the same way. Once trained, its output is a **new sample** that is statistically similar to the data it was trained on.
-
-    **Analogy:** A VQC is like a bank teller trained to distinguish genuine banknotes from counterfeit ones. A QBM is like a master forger trained to create new banknotes that are indistinguishable from the real thing.
-
-```
+    
+    Explain the conceptual difference between a Quantum Boltzmann Machine (QBM) and a Variational Quantum Circuit (VQC) used for supervised classification.
+    
+    ???+ info "Answer Strategy"
+        The key difference lies in their fundamental purpose and the type of task they are designed to solve.
+    
+        1.  **Model Type and Goal:**
+            *   **VQC (Discriminative):** A VQC used for classification is a **discriminative model**. Its goal is to learn a *decision boundary* that separates different classes of data. It learns a mapping from an input to a specific output label ($f: x \to y$).
+            *   **QBM (Generative):** A QBM is a **generative model**. Its goal is to learn the *underlying probability distribution* of the dataset itself, $P(x)$. It is not trying to classify data, but to understand and replicate its structure.
+    
+        2.  **Function and Output:**
+            *   **VQC:** Takes a data point as input and outputs a **prediction** (e.g., "Class A" or "Class B").
+            *   **QBM:** Does not take an input in the same way. Once trained, its output is a **new sample** that is statistically similar to the data it was trained on.
+    
+        **Analogy:** A VQC is like a bank teller trained to distinguish genuine banknotes from counterfeit ones. A QBM is like a master forger trained to create new banknotes that are indistinguishable from the real thing.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**

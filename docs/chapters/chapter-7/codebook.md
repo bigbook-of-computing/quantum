@@ -1,4 +1,4 @@
-# **Chapter 7: Qiskit — The Universal Quantum Compiler () () (Codebook)**
+# **Chapter 7: Qiskit — The Universal Quantum Compiler (Codebook)**
 
 This codebook demonstrates Qiskit's transpiler, noise modelling, and pass manager pipeline. Three projects cover basis gate decomposition, noise-fidelity degradation, and custom optimisation passes.
 

@@ -1,4 +1,4 @@
-# **Chapter 5: 1: Bit-flip and Phase-flip Codes () () () (Workbook)**
+# **Chapter 5: 1: Bit-flip and Phase-flip Codes (Workbook)**
 
 The goal of this chapter is to introduce the foundational principles of **Quantum Error Correction (QEC)** by analyzing the simplest repetition codes—the **3-qubit bit-flip code** and the **3-qubit phase-flip code**—and explaining the concept of **syndrome extraction** using ancilla qubits.
 

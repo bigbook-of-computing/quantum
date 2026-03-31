@@ -1,4 +1,4 @@
-# **Chapter 18: Quantum Monte Carlo and Finance () () (Codebook)**
+# **Chapter 18: Quantum Monte Carlo and Finance (Codebook)**
 
 Quantum amplitude estimation (QAE) promises quadratic speedup for Monte Carlo integration. This chapter loads probability distributions into quantum states, computes expectation values via estimation circuits, and applies QAE to a European option payoff.
 

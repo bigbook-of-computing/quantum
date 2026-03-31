@@ -1,4 +1,4 @@
-# **Chapter 10: Variational Quantum Circuits () () (Workbook)**
+# **Chapter 10: Variational Quantum Circuits (Workbook)**
 
 ---
 
@@ -173,49 +173,45 @@ flowchart LR
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which layer embeds classical data into the quantum state?**
-
-- A. Measurement  
-- B. $\mathbf{U}_\phi(x)$  
-- C. $\mathbf{U}(\mathbf{\theta})$  
-- D. Identity  
-
-**2. A simple VQC prediction can be formed from which quantity?**
-
-- A. Circuit depth  
-- B. $\langle \mathbf{M} \rangle$ for some observable $\mathbf{M}$  
-- C. Number of qubits  
-- D. Number of CNOTs  
-
+    **1. Which layer embeds classical data into the quantum state?**
+    
+    - A. Measurement  
+    - B. $\mathbf{U}_\phi(x)$  
+    - C. $\mathbf{U}(\mathbf{\theta})$  
+    - D. Identity  
+    
+    **2. A simple VQC prediction can be formed from which quantity?**
+    
+    - A. Circuit depth  
+    - B. $\langle \mathbf{M} \rangle$ for some observable $\mathbf{M}$  
+    - C. Number of qubits  
+    - D. Number of CNOTs  
+    
 ??? info "See Answer"
-    **1: B** — The encoder $\mathbf{U}_\phi(x)$ maps $x$ into Hilbert space.  
-    **2: B** — Expectation values provide scalar predictions.
-
-```
+        **1: B** — The encoder $\mathbf{U}_\phi(x)$ maps $x$ into Hilbert space.  
+        **2: B** — Expectation values provide scalar predictions.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Distinguish the roles of $\mathbf{U}_\phi(x)$ and $\mathbf{U}(\mathbf{\theta})$ in terms of feature mapping vs. learning capacity.
-
-???+ info "Answer Strategy"
-    In a Variational Quantum Classifier (VQC), the circuit is typically split into two distinct unitaries: the data encoder $U_\phi(x)$ and the variational ansatz $U(\theta)$.
-
-    1.  **$U_\phi(x)$ (The Feature Map):**
-        *   **Role:** To encode classical data $x$ into a quantum state. It acts as a **fixed, non-trainable feature map**.
-        *   **Purpose:** To project the classical data into a high-dimensional Hilbert space where patterns may be more easily discernible. The structure of this encoder is chosen based on the problem domain (e.g., angle encoding for tabular data, ZZ feature maps for capturing correlations).
-        *   **Analogy:** Similar to feature engineering or applying a kernel in classical machine learning.
-
-    2.  **$U(\theta)$ (The Learning Circuit):**
-        *   **Role:** A **trainable, parameterized quantum circuit** that processes the state prepared by the encoder.
-        *   **Purpose:** To learn the classification task by finding the optimal parameters $\theta$ that map the encoded data to the correct labels. It adjusts the quantum state to align it with a measurement observable that separates the classes.
-        *   **Analogy:** The hidden layers of a classical neural network, where the weights and biases are learned during training.
-
-    **In short:** $U_\phi(x)$ is responsible for **data representation**, while $U(\theta)$ is responsible for **learning the model**. This separation allows for modular design and helps manage the complexity of the training process.
-
-```
+    
+    **Q:** Distinguish the roles of $\mathbf{U}_\phi(x)$ and $\mathbf{U}(\mathbf{\theta})$ in terms of feature mapping vs. learning capacity.
+    
+    ???+ info "Answer Strategy"
+        In a Variational Quantum Classifier (VQC), the circuit is typically split into two distinct unitaries: the data encoder $U_\phi(x)$ and the variational ansatz $U(\theta)$.
+    
+        1.  **$U_\phi(x)$ (The Feature Map):**
+            *   **Role:** To encode classical data $x$ into a quantum state. It acts as a **fixed, non-trainable feature map**.
+            *   **Purpose:** To project the classical data into a high-dimensional Hilbert space where patterns may be more easily discernible. The structure of this encoder is chosen based on the problem domain (e.g., angle encoding for tabular data, ZZ feature maps for capturing correlations).
+            *   **Analogy:** Similar to feature engineering or applying a kernel in classical machine learning.
+    
+        2.  **$U(\theta)$ (The Learning Circuit):**
+            *   **Role:** A **trainable, parameterized quantum circuit** that processes the state prepared by the encoder.
+            *   **Purpose:** To learn the classification task by finding the optimal parameters $\theta$ that map the encoded data to the correct labels. It adjusts the quantum state to align it with a measurement observable that separates the classes.
+            *   **Analogy:** The hidden layers of a classical neural network, where the weights and biases are learned during training.
+    
+        **In short:** $U_\phi(x)$ is responsible for **data representation**, while $U(\theta)$ is responsible for **learning the model**. This separation allows for modular design and helps manage the complexity of the training process.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**
@@ -427,51 +423,47 @@ Volume-law entanglement correlates with barren plateaus.
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. A key benefit of hardware-efficient ansätze is:**
-
-- A. Guaranteed global minima  
-- B. Shallow depth and native-gate compatibility  
-- C. Exact simulation of any Hamiltonian  
-- D. Zero-shot variance  
-
-**2. Problem-inspired designs often aim to:**
-
-- A. Randomize parameters heavily  
-- B. Reduce parameter count and preserve symmetries  
-- C. Maximize depth regardless of noise  
-- D. Eliminate measurements  
-
+    **1. A key benefit of hardware-efficient ansätze is:**
+    
+    - A. Guaranteed global minima  
+    - B. Shallow depth and native-gate compatibility  
+    - C. Exact simulation of any Hamiltonian  
+    - D. Zero-shot variance  
+    
+    **2. Problem-inspired designs often aim to:**
+    
+    - A. Randomize parameters heavily  
+    - B. Reduce parameter count and preserve symmetries  
+    - C. Maximize depth regardless of noise  
+    - D. Eliminate measurements  
+    
 ??? info "See Answer"
-    **1: B** — They map efficiently to available hardware.  
-    **2: B** — Symmetry and sparsity improve trainability.
-
-```
+        **1: B** — They map efficiently to available hardware.  
+        **2: B** — Symmetry and sparsity improve trainability.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Explain how entanglement pattern and depth influence both expressibility and barren plateau risk.
-
-???+ info "Answer Strategy"
-    The design of a variational circuit's ansatz involves a critical trade-off between its **expressibility** (ability to represent complex functions) and its **trainability** (avoiding issues like barren plateaus).
-
-    1.  **Expressibility:**
-        *   **Influence of Entanglement:** More entanglement (e.g., all-to-all connections) allows the circuit to generate a wider variety of quantum states, increasing its representative power.
-        *   **Influence of Depth:** Deeper circuits (more layers) can create more complex quantum states and approximate more complicated functions.
-
-    2.  **Barren Plateaus (Trainability Issue):**
-        *   **Definition:** A phenomenon where the gradients of the cost function vanish exponentially with the number of qubits, making optimization infeasible.
-        *   **Influence of Entanglement and Depth:** Highly entangled and deep circuits are prone to becoming "too random." They start to approximate a mathematical structure known as a 2-design, which leads to the gradients flattening out across the parameter landscape.
-
-    **The Trade-off:**
-    *   **High Expressibility (Deep, Global Entanglement):** Leads to a high risk of barren plateaus, making the circuit untrainable.
-    *   **High Trainability (Shallow, Local Entanglement):** Reduces the risk of barren plateaus but may result in a circuit that is too simple to capture the complexity of the problem (underfitting).
-
-    The key to a good ansatz design is to find a "sweet spot" that is expressive enough for the task but structured and shallow enough to ensure that gradients remain trainable. This often involves using problem-specific knowledge or local entanglement patterns.
-
-```
+    
+    **Q:** Explain how entanglement pattern and depth influence both expressibility and barren plateau risk.
+    
+    ???+ info "Answer Strategy"
+        The design of a variational circuit's ansatz involves a critical trade-off between its **expressibility** (ability to represent complex functions) and its **trainability** (avoiding issues like barren plateaus).
+    
+        1.  **Expressibility:**
+            *   **Influence of Entanglement:** More entanglement (e.g., all-to-all connections) allows the circuit to generate a wider variety of quantum states, increasing its representative power.
+            *   **Influence of Depth:** Deeper circuits (more layers) can create more complex quantum states and approximate more complicated functions.
+    
+        2.  **Barren Plateaus (Trainability Issue):**
+            *   **Definition:** A phenomenon where the gradients of the cost function vanish exponentially with the number of qubits, making optimization infeasible.
+            *   **Influence of Entanglement and Depth:** Highly entangled and deep circuits are prone to becoming "too random." They start to approximate a mathematical structure known as a 2-design, which leads to the gradients flattening out across the parameter landscape.
+    
+        **The Trade-off:**
+        *   **High Expressibility (Deep, Global Entanglement):** Leads to a high risk of barren plateaus, making the circuit untrainable.
+        *   **High Trainability (Shallow, Local Entanglement):** Reduces the risk of barren plateaus but may result in a circuit that is too simple to capture the complexity of the problem (underfitting).
+    
+        The key to a good ansatz design is to find a "sweet spot" that is expressive enough for the task but structured and shallow enough to ensure that gradients remain trainable. This often involves using problem-specific knowledge or local entanglement patterns.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**
@@ -704,49 +696,45 @@ Error: $\mathcal{O}(h^2)$ plus shot noise amplification $\mathcal{O}(1/h)$ for s
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Parameter-shift requires what property of the generator?**
-
-- A. Non-Hermitian  
-- B. Two-point spectrum (involutory up to scale)  
-- C. Nilpotent  
-- D. Non-unitary  
-
-**2. How many evaluations per parameter are needed?**
-
-- A. One  
-- B. Two  
-- C. $d$  
-- D. $2d$  
-
+    **1. Parameter-shift requires what property of the generator?**
+    
+    - A. Non-Hermitian  
+    - B. Two-point spectrum (involutory up to scale)  
+    - C. Nilpotent  
+    - D. Non-unitary  
+    
+    **2. How many evaluations per parameter are needed?**
+    
+    - A. One  
+    - B. Two  
+    - C. $d$  
+    - D. $2d$  
+    
 ??? info "See Answer"
-    **1: B** — Eigenvalues $\pm 1$ admit shifts by $\pm\pi/2$.  
-    **2: B** — Two evaluations suffice per parameter.
-
-```
+        **1: B** — Eigenvalues $\pm 1$ admit shifts by $\pm\pi/2$.  
+        **2: B** — Two evaluations suffice per parameter.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Compare parameter-shift with SPSA in terms of query cost and noise tolerance.
-
-???+ info "Answer Strategy"
-    When training VQCs, the choice of gradient estimator involves a trade-off between cost and precision. The two most common methods are the Parameter-Shift Rule and Simultaneous Perturbation Stochastic Approximation (SPSA).
-
-    | Metric                | Parameter-Shift Rule                               | SPSA (Simultaneous Perturbation Stochastic Approx.)        |
-    | --------------------- | -------------------------------------------------- | ---------------------------------------------------------- |
-    | **Query Cost**        | **High ($2m$ circuits per gradient)**, where $m$ is the number of parameters. | **Low (2 circuits per gradient)**, regardless of $m$.      |
-    | **Gradient Quality**  | **Exact**. It provides the analytical gradient, limited only by shot noise. | **Stochastic**. It's an approximation, introducing its own noise. |
-    | **Noise Tolerance**   | **Moderate**. It's robust to shot noise but can be sensitive to device control errors. | **High**. Its stochastic nature makes it inherently resilient to device noise. |
-    | **Scalability**       | **Poor**. The cost becomes prohibitive for models with many parameters ($m > 100$). | **Excellent**. It is the preferred method for large-scale models. |
-    | **Best For**          | Small models, high-precision optimization, or final fine-tuning. | Large models, noisy hardware, and initial, rapid exploration of the parameter space. |
-
-    **Summary:**
-    - Use **Parameter-Shift** for small, precise models where accuracy is paramount and the cost is manageable.
-    - Use **SPSA** for large, complex models, especially on noisy hardware, where scalability and cost-efficiency are the primary concerns. A common strategy is to use SPSA for initial training and switch to parameter-shift for final convergence.
-
-```
+    
+    **Q:** Compare parameter-shift with SPSA in terms of query cost and noise tolerance.
+    
+    ???+ info "Answer Strategy"
+        When training VQCs, the choice of gradient estimator involves a trade-off between cost and precision. The two most common methods are the Parameter-Shift Rule and Simultaneous Perturbation Stochastic Approximation (SPSA).
+    
+        | Metric                | Parameter-Shift Rule                               | SPSA (Simultaneous Perturbation Stochastic Approx.)        |
+        | --------------------- | -------------------------------------------------- | ---------------------------------------------------------- |
+        | **Query Cost**        | **High ($2m$ circuits per gradient)**, where $m$ is the number of parameters. | **Low (2 circuits per gradient)**, regardless of $m$.      |
+        | **Gradient Quality**  | **Exact**. It provides the analytical gradient, limited only by shot noise. | **Stochastic**. It's an approximation, introducing its own noise. |
+        | **Noise Tolerance**   | **Moderate**. It's robust to shot noise but can be sensitive to device control errors. | **High**. Its stochastic nature makes it inherently resilient to device noise. |
+        | **Scalability**       | **Poor**. The cost becomes prohibitive for models with many parameters ($m > 100$). | **Excellent**. It is the preferred method for large-scale models. |
+        | **Best For**          | Small models, high-precision optimization, or final fine-tuning. | Large models, noisy hardware, and initial, rapid exploration of the parameter space. |
+    
+        **Summary:**
+        - Use **Parameter-Shift** for small, precise models where accuracy is paramount and the cost is manageable.
+        - Use **SPSA** for large, complex models, especially on noisy hardware, where scalability and cost-efficiency are the primary concerns. A common strategy is to use SPSA for initial training and switch to parameter-shift for final convergence.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**
@@ -999,54 +987,50 @@ $$
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. If you halve the standard error, how must shots change?**
-
-- A. Halve shots  
-- B. Keep shots constant  
-- C. Double shots  
-- D. Quadruple shots  
-
-**2. Which tactic reduces measurement overhead?**
-
-- A. Deeper circuits  
-- B. Grouping commuting terms  
-- C. Randomizing bases  
-- D. Fewer iterations regardless of loss  
-
+    **1. If you halve the standard error, how must shots change?**
+    
+    - A. Halve shots  
+    - B. Keep shots constant  
+    - C. Double shots  
+    - D. Quadruple shots  
+    
+    **2. Which tactic reduces measurement overhead?**
+    
+    - A. Deeper circuits  
+    - B. Grouping commuting terms  
+    - C. Randomizing bases  
+    - D. Fewer iterations regardless of loss  
+    
 ??? info "See Answer"
-    **1: D** — $\epsilon\propto 1/\sqrt{N}$ implies $N\mapsto 4N$.  
-    **2: B** — Shared bases reduce distinct settings.
-
-```
+        **1: D** — $\epsilon\propto 1/\sqrt{N}$ implies $N\mapsto 4N$.  
+        **2: B** — Shared bases reduce distinct settings.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why can measurement cost dominate end-to-end training time, and how would you budget shots across iterations?
-
-???+ info "Answer Strategy"
-    Measurement cost often dominates the total training time of a VQC for two primary reasons: the sheer volume of measurements required and the statistical nature of quantum mechanics.
-
-    **Why Measurement is Expensive:**
-
-    1.  **Shot Noise:** To get a reliable estimate of an expectation value, you must repeat the circuit execution and measurement many times (thousands or millions of "shots"). The statistical error in your estimate decreases only as $1/\sqrt{N}$, where $N$ is the number of shots. This means to halve your error, you must quadruple your shots.
-    2.  **Iterative Optimization:** Training a VQC involves many optimization steps (iterations).
-    3.  **Gradient Calculation:** At each step, calculating the gradient requires multiple circuit evaluations (e.g., $2m$ for the parameter-shift rule with $m$ parameters).
-
-    The total number of shots is multiplicative: `(Number of Iterations) x (Circuits per Gradient) x (Shots per Circuit)`. This can quickly lead to billions or trillions of total shots, making measurement the main bottleneck.
-
-    **How to Budget Shots:**
-
-    A naive approach is to use a fixed, large number of shots for every step. A much more efficient strategy is to use an **adaptive shot budget**:
-
-    1.  **Start Low:** In the early stages of training, when gradients are large and the optimizer is just exploring, precision is not critical. Use a low number of shots (e.g., 1,000) to get a rough estimate of the gradient direction quickly.
-    2.  **Increase Gradually:** As the optimization proceeds and the parameters get closer to a minimum, the gradients become smaller. To resolve these smaller gradients from the shot noise, you need more precision. Therefore, you should gradually increase the number of shots with each iteration.
-
-    This adaptive approach concentrates the measurement budget on the later stages of training where it is most needed, leading to significant savings in both time and cost without sacrificing the quality of the final result.
-
-```
+    
+    **Q:** Why can measurement cost dominate end-to-end training time, and how would you budget shots across iterations?
+    
+    ???+ info "Answer Strategy"
+        Measurement cost often dominates the total training time of a VQC for two primary reasons: the sheer volume of measurements required and the statistical nature of quantum mechanics.
+    
+        **Why Measurement is Expensive:**
+    
+        1.  **Shot Noise:** To get a reliable estimate of an expectation value, you must repeat the circuit execution and measurement many times (thousands or millions of "shots"). The statistical error in your estimate decreases only as $1/\sqrt{N}$, where $N$ is the number of shots. This means to halve your error, you must quadruple your shots.
+        2.  **Iterative Optimization:** Training a VQC involves many optimization steps (iterations).
+        3.  **Gradient Calculation:** At each step, calculating the gradient requires multiple circuit evaluations (e.g., $2m$ for the parameter-shift rule with $m$ parameters).
+    
+        The total number of shots is multiplicative: `(Number of Iterations) x (Circuits per Gradient) x (Shots per Circuit)`. This can quickly lead to billions or trillions of total shots, making measurement the main bottleneck.
+    
+        **How to Budget Shots:**
+    
+        A naive approach is to use a fixed, large number of shots for every step. A much more efficient strategy is to use an **adaptive shot budget**:
+    
+        1.  **Start Low:** In the early stages of training, when gradients are large and the optimizer is just exploring, precision is not critical. Use a low number of shots (e.g., 1,000) to get a rough estimate of the gradient direction quickly.
+        2.  **Increase Gradually:** As the optimization proceeds and the parameters get closer to a minimum, the gradients become smaller. To resolve these smaller gradients from the shot noise, you need more precision. Therefore, you should gradually increase the number of shots with each iteration.
+    
+        This adaptive approach concentrates the measurement budget on the later stages of training where it is most needed, leading to significant savings in both time and cost without sacrificing the quality of the final result.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**
@@ -1300,53 +1284,49 @@ Barren plateaus fundamental to random quantum circuits but **not universal curse
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. What symptom characterizes a barren plateau?**
-
-- A. Exploding gradients  
-- B. Vanishing gradients  
-- C. Oscillating loss  
-- D. Deterministic measurements  
-
-**2. Which approach mitigates plateaus?**
-
-- A. Increase random depth  
-- B. Local cost functions and shallow blocks  
-- C. Remove encoders  
-- D. Ignore noise  
-
+    **1. What symptom characterizes a barren plateau?**
+    
+    - A. Exploding gradients  
+    - B. Vanishing gradients  
+    - C. Oscillating loss  
+    - D. Deterministic measurements  
+    
+    **2. Which approach mitigates plateaus?**
+    
+    - A. Increase random depth  
+    - B. Local cost functions and shallow blocks  
+    - C. Remove encoders  
+    - D. Ignore noise  
+    
 ??? info "See Answer"
-    **1: B** — Gradients concentrate near zero.  
-    **2: B** — Local objectives and structure maintain gradient magnitude.
-
-```
+        **1: B** — Gradients concentrate near zero.  
+        **2: B** — Local objectives and structure maintain gradient magnitude.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Outline a mitigation plan when training stalls due to vanishing gradients.
-
-???+ info "Answer Strategy"
-    When a VQC training process stalls and the gradients vanish (a "barren plateau"), it means the optimization landscape is too flat to navigate. Here is a step-by-step mitigation plan:
-
-    1.  **Diagnose the Issue:**
-        *   First, confirm that you are in a barren plateau by monitoring the norm of the gradient vector. If it's consistently close to zero (e.g., $< 10^{-4}$), a barren plateau is likely the cause.
-
-    2.  **Reduce Circuit Complexity:**
-        *   **Reduce Depth:** The most direct solution. Systematically reduce the number of layers in your ansatz. Deeper circuits are more prone to barren plateaus. Find the minimum depth that is still expressive enough for your problem.
-        *   **Use Local Entanglement:** Replace global or random entanglement patterns with local ones (e.g., nearest-neighbor CNOTs). This restricts the flow of information and helps preserve the gradient signal.
-
-    3.  **Adjust Initialization:**
-        *   **Initialize Near Identity:** Instead of initializing parameters randomly across a large range (like $[-\pi, \pi]$), initialize them with small values close to zero (e.g., from a normal distribution $\mathcal{N}(0, 0.01)$). This ensures the initial circuit is not in a flat region of the landscape.
-
-    4.  **Employ Advanced Techniques:**
-        *   **Layer-wise Training:** Train one layer of the ansatz at a time. Once the first layer is converged, freeze its parameters and add a new layer to train. This builds a deep circuit without ever having to optimize all the parameters of a deep circuit at once.
-        - **Use a different Optimizer:** Sometimes, a different classical optimizer can help escape a barren plateau.
-
-    By systematically applying these strategies, you can often restore the trainability of your model and escape the barren plateau.
-
-```
+    
+    **Q:** Outline a mitigation plan when training stalls due to vanishing gradients.
+    
+    ???+ info "Answer Strategy"
+        When a VQC training process stalls and the gradients vanish (a "barren plateau"), it means the optimization landscape is too flat to navigate. Here is a step-by-step mitigation plan:
+    
+        1.  **Diagnose the Issue:**
+            *   First, confirm that you are in a barren plateau by monitoring the norm of the gradient vector. If it's consistently close to zero (e.g., $< 10^{-4}$), a barren plateau is likely the cause.
+    
+        2.  **Reduce Circuit Complexity:**
+            *   **Reduce Depth:** The most direct solution. Systematically reduce the number of layers in your ansatz. Deeper circuits are more prone to barren plateaus. Find the minimum depth that is still expressive enough for your problem.
+            *   **Use Local Entanglement:** Replace global or random entanglement patterns with local ones (e.g., nearest-neighbor CNOTs). This restricts the flow of information and helps preserve the gradient signal.
+    
+        3.  **Adjust Initialization:**
+            *   **Initialize Near Identity:** Instead of initializing parameters randomly across a large range (like $[-\pi, \pi]$), initialize them with small values close to zero (e.g., from a normal distribution $\mathcal{N}(0, 0.01)$). This ensures the initial circuit is not in a flat region of the landscape.
+    
+        4.  **Employ Advanced Techniques:**
+            *   **Layer-wise Training:** Train one layer of the ansatz at a time. Once the first layer is converged, freeze its parameters and add a new layer to train. This builds a deep circuit without ever having to optimize all the parameters of a deep circuit at once.
+            - **Use a different Optimizer:** Sometimes, a different classical optimizer can help escape a barren plateau.
+    
+        By systematically applying these strategies, you can often restore the trainability of your model and escape the barren plateau.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**

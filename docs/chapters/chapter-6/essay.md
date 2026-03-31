@@ -27,10 +27,8 @@ Variational Quantum Algorithms (VQAs) represent a paradigm-shifting approach to 
 The **Variational Quantum Eigensolver (VQE)** is a pivotal algorithm for the **Noisy Intermediate-Scale Quantum (NISQ)** era. It estimates the **ground state energy** (lowest eigenvalue) of a quantum system described by a **Hamiltonian** $H$. VQE is a **hybrid quantum-classical** algorithm, combining quantum state preparation with classical optimization.
 
 !!! tip "NISQ-Era Workhorse"
-```
-VQE circumvents the need for deep quantum circuits and error correction by offloading the computationally expensive optimization task to classical processors, making it one of the most practical algorithms for current quantum hardware [3].
-
-```
+    VQE circumvents the need for deep quantum circuits and error correction by offloading the computationally expensive optimization task to classical processors, making it one of the most practical algorithms for current quantum hardware [3].
+    
 ### **The Variational Principle and Objective Function**
 
 ---
@@ -56,16 +54,14 @@ $$
 That is, find the parameters $\vec{\theta}$ that minimize $E(\vec{\theta})$, bringing the trial state as close as possible to the true ground state.
 
 !!! example "VQE for Molecular Hydrogen"
-```
-For the H₂ molecule, the Hamiltonian can be mapped to a 2-qubit operator. VQE uses a simple ansatz like:
-
-$$
-|\psi(\theta)\rangle = \cos(\theta/2)|01\rangle + \sin(\theta/2)|10\rangle
-$$
-
-By varying $\theta$ and measuring $\langle H \rangle$, the classical optimizer finds the angle that minimizes the energy, yielding the ground state energy of H₂.
-
-```
+    For the H₂ molecule, the Hamiltonian can be mapped to a 2-qubit operator. VQE uses a simple ansatz like:
+    
+    $$
+    |\psi(\theta)\rangle = \cos(\theta/2)|01\rangle + \sin(\theta/2)|10\rangle
+    $$
+    
+    By varying $\theta$ and measuring $\langle H \rangle$, the classical optimizer finds the angle that minimizes the energy, yielding the ground state energy of H₂.
+    
 ---
 
 ### **The Hybrid VQE Loop**
@@ -113,10 +109,8 @@ VQE_Algorithm(H, ansatz, initial_θ, optimizer):
 ```
 
 ??? question "Why not use a purely quantum approach?"
-```
-Purely quantum eigenvalue algorithms like QPE require deep circuits with extensive error correction—capabilities beyond current NISQ devices. VQE's hybrid approach sidesteps these requirements by using shallow quantum circuits and leveraging classical optimization, making it practical for near-term hardware.
-
-```
+    Purely quantum eigenvalue algorithms like QPE require deep circuits with extensive error correction—capabilities beyond current NISQ devices. VQE's hybrid approach sidesteps these requirements by using shallow quantum circuits and leveraging classical optimization, making it practical for near-term hardware.
+    
 ---
 
 ### **Hamiltonian Decomposition and Measurement**
@@ -183,10 +177,8 @@ VQE is widely used in **quantum chemistry**, particularly for estimating molecul
 The **Quantum Approximate Optimization Algorithm (QAOA)** is a hybrid quantum-classical algorithm specifically designed to find approximate solutions to **combinatorial optimization problems**, such as MaxCut, satisfiability (SAT), and various graph problems. Like VQE, QAOA operates within the **NISQ** paradigm by utilizing a parameterized circuit optimized by a classical loop.
 
 !!! tip "Optimization in the NISQ Era"
-```
-QAOA represents a fundamentally different approach than classical approximation algorithms—it uses quantum interference to explore the solution space in ways classical methods cannot, potentially offering polynomial speedups for certain hard combinatorial problems [4].
-
-```
+    QAOA represents a fundamentally different approach than classical approximation algorithms—it uses quantum interference to explore the solution space in ways classical methods cannot, potentially offering polynomial speedups for certain hard combinatorial problems [4].
+    
 ### **Problem Formulation**
 
 ---
@@ -200,16 +192,14 @@ $$
 The cost function $C$ is treated as a diagonal Hamiltonian in the computational basis, meaning its eigenvalues correspond to the possible objective values $C(z)$ for each configuration $z$.
 
 !!! example "MaxCut as QAOA Problem"
-```
-For a graph with edges $(i,j)$, the MaxCut cost Hamiltonian is:
-
-$$
-C = \sum_{(i,j) \in E} \frac{1}{2}(1 - Z_i Z_j)
-$$
-
-Each term equals 1 when qubits $i$ and $j$ differ (edge is "cut"), and 0 when they match. QAOA seeks the bitstring $|z\rangle$ that maximizes the number of cut edges.
-
-```
+    For a graph with edges $(i,j)$, the MaxCut cost Hamiltonian is:
+    
+    $$
+    C = \sum_{(i,j) \in E} \frac{1}{2}(1 - Z_i Z_j)
+    $$
+    
+    Each term equals 1 when qubits $i$ and $j$ differ (edge is "cut"), and 0 when they match. QAOA seeks the bitstring $|z\rangle$ that maximizes the number of cut edges.
+    
 ---
 
 ### **The QAOA Circuit and Alternating Unitaries**
@@ -267,10 +257,8 @@ QAOA is a **variational** algorithm, meaning the parameters $\vec{\gamma}$ and $
 * **Performance Guarantee:** QAOA has theoretical performance guarantees, showing that for a sufficient number of layers $p$, it can often outperform simple classical approximation algorithms for certain optimization problems, especially graph-based problems like MaxCut.
 
 ??? question "How does QAOA compare to classical algorithms?"
-```
-For MaxCut on 3-regular graphs, QAOA with $p=1$ achieves an approximation ratio of 0.6924, which already beats simple classical greedy algorithms. As $p \to \infty$, QAOA approaches the optimal solution, though practical implementations are limited by circuit depth and noise on NISQ hardware [5].
-
-```
+    For MaxCut on 3-regular graphs, QAOA with $p=1$ achieves an approximation ratio of 0.6924, which already beats simple classical greedy algorithms. As $p \to \infty$, QAOA approaches the optimal solution, though practical implementations are limited by circuit depth and noise on NISQ hardware [5].
+    
 ---
 
 ## **6.3 Ansatz Design (Hardware Efficient, UCC, etc.)**
@@ -280,10 +268,8 @@ For MaxCut on 3-regular graphs, QAOA with $p=1$ achieves an approximation ratio 
 The **ansatz** ($|\psi(\vec{\theta})\rangle$) is the parameterized quantum circuit that defines the space of trial solutions in variational quantum algorithms (VQAs). Designing an effective ansatz is crucial because it determines both the **expressibility** (ability to reach the optimal solution) and the **trainability** (ease of optimization) of the VQA.
 
 !!! tip "The Ansatz Dilemma"
-```
-Ansatz design embodies a fundamental tradeoff: circuits must be expressive enough to approximate the target state, yet structured enough to avoid barren plateaus where gradients vanish exponentially. This balance determines whether a VQA succeeds or fails [6].
-
-```
+    Ansatz design embodies a fundamental tradeoff: circuits must be expressive enough to approximate the target state, yet structured enough to avoid barren plateaus where gradients vanish exponentially. This balance determines whether a VQA succeeds or fails [6].
+    
 ### **Desirable Properties of an Ansatz**
 
 ---
@@ -326,18 +312,16 @@ where $T$ contains single, double, and higher-order excitation operators.
 * **Disadvantage:** Requires deep circuits and complex gate sequences to implement the exponential operator, often making it prohibitive on current NISQ hardware.
 
 !!! example "Hardware-Efficient vs UCC"
-```
-For a 4-qubit chemistry problem:
-- **Hardware-Efficient:** 10-20 parameters, circuit depth ~5-10, works on any topology
-- **UCC (UCCSD):** 3-8 parameters (chemically motivated), circuit depth ~20-50, requires high connectivity
-
-The hardware-efficient ansatz trades parameter efficiency for shallower circuits, while UCC prioritizes physical accuracy at the cost of depth.
-
-```
-**Problem-Inspired Ansatz**
-
-This general category includes structures tailored to encode known symmetries or constraints of the problem. **QAOA's circuit structure** (alternating cost and mixer unitaries) is the most prominent example of a problem-inspired ansatz designed for combinatorial optimization. These ansätze are generally shallow and incorporate known symmetries, thereby maintaining larger gradients and mitigating the risk of **Barren Plateaus**.
-
+    For a 4-qubit chemistry problem:
+    - **Hardware-Efficient:** 10-20 parameters, circuit depth ~5-10, works on any topology
+    - **UCC (UCCSD):** 3-8 parameters (chemically motivated), circuit depth ~20-50, requires high connectivity
+    
+    The hardware-efficient ansatz trades parameter efficiency for shallower circuits, while UCC prioritizes physical accuracy at the cost of depth.
+    
+    **Problem-Inspired Ansatz**
+    
+    This general category includes structures tailored to encode known symmetries or constraints of the problem. **QAOA's circuit structure** (alternating cost and mixer unitaries) is the most prominent example of a problem-inspired ansatz designed for combinatorial optimization. These ansätze are generally shallow and incorporate known symmetries, thereby maintaining larger gradients and mitigating the risk of **Barren Plateaus**.
+    
 ---
 
 ### **Mitigation of Barren Plateaus**
@@ -357,10 +341,8 @@ flowchart TD
 ```
 
 ??? question "Can we detect barren plateaus before optimization?"
-```
-Yes! Recent research shows that gradient variance scales inversely with the Hilbert space dimension for certain ansatz types. By analyzing the ansatz structure—particularly its depth, entanglement pattern, and parameter distribution—we can predict susceptibility to barren plateaus before running expensive optimization [7].
-
-```
+    Yes! Recent research shows that gradient variance scales inversely with the Hilbert space dimension for certain ansatz types. By analyzing the ansatz structure—particularly its depth, entanglement pattern, and parameter distribution—we can predict susceptibility to barren plateaus before running expensive optimization [7].
+    
 ---
 
 ## **6.4 Classical Optimizers**
@@ -370,10 +352,8 @@ Yes! Recent research shows that gradient variance scales inversely with the Hilb
 Classical optimization is the indispensable counterpart to the quantum computation step in **Variational Quantum Algorithms (VQAs)**, forming the "classical engine" that drives the minimization of the cost function $C(\vec{\theta})$. The choice of optimizer significantly impacts the algorithm's **convergence speed, resilience to noise**, and ability to avoid local minima or **Barren Plateaus**.
 
 !!! tip "The Classical Engine"
-```
-While quantum processors prepare superpositions and measure expectation values, classical optimizers navigate the parameter landscape—often a rugged, noisy terrain littered with local minima. The optimizer's sophistication often determines whether a VQA succeeds or fails [8].
-
-```
+    While quantum processors prepare superpositions and measure expectation values, classical optimizers navigate the parameter landscape—often a rugged, noisy terrain littered with local minima. The optimizer's sophistication often determines whether a VQA succeeds or fails [8].
+    
 ### **Role of the Optimizer**
 
 ---
@@ -415,33 +395,30 @@ These methods estimate the gradient using only a limited number of function eval
 * **SPSA (Simultaneous Perturbation Stochastic Approximation):** This method is particularly well-suited for VQAs due to its resilience to noise. It estimates the gradient by sampling the cost function at only two points in a randomly perturbed direction for each iteration, making it highly efficient in terms of quantum circuit executions.
 
 !!! example "SPSA vs Parameter-Shift Gradient"
-```
-For a VQA with 100 parameters:
-- **Parameter-Shift Rule:** Requires 200 circuit evaluations per gradient (2 per parameter)
-- **SPSA:** Requires only 2 circuit evaluations per iteration (independent of parameter count)
-
-This 100× reduction in quantum circuit calls makes SPSA especially valuable for NISQ devices where circuit executions are expensive.
-
-```
-```python
-SPSA_Optimizer(C, θ, max_iterations):
-    for iteration = 1 to max_iterations:
-        # Generate random perturbation
-        Δ = Random_Direction()
-        
-        # Evaluate cost at perturbed points
-        C_plus = Evaluate(θ + c·Δ)
-        C_minus = Evaluate(θ - c·Δ)
-        
-        # Estimate gradient
-        gradient_estimate = (C_plus - C_minus) / (2·c·Δ)
-        
-        # Update parameters
-        θ = θ - learning_rate · gradient_estimate
+    For a VQA with 100 parameters:
+    - **Parameter-Shift Rule:** Requires 200 circuit evaluations per gradient (2 per parameter)
+    - **SPSA:** Requires only 2 circuit evaluations per iteration (independent of parameter count)
     
-    return θ
-```
-
+    This 100× reduction in quantum circuit calls makes SPSA especially valuable for NISQ devices where circuit executions are expensive.
+    
+    ```python
+    SPSA_Optimizer(C, θ, max_iterations):
+        for iteration = 1 to max_iterations:
+            # Generate random perturbation
+            Δ = Random_Direction()
+            
+            # Evaluate cost at perturbed points
+            C_plus = Evaluate(θ + c·Δ)
+            C_minus = Evaluate(θ - c·Δ)
+            
+            # Estimate gradient
+            gradient_estimate = (C_plus - C_minus) / (2·c·Δ)
+            
+            # Update parameters
+            θ = θ - learning_rate · gradient_estimate
+        
+        return θ
+    
 ---
 
 ### **Trade-offs and Best Practices**
@@ -456,10 +433,8 @@ The choice of optimizer often involves a trade-off between the number of calls t
 The optimal choice of optimizer is therefore often empirical, depending on the specific VQA problem, the chosen **ansatz**, and the noise characteristics of the underlying quantum hardware.
 
 ??? question "When should I use gradient-free vs gradient-based optimizers?"
-```
-Use gradient-free optimizers (COBYLA, Nelder-Mead) for low-dimensional problems (<10 parameters) or when gradients are unreliable due to noise. Use gradient-based methods (BFGS, Adam) with parameter-shift rule when gradients are trustworthy and the landscape is smooth. Use SPSA when you have many parameters (>20) and need to minimize quantum circuit evaluations [9].
-
-```
+    Use gradient-free optimizers (COBYLA, Nelder-Mead) for low-dimensional problems (<10 parameters) or when gradients are unreliable due to noise. Use gradient-based methods (BFGS, Adam) with parameter-shift rule when gradients are trustworthy and the landscape is smooth. Use SPSA when you have many parameters (>20) and need to minimize quantum circuit evaluations [9].
+    
 ---
 
 ## **6.5 Cost Functions and Convergence**
@@ -469,10 +444,8 @@ Use gradient-free optimizers (COBYLA, Nelder-Mead) for low-dimensional problems 
 In **Variational Quantum Algorithms (VQAs)**, the **Cost Function** $C(\vec{\theta})$ is the scalar objective quantity that the hybrid quantum-classical loop seeks to optimize (minimize for VQE, maximize for QAOA). **Convergence** is the final stage of the optimization where the parameters stabilize, indicating that a satisfactory solution has been found.
 
 !!! tip "Measurement is Everything"
-```
-The cost function in VQAs is fundamentally statistical—it emerges from finite sampling of quantum measurements. Understanding shot noise, measurement grouping, and convergence criteria is essential for extracting reliable results from NISQ hardware [10].
-
-```
+    The cost function in VQAs is fundamentally statistical—it emerges from finite sampling of quantum measurements. Understanding shot noise, measurement grouping, and convergence criteria is essential for extracting reliable results from NISQ hardware [10].
+    
 ### **Cost Function Definition and Evaluation**
 
 ---
@@ -499,17 +472,15 @@ To make the cost function evaluation efficient, especially when the Hamiltonian 
 * **Efficiency Gain:** This grouping significantly reduces the total number of required measurement circuit executions (shots), drastically lowering the time and cost of the optimization loop.
 
 !!! example "Measurement Grouping Efficiency"
-```
-Consider a Hamiltonian with 20 Pauli terms:
-
-$$
-H = 0.5·Z_0 + 0.3·Z_1 + 0.2·X_0X_1 + \ldots
-$$
-
-Without grouping: 20 separate measurement bases required.
-With grouping: Terms like $Z_0, Z_1, Z_0Z_1$ commute and can be measured together in Z-basis, reducing to ~5-7 measurement bases.
-
-```
+    Consider a Hamiltonian with 20 Pauli terms:
+    
+    $$
+    H = 0.5·Z_0 + 0.3·Z_1 + 0.2·X_0X_1 + \ldots
+    $$
+    
+    Without grouping: 20 separate measurement bases required.
+    With grouping: Terms like $Z_0, Z_1, Z_0Z_1$ commute and can be measured together in Z-basis, reducing to ~5-7 measurement bases.
+    
 ---
 
 ### **Convergence Criteria**
@@ -556,10 +527,8 @@ Check_Convergence(C_current, C_previous, θ_current, θ_previous):
 ```
 
 ??? question "How many shots are needed for reliable cost function estimation?"
-```
-The required shot count depends on the desired precision. For chemical accuracy ($\sim$1 kcal/mol), typically 10³-10⁴ shots suffice for small molecules. The uncertainty scales as $1/\sqrt{N_{\text{shots}}}$, so reducing error by 10× requires 100× more shots. Adaptive shot allocation—using fewer shots early in optimization and more near convergence—can significantly reduce total quantum circuit evaluations.
-
-```
+    The required shot count depends on the desired precision. For chemical accuracy ($\sim$1 kcal/mol), typically 10³-10⁴ shots suffice for small molecules. The uncertainty scales as $1/\sqrt{N_{\text{shots}}}$, so reducing error by 10× requires 100× more shots. Adaptive shot allocation—using fewer shots early in optimization and more near convergence—can significantly reduce total quantum circuit evaluations.
+    
 ---
 
 ## Summary of Variational Algorithms

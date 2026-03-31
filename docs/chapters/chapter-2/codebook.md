@@ -1,4 +1,4 @@
-# **Chapter 2: State and Operators () () (Codebook)**
+# **Chapter 2: State and Operators (Codebook)**
 
 This codebook makes the abstract formalism of Chapter 2 concrete: quantum states as vectors, operators as matrices, and expectation values as measurable quantities. All examples use NumPy and Qiskit `quantum_info`.
 

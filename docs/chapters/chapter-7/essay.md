@@ -28,10 +28,8 @@ This chapter surveys the leading quantum software tools available today. We begi
 **Qiskit** is IBM's open-source quantum development kit and the de-facto industry standard for quantum circuit construction, simulation, and hardware execution. At its core, Qiskit provides four layers of abstraction: **Terra** (circuit building and transpilation), **Aer** (high-performance classical simulation), **Runtime** (cloud-execution service), and an expanding set of application libraries. This section focuses on the transpiler — Qiskit's most powerful and often underused component.
 
 !!! tip "Why Transpilation Matters"
-```
-Real quantum hardware only supports a sparse native gate set (e.g., `{CX, RZ, SX, X}`) and a fixed qubit-connectivity graph. The transpiler translates any logical circuit into this restricted form while minimising circuit depth and gate count — directly impacting fidelity on noisy hardware.
-
-```
+    Real quantum hardware only supports a sparse native gate set (e.g., `{CX, RZ, SX, X}`) and a fixed qubit-connectivity graph. The transpiler translates any logical circuit into this restricted form while minimising circuit depth and gate count — directly impacting fidelity on noisy hardware.
+    
 ### **The Transpiler Pipeline**
 
 ---
@@ -61,15 +59,11 @@ $$
 Higher levels invoke more expensive heuristics (like SABRE for routing) but produce shallower circuits better suited to noise-limited hardware.
 
 !!! example "GHZ Circuit Transpilation"
-```
-A 3-qubit GHZ state $|\text{GHZ}\rangle = \tfrac{1}{\sqrt{2}}(|000\rangle + |111\rangle)$ uses one Hadamard and two CNOTs logically. After transpilation to `{CX, RZ, SX, X}` at level 1, the depth becomes 6 and gate count rises to 8 due to basis decomposition — but CNOT count stays at 2, preserving entanglement structure.
-
-```
+    A 3-qubit GHZ state $|\text{GHZ}\rangle = \tfrac{1}{\sqrt{2}}(|000\rangle + |111\rangle)$ uses one Hadamard and two CNOTs logically. After transpilation to `{CX, RZ, SX, X}` at level 1, the depth becomes 6 and gate count rises to 8 due to basis decomposition — but CNOT count stays at 2, preserving entanglement structure.
+    
 ??? question "Why does CNOT count matter more than total gate count on real hardware?"
-```
-Two-qubit gates (CNOTs) have dramatically higher error rates (~1%) compared to single-qubit gates (~0.1%) on superconducting platforms. Minimising CNOT count therefore has a much larger impact on circuit fidelity than reducing single-qubit gate counts.
-
-```
+    Two-qubit gates (CNOTs) have dramatically higher error rates (~1%) compared to single-qubit gates (~0.1%) on superconducting platforms. Minimising CNOT count therefore has a much larger impact on circuit fidelity than reducing single-qubit gate counts.
+    
 ### **Pass Manager and Custom Passes**
 
 ---
@@ -90,10 +84,8 @@ optimised_qc = pm.run(my_circuit)
 Custom passes can be written by subclassing `TransformationPass` or `AnalysisPass`, enabling domain-specific optimisations such as gate fusion for variational algorithms or qubit permutation for error-mitigation protocols.
 
 !!! tip "SabreLayout for Connectivity-Aware Placement"
-```
-The SABRE (Swap-based Bidirectional heuristic search for Efficient quantum circuit Routing) algorithm finds qubit layouts that minimise SWAP insertion cost. Using `layout_method='sabre'` at optimization level 2 typically reduces SWAP overhead by 20–40% versus the default dense layout.
-
-```
+    The SABRE (Swap-based Bidirectional heuristic search for Efficient quantum circuit Routing) algorithm finds qubit layouts that minimise SWAP insertion cost. Using `layout_method='sabre'` at optimization level 2 typically reduces SWAP overhead by 20–40% versus the default dense layout.
+    
 ---
 
 ## **7.2 Cirq and TensorFlow Quantum**
@@ -127,10 +119,8 @@ $$
 $$
 
 !!! tip "Moment-Based Circuit Representation"
-```
-By explicitly encoding time steps, Cirq makes circuit scheduling transparent: two gates in the same moment execute simultaneously. This enables precise control over parallelism and is essential for advanced error-mitigation techniques that require deterministic execution schedules.
-
-```
+    By explicitly encoding time steps, Cirq makes circuit scheduling transparent: two gates in the same moment execute simultaneously. This enables precise control over parallelism and is essential for advanced error-mitigation techniques that require deterministic execution schedules.
+    
 ### **TensorFlow Quantum (TFQ)**
 
 ---
@@ -153,15 +143,11 @@ model = tf.keras.Sequential([
 ```
 
 !!! example "Hybrid Quantum-Classical Training with TFQ"
-```
-A typical TFQ workflow: classical preprocessing → feature encoding into Cirq circuit parameters → quantum expectation value computation → classical classification head. TensorFlow's autodiff handles gradients through the entire hybrid model via TFQ's parameter-shift layer.
-
-```
+    A typical TFQ workflow: classical preprocessing → feature encoding into Cirq circuit parameters → quantum expectation value computation → classical classification head. TensorFlow's autodiff handles gradients through the entire hybrid model via TFQ's parameter-shift layer.
+    
 ??? question "What is the advantage of TFQ over a standalone Cirq simulator for QML?"
-```
-TFQ batches thousands of circuit evaluations in a single GPU kernel call, making it orders of magnitude faster than sequential Cirq simulations for training variational classifiers. It also handles the gradient computation automatically within TensorFlow's computation graph.
-
-```
+    TFQ batches thousands of circuit evaluations in a single GPU kernel call, making it orders of magnitude faster than sequential Cirq simulations for training variational classifiers. It also handles the gradient computation automatically within TensorFlow's computation graph.
+    
 ---
 
 ## **7.3 PennyLane and Differentiable Programming**
@@ -204,26 +190,23 @@ $$
 This rule applies to any gate of the form $U(\theta) = e^{-i\theta G}$ where $G$ is a generator with eigenvalues $\pm 1/2$. Since the gradient is computed from two circuit evaluations (shifted by $\pm\pi/2$), it is **hardware-compatible** — no access to internal circuit states is required.
 
 !!! tip "Exact Gradients on Real Hardware"
-```
-Unlike finite-difference methods ($\nabla \approx \frac{f(\theta+\epsilon)-f(\theta)}{\epsilon}$), parameter-shift gradients are exact (up to shot noise) and require only two circuit evaluations per parameter. This makes PennyLane uniquely suited for gradient-based optimization directly on quantum hardware.
-
-```
+    Unlike finite-difference methods ($\nabla \approx \frac{f(\theta+\epsilon)-f(\theta)}{\epsilon}$), parameter-shift gradients are exact (up to shot noise) and require only two circuit evaluations per parameter. This makes PennyLane uniquely suited for gradient-based optimization directly on quantum hardware.
+    
 !!! example "VQC Gradient with PyTorch Autodiff"
-    ```python
-    import torch
-    dev = qml.device("default.qubit", wires=1)
+        ```python
+        import torch
+        dev = qml.device("default.qubit", wires=1)
+        
+        @qml.qnode(dev, interface="torch", diff_method="parameter-shift")
+        def circuit(theta):
+            qml.RY(theta, wires=0)
+            return qml.expval(qml.PauliZ(0))
+        
+        theta = torch.tensor(0.5, requires_grad=True)
+        loss = circuit(theta)
+        loss.backward()
+        print(theta.grad)  # exact gradient via parameter-shift
     
-    @qml.qnode(dev, interface="torch", diff_method="parameter-shift")
-    def circuit(theta):
-        qml.RY(theta, wires=0)
-        return qml.expval(qml.PauliZ(0))
-    
-    theta = torch.tensor(0.5, requires_grad=True)
-    loss = circuit(theta)
-    loss.backward()
-    print(theta.grad)  # exact gradient via parameter-shift
-    ```
-
 ### **Plugin Ecosystem**
 
 ---
@@ -231,10 +214,8 @@ Unlike finite-difference methods ($\nabla \approx \frac{f(\theta+\epsilon)-f(\th
 PennyLane's extensibility is enabled by a plugin architecture that wraps third-party backends as PennyLane devices. Notable plugins include `pennylane-qiskit` (IBM hardware), `pennylane-braket` (AWS backend), and `pennylane-lightning-gpu` (GPU-accelerated simulation). This write-once, run-anywhere model is PennyLane's defining advantage for algorithm development and benchmarking.
 
 ??? question "Can PennyLane be used for classical deep learning tasks?"
-```
-Yes — PennyLane circuits can be embedded as layers inside standard PyTorch or Keras models, enabling true hybrid architectures where quantum layers and classical layers share the same gradient tape. This is particularly useful for quantum transfer learning, where a pretrained classical CNN is extended with a small quantum layer.
-
-```
+    Yes — PennyLane circuits can be embedded as layers inside standard PyTorch or Keras models, enabling true hybrid architectures where quantum layers and classical layers share the same gradient tape. This is particularly useful for quantum transfer learning, where a pretrained classical CNN is extended with a small quantum layer.
+    
 ---
 
 ## **7.4 Specialised & Cloud Platforms**
@@ -273,20 +254,14 @@ Microsoft's Azure Quantum aggregates access to **IonQ** (trapped ion) and **Quan
 **Quantinuum's H2-1 processor** (32 trapped-ion qubits, all-to-all connectivity) achieves the industry's best published two-qubit gate fidelities (~99.8%), making it the preferred hardware for small-depth, high-fidelity algorithm testing [3].
 
 !!! tip "Choosing a Platform"
-```
-Use Qiskit + IBM for broad ecosystem support and abundant free cloud credits; use PennyLane when gradient-based optimisation or framework interoperability is the priority; use IonQ/Quantinuum via Braket or Azure when native high-fidelity two-qubit gates matter more than qubit count.
-
-```
+    Use Qiskit + IBM for broad ecosystem support and abundant free cloud credits; use PennyLane when gradient-based optimisation or framework interoperability is the priority; use IonQ/Quantinuum via Braket or Azure when native high-fidelity two-qubit gates matter more than qubit count.
+    
 !!! example "Cross-Platform Portability"
-```
-The same Bell-pair circuit can be run on four different backends by simply swapping device strings — `"default.qubit"` (PennyLane simulation), `"qiskit.aer"` (noise simulation), `"braket.local.qubit"` (Braket local), and `"braket.aws.qubit"` (real hardware) — with no algorithm-level code changes.
-
-```
+    The same Bell-pair circuit can be run on four different backends by simply swapping device strings — `"default.qubit"` (PennyLane simulation), `"qiskit.aer"` (noise simulation), `"braket.local.qubit"` (Braket local), and `"braket.aws.qubit"` (real hardware) — with no algorithm-level code changes.
+    
 ??? question "What is the main connectivity advantage of trapped-ion computers over superconducting chips?"
-```
-Trapped-ion qubits are connected via laser-mediated phonon interactions, giving **all-to-all connectivity** — any two qubit in the register can interact directly without SWAP routing. Superconducting chips typically have sparse nearest-neighbour graphs (e.g., IBM's heavy-hex lattice), which require additional SWAP gates for non-adjacent qubit interactions and increase effective circuit depth.
-
-```
+    Trapped-ion qubits are connected via laser-mediated phonon interactions, giving **all-to-all connectivity** — any two qubit in the register can interact directly without SWAP routing. Superconducting chips typically have sparse nearest-neighbour graphs (e.g., IBM's heavy-hex lattice), which require additional SWAP gates for non-adjacent qubit interactions and increase effective circuit depth.
+    
 ---
 
 ## **References**

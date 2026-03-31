@@ -1,4 +1,4 @@
-# **Chapter 5: Quantum Fourier Transform and Phase Estimation () () (Codebook)**
+# **Chapter 5: Quantum Fourier Transform and Phase Estimation (Codebook)**
 
 Three self-contained projects build the QFT from scratch, verify it analytically, and then use it inside Quantum Phase Estimation (QPE). All code uses Qiskit 2.x statevector and shot-based simulation.
 

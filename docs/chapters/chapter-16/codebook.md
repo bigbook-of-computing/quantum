@@ -1,4 +1,4 @@
-# **Chapter 16: Quantum Simulators vs Real Devices () () (Codebook)**
+# **Chapter 16: Quantum Simulators vs Real Devices (Codebook)**
 
 Bridging ideal simulation and hardware execution requires understanding decoherence, gate errors, and readout noise. This chapter compares ideal and noisy Aer simulations, models realistic T1/T2 noise, and applies zero-noise extrapolation (ZNE).
 

@@ -1,4 +1,4 @@
-# **Chapter 20: Quantum Error Correction () () (Codebook)**
+# **Chapter 20: Quantum Error Correction (Codebook)**
 
 Quantum error correction (QEC) encodes logical qubits in multiple physical qubits so that errors can be detected and corrected without collapsing the quantum state. This chapter implements the 3-qubit bit-flip code, the 3-qubit phase-flip code, and the 7-qubit Steane code.
 

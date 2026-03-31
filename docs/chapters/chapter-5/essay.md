@@ -26,10 +26,8 @@ The Quantum Fourier Transform (QFT) stands as one of the most powerful primitive
 The **Quantum Fourier Transform (QFT)** is an indispensable quantum primitive that plays the same role in quantum computation as the Fast Fourier Transform (FFT) does in classical signal processing, data compression, and analysis. The QFT transforms a quantum state vector from its basis representation to its frequency domain representation, enabling the extraction of periodicity and phase information.
 
 !!! tip "Intuition Boost"
-```
-Think of the QFT as a quantum "frequency analyzer"—it takes a superposition encoded in the computational basis and reveals the hidden periodic patterns by transforming it into the frequency domain, all in polynomial time instead of exponential.
-
-```
+    Think of the QFT as a quantum "frequency analyzer"—it takes a superposition encoded in the computational basis and reveals the hidden periodic patterns by transforming it into the frequency domain, all in polynomial time instead of exponential.
+    
 ### **Definition of the Quantum Fourier Transform**
 
 ---
@@ -46,16 +44,14 @@ $$
 * **Root of Unity:** The complex coefficient $W_{N}^{j k} = e^{2\pi i j k / N}$ is the $N$-th root of unity (often called the **twiddle factor** in signal processing). This complex phase factor dictates the rotation applied to each component of the superposition.
 
 !!! example "QFT on a Single Qubit"
-```
-For $n=1$ (single qubit), the QFT reduces to the Hadamard gate:
-
-$$
-\text{QFT}(|0\rangle) = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle), \quad \text{QFT}(|1\rangle) = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)
-$$
-
-This shows the QFT generalizes the familiar Hadamard transformation to higher-dimensional spaces.
-
-```
+    For $n=1$ (single qubit), the QFT reduces to the Hadamard gate:
+    
+    $$
+    \text{QFT}(|0\rangle) = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle), \quad \text{QFT}(|1\rangle) = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)
+    $$
+    
+    This shows the QFT generalizes the familiar Hadamard transformation to higher-dimensional spaces.
+    
 ### **Decomposition into Bit-wise Product**
 
 ---
@@ -86,10 +82,8 @@ QFT_Circuit(n_qubits):
 ```
 
 ??? question "Why does the QFT require a final qubit reversal?"
-```
-The natural output of the QFT circuit produces qubits in reversed order compared to the standard basis ordering. SWAP gates reorder them to match conventional notation, though this reversal can sometimes be absorbed into subsequent operations for efficiency.
-
-```
+    The natural output of the QFT circuit produces qubits in reversed order compared to the standard basis ordering. SWAP gates reorder them to match conventional notation, though this reversal can sometimes be absorbed into subsequent operations for efficiency.
+    
 ### **Exponential Speedup in Implementation**
 
 ---
@@ -128,10 +122,8 @@ graph TD
 The **Quantum Phase Estimation (QPE)** algorithm is one of the most significant quantum primitives, providing a method to estimate the unknown phase (eigenvalue) associated with a given unitary operator. QPE is the core subroutine that grants exponential speedups in structural algorithms like **Shor's factoring algorithm**.
 
 !!! tip "Key Insight"
-```
-QPE transforms the difficult problem of finding eigenvalues (which requires exponential classical resources) into a problem of measuring quantum phases—a task the QFT performs in polynomial time. This conversion is the secret behind many exponential quantum speedups.
-
-```
+    QPE transforms the difficult problem of finding eigenvalues (which requires exponential classical resources) into a problem of measuring quantum phases—a task the QFT performs in polynomial time. This conversion is the secret behind many exponential quantum speedups.
+    
 ### **Problem Statement**
 
 ---
@@ -172,43 +164,38 @@ The QPE circuit requires two quantum registers and follows a distinct four-step 
 * The first register is measured. The measurement result yields an $n$-bit binary approximation of the phase $\phi$ with high probability.
 
 !!! example "QPE Circuit Flow"
-```
-The QPE algorithm can be visualized as a four-stage pipeline:
-
-```
-Stage 1: |0⟩⊗ⁿ → H⊗ⁿ → Uniform Superposition
-Stage 2: Apply Controlled-U^(2^j) for j=0...n-1 → Phase Encoding
-Stage 3: Apply Inverse QFT → Phase Decoding
-Stage 4: Measure → n-bit approximation of φ
-```
-
-```
-Here is the complete QPE algorithm structure:
-
-```python
-QPE_Algorithm(U, ψ, n_precision_bits):
-    # Initialize registers
-    counting_reg = |0⟩⊗n
-    target_reg = |ψ⟩
+    The QPE algorithm can be visualized as a four-stage pipeline:
     
-    # Step 1: Create superposition
-    for i = 0 to n-1:
-        Apply H to counting_reg[i]
+    Stage 1: |0⟩⊗ⁿ → H⊗ⁿ → Uniform Superposition
+    Stage 2: Apply Controlled-U^(2^j) for j=0...n-1 → Phase Encoding
+    Stage 3: Apply Inverse QFT → Phase Decoding
+    Stage 4: Measure → n-bit approximation of φ
     
-    # Step 2: Controlled-Unitary operations
-    for i = 0 to n-1:
-        Apply Controlled-U^(2^i) with control=counting_reg[i], target=target_reg
+    Here is the complete QPE algorithm structure:
     
-    # Step 3: Inverse QFT
-    Apply IQFT to counting_reg
+    ```python
+    QPE_Algorithm(U, ψ, n_precision_bits):
+        # Initialize registers
+        counting_reg = |0⟩⊗n
+        target_reg = |ψ⟩
+        
+        # Step 1: Create superposition
+        for i = 0 to n-1:
+            Apply H to counting_reg[i]
+        
+        # Step 2: Controlled-Unitary operations
+        for i = 0 to n-1:
+            Apply Controlled-U^(2^i) with control=counting_reg[i], target=target_reg
+        
+        # Step 3: Inverse QFT
+        Apply IQFT to counting_reg
+        
+        # Step 4: Measurement
+        measured_value = Measure(counting_reg)
+        estimated_phase = measured_value / 2^n
+        
+        return estimated_phase
     
-    # Step 4: Measurement
-    measured_value = Measure(counting_reg)
-    estimated_phase = measured_value / 2^n
-    
-    return estimated_phase
-```
-
 ### **The Role of Phase Kickback**
 
 ---
@@ -222,10 +209,8 @@ $$
 The phase $e^{2\pi i \phi}$ is effectively "kicked back" to the control qubit, allowing the algorithm to manipulate $\phi$ without disturbing the target eigenstate $|\psi\rangle$. The controlled-$U^{2^j}$ sequence uses this kickback repeatedly to encode each binary digit of $\phi$ onto the $j$-th control qubit.
 
 ??? question "What happens if the target state is not an exact eigenstate?"
-```
-If $|\psi\rangle$ is not an exact eigenstate but a superposition of eigenstates, QPE will output one of the corresponding eigenvalues probabilistically. The measurement outcome depends on the decomposition weights, and repeating QPE multiple times can reveal the full eigenspectrum.
-
-```
+    If $|\psi\rangle$ is not an exact eigenstate but a superposition of eigenstates, QPE will output one of the corresponding eigenvalues probabilistically. The measurement outcome depends on the decomposition weights, and repeating QPE multiple times can reveal the full eigenspectrum.
+    
 ### **Efficiency and Applications**
 
 ---
@@ -247,10 +232,8 @@ The ability to extract eigenvalues efficiently is essential for several exponent
 The **Quantum Phase Estimation (QPE)** algorithm is the computational engine behind the exponential speedup achieved by **Shor's factoring algorithm**. This section explains how QPE is applied to solve the intermediate, computationally hard problem of **Order Finding**.
 
 !!! tip "Connecting QPE to Factoring"
-```
-The genius of Shor's algorithm lies in recognizing that factoring can be reduced to period finding, and period finding can be solved by QPE. This chain of reductions transforms an intractable problem into a tractable one through quantum phase estimation.
-
-```
+    The genius of Shor's algorithm lies in recognizing that factoring can be reduced to period finding, and period finding can be solved by QPE. This chain of reductions transforms an intractable problem into a tractable one through quantum phase estimation.
+    
 ### **The Order Finding Problem**
 
 ---
@@ -302,37 +285,34 @@ $$
 Thus, the goal of QPE becomes extracting this fractional phase $\phi$.
 
 !!! example "Order Finding for N=15, a=7"
-```
-For $N=15$ and $a=7$, the order is $r=4$ because $7^4 = 2401 \equiv 1 \pmod{15}$.
-
-QPE would measure phases $\phi \in \{0/4, 1/4, 2/4, 3/4\}$ depending on which eigenstate $|\psi_k\rangle$ the system collapses to. The continued fractions algorithm then extracts the common denominator $r=4$ from any non-zero measurement.
-
-```
-**Step 3: Apply QPE and Extract $r$**
-
-The QPE algorithm measures an estimate of $\phi = k/r$. Then, using the **continued fractions algorithm**, we extract the denominator $r$ from the estimated $\phi$ with high probability.
-
-```python
-Order_Finding(N, a):
-    # Choose precision
-    n = 2 * ceil(log₂(N)) + 1
+    For $N=15$ and $a=7$, the order is $r=4$ because $7^4 = 2401 \equiv 1 \pmod{15}$.
     
-    # Prepare eigenstate (or uniform superposition approximation)
-    ψ = Prepare_Eigenstate_Approximation(a, N)
+    QPE would measure phases $\phi \in \{0/4, 1/4, 2/4, 3/4\}$ depending on which eigenstate $|\psi_k\rangle$ the system collapses to. The continued fractions algorithm then extracts the common denominator $r=4$ from any non-zero measurement.
     
-    # Apply QPE to extract phase φ = k/r
-    φ_estimate = QPE(U_modular_exp, ψ, n)
+    **Step 3: Apply QPE and Extract $r$**
     
-    # Extract denominator r using continued fractions
-    r = Continued_Fractions(φ_estimate)
+    The QPE algorithm measures an estimate of $\phi = k/r$. Then, using the **continued fractions algorithm**, we extract the denominator $r$ from the estimated $\phi$ with high probability.
     
-    # Verify that a^r ≡ 1 (mod N)
-    if Power_Mod(a, r, N) == 1:
-        return r
-    else:
-        retry with different eigenstate
-```
-
+    ```python
+    Order_Finding(N, a):
+        # Choose precision
+        n = 2 * ceil(log₂(N)) + 1
+        
+        # Prepare eigenstate (or uniform superposition approximation)
+        ψ = Prepare_Eigenstate_Approximation(a, N)
+        
+        # Apply QPE to extract phase φ = k/r
+        φ_estimate = QPE(U_modular_exp, ψ, n)
+        
+        # Extract denominator r using continued fractions
+        r = Continued_Fractions(φ_estimate)
+        
+        # Verify that a^r ≡ 1 (mod N)
+        if Power_Mod(a, r, N) == 1:
+            return r
+        else:
+            retry with different eigenstate
+    
 ### **The Factoring Process**
 
 ---
@@ -368,12 +348,10 @@ flowchart TD
 ```
 
 ??? question "Why might the algorithm need to retry?"
-```
-QPE might measure a phase corresponding to $k=0$ (yielding no information), or the order $r$ might be odd, or $a^{r/2} \equiv -1 \pmod{N}$. In these cases, we simply choose a different random $a$ and retry. Statistically, success occurs with high probability after a few attempts.
-
-```
-In summary, **QPE reduces factoring to period finding**, which is efficient on a quantum computer. The **quantum speedup** lies in this core exponential advantage over classical algorithms [3, 4].
-
+    QPE might measure a phase corresponding to $k=0$ (yielding no information), or the order $r$ might be odd, or $a^{r/2} \equiv -1 \pmod{N}$. In these cases, we simply choose a different random $a$ and retry. Statistically, success occurs with high probability after a few attempts.
+    
+    In summary, **QPE reduces factoring to period finding**, which is efficient on a quantum computer. The **quantum speedup** lies in this core exponential advantage over classical algorithms [3, 4].
+    
 ---
 
 ## **5.4 Phase Kickback and QFT-based Algorithms**
@@ -383,10 +361,8 @@ In summary, **QPE reduces factoring to period finding**, which is efficient on a
 The technique of **Phase Kickback** is a subtle but foundational quantum mechanical trick that enables the efficient extraction of phase information, making it indispensable for QPE and all related QFT-based algorithms.
 
 !!! tip "The Hidden Trick"
-```
-Phase kickback exploits the eigenstructure of controlled operations to transfer phase information from the target register to the control qubit—a quantum-mechanical sleight of hand that makes eigenvalue estimation possible without directly measuring the target state [5].
-
-```
+    Phase kickback exploits the eigenstructure of controlled operations to transfer phase information from the target register to the control qubit—a quantum-mechanical sleight of hand that makes eigenvalue estimation possible without directly measuring the target state [5].
+    
 ### **The Mechanism of Phase Kickback**
 
 ---
@@ -425,14 +401,12 @@ Phase kickback is the essential step in **Quantum Phase Estimation (QPE)** (Sect
 Without phase kickback, the phase information would remain trapped in the target register, unable to be accessed or measured directly by the final computational basis measurement.
 
 !!! example "Phase Kickback in Action"
-```
-Consider a controlled-$Z$ gate acting on $|+\rangle \otimes |1\rangle$:
-$$
-C-Z: \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |1\rangle \rightarrow \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) \otimes |1\rangle
-$$
-The phase $e^{i\pi} = -1$ kicked back to the control qubit, transforming $|+\rangle$ into $|-\rangle$ while leaving the target state $|1\rangle$ unchanged.
-
-```
+    Consider a controlled-$Z$ gate acting on $|+\rangle \otimes |1\rangle$:
+    $$
+    C-Z: \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |1\rangle \rightarrow \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle) \otimes |1\rangle
+    $$
+    The phase $e^{i\pi} = -1$ kicked back to the control qubit, transforming $|+\rangle$ into $|-\rangle$ while leaving the target state $|1\rangle$ unchanged.
+    
 ---
 
 ### **QFT-based Algorithms**
@@ -473,10 +447,8 @@ QFT_Based_Workflow():
 ```
 
 ??? question "What happens if the target state is not an eigenstate?"
-```
-If the target state $|\psi\rangle$ is not an eigenstate of $U$, it can be expressed as a superposition of eigenstates: $|\psi\rangle = \sum_k c_k |\psi_k\rangle$. The phase kickback mechanism still works, but QPE will measure one of the eigenphases $\phi_k$ probabilistically with probability $|c_k|^2$. This is actually exploited in applications where we want to sample from the eigenspectrum [6].
-
-```
+    If the target state $|\psi\rangle$ is not an eigenstate of $U$, it can be expressed as a superposition of eigenstates: $|\psi\rangle = \sum_k c_k |\psi_k\rangle$. The phase kickback mechanism still works, but QPE will measure one of the eigenphases $\phi_k$ probabilistically with probability $|c_k|^2$. This is actually exploited in applications where we want to sample from the eigenspectrum [6].
+    
 ---
 
 ## Comparison and Analysis of Quantum Fourier Transform Applications

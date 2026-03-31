@@ -1,4 +1,4 @@
-# **Chapter 8: Quantum Machine Learning Foundations () () (Workbook)**
+# **Chapter 8: Quantum Machine Learning Foundations (Workbook)**
 
 ---
 
@@ -114,41 +114,37 @@ Solving: $K(\mathbf{x}, \mathbf{x}') = 2 \cdot \text{Prob}(|0\rangle_{\text{anc}
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. What is the dimension of an $n$-qubit Hilbert space?**
-
-- A. $n$  
-- B. $n^2$  
-- C. $2^n$  
-- D. $\log n$  
-
-**2. What does amplitude encoding require?**
-
-- A. Unnormalized amplitudes  
-- B. Normalized amplitudes with $\sum_k |c_k|^2=1$  
-- C. Only real amplitudes  
-- D. Exactly sparse vectors  
-
+    **1. What is the dimension of an $n$-qubit Hilbert space?**
+    
+    - A. $n$  
+    - B. $n^2$  
+    - C. $2^n$  
+    - D. $\log n$  
+    
+    **2. What does amplitude encoding require?**
+    
+    - A. Unnormalized amplitudes  
+    - B. Normalized amplitudes with $\sum_k |c_k|^2=1$  
+    - C. Only real amplitudes  
+    - D. Exactly sparse vectors  
+    
 ??? info "See Answer"
-    **1: C** — $\dim\mathcal{H}=2^n$.  
-    **2: B** — Quantum states must be normalized to unit length.
-
-```
+        **1: C** — $\dim\mathcal{H}=2^n$.  
+        **2: B** — Quantum states must be normalized to unit length.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Explain how quantum feature maps can alleviate the curse of dimensionality, and name a practical caveat in the NISQ era.
-
-???+ info "Answer Strategy"
-    A quantum feature map $\Phi: \mathbb{R}^d \to \mathcal{H}$ embeds classical data into a $2^n$-dimensional Hilbert space using just $n$ qubits.
-
-    1.  **Exponential Feature Space:** This mapping allows access to an exponentially large feature space ($2^n$ dimensions) with linear resources ($n$ qubits), theoretically mitigating the classical "curse of dimensionality" where resources scale with dimension $d$.
-    2.  **Implicit Computation:** The features, often complex polynomials and trigonometric functions of the input data, are created implicitly through quantum interference without needing classical computation.
-    3.  **NISQ-Era Caveat:** The primary caveat is the **data loading bottleneck**. Creating the quantum state that encodes the classical data often requires a number of operations that scales with the size of the data, which can erase the quantum advantage. Additionally, noise on NISQ devices limits the depth of feature maps, restricting their practical expressiveness.
-
-```
+    
+    **Q:** Explain how quantum feature maps can alleviate the curse of dimensionality, and name a practical caveat in the NISQ era.
+    
+    ???+ info "Answer Strategy"
+        A quantum feature map $\Phi: \mathbb{R}^d \to \mathcal{H}$ embeds classical data into a $2^n$-dimensional Hilbert space using just $n$ qubits.
+    
+        1.  **Exponential Feature Space:** This mapping allows access to an exponentially large feature space ($2^n$ dimensions) with linear resources ($n$ qubits), theoretically mitigating the classical "curse of dimensionality" where resources scale with dimension $d$.
+        2.  **Implicit Computation:** The features, often complex polynomials and trigonometric functions of the input data, are created implicitly through quantum interference without needing classical computation.
+        3.  **NISQ-Era Caveat:** The primary caveat is the **data loading bottleneck**. Creating the quantum state that encodes the classical data often requires a number of operations that scales with the size of the data, which can erase the quantum advantage. Additionally, noise on NISQ devices limits the depth of feature maps, restricting their practical expressiveness.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**
@@ -351,40 +347,36 @@ flowchart LR
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which resource grants non-classical correlations in QML models?**
-
-- A. Dropout  
-- B. Entanglement  
-- C. Weight decay  
-- D. Batch norm  
-
-**2. Why are hybrid loops prevalent on NISQ devices?**
-
-- A. Unlimited coherence  
-- B. Deep circuits are error-free  
-- C. Quantum is used for feature mapping while classical optimizes  
-- D. Measurements are unnecessary  
-
+    **1. Which resource grants non-classical correlations in QML models?**
+    
+    - A. Dropout  
+    - B. Entanglement  
+    - C. Weight decay  
+    - D. Batch norm  
+    
+    **2. Why are hybrid loops prevalent on NISQ devices?**
+    
+    - A. Unlimited coherence  
+    - B. Deep circuits are error-free  
+    - C. Quantum is used for feature mapping while classical optimizes  
+    - D. Measurements are unnecessary  
+    
 ??? info "See Answer"
-    **1: B** — Entanglement enables correlations absent from classical models.  
-    **2: C** — Hybrid training mitigates noise while leveraging quantum expressivity.
-
-```
+        **1: B** — Entanglement enables correlations absent from classical models.  
+        **2: C** — Hybrid training mitigates noise while leveraging quantum expressivity.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Describe the roles of $\mathbf{U}_\Phi(\mathbf{x})$ and $\mathbf{U}(\mathbf{\theta})$ in a hybrid classifier.
-
-???+ info "Answer Strategy"
-    In a hybrid classifier, the two unitaries have distinct roles:
-
-    1.  **$U_\Phi(\mathbf{x})$ (Feature Map):** This is a **fixed** circuit that **encodes** the classical input data $\mathbf{x}$ into a quantum state. It acts as the quantum equivalent of feature engineering, mapping the data into a high-dimensional Hilbert space.
-    2.  **$U(\mathbf{\theta})$ (Variational Ansatz):** This is a **trainable** circuit with parameters $\mathbf{\theta}$. It processes the encoded state, and its parameters are optimized by a classical computer to learn the classification task. It is analogous to the hidden layers of a classical neural network.
-
-```
+    
+    **Q:** Describe the roles of $\mathbf{U}_\Phi(\mathbf{x})$ and $\mathbf{U}(\mathbf{\theta})$ in a hybrid classifier.
+    
+    ???+ info "Answer Strategy"
+        In a hybrid classifier, the two unitaries have distinct roles:
+    
+        1.  **$U_\Phi(\mathbf{x})$ (Feature Map):** This is a **fixed** circuit that **encodes** the classical input data $\mathbf{x}$ into a quantum state. It acts as the quantum equivalent of feature engineering, mapping the data into a high-dimensional Hilbert space.
+        2.  **$U(\mathbf{\theta})$ (Variational Ansatz):** This is a **trainable** circuit with parameters $\mathbf{\theta}$. It processes the encoded state, and its parameters are optimized by a classical computer to learn the classification task. It is analogous to the hidden layers of a classical neural network.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**
@@ -576,42 +568,38 @@ gates (Solovay-Kitaev). For structured problems, polynomial $L$ may suffice.
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. HHL primarily accelerates which task?**
-
-- A. Sorting  
-- B. Linear system solving  
-- C. Graph traversal  
-- D. Hashing  
-
-**2. Quantum kernels rely on what key ingredient?**
-
-- A. Low-dimensional embeddings  
-- B. Entangled, high-dimensional feature states  
-- C. Classical Fourier features  
-- D. Dropout  
-
+    **1. HHL primarily accelerates which task?**
+    
+    - A. Sorting  
+    - B. Linear system solving  
+    - C. Graph traversal  
+    - D. Hashing  
+    
+    **2. Quantum kernels rely on what key ingredient?**
+    
+    - A. Low-dimensional embeddings  
+    - B. Entangled, high-dimensional feature states  
+    - C. Classical Fourier features  
+    - D. Dropout  
+    
 ??? info "See Answer"
-    **1: B** — HHL addresses $\mathbf{A}\mathbf{x}=\mathbf{b}$.  
-    **2: B** — Kernels arise from overlaps of high-dimensional quantum states.
-
-```
+        **1: B** — HHL addresses $\mathbf{A}\mathbf{x}=\mathbf{b}$.  
+        **2: B** — Kernels arise from overlaps of high-dimensional quantum states.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Contrast provable speedups (HHL, qPCA) with heuristic advantages (VQCs, kernels) in QML deployment.
-
-???+ info "Answer Strategy"
-    There are two main types of quantum advantage claims:
-
-    1.  **Provable Speedups (e.g., HHL):** These algorithms offer a theoretically guaranteed, often exponential, speedup over the best-known classical algorithms for specific tasks like solving linear systems. However, they typically rely on unavailable hardware (like qRAM) and oracles, making them impractical for near-term deployment.
-    2.  **Heuristic Advantages (e.g., VQCs, Quantum Kernels):** These methods leverage the unique properties of quantum mechanics, like high-dimensional Hilbert spaces and entanglement, to create powerful models. There is no formal proof of a speedup, and their performance is problem-dependent. They are compatible with today's noisy, intermediate-scale quantum (NISQ) devices but face challenges like trainability and noise.
-
-    In summary, provable speedups are a long-term goal requiring fault-tolerant quantum computers, while heuristic methods are the focus of current research for finding practical applications on NISQ hardware.
-
-```
+    
+    **Q:** Contrast provable speedups (HHL, qPCA) with heuristic advantages (VQCs, kernels) in QML deployment.
+    
+    ???+ info "Answer Strategy"
+        There are two main types of quantum advantage claims:
+    
+        1.  **Provable Speedups (e.g., HHL):** These algorithms offer a theoretically guaranteed, often exponential, speedup over the best-known classical algorithms for specific tasks like solving linear systems. However, they typically rely on unavailable hardware (like qRAM) and oracles, making them impractical for near-term deployment.
+        2.  **Heuristic Advantages (e.g., VQCs, Quantum Kernels):** These methods leverage the unique properties of quantum mechanics, like high-dimensional Hilbert spaces and entanglement, to create powerful models. There is no formal proof of a speedup, and their performance is problem-dependent. They are compatible with today's noisy, intermediate-scale quantum (NISQ) devices but face challenges like trainability and noise.
+    
+        In summary, provable speedups are a long-term goal requiring fault-tolerant quantum computers, while heuristic methods are the focus of current research for finding practical applications on NISQ hardware.
+    
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**
@@ -838,130 +826,126 @@ With $N$ data points:
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. How many qubits are needed to encode $N$ amplitudes (power of two)?**
-
-- A. $N$  
-- B. $\sqrt{N}$  
-- C. $\log_2 N$  
-- D. $\ln N$  
-
-**2. What reduces the variance of expectation estimates?**
-
-- A. Fewer shots  
-- B. More shots and commuting-term grouping  
-- C. Ignoring noise  
-- D. Deeper ansatz  
-
+    **1. How many qubits are needed to encode $N$ amplitudes (power of two)?**
+    
+    - A. $N$  
+    - B. $\sqrt{N}$  
+    - C. $\log_2 N$  
+    - D. $\ln N$  
+    
+    **2. What reduces the variance of expectation estimates?**
+    
+    - A. Fewer shots  
+    - B. More shots and commuting-term grouping  
+    - C. Ignoring noise  
+    - D. Deeper ansatz  
+    
 ??? info "See Answer"
-    **1: C** — $n=\lceil\log_2 N\rceil$ qubits suffice.  
-    **2: B** — Shot count and grouped measurements lower estimator variance.
-
-```
+        **1: C** — $n=\lceil\log_2 N\rceil$ qubits suffice.  
+        **2: B** — Shot count and grouped measurements lower estimator variance.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Explain why $\Theta(N)$ state preparation can erase HHL's asymptotic advantage if the dataset is classical.
-
-???+ info "Answer Strategy"
-    **HHL's Promised Speedup:**  
-    The Harrow-Hassidim-Lloyd (HHL) algorithm solves linear systems $A\mathbf{x} = \mathbf{b}$ with quantum complexity $O(\log(N) s^2 \kappa^2 / \epsilon)$ versus classical $O(N s \kappa \log(1/\epsilon))$ (conjugate gradient)—an **exponential speedup**: $O(\log N)$ quantum vs $O(N)$ classical.
     
-    However, this comparison **hides a critical bottleneck**: quantum state preparation.
-
-    **The State Preparation Problem:**  
-    HHL requires encoding classical vector $\mathbf{b} \in \mathbb{R}^N$ as a quantum state:
+    **Q:** Explain why $\Theta(N)$ state preparation can erase HHL's asymptotic advantage if the dataset is classical.
     
-    $$
-    |b\rangle = \frac{1}{\|\mathbf{b}\|} \sum_{i=1}^N b_i |i\rangle
-    $$
+    ???+ info "Answer Strategy"
+        **HHL's Promised Speedup:**  
+        The Harrow-Hassidim-Lloyd (HHL) algorithm solves linear systems $A\mathbf{x} = \mathbf{b}$ with quantum complexity $O(\log(N) s^2 \kappa^2 / \epsilon)$ versus classical $O(N s \kappa \log(1/\epsilon))$ (conjugate gradient)—an **exponential speedup**: $O(\log N)$ quantum vs $O(N)$ classical.
+        
+        However, this comparison **hides a critical bottleneck**: quantum state preparation.
     
-    **Key Challenge**: Creating arbitrary quantum state $|b\rangle$ from classical data $\mathbf{b}$ requires:
+        **The State Preparation Problem:**  
+        HHL requires encoding classical vector $\mathbf{b} \in \mathbb{R}^N$ as a quantum state:
+        
+        $$
+        |b\rangle = \frac{1}{\|\mathbf{b}\|} \sum_{i=1}^N b_i |i\rangle
+        $$
+        
+        **Key Challenge**: Creating arbitrary quantum state $|b\rangle$ from classical data $\mathbf{b}$ requires:
+        
+        1. **Reading the data**: Access all $N$ components $b_1, \ldots, b_N$ → $\Theta(N)$ classical operations  
+        2. **Gate complexity**: For generic $|b\rangle$, requires $\Theta(N)$ gates (no known efficient circuit)  
+        3. **Information-theoretic bound**: $N$-dimensional vector contains $N$ real numbers; must read all values at least once → $\Omega(N)$ time
+        
+        **Total Runtime**: $T_{\text{total}} = T_{\text{prep}} + T_{\text{HHL}} = \Theta(N) + O(\log N) = \Theta(N)$  
+        The $O(\log N)$ quantum solver is **dominated** by $\Theta(N)$ classical preprocessing—**the exponential speedup vanishes**!
     
-    1. **Reading the data**: Access all $N$ components $b_1, \ldots, b_N$ → $\Theta(N)$ classical operations  
-    2. **Gate complexity**: For generic $|b\rangle$, requires $\Theta(N)$ gates (no known efficient circuit)  
-    3. **Information-theoretic bound**: $N$-dimensional vector contains $N$ real numbers; must read all values at least once → $\Omega(N)$ time
+        **The qRAM Assumption:**  
+        HHL complexity analyses assume a **quantum random access memory (qRAM)** oracle that loads data in $O(\log N)$ depth:
+        
+        $$
+        U_{\text{qRAM}} |i\rangle |0\rangle = |i\rangle |b_i\rangle
+        $$
+        
+        **Problem**: qRAM doesn't exist!
+        - Requires $\Theta(N)$ quantum memory cells with active error correction  
+        - Proposed architectures (bucket-brigade) have polynomial overhead  
+        - No experimental demonstration beyond toy systems ($N < 10$)  
+        - Even with qRAM, loading classical data into qRAM takes $\Theta(N)$ operations—negating speedup
     
-    **Total Runtime**: $T_{\text{total}} = T_{\text{prep}} + T_{\text{HHL}} = \Theta(N) + O(\log N) = \Theta(N)$  
-    The $O(\log N)$ quantum solver is **dominated** by $\Theta(N)$ classical preprocessing—**the exponential speedup vanishes**!
-
-    **The qRAM Assumption:**  
-    HHL complexity analyses assume a **quantum random access memory (qRAM)** oracle that loads data in $O(\log N)$ depth:
+        **When Does HHL Actually Help?**  
+        
+        **1. Quantum-Native Data:**  
+        Input state $|b\rangle$ is **already quantum**—no classical loading needed:
+        - **Quantum simulation**: $|b\rangle$ is molecular wavefunction  
+        - **Quantum sensors**: $|b\rangle$ from measurement apparatus  
+        - **Prior quantum algorithm**: $|b\rangle$ output of previous subroutine
+        
+        **Example**: Quantum chemistry pipeline produces $|b\rangle$ → HHL solves linear response → output $|x\rangle$ used for property calculation. **No classical data loading**!
+        
+        **2. Query Complexity Model:**  
+        If analyzing **query complexity** (oracle calls to $A$, $\mathbf{b}$) rather than wall-clock time:
+        - Classical CG: $O(N \kappa)$ queries  
+        - Quantum HHL: $O(\kappa^2 \log N)$ queries—exponential reduction meaningful if querying $A$ is expensive and we only need quantum output $|x\rangle$
+        
+        **3. Structured State Preparation:**  
+        Some vectors have efficient circuits:
+        - **Discretized functions**: $b_i = f(x_i)$ for simple $f$ → $O(\text{poly}(\log N))$ via quantum arithmetic  
+        - **Sparse vectors**: $\|\mathbf{b}\|_0 = k \ll N$ → prepare in $O(k \log N)$ time  
+        - **Example**: $b_i = \sin(i\pi/N)$ prepared in $O(\log^2 N)$ depth via quantum Fourier synthesis
     
-    $$
-    U_{\text{qRAM}} |i\rangle |0\rangle = |i\rangle |b_i\rangle
-    $$
+        **The Matrix Encoding Problem:**  
+        HHL also requires **block-encoding of $A$** as unitary $U_A$. For general dense matrix:
+        - **Generic encoding**: $O(N^2)$ gates (reading all entries)—erases advantage  
+        - **Sparse matrices**: $O(s \text{poly}(\log N))$ where $s$ = row sparsity  
+        - **Special structure**: Hamiltonians, Toeplitz matrices have efficient encodings
     
-    **Problem**: qRAM doesn't exist!
-    - Requires $\Theta(N)$ quantum memory cells with active error correction  
-    - Proposed architectures (bucket-brigade) have polynomial overhead  
-    - No experimental demonstration beyond toy systems ($N < 10$)  
-    - Even with qRAM, loading classical data into qRAM takes $\Theta(N)$ operations—negating speedup
-
-    **When Does HHL Actually Help?**  
+        **Fair Comparison with Classical:**  
+        
+        | **Algorithm** | **Data Load** | **Solver** | **Output** | **Total** |
+        |--------------|--------------|------------|------------|-----------|
+        | **Classical CG** | $\Theta(N)$ | $O(N\kappa)$ | $\Theta(N)$ | $O(N\kappa)$ |
+        | **HHL** | $\Theta(N)$ | $O(\kappa^2 \log N)$ | $\Theta(N)$ | $\Theta(N)$ |
+        
+        HHL's $O(\log N)$ solver is **asymptotically negligible** compared to $\Theta(N)$ data I/O.
     
-    **1. Quantum-Native Data:**  
-    Input state $|b\rangle$ is **already quantum**—no classical loading needed:
-    - **Quantum simulation**: $|b\rangle$ is molecular wavefunction  
-    - **Quantum sensors**: $|b\rangle$ from measurement apparatus  
-    - **Prior quantum algorithm**: $|b\rangle$ output of previous subroutine
+        **Output Readout Problem:**  
+        HHL produces quantum state $|x\rangle$. Extracting classical solution $\mathbf{x}$ requires:
+        - **Full tomography**: $\Theta(N)$ measurements (exponential in qubits)  
+        - **Expectation values**: Compute $\langle x | O | x \rangle$—useful only if downstream task is quantum
+        
+        **Classical output** destroys the advantage.
     
-    **Example**: Quantum chemistry pipeline produces $|b\rangle$ → HHL solves linear response → output $|x\rangle$ used for property calculation. **No classical data loading**!
+        **Dequantization Results:**  
+        Recent work (Ewin Tang, 2018+) shows classical algorithms match HHL's performance via:
+        - Low-rank sampling instead of exact solutions  
+        - Randomized linear algebra (sketching, random projections)  
+        - Result: Classical $O(\text{poly}(\log N))$ **query complexity** for sampling—matching HHL without quantum hardware!
     
-    **2. Query Complexity Model:**  
-    If analyzing **query complexity** (oracle calls to $A$, $\mathbf{b}$) rather than wall-clock time:
-    - Classical CG: $O(N \kappa)$ queries  
-    - Quantum HHL: $O(\kappa^2 \log N)$ queries—exponential reduction meaningful if querying $A$ is expensive and we only need quantum output $|x\rangle$
+        **Practical Implications:**  
+        - **For classical ML data** (images, text): HHL **not useful**—state preparation dominates; classical solvers faster  
+        - **For quantum-native applications** (chemistry, materials): HHL helps if $|b\rangle$ from quantum simulation, $A$ has efficient encoding, output $|x\rangle$ used in quantum expectations—**only regime with genuine speedup**
     
-    **3. Structured State Preparation:**  
-    Some vectors have efficient circuits:
-    - **Discretized functions**: $b_i = f(x_i)$ for simple $f$ → $O(\text{poly}(\log N))$ via quantum arithmetic  
-    - **Sparse vectors**: $\|\mathbf{b}\|_0 = k \ll N$ → prepare in $O(k \log N)$ time  
-    - **Example**: $b_i = \sin(i\pi/N)$ prepared in $O(\log^2 N)$ depth via quantum Fourier synthesis
-
-    **The Matrix Encoding Problem:**  
-    HHL also requires **block-encoding of $A$** as unitary $U_A$. For general dense matrix:
-    - **Generic encoding**: $O(N^2)$ gates (reading all entries)—erases advantage  
-    - **Sparse matrices**: $O(s \text{poly}(\log N))$ where $s$ = row sparsity  
-    - **Special structure**: Hamiltonians, Toeplitz matrices have efficient encodings
-
-    **Fair Comparison with Classical:**  
+        **Connection to Quantum Advantage:**  
+        The $\Theta(N)$ state preparation bottleneck is a **fundamental barrier** for classical datasets. Quantum advantage in ML requires:
+        1. Quantum-to-quantum workflows (no classical I/O)  
+        2. Efficient encodings (problem structure provides $O(\text{poly}(\log N))$ state prep)  
+        3. Quantum output (downstream tasks use $|x\rangle$ directly)
+        
+        HHL remains a theoretical benchmark, not a practical tool for classical data. Path to advantage lies in **domain-specific applications** where quantum encoding is natural.
     
-    | **Algorithm** | **Data Load** | **Solver** | **Output** | **Total** |
-    |--------------|--------------|------------|------------|-----------|
-    | **Classical CG** | $\Theta(N)$ | $O(N\kappa)$ | $\Theta(N)$ | $O(N\kappa)$ |
-    | **HHL** | $\Theta(N)$ | $O(\kappa^2 \log N)$ | $\Theta(N)$ | $\Theta(N)$ |
-    
-    HHL's $O(\log N)$ solver is **asymptotically negligible** compared to $\Theta(N)$ data I/O.
-
-    **Output Readout Problem:**  
-    HHL produces quantum state $|x\rangle$. Extracting classical solution $\mathbf{x}$ requires:
-    - **Full tomography**: $\Theta(N)$ measurements (exponential in qubits)  
-    - **Expectation values**: Compute $\langle x | O | x \rangle$—useful only if downstream task is quantum
-    
-    **Classical output** destroys the advantage.
-
-    **Dequantization Results:**  
-    Recent work (Ewin Tang, 2018+) shows classical algorithms match HHL's performance via:
-    - Low-rank sampling instead of exact solutions  
-    - Randomized linear algebra (sketching, random projections)  
-    - Result: Classical $O(\text{poly}(\log N))$ **query complexity** for sampling—matching HHL without quantum hardware!
-
-    **Practical Implications:**  
-    - **For classical ML data** (images, text): HHL **not useful**—state preparation dominates; classical solvers faster  
-    - **For quantum-native applications** (chemistry, materials): HHL helps if $|b\rangle$ from quantum simulation, $A$ has efficient encoding, output $|x\rangle$ used in quantum expectations—**only regime with genuine speedup**
-
-    **Connection to Quantum Advantage:**  
-    The $\Theta(N)$ state preparation bottleneck is a **fundamental barrier** for classical datasets. Quantum advantage in ML requires:
-    1. Quantum-to-quantum workflows (no classical I/O)  
-    2. Efficient encodings (problem structure provides $O(\text{poly}(\log N))$ state prep)  
-    3. Quantum output (downstream tasks use $|x\rangle$ directly)
-    
-    HHL remains a theoretical benchmark, not a practical tool for classical data. Path to advantage lies in **domain-specific applications** where quantum encoding is natural.
-
-```
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
 
 #### **Project Blueprint**

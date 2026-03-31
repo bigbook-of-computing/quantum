@@ -1,4 +1,4 @@
-# **Chapter 4: Foundational Quantum Algorithms () () (Workbook)**
+# **Chapter 4: Foundational Quantum Algorithms (Workbook)**
 
 ---
 
@@ -45,52 +45,48 @@ If $f$ is constant, $\alpha_{0^n}=\pm1$ and all others vanish; if balanced, $\al
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. How many oracle calls does Deutsch–Jozsa need?**
-
-- A. Two  
-- B. One  
-- C. $n$  
-- D. $2^{n-1}+1$  
-
+    **1. How many oracle calls does Deutsch–Jozsa need?**
+    
+    - A. Two  
+    - B. One  
+    - C. $n$  
+    - D. $2^{n-1}+1$  
+    
 ??? info "See Answer"
-    **Correct: B.** A single query suffices under the promise.
-
-**2. Measuring $|0\rangle^{\otimes n}$ indicates what?**
-
-- A. Balanced  
-- B. Constant  
-- C. Random  
-- D. Periodic  
-
+        **Correct: B.** A single query suffices under the promise.
+    
+    **2. Measuring $|0\rangle^{\otimes n}$ indicates what?**
+    
+    - A. Balanced  
+    - B. Constant  
+    - C. Random  
+    - D. Periodic  
+    
 ??? info "See Answer"
-    **Correct: B.** Only constant functions yield the all-zeros outcome deterministically.
-
-```
+        **Correct: B.** Only constant functions yield the all-zeros outcome deterministically.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why is the ancilla prepared in $|1\rangle$ and then Hadamarded to $|{-}\rangle$?
-
-???+ info "Answer Strategy"
-    **Phase Kickback Mechanism:**  
-    Ancilla $|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$ enables phase kickback. For oracle $U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle$:
     
-    $$
-    U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle
-    $$
+    **Q:** Why is the ancilla prepared in $|1\rangle$ and then Hadamarded to $|{-}\rangle$?
     
-    Function value becomes global phase on control register, leaving ancilla unentangled and factorizable.
+    ???+ info "Answer Strategy"
+        **Phase Kickback Mechanism:**  
+        Ancilla $|-\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$ enables phase kickback. For oracle $U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle$:
+        
+        $$
+        U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle
+        $$
+        
+        Function value becomes global phase on control register, leaving ancilla unentangled and factorizable.
+        
+        **Quantum Interference:**  
+        Phases $(-1)^{f(x)}$ imprinted on $|x\rangle$ interfere under final Hadamards: $H^{\otimes n}\sum_x (-1)^{f(x)}|x\rangle = \sum_y \alpha_y |y\rangle$ where $\alpha_y = 2^{-n/2}\sum_x (-1)^{f(x)+x \cdot y}$. Distinguishes constant vs balanced (Deutsch-Jozsa) or reveals hidden string (Bernstein-Vazirani).
+        
+        **Alternatives Fail:**  
+        $|0\rangle$ ancilla entangles: $U_f|x,0\rangle = |x,f(x)\rangle$, destroying interference. Only antisymmetric $|-\rangle$ converts XOR to phase.
     
-    **Quantum Interference:**  
-    Phases $(-1)^{f(x)}$ imprinted on $|x\rangle$ interfere under final Hadamards: $H^{\otimes n}\sum_x (-1)^{f(x)}|x\rangle = \sum_y \alpha_y |y\rangle$ where $\alpha_y = 2^{-n/2}\sum_x (-1)^{f(x)+x \cdot y}$. Distinguishes constant vs balanced (Deutsch-Jozsa) or reveals hidden string (Bernstein-Vazirani).
-    
-    **Alternatives Fail:**  
-    $|0\rangle$ ancilla entangles: $U_f|x,0\rangle = |x,f(x)\rangle$, destroying interference. Only antisymmetric $|-\rangle$ converts XOR to phase.
-
-```
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -202,52 +198,48 @@ Measuring the data register yields $s$ with certainty.
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. What operation defines $f_s(x)$?**
-
-- A. Integer product  
-- B. Real dot product  
-- C. Bitwise dot product mod 2  
-- D. Convolution  
-
+    **1. What operation defines $f_s(x)$?**
+    
+    - A. Integer product  
+    - B. Real dot product  
+    - C. Bitwise dot product mod 2  
+    - D. Convolution  
+    
 ??? info "See Answer"
-    **Correct: C.** $f_s(x)=\sum_i s_ix_i\;\bmod\;2$.
-
-**2. How many oracle calls to recover $s$?**
-
-- A. $n$  
-- B. 2  
-- C. 1  
-- D. $\Theta(\log n)$  
-
+        **Correct: C.** $f_s(x)=\sum_i s_ix_i\;\bmod\;2$.
+    
+    **2. How many oracle calls to recover $s$?**
+    
+    - A. $n$  
+    - B. 2  
+    - C. 1  
+    - D. $\Theta(\log n)$  
+    
 ??? info "See Answer"
-    **Correct: C.** A single query suffices.
-
-```
+        **Correct: C.** A single query suffices.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why is the ancilla fixed in $|{-}\rangle$ rather than $|0\rangle$?
-
-???+ info "Answer Strategy"
-    **Phase Kickback Requirement:**  
-    To extract hidden string $s$ from $f_s(x) = s \cdot x \pmod{2}$ in one query, convert function output to phase:
     
-    $$
-    U_f|x\rangle|{-}\rangle = (-1)^{s \cdot x}|x\rangle|{-}\rangle
-    $$
+    **Q:** Why is the ancilla fixed in $|{-}\rangle$ rather than $|0\rangle$?
     
-    Ancilla factors out—state remains separable $(\text{phase})|x\rangle \otimes |{-}\rangle$ rather than entangled.
+    ???+ info "Answer Strategy"
+        **Phase Kickback Requirement:**  
+        To extract hidden string $s$ from $f_s(x) = s \cdot x \pmod{2}$ in one query, convert function output to phase:
+        
+        $$
+        U_f|x\rangle|{-}\rangle = (-1)^{s \cdot x}|x\rangle|{-}\rangle
+        $$
+        
+        Ancilla factors out—state remains separable $(\text{phase})|x\rangle \otimes |{-}\rangle$ rather than entangled.
+        
+        **Hadamard Decoding:**  
+        Data register holds clean superposition $\frac{1}{\sqrt{2^n}}\sum_x (-1)^{s \cdot x}|x\rangle$. Applying $H^{\otimes n}$ yields $\alpha_y = 2^{-n}\sum_x (-1)^{s \cdot x + x \cdot y}$, nonzero only when $y = s$ (Walsh-Hadamard property), giving deterministic measurement.
+        
+        **$|0\rangle$ Fails:**  
+        Creates entanglement $|x\rangle|f_s(x)\rangle$, collapsing superposition upon measurement, preventing interference. Phase kickback uniquely requires antisymmetric $|{-}\rangle$.
     
-    **Hadamard Decoding:**  
-    Data register holds clean superposition $\frac{1}{\sqrt{2^n}}\sum_x (-1)^{s \cdot x}|x\rangle$. Applying $H^{\otimes n}$ yields $\alpha_y = 2^{-n}\sum_x (-1)^{s \cdot x + x \cdot y}$, nonzero only when $y = s$ (Walsh-Hadamard property), giving deterministic measurement.
-    
-    **$|0\rangle$ Fails:**  
-    Creates entanglement $|x\rangle|f_s(x)\rangle$, collapsing superposition upon measurement, preventing interference. Phase kickback uniquely requires antisymmetric $|{-}\rangle$.
-
-```
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -380,49 +372,45 @@ Each run provides one linear constraint over $\mathbb{F}_2$. The subspace orthog
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. What promise defines Simon’s oracle?**
-
-- A. $f$ is constant or balanced  
-- B. $f(x)=s\cdot x$  
-- C. $f(x)=f(x\oplus s)$ with $s\neq0$  
-- D. $f$ is one-to-one  
-
+    **1. What promise defines Simon’s oracle?**
+    
+    - A. $f$ is constant or balanced  
+    - B. $f(x)=s\cdot x$  
+    - C. $f(x)=f(x\oplus s)$ with $s\neq0$  
+    - D. $f$ is one-to-one  
+    
 ??? info "See Answer"
-    **Correct: C.** The oracle is 2-to-1 with period $s$.
-
-**2. The measurement outcomes $y$ satisfy:**
-
-- A. $y=s$  
-- B. $y\cdot s=1$  
-- C. $y\cdot s=0$  
-- D. $y=0$  
-
+        **Correct: C.** The oracle is 2-to-1 with period $s$.
+    
+    **2. The measurement outcomes $y$ satisfy:**
+    
+    - A. $y=s$  
+    - B. $y\cdot s=1$  
+    - C. $y\cdot s=0$  
+    - D. $y=0$  
+    
 ??? info "See Answer"
-    **Correct: C.** Each sample provides a parity constraint orthogonal to $s$.
-
-```
+        **Correct: C.** Each sample provides a parity constraint orthogonal to $s$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** How does Simon's algorithm foreshadow Shor's period finding?
-
-???+ info "Answer Strategy"
-    **Common Theme: Hidden Periodicity:**  
-    Both exploit periodic structure via quantum interference. Simon finds XOR period $s$ over $\mathbb{Z}_2^n$ where $f(x) = f(x \oplus s)$; Shor finds multiplicative order $r$ over $\mathbb{Z}_N$ where $a^r \equiv 1 \pmod{N}$.
     
-    **Simon's Approach:**  
-    Measurement collapses to $\frac{1}{\sqrt{2}}(|x\rangle + |x \oplus s\rangle)$. Hadamards yield outcomes $y$ satisfying $y \cdot s = 0 \pmod{2}$. Collecting $\mathcal{O}(n)$ equations and Gaussian elimination over $\mathbb{F}_2$ recovers $s$ in polynomial time vs classical $\Omega(2^{n/2})$.
+    **Q:** How does Simon's algorithm foreshadow Shor's period finding?
     
-    **Shor's Generalization:**  
-    QPE extracts eigenphases $e^{2\pi ik/r}$ of $U_a|x\rangle = |ax \bmod N\rangle$. Inverse QFT concentrates probability at $k/r$; continued fractions recover $r$ from measured phase. Speedup: $\mathcal{O}(\log N)$ precision vs exponential classical.
+    ???+ info "Answer Strategy"
+        **Common Theme: Hidden Periodicity:**  
+        Both exploit periodic structure via quantum interference. Simon finds XOR period $s$ over $\mathbb{Z}_2^n$ where $f(x) = f(x \oplus s)$; Shor finds multiplicative order $r$ over $\mathbb{Z}_N$ where $a^r \equiv 1 \pmod{N}$.
+        
+        **Simon's Approach:**  
+        Measurement collapses to $\frac{1}{\sqrt{2}}(|x\rangle + |x \oplus s\rangle)$. Hadamards yield outcomes $y$ satisfying $y \cdot s = 0 \pmod{2}$. Collecting $\mathcal{O}(n)$ equations and Gaussian elimination over $\mathbb{F}_2$ recovers $s$ in polynomial time vs classical $\Omega(2^{n/2})$.
+        
+        **Shor's Generalization:**  
+        QPE extracts eigenphases $e^{2\pi ik/r}$ of $U_a|x\rangle = |ax \bmod N\rangle$. Inverse QFT concentrates probability at $k/r$; continued fractions recover $r$ from measured phase. Speedup: $\mathcal{O}(\log N)$ precision vs exponential classical.
+        
+        **Historical Impact:**  
+        Simon (1994) demonstrated first exponential separation for structured problems, inspiring Shor to extend period-finding to modular arithmetic, proving quantum advantage for cryptographic problems.
     
-    **Historical Impact:**  
-    Simon (1994) demonstrated first exponential separation for structured problems, inspiring Shor to extend period-finding to modular arithmetic, proving quantum advantage for cryptographic problems.
-
-```
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -572,48 +560,44 @@ D -->|Yes| E[Measure]
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Expected query complexity for one marked item?**
-
-- A. $O(N)$  
-- B. $O(\sqrt{N})$  
-- C. $O(\log N)$  
-- D. $O(1)$  
-
+    **1. Expected query complexity for one marked item?**
+    
+    - A. $O(N)$  
+    - B. $O(\sqrt{N})$  
+    - C. $O(\log N)$  
+    - D. $O(1)$  
+    
 ??? info "See Answer"
-    **Correct: B.** Quadratic speedup over linear search.
-
-**2. The diffusion operator equals:**
-
-- A. $\mathbf{H}$  
-- B. $2|s\rangle\langle s|-\mathbf{I}$  
-- C. $O_f$  
-- D. QFT  
-
+        **Correct: B.** Quadratic speedup over linear search.
+    
+    **2. The diffusion operator equals:**
+    
+    - A. $\mathbf{H}$  
+    - B. $2|s\rangle\langle s|-\mathbf{I}$  
+    - C. $O_f$  
+    - D. QFT  
+    
 ??? info "See Answer"
-    **Correct: B.** Reflection about the mean.
-
-```
+        **Correct: B.** Reflection about the mean.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why does over-iterating reduce success and how can one mitigate this?
-
-???+ info "Answer Strategy"
-    **Rotation Mechanism:**  
-    Grover iterates $G = -D \cdot O_f$ rotate state by $2\theta$ where $\sin^2\theta = M/N$. After $k$ iterations: $P_{\text{success}}(k) = \sin^2((2k+1)\theta)$. Optimal $k_{\text{opt}} \approx \lfloor\frac{\pi}{4\sqrt{N/M}}\rfloor$ maximizes success. Beyond this, rotation continues past $|m\rangle$, returning toward $|u\rangle$, reducing probability.
     
-    **Mitigation Strategies:**  
-    **1. Estimate $M$ first:** Use quantum counting or sample-based estimation to compute $k_{\text{opt}}$ precisely.  
-    **2. Fixed-point search:** Modified Grover-Long operators prevent over-rotation, guaranteeing $P \geq 1-\epsilon$ without knowing $M$.  
-    **3. Variable-iteration:** Use random $k \in \{1, \ldots, k_{\max}\}$ or doubling scheme ($k = 1, 2, 4, 8, \ldots$) to hit near-optimal with good probability.
+    **Q:** Why does over-iterating reduce success and how can one mitigate this?
     
-    **Practical Impact:**  
-    On NISQ devices, precise iteration control is critical. Over-iterating wastes coherence; fixed-point or adaptive methods ensure reliable performance when $M$ unknown.
-
-```
+    ???+ info "Answer Strategy"
+        **Rotation Mechanism:**  
+        Grover iterates $G = -D \cdot O_f$ rotate state by $2\theta$ where $\sin^2\theta = M/N$. After $k$ iterations: $P_{\text{success}}(k) = \sin^2((2k+1)\theta)$. Optimal $k_{\text{opt}} \approx \lfloor\frac{\pi}{4\sqrt{N/M}}\rfloor$ maximizes success. Beyond this, rotation continues past $|m\rangle$, returning toward $|u\rangle$, reducing probability.
+        
+        **Mitigation Strategies:**  
+        **1. Estimate $M$ first:** Use quantum counting or sample-based estimation to compute $k_{\text{opt}}$ precisely.  
+        **2. Fixed-point search:** Modified Grover-Long operators prevent over-rotation, guaranteeing $P \geq 1-\epsilon$ without knowing $M$.  
+        **3. Variable-iteration:** Use random $k \in \{1, \ldots, k_{\max}\}$ or doubling scheme ($k = 1, 2, 4, 8, \ldots$) to hit near-optimal with good probability.
+        
+        **Practical Impact:**  
+        On NISQ devices, precise iteration control is critical. Over-iterating wastes coherence; fixed-point or adaptive methods ensure reliable performance when $M$ unknown.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -767,49 +751,45 @@ Thus $\mathcal{O}(1/\sqrt{a})$ iterations suffice, compared to $\mathcal{O}(1/a)
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. If $a=1/25$, iterations needed are $k\sim$?**
-
-- A. 1  
-- B. 3  
-- C. 5  
-- D. 25  
-
+    **1. If $a=1/25$, iterations needed are $k\sim$?**
+    
+    - A. 1  
+    - B. 3  
+    - C. 5  
+    - D. 25  
+    
 ??? info "See Answer"
-    **Correct: C.** $1/\sqrt{a}=5$.
-
-**2. Amplitude amplification generalizes which algorithm?**
-
-- A. Shor  
-- B. BV  
-- C. Grover  
-- D. Simon  
-
+        **Correct: C.** $1/\sqrt{a}=5$.
+    
+    **2. Amplitude amplification generalizes which algorithm?**
+    
+    - A. Shor  
+    - B. BV  
+    - C. Grover  
+    - D. Simon  
+    
 ??? info "See Answer"
-    **Correct: C.** It subsumes Grover as a special case.
-
-```
+        **Correct: C.** It subsumes Grover as a special case.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why is knowing $a$ useful and how to proceed if $a$ is unknown?
-
-???+ info "Answer Strategy"
-    **Role of Success Amplitude $a$:**  
-    Amplification operator $Q = S_\psi \cdot O$ rotates by $2\theta$ where $\sin^2\theta = a$. Optimal iterations $k_{\text{opt}} \approx \lfloor\frac{\pi}{4\sqrt{a}}\rfloor$ maximize $P_{\text{success}} \approx 1$. Without knowing $a$, risk over-rotation (success drops) or under-amplification (low success).
     
-    **Strategy 1: Doubling Search (Unknown $a$):**  
-    Run with $k = 1, 2, 4, 8, \ldots$ until success. Total queries $\sim 4K = \mathcal{O}(1/\sqrt{a})$, constant-factor worse than optimal but no $a$ needed.
+    **Q:** Why is knowing $a$ useful and how to proceed if $a$ is unknown?
     
-    **Strategy 2: Amplitude Estimation First:**  
-    Use quantum amplitude estimation (QAE) to estimate $a$ with precision $\epsilon$ using $\mathcal{O}(1/(\epsilon\sqrt{a}))$ queries, then compute $k_{\text{opt}}$ and run once. Valuable for repeated instances.
+    ???+ info "Answer Strategy"
+        **Role of Success Amplitude $a$:**  
+        Amplification operator $Q = S_\psi \cdot O$ rotates by $2\theta$ where $\sin^2\theta = a$. Optimal iterations $k_{\text{opt}} \approx \lfloor\frac{\pi}{4\sqrt{a}}\rfloor$ maximize $P_{\text{success}} \approx 1$. Without knowing $a$, risk over-rotation (success drops) or under-amplification (low success).
+        
+        **Strategy 1: Doubling Search (Unknown $a$):**  
+        Run with $k = 1, 2, 4, 8, \ldots$ until success. Total queries $\sim 4K = \mathcal{O}(1/\sqrt{a})$, constant-factor worse than optimal but no $a$ needed.
+        
+        **Strategy 2: Amplitude Estimation First:**  
+        Use quantum amplitude estimation (QAE) to estimate $a$ with precision $\epsilon$ using $\mathcal{O}(1/(\epsilon\sqrt{a}))$ queries, then compute $k_{\text{opt}}$ and run once. Valuable for repeated instances.
+        
+        **Strategy 3: Fixed-Point Amplification:**  
+        Modified operators converge to good subspace without knowing $a$, achieving $P \geq 1-\delta$ in $\mathcal{O}(1/\sqrt{a})$ iterations with robustness.
     
-    **Strategy 3: Fixed-Point Amplification:**  
-    Modified operators converge to good subspace without knowing $a$, achieving $P \geq 1-\delta$ in $\mathcal{O}(1/\sqrt{a})$ iterations with robustness.
-
-```
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -949,50 +929,46 @@ D --> E["Compute gcd(a^(r/2)±1,N)"]
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Shor reduces factoring to what subproblem?**
-
-- A. Discrete log  
-- B. Order/period finding  
-- C. SAT  
-- D. Graph isomorphism  
-
+    **1. Shor reduces factoring to what subproblem?**
+    
+    - A. Discrete log  
+    - B. Order/period finding  
+    - C. SAT  
+    - D. Graph isomorphism  
+    
 ??? info "See Answer"
-    **Correct: B.** Period finding enables factor extraction.
-
-**2. The classical component used at the end is:**
-
-- A. Gradient descent  
-- B. Euclid’s algorithm (gcd)  
-- C. FFT  
-- D. Gaussian elimination over reals  
-
+        **Correct: B.** Period finding enables factor extraction.
+    
+    **2. The classical component used at the end is:**
+    
+    - A. Gradient descent  
+    - B. Euclid’s algorithm (gcd)  
+    - C. FFT  
+    - D. Gaussian elimination over reals  
+    
 ??? info "See Answer"
-    **Correct: B.** $\gcd$ yields factors from $a^{r/2}\pm1$.
-
-```
+        **Correct: B.** $\gcd$ yields factors from $a^{r/2}\pm1$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why is QPE suitable for period finding in modular exponentiation?
-
-???+ info "Answer Strategy"
-    **Modular Exponentiation as Unitary:**  
-    Define $U_a|y\rangle = |a \cdot y \bmod N\rangle$ for $a$ coprime to $N$. Eigenstates are $|\psi_k\rangle = \frac{1}{\sqrt{r}}\sum_{j=0}^{r-1} e^{-2\pi ijk/r}|a^j \bmod N\rangle$ with eigenvalues $e^{2\pi ik/r}$.
     
-    $$
-    U_a|\psi_k\rangle = e^{2\pi ik/r}|\psi_k\rangle
-    $$
-
-    **Rational Eigenphases:**  
-    Eigenphase $\phi_k = k/r$ has denominator exactly equal to period $r$! QPE extracts this via controlled-$U_a^{2^j}$ building phase $2^j \cdot 2\pi k/r$ in counting register, then inverse QFT yields binary fraction $k/r$. Continued fractions recover $r$ from measured approximation.
+    **Q:** Why is QPE suitable for period finding in modular exponentiation?
     
-    **Why This Works:**  
-    $U_a$ efficiently implementable ($\mathcal{O}(\log^2 N)$ gates). Eigenvalues have phases $k/r$ where denominator is the period. With $n \approx 2\log N$ counting qubits, QPE estimates to sufficient precision that continued fractions recovers $r$ with high probability. Classical methods need exponential queries; QPE leverages superposition over entire periodic structure.
-
-```
+    ???+ info "Answer Strategy"
+        **Modular Exponentiation as Unitary:**  
+        Define $U_a|y\rangle = |a \cdot y \bmod N\rangle$ for $a$ coprime to $N$. Eigenstates are $|\psi_k\rangle = \frac{1}{\sqrt{r}}\sum_{j=0}^{r-1} e^{-2\pi ijk/r}|a^j \bmod N\rangle$ with eigenvalues $e^{2\pi ik/r}$.
+        
+        $$
+        U_a|\psi_k\rangle = e^{2\pi ik/r}|\psi_k\rangle
+        $$
+    
+        **Rational Eigenphases:**  
+        Eigenphase $\phi_k = k/r$ has denominator exactly equal to period $r$! QPE extracts this via controlled-$U_a^{2^j}$ building phase $2^j \cdot 2\pi k/r$ in counting register, then inverse QFT yields binary fraction $k/r$. Continued fractions recover $r$ from measured approximation.
+        
+        **Why This Works:**  
+        $U_a$ efficiently implementable ($\mathcal{O}(\log^2 N)$ gates). Eigenvalues have phases $k/r$ where denominator is the period. With $n \approx 2\log N$ counting qubits, QPE estimates to sufficient precision that continued fractions recovers $r$ with high probability. Classical methods need exponential queries; QPE leverages superposition over entire periodic structure.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -1140,46 +1116,42 @@ These speedups underpin algorithmic applications including element distinctness,
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. A key advantage of quantum walks is:**
-
-- A. Guaranteed optimal path  
-- B. Faster mixing/hitting on some graphs  
-- C. Fewer nodes needed  
-- D. Deterministic outcomes  
-
+    **1. A key advantage of quantum walks is:**
+    
+    - A. Guaranteed optimal path  
+    - B. Faster mixing/hitting on some graphs  
+    - C. Fewer nodes needed  
+    - D. Deterministic outcomes  
+    
 ??? info "See Answer"
-    **Correct: B.** Interference accelerates exploration.
-
-**2. Discrete-time walks use which ingredients?**
-
-- A. Coin and shift  
-- B. Only shift  
-- C. Only coin  
-- D. Measurement alone  
-
+        **Correct: B.** Interference accelerates exploration.
+    
+    **2. Discrete-time walks use which ingredients?**
+    
+    - A. Coin and shift  
+    - B. Only shift  
+    - C. Only coin  
+    - D. Measurement alone  
+    
 ??? info "See Answer"
-    **Correct: A.** A unitary coin followed by a conditional shift.
-
-```
+        **Correct: A.** A unitary coin followed by a conditional shift.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Name an application of quantum walks in algorithms and explain the role of interference.
-
-???+ info "Answer Strategy"
-    **Spatial Search on Grids:**  
-    Coined quantum walk on $\sqrt{N} \times \sqrt{N}$ 2D grid finds marked vertex in $\mathcal{O}(\sqrt{N})$ steps vs classical $\mathcal{O}(N)$. Coin operator (e.g., Grover diffusion on 4-direction space) + shift operator creates coherent evolution. Oracle marks target vertex with phase flip.
     
-    **Interference Dynamics:**  
-    After $\mathcal{O}(\sqrt{N})$ steps, constructive interference amplifies amplitude at marked vertex; destructive interference suppresses unmarked vertices. Quantum walk operator $U = S \cdot C$ creates coherent paths where phase differences from marking cause amplitude addition (converging at target) or cancellation (avoiding target).
+    **Q:** Name an application of quantum walks in algorithms and explain the role of interference.
     
-    **Other Applications:**  
-    **Element distinctness** ($\mathcal{O}(N^{2/3})$ queries on Johnson graph), **triangle finding** ($\mathcal{O}(N^{1.3})$), **collision finding** ($\mathcal{O}(N^{1/3})$). Interference enables wavelike propagation (ballistic $\propto t$ vs diffusive $\propto \sqrt{t}$), phase-dependent amplification at solutions, directional bias via engineered coins. Without coherence, walks collapse to classical random walks.
-
-```
+    ???+ info "Answer Strategy"
+        **Spatial Search on Grids:**  
+        Coined quantum walk on $\sqrt{N} \times \sqrt{N}$ 2D grid finds marked vertex in $\mathcal{O}(\sqrt{N})$ steps vs classical $\mathcal{O}(N)$. Coin operator (e.g., Grover diffusion on 4-direction space) + shift operator creates coherent evolution. Oracle marks target vertex with phase flip.
+        
+        **Interference Dynamics:**  
+        After $\mathcal{O}(\sqrt{N})$ steps, constructive interference amplifies amplitude at marked vertex; destructive interference suppresses unmarked vertices. Quantum walk operator $U = S \cdot C$ creates coherent paths where phase differences from marking cause amplitude addition (converging at target) or cancellation (avoiding target).
+        
+        **Other Applications:**  
+        **Element distinctness** ($\mathcal{O}(N^{2/3})$ queries on Johnson graph), **triangle finding** ($\mathcal{O}(N^{1.3})$), **collision finding** ($\mathcal{O}(N^{1/3})$). Interference enables wavelike propagation (ballistic $\propto t$ vs diffusive $\propto \sqrt{t}$), phase-dependent amplification at solutions, directional bias via engineered coins. Without coherence, walks collapse to classical random walks.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**

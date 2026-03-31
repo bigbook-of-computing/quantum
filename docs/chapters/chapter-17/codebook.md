@@ -1,4 +1,4 @@
-# **Chapter 17: First and Second Quantization in Quantum Computing () () (Codebook)**
+# **Chapter 17: First and Second Quantization in Quantum Computing (Codebook)**
 
 Quantum chemistry on quantum hardware requires mapping fermionic creation/annihilation operators to qubit operators. This chapter covers the Jordan-Wigner transformation, Hamiltonian simulation for H2, and VQE for molecular ground-state energy estimation.
 

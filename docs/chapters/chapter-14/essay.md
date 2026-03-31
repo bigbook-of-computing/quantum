@@ -54,10 +54,8 @@ $$
 The **diagonal elements** $Q_{ii}$ represent **linear costs** associated with individual variable assignments, while the **off-diagonal elements** $Q_{ij}$ encode **quadratic interaction terms** capturing the cost of joint assignments between variables $x_i$ and $x_j$. This structure allows QUBO to naturally represent problems involving both independent variable costs and pairwise relationships.
 
 !!! tip "QUBO as a Universal Problem Formulation"
-```
-Many NP-hard combinatorial optimization problems—including graph partitioning, constraint satisfaction, scheduling, and portfolio selection—can be reduced to QUBO form. This universality makes QUBO the standard input language for quantum optimization hardware and algorithms.
-
-```
+    Many NP-hard combinatorial optimization problems—including graph partitioning, constraint satisfaction, scheduling, and portfolio selection—can be reduced to QUBO form. This universality makes QUBO the standard input language for quantum optimization hardware and algorithms.
+    
 ---
 
 ### **Relationship to the Ising Model**
@@ -115,21 +113,19 @@ QUBO formulations naturally capture the structure of numerous NP-hard optimizati
 The NP-hard complexity of these problems validates the need for quantum solvers, as classical algorithms struggle with exponential scaling. Quantum approaches—whether through quantum annealing hardware or variational algorithms like QAOA—offer potential pathways to finding high-quality approximate solutions more efficiently than classical heuristics.
 
 !!! example "MaxCut QUBO Encoding"
-```
-Consider a 4-vertex graph with edges (0,1), (1,2), (2,3), (0,3), each with weight 1. The MaxCut QUBO matrix becomes:
-
-$$
-Q = \begin{pmatrix}
-0 & -1 & 0 & -1 \\
--1 & 0 & -1 & 0 \\
-0 & -1 & 0 & -1 \\
--1 & 0 & -1 & 0
-\end{pmatrix}
-$$
-
-A solution $x = (1,0,1,0)$ partitions vertices {0,2} versus {1,3}, cutting all 4 edges with cost $C(x) = -4$ (maximum cut).
-
-```
+    Consider a 4-vertex graph with edges (0,1), (1,2), (2,3), (0,3), each with weight 1. The MaxCut QUBO matrix becomes:
+    
+    $$
+    Q = \begin{pmatrix}
+    0 & -1 & 0 & -1 \\
+    -1 & 0 & -1 & 0 \\
+    0 & -1 & 0 & -1 \\
+    -1 & 0 & -1 & 0
+    \end{pmatrix}
+    $$
+    
+    A solution $x = (1,0,1,0)$ partitions vertices {0,2} versus {1,3}, cutting all 4 edges with cost $C(x) = -4$ (maximum cut).
+    
 ---
 
 ## **14.2 Ising Model Formulations**
@@ -210,14 +206,12 @@ The Ising energy function provides the natural input for quantum optimization ap
 Both approaches leverage quantum superposition and interference to explore the solution space, offering potential advantages over classical optimization heuristics for certain problem classes, particularly those with rugged energy landscapes where classical algorithms become trapped in local minima.
 
 ??? question "When Should You Use Ising Formulation vs QUBO?"
-```
-The choice depends on your quantum hardware target:
-
-- **Use Ising directly** when interfacing with quantum annealing hardware (D-Wave) that natively implements spin-glass physics with programmable $J_{ij}$ and $h_i$ parameters.
-- **Use QUBO** when working with optimization software libraries (D-Wave Ocean, Qiskit Optimization) that accept binary formulations and handle the internal Ising transformation automatically.
-- **Equivalence guarantees** that the optimal solution is identical regardless of which representation you choose—select based on convenience and platform compatibility.
-
-```
+    The choice depends on your quantum hardware target:
+    
+    - **Use Ising directly** when interfacing with quantum annealing hardware (D-Wave) that natively implements spin-glass physics with programmable $J_{ij}$ and $h_i$ parameters.
+    - **Use QUBO** when working with optimization software libraries (D-Wave Ocean, Qiskit Optimization) that accept binary formulations and handle the internal Ising transformation automatically.
+    - **Equivalence guarantees** that the optimal solution is identical regardless of which representation you choose—select based on convenience and platform compatibility.
+    
 ---
 
 ## **14.3 Adiabatic Quantum Optimization**
@@ -251,10 +245,8 @@ represents the maximum rate of Hamiltonian change. Smaller gaps demand slower ev
 For optimization, this principle enables solving hard problems: if we construct $H(T)$ such that its ground state encodes the optimal solution, adiabatic evolution from a simple initial state guarantees (in the ideal limit) delivery of the solution without needing to search the exponential solution space explicitly.
 
 !!! tip "Adiabatic Condition for Successful Optimization"
-```
-The adiabatic condition requires that the evolution time $T$ be long compared to the inverse square of the minimum energy gap. For NP-hard problems, this gap often becomes exponentially small near the problem's critical point, potentially requiring exponentially long evolution times. However, quantum annealing hardware explores whether quantum tunneling through energy barriers provides practical advantages even when perfect adiabaticity cannot be achieved.
-
-```
+    The adiabatic condition requires that the evolution time $T$ be long compared to the inverse square of the minimum energy gap. For NP-hard problems, this gap often becomes exponentially small near the problem's critical point, potentially requiring exponentially long evolution times. However, quantum annealing hardware explores whether quantum tunneling through energy barriers provides practical advantages even when perfect adiabaticity cannot be achieved.
+    
 ---
 
 ### **The Total Hamiltonian and Evolution**
@@ -515,16 +507,14 @@ The primary advantage of QAOA lies in achieving **better approximation ratios** 
 QAOA's shallow circuit depth (relative to fault-tolerant algorithms) makes it particularly well-suited for current noisy quantum devices. Error mitigation techniques (zero-noise extrapolation, probabilistic error cancellation) can further enhance performance, and ongoing research explores parameter initialization strategies, adaptive circuit depth, and problem-specific mixer designs to improve convergence.
 
 !!! example "QAOA for 4-Vertex MaxCut"
-```
-Consider the 4-vertex cycle graph with unit edge weights (edges: 0-1, 1-2, 2-3, 3-0). The MaxCut cost Hamiltonian is:
-
-$$
-C = \frac{1}{2}\left(4 - Z_0 Z_1 - Z_1 Z_2 - Z_2 Z_3 - Z_3 Z_0\right)
-$$
-
-With $p=1$ QAOA layer, classical optimization typically finds parameters yielding $\langle C \rangle \approx 3.5$, close to the optimal cut of 4 edges achieved by partition $\{0,2\}$ vs $\{1,3\}$.
-
-```
+    Consider the 4-vertex cycle graph with unit edge weights (edges: 0-1, 1-2, 2-3, 3-0). The MaxCut cost Hamiltonian is:
+    
+    $$
+    C = \frac{1}{2}\left(4 - Z_0 Z_1 - Z_1 Z_2 - Z_2 Z_3 - Z_3 Z_0\right)
+    $$
+    
+    With $p=1$ QAOA layer, classical optimization typically finds parameters yielding $\langle C \rangle \approx 3.5$, close to the optimal cut of 4 edges achieved by partition $\{0,2\}$ vs $\{1,3\}$.
+    
 ---
 
 ## **14.5 Portfolio Optimization**
@@ -562,10 +552,8 @@ where:
 The quadratic term $x^T Q x$ quantifies portfolio variance (total risk), while the linear term $x^T R$ captures total expected return. The QUBO formulation directly encodes this objective, with the covariance matrix $Q$ serving as the QUBO matrix and the return vector $R$ adjusting the diagonal or being incorporated via penalty terms.
 
 !!! tip "Risk-Return Trade-off Tuning"
-```
-The parameter $\lambda$ is critical for balancing investor risk tolerance. Conservative investors (higher $\lambda$) obtain portfolios with lower variance but potentially lower returns, while aggressive investors (lower $\lambda$) accept higher volatility for greater expected gains. Sensitivity analysis over $\lambda$ can generate an efficient frontier of Pareto-optimal portfolios.
-
-```
+    The parameter $\lambda$ is critical for balancing investor risk tolerance. Conservative investors (higher $\lambda$) obtain portfolios with lower variance but potentially lower returns, while aggressive investors (lower $\lambda$) accept higher volatility for greater expected gains. Sensitivity analysis over $\lambda$ can generate an efficient frontier of Pareto-optimal portfolios.
+    
 ---
 
 ### **Solution on Quantum Solvers**
@@ -635,10 +623,8 @@ The penalty function $\text{Penalty}(x)$ is designed to:
 The penalty weight $\lambda_{\text{penalty}}$ must be chosen sufficiently large to ensure that violating constraints always results in higher cost than any feasible solution, thereby guiding the quantum solver toward the feasible region. Constraint encoding strategies are detailed in Section 14.6.
 
 ??? question "Why Not Use Constrained Quantum Optimization Directly?"
-```
-Current quantum optimization hardware (quantum annealers) and algorithms (QAOA) are inherently designed for unconstrained problems encoded as QUBO or Ising models. While active research explores constrained quantum optimization via quantum linear programming and specialized mixer Hamiltonians (Section 14.6.3), penalty-based constraint embedding remains the most mature and widely deployed approach. The challenge lies in tuning penalty weights: too small allows constraint violations, too large creates numerical ill-conditioning that hinders optimization.
-
-```
+    Current quantum optimization hardware (quantum annealers) and algorithms (QAOA) are inherently designed for unconstrained problems encoded as QUBO or Ising models. While active research explores constrained quantum optimization via quantum linear programming and specialized mixer Hamiltonians (Section 14.6.3), penalty-based constraint embedding remains the most mature and widely deployed approach. The challenge lies in tuning penalty weights: too small allows constraint violations, too large creates numerical ill-conditioning that hinders optimization.
+    
 ---
 
 ## **14.6 Constraint Encoding Strategies**
@@ -858,18 +844,16 @@ Ongoing research explores:
 Custom mixer strategies represent the frontier of constrained quantum optimization, offering potential advantages for problems where constraint structure is well-understood and feasible subspaces are not too restrictive.
 
 !!! example "Custom Mixer for Cardinality Constraint"
-```
-Consider portfolio optimization requiring exactly $k=5$ assets selected from $n=20$ candidates. The feasible subspace consists of all bitstrings with Hamming weight 5 (e.g., 11110000... configurations). A custom mixer using XY-exchange operators allows transitions like $|110100...\rangle \leftrightarrow |101100...\rangle$ (swapping asset selections) while preserving the count of selected assets. This keeps the quantum state within the 
-$$
-\binom{20}{5} = 15504
-$$
- valid configurations, avoiding exploration of the 
-$$
-2^{20} - 15504
-$$
- infeasible states.
-
-```
+    Consider portfolio optimization requiring exactly $k=5$ assets selected from $n=20$ candidates. The feasible subspace consists of all bitstrings with Hamming weight 5 (e.g., 11110000... configurations). A custom mixer using XY-exchange operators allows transitions like $|110100...\rangle \leftrightarrow |101100...\rangle$ (swapping asset selections) while preserving the count of selected assets. This keeps the quantum state within the 
+    $$
+    \binom{20}{5} = 15504
+    $$
+     valid configurations, avoiding exploration of the 
+    $$
+    2^{20} - 15504
+    $$
+     infeasible states.
+    
 ---
 
 ## **Summary of Quantum Optimization Methods (Chapter 14)**

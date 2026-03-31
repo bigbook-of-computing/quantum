@@ -1,4 +1,4 @@
-# **Chapter 4: Foundational Quantum Algorithms () () (Codebook)**
+# **Chapter 4: Foundational Quantum Algorithms (Codebook)**
 
 This codebook implements Deutsch-Jozsa, Bernstein-Vazirani, and Grover's algorithm — the three cornerstones of foundational quantum computing. Every circuit is parameterised for experimentation.
 

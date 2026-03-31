@@ -1,4 +1,4 @@
-# **Chapter 14: Quantum Optimization — QUBO and QAOA () () (Codebook)**
+# **Chapter 14: Quantum Optimization — QUBO and QAOA (Codebook)**
 
 Quantum optimisation targets NP-hard combinatorial problems by encoding them as Ising Hamiltonians. This chapter covers QUBO problem formulation, the Quantum Approximate Optimization Algorithm (QAOA), and Grover adaptive search for binary optimisation.
 

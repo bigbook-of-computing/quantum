@@ -1,4 +1,4 @@
-# **Chapter 19: 19.1 Superconducting Qubits {.heading-with-pill} () () (Workbook)**
+# **Chapter 19: 19.1 Superconducting Qubits {.heading-with-pill} (Workbook)**
 
 > **Concept:** Engineered Quantum Systems with Josephson Junctions • **Difficulty:** ★★★☆☆
 > **Summary:** Superconducting qubits are artificial atoms built from LC circuits containing a nonlinear element—the Josephson junction. The most common design, the transmon, encodes quantum information in the two lowest energy levels of this system, offering fast gate speeds and a clear path to scaling, making it a leading platform for NISQ-era computing.
@@ -28,61 +28,53 @@ Qubit control and measurement are performed using microwave pulses. Single-qubit
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which physical component provides the necessary nonlinearity in a superconducting qubit circuit to define discrete energy levels for the qubit?**
-
-- A. The microwave resonator
-- B. The Josephson junction
-- C. The capacitive shunt
-- D. The magnetic flux bias
-
+    **1. Which physical component provides the necessary nonlinearity in a superconducting qubit circuit to define discrete energy levels for the qubit?**
+    
+    - A. The microwave resonator
+    - B. The Josephson junction
+    - C. The capacitive shunt
+    - D. The magnetic flux bias
+    
 ??? info "See Answer"
-    **Correct: B**
-
-```
+        **Correct: B**
+    
 ---
 
 !!! note "Quiz"
-```
-**2. The transmon qubit is a modification of the Cooper pair box designed specifically to suppress sensitivity to what type of quantum noise?**
-
-- A. Magnetic flux noise
-- B. Thermal (phonon) noise
-- C. Charge noise
-- D. Readout error
-
+    **2. The transmon qubit is a modification of the Cooper pair box designed specifically to suppress sensitivity to what type of quantum noise?**
+    
+    - A. Magnetic flux noise
+    - B. Thermal (phonon) noise
+    - C. Charge noise
+    - D. Readout error
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! note "Quiz"
-```
-**3. In superconducting qubits, both single-qubit rotations and multi-qubit entangling gates are driven by what type of physical signal?**
-
-- A. Optical lasers
-- B. RF magnetic fields
-- C. Microwave pulses
-- D. DC voltage
-
+    **3. In superconducting qubits, both single-qubit rotations and multi-qubit entangling gates are driven by what type of physical signal?**
+    
+    - A. Optical lasers
+    - B. RF magnetic fields
+    - C. Microwave pulses
+    - D. DC voltage
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! abstract "Interview-Style Question"
-```
-**Q:** How are the discrete energy levels of a qubit formed in a superconducting circuit, and why is this important for quantum computation?
-
-???+ info "Answer Strategy"
-    1.  **Start with a Harmonic Oscillator:** A standard LC circuit is a harmonic oscillator with evenly spaced energy levels. This is not suitable for a qubit because a control signal (microwave pulse) intended to drive the $|0\rangle \to |1\rangle$ transition would also drive all other transitions ($|1\rangle \to |2\rangle$, etc.), causing state leakage.
-    2.  **Introduce Anharmonicity:** By replacing the linear inductor with a **Josephson junction**, the circuit becomes an **anharmonic oscillator**. This means its energy levels are no longer evenly spaced.
-    3.  **Isolate the Qubit:** The two lowest energy levels are designated as the qubit states: $|0\rangle$ (ground state) and $|1\rangle$ (first excited state).
-    4.  **Enable Selective Control:** Because the energy gap between $|0\rangle \leftrightarrow |1\rangle$ is now unique, a microwave pulse can be tuned to this specific frequency. This allows for precise control of the qubit state without accidentally exciting it to higher, non-computational levels, ensuring high-fidelity gate operations.
-
-```
+    **Q:** How are the discrete energy levels of a qubit formed in a superconducting circuit, and why is this important for quantum computation?
+    
+    ???+ info "Answer Strategy"
+        1.  **Start with a Harmonic Oscillator:** A standard LC circuit is a harmonic oscillator with evenly spaced energy levels. This is not suitable for a qubit because a control signal (microwave pulse) intended to drive the $|0\rangle \to |1\rangle$ transition would also drive all other transitions ($|1\rangle \to |2\rangle$, etc.), causing state leakage.
+        2.  **Introduce Anharmonicity:** By replacing the linear inductor with a **Josephson junction**, the circuit becomes an **anharmonic oscillator**. This means its energy levels are no longer evenly spaced.
+        3.  **Isolate the Qubit:** The two lowest energy levels are designated as the qubit states: $|0\rangle$ (ground state) and $|1\rangle$ (first excited state).
+        4.  **Enable Selective Control:** Because the energy gap between $|0\rangle \leftrightarrow |1\rangle$ is now unique, a microwave pulse can be tuned to this specific frequency. This allows for precise control of the qubit state without accidentally exciting it to higher, non-computational levels, ensuring high-fidelity gate operations.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Project**

@@ -1,4 +1,4 @@
-# **Chapter 6: Variational Quantum Algorithms () () (Codebook)**
+# **Chapter 6: Variational Quantum Algorithms (Codebook)**
 
 This codebook implements VQE for a multi-qubit Hamiltonian, QAOA for MaxCut, and a parameter landscape scan to study optimisation challenges including barren plateaus.
 

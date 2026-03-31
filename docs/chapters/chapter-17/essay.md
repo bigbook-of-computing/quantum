@@ -58,10 +58,8 @@ $$
 The Hartree-Fock approximation finds the single Slater determinant that minimises the electronic energy. Correlation methods (CISD, MP2, CCSD) add perturbative corrections.
 
 !!! tip "First Quantization on Quantum Computers"
-```
-First quantization on quantum computers represents electronic positions on a 3D spatial grid, using $O(\log N + \log(1/\epsilon))$ qubits per electron. Recent proposals by Babbush et al. show first-quantized quantum simulation requires fewer qubits than second-quantized approaches for large molecules, making it promising for fault-tolerant hardware.
-
-```
+    First quantization on quantum computers represents electronic positions on a 3D spatial grid, using $O(\log N + \log(1/\epsilon))$ qubits per electron. Recent proposals by Babbush et al. show first-quantized quantum simulation requires fewer qubits than second-quantized approaches for large molecules, making it promising for fault-tolerant hardware.
+    
 ### **Second Quantization: Occupation Number Representation**
 
 ---
@@ -75,15 +73,11 @@ $$
 where $n_p = 1$ means orbital $\phi_p$ is occupied and $n_p = 0$ means it is empty. The full **many-body Hilbert space** (Fock space of $M$ orbitals) has dimension $2^M$, mapping naturally to $M$ qubits.
 
 !!! example "H₂ Occupation Number Basis"
-```
-For H₂ in the STO-3G basis, there are $M = 4$ spin-orbitals (2 spatial orbitals × 2 spins). The $2^4 = 16$ Fock states span from the vacuum $|0000\rangle$ to the fully occupied $|1111\rangle$. The physical 2-electron sector contains $\binom{4}{2} = 6$ states.
-
-```
+    For H₂ in the STO-3G basis, there are $M = 4$ spin-orbitals (2 spatial orbitals × 2 spins). The $2^4 = 16$ Fock states span from the vacuum $|0000\rangle$ to the fully occupied $|1111\rangle$. The physical 2-electron sector contains $\binom{4}{2} = 6$ states.
+    
 ??? question "Why does the number of qubits needed for second quantization scale with the number of orbitals and not the number of electrons?"
-```
-In second quantization, each qubit represents one spin-orbital's occupancy (empty or occupied), independently of how many electrons are in the system. Encoding $M$ molecular spin-orbitals therefore requires exactly $M$ qubits. In contrast, first-quantized simulation assigns $n \sim \log(M)$ qubits per electron, favouring first-quantization for large electron numbers.
-
-```
+    In second quantization, each qubit represents one spin-orbital's occupancy (empty or occupied), independently of how many electrons are in the system. Encoding $M$ molecular spin-orbitals therefore requires exactly $M$ qubits. In contrast, first-quantized simulation assigns $n \sim \log(M)$ qubits per electron, favouring first-quantization for large electron numbers.
+    
 ---
 
 ## **17.2 Fermionic Fock Space and Operators**
@@ -117,10 +111,8 @@ $$
 These relations encode the Pauli exclusion principle: $a_p^\dagger a_p^\dagger = 0$ (cannot create two electrons in the same spin-orbital).
 
 !!! tip "Anti-commutation vs Commutation"
-```
-Bosons satisfy **commutation** relations $[b_p, b_q^\dagger] = \delta_{pq}$, allowing multiple occupation. Fermions satisfy **anti-commutation** $\{a_p, a_q^\dagger\} = \delta_{pq}$, enforcing single occupancy. The sign difference between these algebras is what makes fermionic quantum simulation non-trivial on a qubit register.
-
-```
+    Bosons satisfy **commutation** relations $[b_p, b_q^\dagger] = \delta_{pq}$, allowing multiple occupation. Fermions satisfy **anti-commutation** $\{a_p, a_q^\dagger\} = \delta_{pq}$, enforcing single occupancy. The sign difference between these algebras is what makes fermionic quantum simulation non-trivial on a qubit register.
+    
 ### **The Number Operator and Normal Ordering**
 
 ---
@@ -136,12 +128,10 @@ The **total electron number operator** $\hat{N} = \sum_p \hat{n}_p$ commutes wit
 **Normal ordering** arranges operators with all $a_p^\dagger$ to the left of all $a_q$, providing a canonical form for computing matrix elements and implementing operator measurements.
 
 !!! example "Expectation Value of the Number Operator"
-```
-For the H₂ state $|\psi\rangle = 0.99|0011\rangle + 0.14|0110\rangle - 0.04|1001\rangle$:
-$$\langle \hat{N} \rangle = 0.99^2 \cdot 2 + 0.14^2 \cdot 2 + 0.04^2 \cdot 2 \approx 2.0$$
-as expected for a 2-electron system. Individual orbital occupancies reveal the electron distribution across the molecule.
-
-```
+    For the H₂ state $|\psi\rangle = 0.99|0011\rangle + 0.14|0110\rangle - 0.04|1001\rangle$:
+    $$\langle \hat{N} \rangle = 0.99^2 \cdot 2 + 0.14^2 \cdot 2 + 0.04^2 \cdot 2 \approx 2.0$$
+    as expected for a 2-electron system. Individual orbital occupancies reveal the electron distribution across the molecule.
+    
 ---
 
 ## **17.3 The Electronic Hamiltonian and Qubit Mapping**
@@ -173,10 +163,8 @@ $$
 These integrals are computed classically using quantum chemistry packages (PySCF, PSI4, OpenFermion) before encoding onto quantum hardware.
 
 !!! tip "Number of Hamiltonian Terms"
-```
-A molecule with $M$ spin-orbitals has $O(M^4)$ two-electron integrals. For H₂ in STO-3G ($M=4$): 256 integrals, most zero by symmetry → ~5 unique Pauli terms. For larger molecules (e.g., FeMo-cofactor, $M \approx 50$-$100$): millions of terms, requiring efficient grouping strategies for measurement.
-
-```
+    A molecule with $M$ spin-orbitals has $O(M^4)$ two-electron integrals. For H₂ in STO-3G ($M=4$): 256 integrals, most zero by symmetry → ~5 unique Pauli terms. For larger molecules (e.g., FeMo-cofactor, $M \approx 50$-$100$): millions of terms, requiring efficient grouping strategies for measurement.
+    
 ### **VQE Workflow for Molecular Systems**
 
 ---
@@ -204,10 +192,8 @@ graph LR
 **Step 5: VQE loop** — evaluate $\langle H \rangle$ on quantum hardware, classically optimize circuit parameters
 
 !!! example "H₂ Ground-State Energy with VQE"
-```
-For H₂ at bond length 0.735 Å in STO-3G basis: after JW mapping and symmetry reduction, the effective Hamiltonian is 2-qubit. UCCSD with a single parameter achieves chemical accuracy (~1 mHartree) in ~20 optimizer iterations, matching CCSD(T) exactly for this two-electron system.
-
-```
+    For H₂ at bond length 0.735 Å in STO-3G basis: after JW mapping and symmetry reduction, the effective Hamiltonian is 2-qubit. UCCSD with a single parameter achieves chemical accuracy (~1 mHartree) in ~20 optimizer iterations, matching CCSD(T) exactly for this two-electron system.
+    
 ### **Comparison of Qubit Mappings**
 
 ---
@@ -220,10 +206,8 @@ For H₂ at bond length 0.735 Å in STO-3G basis: after JW mapping and symmetry 
 | **BK Superfast** | $O(1)$ (local) | $O(M^5)$ | $O(M)$ | Constant locality; higher term count |
 
 ??? question "Can VQE achieve exact ground state energies, or are there fundamental accuracy limits?"
-```
-VQE is exact in the limit of a complete ansatz — a circuit with enough expressibility to represent the exact ground state wavefunction. In practice, UCCSD is exact for two-electron systems (H₂) but approximate for larger ones (the truncation to singles and doubles introduces error). Hardware noise introduces a further accuracy floor: current NISQ devices typically achieve 1–10 mHartree accuracy for small molecules, comparable to HF but below chemical accuracy (~1 mHartree) for most cases.
-
-```
+    VQE is exact in the limit of a complete ansatz — a circuit with enough expressibility to represent the exact ground state wavefunction. In practice, UCCSD is exact for two-electron systems (H₂) but approximate for larger ones (the truncation to singles and doubles introduces error). Hardware noise introduces a further accuracy floor: current NISQ devices typically achieve 1–10 mHartree accuracy for small molecules, comparable to HF but below chemical accuracy (~1 mHartree) for most cases.
+    
 ---
 
 ## **References**

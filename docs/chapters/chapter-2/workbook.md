@@ -1,4 +1,4 @@
-# **Chapter 2: State and Operators () () (Workbook)**
+# **Chapter 2: State and Operators (Workbook)**
 
 ---
 
@@ -70,76 +70,68 @@ $$
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which expression equals the overlap between two states?**
-
-- A. $|\psi\rangle\langle\phi|$  
-- B. $|\psi\rangle|\phi\rangle$  
-- C. $\langle\phi|\psi\rangle$  
-- D. $\rho^2$
-
+    **1. Which expression equals the overlap between two states?**
+    
+    - A. $|\psi\rangle\langle\phi|$  
+    - B. $|\psi\rangle|\phi\rangle$  
+    - C. $\langle\phi|\psi\rangle$  
+    - D. $\rho^2$
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! note "Quiz"
-```
-**2. Which property must any density matrix satisfy?**
-
-- A. $\rho = iI$  
-- B. $\rho^2 = \rho$  
-- C. $\mathrm{Tr}(\rho) = 1$  
-- D. $\det(\rho)=1$
-
+    **2. Which property must any density matrix satisfy?**
+    
+    - A. $\rho = iI$  
+    - B. $\rho^2 = \rho$  
+    - C. $\mathrm{Tr}(\rho) = 1$  
+    - D. $\det(\rho)=1$
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! note "Quiz"
-```
-**3. For a pure state $\rho = |\psi\rangle\langle\psi|$, what is $\mathrm{Tr}(\rho^2)$?**
-
-- A. 0  
-- B. $<1$  
-- C. 1  
-- D. Undefined
-
+    **3. For a pure state $\rho = |\psi\rangle\langle\psi|$, what is $\mathrm{Tr}(\rho^2)$?**
+    
+    - A. 0  
+    - B. $<1$  
+    - C. 1  
+    - D. Undefined
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Why are density matrices necessary to describe mixed states, and how do you distinguish pure from mixed using matrix identities?
-
-???+ info "Answer Strategy"
-    **Pure vs. Mixed States:**  
-    A **pure state** has maximal knowledge and is described by a single ket $|\psi\rangle$. A **mixed state** represents classical uncertainty over an ensemble of quantum states $|\psi_i\rangle$ with probabilities $p_i$, requiring the density matrix:
     
-    $$
-    \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|
-    $$
-
-    **Mathematical Properties:**  
-    All valid density matrices satisfy: (1) Hermiticity $\rho = \rho^\dagger$, (2) Positive semidefiniteness $\langle\phi|\rho|\phi\rangle \geq 0$, (3) Unit trace $\mathrm{Tr}(\rho) = 1$.
-
-    **Distinguishing Pure from Mixed:**  
-    Use the purity test:
+    **Q:** Why are density matrices necessary to describe mixed states, and how do you distinguish pure from mixed using matrix identities?
     
-    $$
-    \mathrm{Tr}(\rho^2) = \begin{cases} 1 & \text{pure state} \\ < 1 & \text{mixed state} \end{cases}
-    $$
+    ???+ info "Answer Strategy"
+        **Pure vs. Mixed States:**  
+        A **pure state** has maximal knowledge and is described by a single ket $|\psi\rangle$. A **mixed state** represents classical uncertainty over an ensemble of quantum states $|\psi_i\rangle$ with probabilities $p_i$, requiring the density matrix:
+        
+        $$
+        \rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|
+        $$
     
-    For pure states, $\rho^2 = \rho$ (idempotent). Mixed states arise from decoherence when environmental interactions entangle the system with unobserved degrees of freedom.
-
-```
+        **Mathematical Properties:**  
+        All valid density matrices satisfy: (1) Hermiticity $\rho = \rho^\dagger$, (2) Positive semidefiniteness $\langle\phi|\rho|\phi\rangle \geq 0$, (3) Unit trace $\mathrm{Tr}(\rho) = 1$.
+    
+        **Distinguishing Pure from Mixed:**  
+        Use the purity test:
+        
+        $$
+        \mathrm{Tr}(\rho^2) = \begin{cases} 1 & \text{pure state} \\ < 1 & \text{mixed state} \end{cases}
+        $$
+        
+        For pure states, $\rho^2 = \rho$ (idempotent). Mixed states arise from decoherence when environmental interactions entangle the system with unobserved degrees of freedom.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -205,67 +197,61 @@ flowchart LR
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which identity defines unitarity?**
-
-- A. $U=U^\dagger$  
-- B. $U^2=I$  
-- C. $U^\dagger U = I$  
-- D. $\mathrm{Tr}(U)=1$
-
+    **1. Which identity defines unitarity?**
+    
+    - A. $U=U^\dagger$  
+    - B. $U^2=I$  
+    - C. $U^\dagger U = I$  
+    - D. $\mathrm{Tr}(U)=1$
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! note "Quiz"
-```
-**2. Why is unitary evolution essential for quantum computing?**
-
-- A. It creates mixed states  
-- B. It ensures reversibility and probability conservation  
-- C. It implements measurement collapse  
-- D. It breaks linearity
-
+    **2. Why is unitary evolution essential for quantum computing?**
+    
+    - A. It creates mixed states  
+    - B. It ensures reversibility and probability conservation  
+    - C. It implements measurement collapse  
+    - D. It breaks linearity
+    
 ??? info "See Answer"
-    **Correct: B**
-
-```
+        **Correct: B**
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Provide one unitary example from the Pauli set and justify why it preserves norm.
-
-???+ info "Answer Strategy"
-    **The Pauli-X Gate:**  
-    The Pauli-X gate (quantum NOT) has matrix:
     
-    $$
-    X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
-    $$
+    **Q:** Provide one unitary example from the Pauli set and justify why it preserves norm.
     
-    It swaps basis states: $X|0\rangle = |1\rangle$ and $X|1\rangle = |0\rangle$ (a $\pi$ rotation about the Bloch sphere's $x$-axis).
-
-    **Unitarity Verification:**  
-    The Pauli-X is both Hermitian ($X^\dagger = X$) and involutory ($X^2 = I$), so:
+    ???+ info "Answer Strategy"
+        **The Pauli-X Gate:**  
+        The Pauli-X gate (quantum NOT) has matrix:
+        
+        $$
+        X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+        $$
+        
+        It swaps basis states: $X|0\rangle = |1\rangle$ and $X|1\rangle = |0\rangle$ (a $\pi$ rotation about the Bloch sphere's $x$-axis).
     
-    $$
-    X^\dagger X = X^2 = I
-    $$
-
-    **Norm Preservation:**  
-    For any state $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$:
+        **Unitarity Verification:**  
+        The Pauli-X is both Hermitian ($X^\dagger = X$) and involutory ($X^2 = I$), so:
+        
+        $$
+        X^\dagger X = X^2 = I
+        $$
     
-    $$
-    \langle\psi|X^\dagger X|\psi\rangle = \langle\psi|I|\psi\rangle = 1
-    $$
+        **Norm Preservation:**  
+        For any state $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$:
+        
+        $$
+        \langle\psi|X^\dagger X|\psi\rangle = \langle\psi|I|\psi\rangle = 1
+        $$
+        
+        Unitarity preserves inner products, ensuring total probability conservation—a mandatory requirement for all quantum gates.
     
-    Unitarity preserves inner products, ensuring total probability conservation—a mandatory requirement for all quantum gates.
-
-```
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -326,66 +312,60 @@ flowchart TD
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. For $|\psi\rangle=\tfrac{1}{\sqrt{5}}|0\rangle+\tfrac{2i}{\sqrt{5}}|1\rangle$, what is $P(1)$?**
-
-- A. $1/5$  
-- B. $1/\sqrt{5}$  
-- C. $4/5$  
-- D. $2i/\sqrt{5}$
-
+    **1. For $|\psi\rangle=\tfrac{1}{\sqrt{5}}|0\rangle+\tfrac{2i}{\sqrt{5}}|1\rangle$, what is $P(1)$?**
+    
+    - A. $1/5$  
+    - B. $1/\sqrt{5}$  
+    - C. $4/5$  
+    - D. $2i/\sqrt{5}$
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! note "Quiz"
-```
-**2. What does $\sum_i M_i^\dagger M_i=I$ ensure?**
-
-- A. Orthogonality of $M_i$  
-- B. Completeness of measurement and probability conservation  
-- C. Hermiticity of $M_i$  
-- D. Deterministic outcomes
-
+    **2. What does $\sum_i M_i^\dagger M_i=I$ ensure?**
+    
+    - A. Orthogonality of $M_i$  
+    - B. Completeness of measurement and probability conservation  
+    - C. Hermiticity of $M_i$  
+    - D. Deterministic outcomes
+    
 ??? info "See Answer"
-    **Correct: B**
-
-```
+        **Correct: B**
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Explain the role of the denominator $\sqrt{P(i)}$ in the post-measurement state.
-
-???+ info "Answer Strategy"
-    **Measurement-Induced Collapse:**  
-    When measurement operator $M_i$ acts on $|\psi\rangle$, the post-measurement state is:
     
-    $$
-    |\psi_i\rangle = \frac{M_i|\psi\rangle}{\sqrt{P(i)}}
-    $$
+    **Q:** Explain the role of the denominator $\sqrt{P(i)}$ in the post-measurement state.
     
-    where $P(i) = \langle\psi|M_i^\dagger M_i|\psi\rangle$. The denominator provides **renormalization**.
-
-    **Why Renormalization is Necessary:**  
-    $M_i$ is not unitary—it extracts a state component, changing the norm. For example, with $M_0 = |0\rangle\langle 0|$ acting on $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$:
+    ???+ info "Answer Strategy"
+        **Measurement-Induced Collapse:**  
+        When measurement operator $M_i$ acts on $|\psi\rangle$, the post-measurement state is:
+        
+        $$
+        |\psi_i\rangle = \frac{M_i|\psi\rangle}{\sqrt{P(i)}}
+        $$
+        
+        where $P(i) = \langle\psi|M_i^\dagger M_i|\psi\rangle$. The denominator provides **renormalization**.
     
-    $$
-    M_0|\psi\rangle = \alpha|0\rangle
-    $$
+        **Why Renormalization is Necessary:**  
+        $M_i$ is not unitary—it extracts a state component, changing the norm. For example, with $M_0 = |0\rangle\langle 0|$ acting on $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$:
+        
+        $$
+        M_0|\psi\rangle = \alpha|0\rangle
+        $$
+        
+        This has norm $|\alpha|^2 \neq 1$. Dividing by $\sqrt{P(i)}$ restores unit normalization:
+        
+        $$
+        \langle\psi_i|\psi_i\rangle = \frac{P(i)}{P(i)} = 1
+        $$
+        
+        This is analogous to Bayesian updating: $P(A|B) = P(A \cap B)/P(B)$ renormalizes conditional probabilities.
     
-    This has norm $|\alpha|^2 \neq 1$. Dividing by $\sqrt{P(i)}$ restores unit normalization:
-    
-    $$
-    \langle\psi_i|\psi_i\rangle = \frac{P(i)}{P(i)} = 1
-    $$
-    
-    This is analogous to Bayesian updating: $P(A|B) = P(A \cap B)/P(B)$ renormalizes conditional probabilities.
-
-```
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -438,51 +418,45 @@ Consequences: quantum information cannot be duplicated like classical data; quan
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which principle underlies the no-cloning theorem?**
-
-- A. Measurement collapse  
-- B. Linearity/unitarity of quantum evolution  
-- C. Trace preservation  
-- D. Entanglement
-
+    **1. Which principle underlies the no-cloning theorem?**
+    
+    - A. Measurement collapse  
+    - B. Linearity/unitarity of quantum evolution  
+    - C. Trace preservation  
+    - D. Entanglement
+    
 ??? info "See Answer"
-    **Correct: B**
-
-```
+        **Correct: B**
+    
 ---
 
 !!! note "Quiz"
-```
-**2. The equation $\langle\psi|\phi\rangle = \langle\psi|\phi\rangle^2$ implies what for distinct non-orthogonal states?**
-
-- A. They can be cloned  
-- B. They are orthogonal  
-- C. A contradiction, hence cloning is impossible  
-- D. They are identical
-
+    **2. The equation $\langle\psi|\phi\rangle = \langle\psi|\phi\rangle^2$ implies what for distinct non-orthogonal states?**
+    
+    - A. They can be cloned  
+    - B. They are orthogonal  
+    - C. A contradiction, hence cloning is impossible  
+    - D. They are identical
+    
 ??? info "See Answer"
-    **Correct: C**
-
-```
+        **Correct: C**
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** State two practical implications of no-cloning for quantum computing.
-
-???+ info "Answer Strategy"
-    **The No-Cloning Theorem:**  
-    No unitary $U$ exists such that $U|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle$ for all $|\psi\rangle$. This follows from linearity and unitarity: cloning would require $\langle\psi|\phi\rangle \to (\langle\psi|\phi\rangle)^2$, violating unitarity for non-orthogonal states.
-
-    **Implication 1: No Quantum Backup via Copying:**  
-    Quantum information cannot be duplicated like classical bits. Unknown qubit states cannot be copied before measurement or destructive operations. This enables **quantum key distribution (QKD)** security—eavesdroppers cannot copy states without disturbance—but prevents lossless amplification, requiring **quantum repeaters** with entanglement swapping.
-
-    **Implication 2: Quantum Error Correction Requires Entangled Encoding:**  
-    QEC cannot use classical majority voting. Instead, logical qubits are encoded into **entangled subspaces** of physical qubits (e.g., 9-qubit Shor code). Error **syndrome measurements** reveal which error occurred without collapsing the encoded state, using stabilizer operators. No-cloning forces QEC to use correlations (entanglement) rather than copies, making it fundamentally different and more resource-intensive than classical error correction.
-
-```
+    
+    **Q:** State two practical implications of no-cloning for quantum computing.
+    
+    ???+ info "Answer Strategy"
+        **The No-Cloning Theorem:**  
+        No unitary $U$ exists such that $U|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle$ for all $|\psi\rangle$. This follows from linearity and unitarity: cloning would require $\langle\psi|\phi\rangle \to (\langle\psi|\phi\rangle)^2$, violating unitarity for non-orthogonal states.
+    
+        **Implication 1: No Quantum Backup via Copying:**  
+        Quantum information cannot be duplicated like classical bits. Unknown qubit states cannot be copied before measurement or destructive operations. This enables **quantum key distribution (QKD)** security—eavesdroppers cannot copy states without disturbance—but prevents lossless amplification, requiring **quantum repeaters** with entanglement swapping.
+    
+        **Implication 2: Quantum Error Correction Requires Entangled Encoding:**  
+        QEC cannot use classical majority voting. Instead, logical qubits are encoded into **entangled subspaces** of physical qubits (e.g., 9-qubit Shor code). Error **syndrome measurements** reveal which error occurred without collapsing the encoded state, using stabilizer operators. No-cloning forces QEC to use correlations (entanglement) rather than copies, making it fundamentally different and more resource-intensive than classical error correction.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**

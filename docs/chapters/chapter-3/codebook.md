@@ -1,4 +1,4 @@
-# **Chapter 3: Quantum Gates and Circuits () () (Codebook)**
+# **Chapter 3: Quantum Gates and Circuits (Codebook)**
 
 This codebook translates the gate formalism of Chapter 3 into runnable Qiskit circuits: from single-qubit gate composition through multi-qubit entanglement to circuit resource analysis.
 

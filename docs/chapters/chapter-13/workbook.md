@@ -1,4 +1,4 @@
-# **Chapter 13: Quantum Reinforcement Learning () () (Workbook)**
+# **Chapter 13: Quantum Reinforcement Learning (Workbook)**
 
 ---
 
@@ -39,31 +39,27 @@ The discount factor $\gamma$ prioritizes immediate rewards over distant ones.
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  In the classical RL setup, which quantity is the agent's primary goal to maximize?
-    2.  In QRL, what quantum computational structure is typically used to approximate the policy or value functions?
-
-```
+    
+        1.  In the classical RL setup, which quantity is the agent's primary goal to maximize?
+        2.  In QRL, what quantum computational structure is typically used to approximate the policy or value functions?
+    
 ??? info "See Answer"
-
-    1.  The **expected return $G_t$** (cumulative discounted rewards).
-    2.  A **Parameterized Quantum Circuit (PQC)** or a related quantum model.
-
-```
+    
+        1.  The **expected return $G_t$** (cumulative discounted rewards).
+        2.  A **Parameterized Quantum Circuit (PQC)** or a related quantum model.
+    
 !!! abstract "Interview-Style Question"
-
-```
-A client asks why you would use a PQC to model an RL policy instead of a standard neural network. What is the core theoretical advantage you would cite?
-
-???+ info "Answer Strategy"
-    The core theoretical advantage is the potentially superior **expressive power** of a Parameterized Quantum Circuit (PQC).
-
-    1.  **Access to a Larger State Space:** A PQC operates in an exponentially large Hilbert space. This allows it to represent far more complex functions and strategies than a classical neural network of a comparable size.
-    2.  **Modeling Complex Correlations:** By leveraging quantum entanglement, a PQC can naturally capture intricate, non-local correlations within the environment's state space. A classical network might require a much larger and deeper architecture to model these same relationships, if it can at all.
-
-    In essence, you are giving the agent a more powerful "brain" to find more sophisticated and effective policies, especially in environments with complex, quantum-like structures.
-
-```
+    
+    A client asks why you would use a PQC to model an RL policy instead of a standard neural network. What is the core theoretical advantage you would cite?
+    
+    ???+ info "Answer Strategy"
+        The core theoretical advantage is the potentially superior **expressive power** of a Parameterized Quantum Circuit (PQC).
+    
+        1.  **Access to a Larger State Space:** A PQC operates in an exponentially large Hilbert space. This allows it to represent far more complex functions and strategies than a classical neural network of a comparable size.
+        2.  **Modeling Complex Correlations:** By leveraging quantum entanglement, a PQC can naturally capture intricate, non-local correlations within the environment's state space. A classical network might require a much larger and deeper architecture to model these same relationships, if it can at all.
+    
+        In essence, you are giving the agent a more powerful "brain" to find more sophisticated and effective policies, especially in environments with complex, quantum-like structures.
+    
 ---
 
 ## **13.2 Quantum Policy Gradient Methods** {.heading-with-pill}
@@ -97,30 +93,26 @@ A key potential advantage of the quantum approach is **enhanced exploration**. B
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  What is the role of the term $\nabla_\theta \log \pi_\theta(a|s)$ in the policy gradient update rule?
-    2.  In the quantum formulation, what quantum property is often cited as a way to enhance the search process?
-
-```
+    
+        1.  What is the role of the term $\nabla_\theta \log \pi_\theta(a|s)$ in the policy gradient update rule?
+        2.  In the quantum formulation, what quantum property is often cited as a way to enhance the search process?
+    
 ??? info "See Answer"
-
-    1.  It is the **score function**, which acts as a directional indicator. It tells the optimizer how to change the parameters $\theta$ to make the chosen action more (or less) likely.
-    2.  **Superposition**, which can be used for more effective and potentially parallel exploration of the state space.
-
-```
+    
+        1.  It is the **score function**, which acts as a directional indicator. It tells the optimizer how to change the parameters $\theta$ to make the chosen action more (or less) likely.
+        2.  **Superposition**, which can be used for more effective and potentially parallel exploration of the state space.
+    
 !!! abstract "Interview-Style Question"
-
-```
-Explain the intuition behind the policy gradient update rule $\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t$. Why the logarithm?
-
-???+ info "Answer Strategy"
-    The intuition is simple: **"If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely."**
-
-    1.  **The Outcome Signal ($G_t$):** The return, $G_t$, is the "goodness" signal. A large positive $G_t$ means the action was beneficial, while a negative $G_t$ means it was detrimental.
-    2.  **The Directional Pointer ($\nabla_\theta \log \pi_\theta(a|s)$):** This term, the score function, tells us which way to adjust the parameters $\theta$ to increase the probability of the specific action we just took.
-    3.  **Why the Logarithm?** The logarithm is a mathematical tool (the "log-derivative trick") that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent's own experience.
-
-```
+    
+    Explain the intuition behind the policy gradient update rule $\nabla_\theta J(\theta) \propto \nabla_\theta \log \pi_\theta(a|s) \cdot G_t$. Why the logarithm?
+    
+    ???+ info "Answer Strategy"
+        The intuition is simple: **"If an action led to a good outcome, make it more likely. If it led to a bad outcome, make it less likely."**
+    
+        1.  **The Outcome Signal ($G_t$):** The return, $G_t$, is the "goodness" signal. A large positive $G_t$ means the action was beneficial, while a negative $G_t$ means it was detrimental.
+        2.  **The Directional Pointer ($\nabla_\theta \log \pi_\theta(a|s)$):** This term, the score function, tells us which way to adjust the parameters $\theta$ to increase the probability of the specific action we just took.
+        3.  **Why the Logarithm?** The logarithm is a mathematical tool (the "log-derivative trick") that makes the gradient calculable. It converts the gradient of the policy into a form that can be estimated by sampling. Without it, calculating the gradient would require knowing the full, often intractable, dynamics of the environment. It allows us to estimate the gradient using only the agent's own experience.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -240,38 +232,34 @@ By minimizing this loss, the PQC $Q_\theta(s, a)$ is trained to become a self-co
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  In value-based QRL, what function is approximated by the PQC?
-    2.  The loss function in Quantum Value Iteration aims to minimize what quantity?
-
-```
+    
+        1.  In value-based QRL, what function is approximated by the PQC?
+        2.  The loss function in Quantum Value Iteration aims to minimize what quantity?
+    
 ??? info "See Answer"
-
-    1.  The **action-value function $Q(s, a)$**.
-    2.  The **temporal-difference (TD) error**, which is the squared difference between the current Q-value estimate and the TD target.
-
-```
+    
+        1.  The **action-value function $Q(s, a)$**.
+        2.  The **temporal-difference (TD) error**, which is the squared difference between the current Q-value estimate and the TD target.
+    
 !!! abstract "Interview-Style Question"
-
-```
-What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method?
-
-???+ info "Answer Strategy"
-    The fundamental difference is what each method chooses to model and learn directly.
-
-    1.  **Policy Gradient (Direct Policy Learning):**
-        *   **What it learns:** The policy itself, $\pi_\theta(a|s)$.
-        *   **How it works:** It directly adjusts the parameters of the policy to favor actions that lead to higher rewards.
-        *   **It answers the question:** "In this state, what is the best action to take?"
-
-    2.  **Value Iteration (Indirect Policy Learning):**
-        *   **What it learns:** The action-value function, $Q(s, a)$.
-        *   **How it works:** It learns the expected long-term reward (the "value") of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value).
-        *   **It answers the question:** "In this state, how good is it to take this action?"
-
-    In short, policy gradient methods learn a **strategy** directly, while value iteration methods learn a **map of values** and then derive the strategy from that map.
-
-```
+    
+    What is the fundamental difference in what is being learned in a policy gradient method versus a value iteration method?
+    
+    ???+ info "Answer Strategy"
+        The fundamental difference is what each method chooses to model and learn directly.
+    
+        1.  **Policy Gradient (Direct Policy Learning):**
+            *   **What it learns:** The policy itself, $\pi_\theta(a|s)$.
+            *   **How it works:** It directly adjusts the parameters of the policy to favor actions that lead to higher rewards.
+            *   **It answers the question:** "In this state, what is the best action to take?"
+    
+        2.  **Value Iteration (Indirect Policy Learning):**
+            *   **What it learns:** The action-value function, $Q(s, a)$.
+            *   **How it works:** It learns the expected long-term reward (the "value") of taking any action in any state. The policy is then derived from these values (e.g., by always picking the action with the highest Q-value).
+            *   **It answers the question:** "In this state, how good is it to take this action?"
+    
+        In short, policy gradient methods learn a **strategy** directly, while value iteration methods learn a **map of values** and then derive the strategy from that map.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -366,34 +354,30 @@ These quantum strategies move beyond simple randomness, introducing a structured
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  What is the name for the RL dilemma of choosing between known good actions and trying new ones?
-    2.  How does a quantum random walk differ from a classical one?
-
-```
+    
+        1.  What is the name for the RL dilemma of choosing between known good actions and trying new ones?
+        2.  How does a quantum random walk differ from a classical one?
+    
 ??? info "See Answer"
-
-    1.  The **exploration-exploitation trade-off**.
-    2.  A quantum random walk evolves a **superposition** of states, allowing it to explore many paths at once and use **interference** to amplify promising directions. A classical random walk follows a single, probabilistic path.
-
-```
+    
+        1.  The **exploration-exploitation trade-off**.
+        2.  A quantum random walk evolves a **superposition** of states, allowing it to explore many paths at once and use **interference** to amplify promising directions. A classical random walk follows a single, probabilistic path.
+    
 !!! abstract "Interview-Style Question"
-
-```
-Explain what "coherent exploration" means and why it's fundamentally different from $\epsilon$-greedy exploration.
-
-???+ info "Answer Strategy"
-    The difference is between a random, memoryless search and a structured, parallel search.
-
-    1.  **Classical $\epsilon$-greedy (Incoherent Search):** This is a purely probabilistic strategy. The decision to explore is like an independent coin flip at each step. There is no memory or structure to the exploration; the agent simply "jumps" to a random action. It's a memoryless, point-by-point search.
-
-    2.  **Quantum Coherent Exploration (Wave-like Search):** This strategy uses quantum superposition to explore many possible paths simultaneously. The agent's state is a wave that evolves through the state space. The different paths maintain phase relationships and can interfere with each other.
-        *   **Constructive Interference:** Amplifies paths leading to high-reward regions.
-        *   **Destructive Interference:** Cancels out paths leading to low-reward regions.
-
-    **Analogy:** $\epsilon$-greedy is like a person in a maze randomly trying one door at a time. Coherent exploration is like a flood of water that spreads through the entire maze at once, with the flow naturally concentrating towards the exit. It's a deterministic, highly parallel, and structured search.
-
-```
+    
+    Explain what "coherent exploration" means and why it's fundamentally different from $\epsilon$-greedy exploration.
+    
+    ???+ info "Answer Strategy"
+        The difference is between a random, memoryless search and a structured, parallel search.
+    
+        1.  **Classical $\epsilon$-greedy (Incoherent Search):** This is a purely probabilistic strategy. The decision to explore is like an independent coin flip at each step. There is no memory or structure to the exploration; the agent simply "jumps" to a random action. It's a memoryless, point-by-point search.
+    
+        2.  **Quantum Coherent Exploration (Wave-like Search):** This strategy uses quantum superposition to explore many possible paths simultaneously. The agent's state is a wave that evolves through the state space. The different paths maintain phase relationships and can interfere with each other.
+            *   **Constructive Interference:** Amplifies paths leading to high-reward regions.
+            *   **Destructive Interference:** Cancels out paths leading to low-reward regions.
+    
+        **Analogy:** $\epsilon$-greedy is like a person in a maze randomly trying one door at a time. Coherent exploration is like a flood of water that spreads through the entire maze at once, with the flow naturally concentrating towards the exit. It's a deterministic, highly parallel, and structured search.
+    
 ---
 
 ## **13.5 Quantum Agent Architectures** {.heading-with-pill}
@@ -421,34 +405,30 @@ This final case, where the environment is a real quantum experiment, is a partic
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  In a hybrid QRL agent, which component is typically handled by a classical optimizer like Adam?
-    2.  What futuristic quantum technology is proposed for advanced agent memory?
-
-```
+    
+        1.  In a hybrid QRL agent, which component is typically handled by a classical optimizer like Adam?
+        2.  What futuristic quantum technology is proposed for advanced agent memory?
+    
 ??? info "See Answer"
-
-    1.  The **learning/optimization** step (i.e., updating the parameters $\theta$).
-    2.  **Quantum Random Access Memory (QRAM)**.
-
-```
+    
+        1.  The **learning/optimization** step (i.e., updating the parameters $\theta$).
+        2.  **Quantum Random Access Memory (QRAM)**.
+    
 !!! abstract "Interview-Style Question"
-
-```
-Describe a scenario where the "environment" in a QRL setup is itself a quantum system. What are the state, action, and reward?
-
-???+ info "Answer Strategy"
-    This describes a powerful application where a QRL agent acts as an "autonomous physicist," learning to control a quantum experiment.
-
-    *   **Scenario:** An agent is tasked with creating a high-fidelity three-qubit GHZ state in a trapped-ion experiment.
-
-    *   **State ($s_t$):** The state is a classical description of the outcome of the previous attempt. This could be a vector containing the measured populations of the 8 basis states (e.g., $|000\rangle, |001\rangle, \dots$) and the coherences between them, obtained via quantum state tomography.
-
-    *   **Action ($a_t$):** The action is a set of classical control parameters for the experimental apparatus. For instance, it could be a vector specifying the duration, intensity, and frequency of the laser pulses applied to the ions.
-
-    *   **Reward ($r_{t+1}$):** The reward is a single number quantifying the success of the experiment. The most direct reward is the **fidelity** of the created state $|\psi_{\text{actual}}\rangle$ with respect to the ideal GHZ state $|\psi_{\text{GHZ}}\rangle$:
-        $$
-        r_{t+1} = F = |\langle \psi_{\text{GHZ}} | \psi_{\text{actual}} \rangle|^2
-        $$
-        The agent's goal is to learn the sequence of actions (laser pulses) that maximizes this fidelity, thereby discovering the optimal control protocol for the experiment.
-```
+    
+    Describe a scenario where the "environment" in a QRL setup is itself a quantum system. What are the state, action, and reward?
+    
+    ???+ info "Answer Strategy"
+        This describes a powerful application where a QRL agent acts as an "autonomous physicist," learning to control a quantum experiment.
+    
+        *   **Scenario:** An agent is tasked with creating a high-fidelity three-qubit GHZ state in a trapped-ion experiment.
+    
+        *   **State ($s_t$):** The state is a classical description of the outcome of the previous attempt. This could be a vector containing the measured populations of the 8 basis states (e.g., $|000\rangle, |001\rangle, \dots$) and the coherences between them, obtained via quantum state tomography.
+    
+        *   **Action ($a_t$):** The action is a set of classical control parameters for the experimental apparatus. For instance, it could be a vector specifying the duration, intensity, and frequency of the laser pulses applied to the ions.
+    
+        *   **Reward ($r_{t+1}$):** The reward is a single number quantifying the success of the experiment. The most direct reward is the **fidelity** of the created state $|\psi_{\text{actual}}\rangle$ with respect to the ideal GHZ state $|\psi_{\text{GHZ}}\rangle$:
+            $$
+            r_{t+1} = F = |\langle \psi_{\text{GHZ}} | \psi_{\text{actual}} \rangle|^2
+            $$
+            The agent's goal is to learn the sequence of actions (laser pulses) that maximizes this fidelity, thereby discovering the optimal control protocol for the experiment.

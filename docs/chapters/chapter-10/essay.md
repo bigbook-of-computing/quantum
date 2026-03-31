@@ -31,10 +31,8 @@ This chapter deconstructs the anatomy of VQCs, examining their three-stage archi
 The foundation of quantum machine learning and variational algorithms is the **Parameterized Quantum Circuit (PQC)**, commonly referred to as a **Variational Quantum Circuit (VQC)**. A VQC is a **hybrid quantum-classical model** designed to be the trainable core of an algorithm, where the quantum hardware performs the complex state transformation and the classical hardware executes the optimization.
 
 !!! tip "VQCs as Quantum Neural Networks"
-```
-Think of a VQC as a quantum neural network: the encoding layer is the input, the parameterized gates are trainable weights, entangling gates are activation functions, and measurement extracts the output. The entire circuit learns by gradient descent [3].
-
-```
+    Think of a VQC as a quantum neural network: the encoding layer is the input, the parameterized gates are trainable weights, entangling gates are activation functions, and measurement extracts the output. The entire circuit learns by gradient descent [3].
+    
 ### **Structural Stages of a VQC**
 
 ---
@@ -99,16 +97,14 @@ $$
 where $y_i$ is the target label.
 
 !!! example "VQC for Binary Classification"
-```
-For classifying data point $x$ into classes $\{-1, +1\}$:
-
-1. **Encode:** $U_\phi(x)|0\rangle^{\otimes n}$ maps $x$ to quantum state
-2. **Transform:** $U(\vec{\theta})$ applies trainable rotations and entanglement
-3. **Measure:** Compute $\langle Z_0 \rangle$ (expectation of Pauli-Z on qubit 0)
-4. **Classify:** Prediction = sign($\langle Z_0 \rangle$)
-5. **Train:** Minimize $L(\vec{\theta}) = \sum_i (\langle Z_0 \rangle_i - y_i)^2$ using classical optimizer
-
-```
+    For classifying data point $x$ into classes $\{-1, +1\}$:
+    
+    1. **Encode:** $U_\phi(x)|0\rangle^{\otimes n}$ maps $x$ to quantum state
+    2. **Transform:** $U(\vec{\theta})$ applies trainable rotations and entanglement
+    3. **Measure:** Compute $\langle Z_0 \rangle$ (expectation of Pauli-Z on qubit 0)
+    4. **Classify:** Prediction = sign($\langle Z_0 \rangle$)
+    5. **Train:** Minimize $L(\vec{\theta}) = \sum_i (\langle Z_0 \rangle_i - y_i)^2$ using classical optimizer
+    
 ---
 
 ### **Analogy to Classical Neural Networks**
@@ -158,10 +154,8 @@ VQC_Forward_Pass(x, theta, num_qubits):
 An **ansatz** is a pre-defined template for the **Parameterized Unitary Layer** $U(\vec{\theta})$ in a Variational Quantum Circuit (VQC). It is a structured sequence of fixed gates and trainable rotations that determines the **expressibility** (the ability to generate complex target states) and **trainability** (the ease of finding optimal parameters) of the model.
 
 !!! tip "Ansatz Design is Everything"
-```
-The choice of ansatz is not a mere implementation detail—it fundamentally determines whether your VQC will train successfully or get stuck in barren plateaus. Structured, problem-inspired ansätze often outperform deep random circuits [4].
-
-```
+    The choice of ansatz is not a mere implementation detail—it fundamentally determines whether your VQC will train successfully or get stuck in barren plateaus. Structured, problem-inspired ansätze often outperform deep random circuits [4].
+    
 ### **Structure and Design Principles**
 
 ---
@@ -208,10 +202,8 @@ This structure involves applying universal gates to every qubit in a simple repe
 * **Structure:** Alternates layers of all-to-all entanglement (or fixed patterns) and rotation blocks. An example is alternating $R_y(\theta)$ on all qubits and CNOTs on adjacent pairs.
 
 ??? question "Why do entangling gates act like activation functions in neural networks?"
-```
-Entangling gates create non-linear correlations between qubits by coupling their states, similar to how ReLU or sigmoid functions introduce non-linearity in neural networks. Without entanglement, the circuit would only produce separable (product) states, limiting expressivity to linear transformations.
-
-```
+    Entangling gates create non-linear correlations between qubits by coupling their states, similar to how ReLU or sigmoid functions introduce non-linearity in neural networks. Without entanglement, the circuit would only produce separable (product) states, limiting expressivity to linear transformations.
+    
 ---
 
 ### **Importance for Trainability (Barren Plateaus)**
@@ -273,10 +265,8 @@ Problem_Inspired_Ansatz_QAOA(num_qubits, beta, gamma):
 Variational Quantum Circuits (VQCs) are not standalone algorithms; they function as the quantum processor within **hybrid quantum-classical models**. This model is the dominant paradigm for current computation on **NISQ (Noisy Intermediate-Scale Quantum)** devices, pragmatically dividing the computational workload between the quantum processor and the conventional classical computer.
 
 !!! tip "Why Hybrid Models Dominate NISQ"
-```
-Quantum hardware excels at exploring exponential Hilbert spaces but is terrible at iterative optimization (noise, decoherence, limited coherence time). Classical computers excel at optimization but cannot efficiently simulate quantum states. Hybrid models exploit the best of both worlds [5].
-
-```
+    Quantum hardware excels at exploring exponential Hilbert spaces but is terrible at iterative optimization (noise, decoherence, limited coherence time). Classical computers excel at optimization but cannot efficiently simulate quantum states. Hybrid models exploit the best of both worlds [5].
+    
 ### **The Hybrid Workflow**
 
 ---
@@ -327,33 +317,31 @@ flowchart TD
 ```
 
 !!! example "VQC Training Loop Pseudo-code"
-    ```
-    VQC_Training_Loop(data, labels, initial_theta, max_iterations):
-        theta = initial_theta
-        
-        for iteration in range(max_iterations):
-            # Quantum execution: evaluate cost
-            total_cost = 0
-            for (x, y) in zip(data, labels):
-                # Run VQC on quantum hardware
-                prediction = VQC_Forward_Pass(x, theta)
-                total_cost += (prediction - y)^2
+        VQC_Training_Loop(data, labels, initial_theta, max_iterations):
+            theta = initial_theta
             
-            # Classical optimization: compute gradient and update
-            if using_gradient_based_optimizer:
-                gradient = Parameter_Shift_Rule(theta, data, labels)
-                theta = theta - learning_rate * gradient
-            else:
-                # Gradient-free (e.g., COBYLA)
-                theta = Optimizer_Step(theta, total_cost)
+            for iteration in range(max_iterations):
+                # Quantum execution: evaluate cost
+                total_cost = 0
+                for (x, y) in zip(data, labels):
+                    # Run VQC on quantum hardware
+                    prediction = VQC_Forward_Pass(x, theta)
+                    total_cost += (prediction - y)^2
+                
+                # Classical optimization: compute gradient and update
+                if using_gradient_based_optimizer:
+                    gradient = Parameter_Shift_Rule(theta, data, labels)
+                    theta = theta - learning_rate * gradient
+                else:
+                    # Gradient-free (e.g., COBYLA)
+                    theta = Optimizer_Step(theta, total_cost)
+                
+                # Check convergence
+                if total_cost < tolerance:
+                    break
             
-            # Check convergence
-            if total_cost < tolerance:
-                break
-        
-        return theta
-    ```
-
+            return theta
+    
 ---
 
 ### **Advantages for NISQ**
@@ -379,10 +367,8 @@ The exponential number of repetitions inherent in optimization is handled by cla
 Training a Variational Quantum Circuit (VQC) involves the critical step of using a classical optimizer to find the parameter vector $\vec{\theta}$ that minimizes the measured cost function $C(\vec{\theta})$. This process relies on efficiently calculating or approximating the gradient of the cost function, often through quantum mechanical methods.
 
 !!! tip "The Parameter Shift Rule: Quantum Backpropagation"
-```
-Classical neural networks use backpropagation to compute gradients. Quantum circuits use the parameter shift rule—a quantum-native method that analytically computes gradients by running the circuit twice with shifted parameters [6].
-
-```
+    Classical neural networks use backpropagation to compute gradients. Quantum circuits use the parameter shift rule—a quantum-native method that analytically computes gradients by running the circuit twice with shifted parameters [6].
+    
 ### **Gradient-Based Optimization and the Parameter Shift Rule**
 
 ---
@@ -451,10 +437,8 @@ Methods like **COBYLA, Nelder-Mead, or Powell** do not calculate the gradient at
 Methods like **SPSA (Simultaneous Perturbation Stochastic Approximation)** estimate the gradient using only a small, fixed number of noisy measurements (usually two per iteration), regardless of the number of parameters. This makes SPSA highly efficient in terms of quantum circuit executions, particularly for circuits with a large number of parameters.
 
 ??? question "When should you use COBYLA instead of Adam for VQC training?"
-```
-Use COBYLA when: (1) measurement noise is high and gradient estimates are unreliable, (2) the number of parameters is small (<50), or (3) the cost landscape is highly non-convex with many local minima. Adam is preferred when gradients are reliable and you need faster convergence with many parameters.
-
-```
+    Use COBYLA when: (1) measurement noise is high and gradient estimates are unreliable, (2) the number of parameters is small (<50), or (3) the cost landscape is highly non-convex with many local minima. Adam is preferred when gradients are reliable and you need faster convergence with many parameters.
+    
 ---
 
 ### **Challenges to Optimization**
@@ -480,10 +464,8 @@ This is a severe problem where the cost function gradients vanish exponentially 
 **Barren plateaus** are a critical, inherent issue in training large **Variational Quantum Circuits (VQCs)**, representing an exponential vanishing of gradients across the optimization landscape. This issue directly impacts the **trainability** of VQCs.
 
 !!! tip "The Barren Plateau Crisis"
-```
-Barren plateaus are the quantum equivalent of the vanishing gradient problem in deep classical neural networks, but exponentially worse. Random deep quantum circuits become exponentially flat—gradients vanish as $\exp(-n)$ where $n$ is the number of qubits [7].
-
-```
+    Barren plateaus are the quantum equivalent of the vanishing gradient problem in deep classical neural networks, but exponentially worse. Random deep quantum circuits become exponentially flat—gradients vanish as $\exp(-n)$ where $n$ is the number of qubits [7].
+    
 ### **The Phenomenon**
 
 ---
@@ -547,17 +529,15 @@ flowchart TD
 ```
 
 !!! example "Barren Plateau Detection"
-```
-To detect if your VQC suffers from barren plateaus:
-
-1. **Sample gradients:** Compute $\frac{\partial C}{\partial \theta_k}$ for multiple random $\vec{\theta}$
-2. **Calculate variance:** $\text{Var}[\nabla C] = \frac{1}{K}\sum_{k=1}^{K}(\nabla_k C)^2 - (\frac{1}{K}\sum_{k=1}^{K}\nabla_k C)^2$
-3. **Check scaling:** If $\text{Var}[\nabla C] \propto 2^{-n}$, you have a barren plateau
-4. **Mitigate:** Switch to shallow, structured ansatz or local cost function
-
-```
-The challenge of barren plateaus reinforces the current necessity of designing **shallow, localized VQCs** for quantum machine learning.
-
+    To detect if your VQC suffers from barren plateaus:
+    
+    1. **Sample gradients:** Compute $\frac{\partial C}{\partial \theta_k}$ for multiple random $\vec{\theta}$
+    2. **Calculate variance:** $\text{Var}[\nabla C] = \frac{1}{K}\sum_{k=1}^{K}(\nabla_k C)^2 - (\frac{1}{K}\sum_{k=1}^{K}\nabla_k C)^2$
+    3. **Check scaling:** If $\text{Var}[\nabla C] \propto 2^{-n}$, you have a barren plateau
+    4. **Mitigate:** Switch to shallow, structured ansatz or local cost function
+    
+    The challenge of barren plateaus reinforces the current necessity of designing **shallow, localized VQCs** for quantum machine learning.
+    
 ---
 
 ### **Summary: Comparison of VQC Components and Challenges**

@@ -1,4 +1,4 @@
-# **Chapter 12: Quantum Unsupervised Learning () () (Codebook)**
+# **Chapter 12: Quantum Unsupervised Learning (Codebook)**
 
 Unsupervised quantum learning discovers structure in unlabelled data. This chapter implements quantum principal-component analysis via state overlap, quantum k-means assignment, and a quantum autoencoder that compresses $n$ qubits into $k < n$ qubits.
 

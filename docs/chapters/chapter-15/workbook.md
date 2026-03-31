@@ -1,4 +1,4 @@
-# **Chapter 15: 15.1 Using PennyLane for QML {.heading-with-pill} () () (Workbook)**
+# **Chapter 15: 15.1 Using PennyLane for QML {.heading-with-pill} (Workbook)**
 
 > **Concept:** Differentiable Quantum Programming • **Difficulty:** ★★★☆☆
 > **Summary:** PennyLane is a cross-platform Python library for differentiable programming of quantum computers. It integrates with classical machine learning libraries like PyTorch and TensorFlow, making it ideal for building and training hybrid quantum-classical models.
@@ -23,54 +23,48 @@ This makes PennyLane the ideal tool for developing and experimenting with **Vari
 ### Comprehension Check
 
 !!! note "Quiz"
-```
-**1. What is the core feature of PennyLane that makes it particularly suitable for Quantum Machine Learning?**
-
-- A. It has the fastest available quantum simulator.
-- B. It provides direct access to all quantum hardware.
-- C. **It allows for automatic differentiation of quantum circuits.**
-- D. It is the only framework that supports the Q# language.
-
+    **1. What is the core feature of PennyLane that makes it particularly suitable for Quantum Machine Learning?**
+    
+    - A. It has the fastest available quantum simulator.
+    - B. It provides direct access to all quantum hardware.
+    - C. **It allows for automatic differentiation of quantum circuits.**
+    - D. It is the only framework that supports the Q# language.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    PennyLane's ability to compute gradients of quantum circuits is its defining feature, enabling integration with classical ML optimization loops.
-
-```
+        **Correct: C**  
+        PennyLane's ability to compute gradients of quantum circuits is its defining feature, enabling integration with classical ML optimization loops.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. In PennyLane, what is the role of a `qnode`?**
-
-- A. It is a type of quantum hardware.
-- B. It is a classical optimization algorithm.
-- C. **It is a Python function that encapsulates a quantum circuit and binds it to a device.**
-- D. It is a data structure for storing quantum measurement results.
-
+    **2. In PennyLane, what is the role of a `qnode`?**
+    
+    - A. It is a type of quantum hardware.
+    - B. It is a classical optimization algorithm.
+    - C. **It is a Python function that encapsulates a quantum circuit and binds it to a device.**
+    - D. It is a data structure for storing quantum measurement results.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    A `qnode` is the fundamental building block that turns a Python function describing a circuit into an executable and differentiable quantum computation.
-
-```
+        **Correct: C**  
+        A `qnode` is the fundamental building block that turns a Python function describing a circuit into an executable and differentiable quantum computation.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Imagine you are tasked with building a hybrid quantum-classical model to classify data. Why would PennyLane be a more natural choice for this task than a lower-level framework like Qiskit or Cirq on its own?
-
-???+ info "Answer Strategy"
-    PennyLane is the more natural choice because it is specifically designed for **differentiable programming** and seamless integration with classical machine learning frameworks.
-
-    1.  **Automatic Differentiation:** The most critical reason is PennyLane's built-in ability to compute gradients of quantum circuits. Training a hybrid model requires calculating the derivative of a classical cost function with respect to the quantum circuit's parameters. PennyLane automates this using techniques like the parameter-shift rule. In a lower-level framework like Qiskit or Cirq, you would need to implement this complex gradient logic manually.
-
-    2.  **Framework Agnosticism and Integration:** PennyLane is designed to be a universal bridge. A PennyLane `qnode` can be used as a native layer directly within a PyTorch (`torch.nn.Module`) or TensorFlow (`tf.keras.layers.Layer`) model. This allows you to use familiar classical optimizers (like Adam) and data pipelines to train the entire hybrid system end-to-end, without any special wrappers.
-
-    3.  **Higher Level of Abstraction:** PennyLane provides a higher level of abstraction focused on the QML task itself. It lets you concentrate on designing the model architecture and cost function, while it handles the underlying mechanics of gradient computation and device communication. Lower-level frameworks provide the fundamental building blocks for circuits but require you to construct the entire QML training infrastructure yourself.
-
-    In short, you would choose PennyLane because it allows you to build and train hybrid models using the same mental models and tools you already use for classical deep learning, dramatically accelerating the development process.
-
-```
+    
+    **Q:** Imagine you are tasked with building a hybrid quantum-classical model to classify data. Why would PennyLane be a more natural choice for this task than a lower-level framework like Qiskit or Cirq on its own?
+    
+    ???+ info "Answer Strategy"
+        PennyLane is the more natural choice because it is specifically designed for **differentiable programming** and seamless integration with classical machine learning frameworks.
+    
+        1.  **Automatic Differentiation:** The most critical reason is PennyLane's built-in ability to compute gradients of quantum circuits. Training a hybrid model requires calculating the derivative of a classical cost function with respect to the quantum circuit's parameters. PennyLane automates this using techniques like the parameter-shift rule. In a lower-level framework like Qiskit or Cirq, you would need to implement this complex gradient logic manually.
+    
+        2.  **Framework Agnosticism and Integration:** PennyLane is designed to be a universal bridge. A PennyLane `qnode` can be used as a native layer directly within a PyTorch (`torch.nn.Module`) or TensorFlow (`tf.keras.layers.Layer`) model. This allows you to use familiar classical optimizers (like Adam) and data pipelines to train the entire hybrid system end-to-end, without any special wrappers.
+    
+        3.  **Higher Level of Abstraction:** PennyLane provides a higher level of abstraction focused on the QML task itself. It lets you concentrate on designing the model architecture and cost function, while it handles the underlying mechanics of gradient computation and device communication. Lower-level frameworks provide the fundamental building blocks for circuits but require you to construct the entire QML training infrastructure yourself.
+    
+        In short, you would choose PennyLane because it allows you to build and train hybrid models using the same mental models and tools you already use for classical deep learning, dramatically accelerating the development process.
+    
 ---
 
 ### <i class="fa-solid fa-flask"></i> Hands-On Project
@@ -129,35 +123,31 @@ This module is part of the broader Qiskit ecosystem and provides tools specifica
 ### Comprehension Check
 
 !!! note "Quiz"
-```
-**1. What is the primary advantage of using TensorFlow Quantum for building a hybrid model?**
-
-- A. It is the only framework that can run on Google's Sycamore processor.
-- B. **It allows quantum circuits to be treated as native `tf.keras.layers.Layer` objects.**
-- C. It exclusively uses the `Adam` optimizer.
-- D. It does not require a quantum simulator.
-
+    **1. What is the primary advantage of using TensorFlow Quantum for building a hybrid model?**
+    
+    - A. It is the only framework that can run on Google's Sycamore processor.
+    - B. **It allows quantum circuits to be treated as native `tf.keras.layers.Layer` objects.**
+    - C. It exclusively uses the `Adam` optimizer.
+    - D. It does not require a quantum simulator.
+    
 ??? info "See Answer"
-    **Correct: B**  
-    TFQ's main strength is its deep integration with TensorFlow, allowing quantum components to be seamlessly inserted into Keras models.
-
-```
+        **Correct: B**  
+        TFQ's main strength is its deep integration with TensorFlow, allowing quantum components to be seamlessly inserted into Keras models.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. The `QuantumKernel` in Qiskit Machine Learning is designed to be used with which classical machine learning algorithm?**
-
-- A. K-Means Clustering.
-- B. Decision Trees.
-- C. **Support Vector Machines (SVMs).**
-- D. Linear Regression.
-
+    **2. The `QuantumKernel` in Qiskit Machine Learning is designed to be used with which classical machine learning algorithm?**
+    
+    - A. K-Means Clustering.
+    - B. Decision Trees.
+    - C. **Support Vector Machines (SVMs).**
+    - D. Linear Regression.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    The `QuantumKernel` computes a kernel matrix that replaces the classical kernel in an SVM, creating a QSVM.
-
-```
+        **Correct: C**  
+        The `QuantumKernel` computes a kernel matrix that replaces the classical kernel in an SVM, creating a QSVM.
+    
 ---
 
 ### <i class="fa-solid fa-flask"></i> Hands-On Project
@@ -227,35 +217,31 @@ Choosing the right ansatz, cost function, and optimizer is critical for successf
 ### Comprehension Check
 
 !!! note "Quiz"
-```
-**1. What is the defining characteristic of a "barren plateau" in the context of training quantum circuits?**
-
-- A. The cost function has many local minima.
-- B. **The gradient of the cost function vanishes exponentially with the number of qubits.**
-- C. The quantum circuit requires too many gates.
-- D. The classical optimizer is too slow.
-
+    **1. What is the defining characteristic of a "barren plateau" in the context of training quantum circuits?**
+    
+    - A. The cost function has many local minima.
+    - B. **The gradient of the cost function vanishes exponentially with the number of qubits.**
+    - C. The quantum circuit requires too many gates.
+    - D. The classical optimizer is too slow.
+    
 ??? info "See Answer"
-    **Correct: B**  
-    The core issue of a barren plateau is that the gradient becomes too small to provide a useful search direction for the optimizer.
-
-```
+        **Correct: B**  
+        The core issue of a barren plateau is that the gradient becomes too small to provide a useful search direction for the optimizer.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. Which of the following is a common strategy to mitigate the risk of encountering a barren plateau?**
-
-- A. Using a global cost function.
-- B. Initializing all parameters to random values between 0 and $2\pi$.
-- C. **Using a gradient-free optimizer like COBYLA.**
-- D. Using the deepest possible quantum circuit.
-
+    **2. Which of the following is a common strategy to mitigate the risk of encountering a barren plateau?**
+    
+    - A. Using a global cost function.
+    - B. Initializing all parameters to random values between 0 and $2\pi$.
+    - C. **Using a gradient-free optimizer like COBYLA.**
+    - D. Using the deepest possible quantum circuit.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    Gradient-free optimizers do not rely on the vanishing gradients and can sometimes find a path out of a barren plateau, although they may converge more slowly.
-
-```
+        **Correct: C**  
+        Gradient-free optimizers do not rely on the vanishing gradients and can sometimes find a path out of a barren plateau, although they may converge more slowly.
+    
 ---
 
 ### <i class="fa-solid fa-flask"></i> Hands-On Project

@@ -1,4 +1,4 @@
-# **Chapter 1: Introduction () () (Workbook)**
+# **Chapter 1: Introduction (Workbook)**
 
 ---
 
@@ -62,76 +62,68 @@ Quantum algorithms exploit **interference**—the constructive and destructive c
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which of the following is a fundamental principle that gives quantum computers their parallel processing capability?**
-
-- A. Deterministic memory  
-- B. Superposition  
-- C. Boolean logic gates  
-- D. The No-cloning theorem
-
+    **1. Which of the following is a fundamental principle that gives quantum computers their parallel processing capability?**
+    
+    - A. Deterministic memory  
+    - B. Superposition  
+    - C. Boolean logic gates  
+    - D. The No-cloning theorem
+    
 ??? info "See Answer"
-    **Correct: B**
-
-    Superposition allows a quantum system with $N$ qubits to exist in a linear combination of all $2^N$ basis states simultaneously, enabling exponential parallelism in the state space.
-
-```
+        **Correct: B**
+    
+        Superposition allows a quantum system with $N$ qubits to exist in a linear combination of all $2^N$ basis states simultaneously, enabling exponential parallelism in the state space.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. A classical computer relies on a bit, which is deterministic (0 or 1). A quantum computer relies on a qubit, which is based on:**
-
-- A. The asset's historical return  
-- B. Probabilistic and amplitude-based information  
-- C. Classical logic gates  
-- D. A finite, two-state physical system
-
+    **2. A classical computer relies on a bit, which is deterministic (0 or 1). A quantum computer relies on a qubit, which is based on:**
+    
+    - A. The asset's historical return  
+    - B. Probabilistic and amplitude-based information  
+    - C. Classical logic gates  
+    - D. A finite, two-state physical system
+    
 ??? info "See Answer"
-    **Correct: B**
-
-    Qubits encode information in complex probability amplitudes $\alpha$ and $\beta$, with measurement outcomes determined probabilistically by $|\alpha|^2$ and $|\beta|^2$ according to the Born rule.
-
-```
+        **Correct: B**
+    
+        Qubits encode information in complex probability amplitudes $\alpha$ and $\beta$, with measurement outcomes determined probabilistically by $|\alpha|^2$ and $|\beta|^2$ according to the Born rule.
+    
 ---
 
 !!! note "Quiz"
-```
-**3. In a quantum system with 10 qubits, how many computational basis states can exist in superposition simultaneously before measurement?**
-
-- A. 10  
-- B. 20  
-- C. 100  
-- D. 1024
-
+    **3. In a quantum system with 10 qubits, how many computational basis states can exist in superposition simultaneously before measurement?**
+    
+    - A. 10  
+    - B. 20  
+    - C. 100  
+    - D. 1024
+    
 ??? info "See Answer"
-    **Correct: D**
-
-    The state space dimension is $2^N = 2^{10} = 1024$. A general 10-qubit state is a superposition of all 1024 computational basis states $|x\rangle$ where $x \in \{0, 1, \ldots, 1023\}$.
-
-```
+        **Correct: D**
+    
+        The state space dimension is $2^N = 2^{10} = 1024$. A general 10-qubit state is a superposition of all 1024 computational basis states $|x\rangle$ where $x \in \{0, 1, \ldots, 1023\}$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Explain the difference in **state space** growth between a classical computer and a quantum computer, and how this relates to the idea of **superposition**.
-
-???+ info "Answer Strategy"
-    **Classical State Space:**  
-    A classical system with $N$ bits has an exponentially large configuration space of $2^N$ possible states, but can only occupy **one** state at any moment. Information processing occurs by transitioning sequentially through this space, exploring one configuration at a time.
-
-    **Quantum State Space (Superposition):**  
-    A quantum system with $N$ qubits inhabits a $2^N$-dimensional Hilbert space and can exist in a **superposition** of all $2^N$ basis states simultaneously. For example, 10 qubits can represent a coherent linear combination of 1024 states at once:
     
-    $$
-    |\Psi\rangle = \sum_{x=0}^{1023} \alpha_x |x\rangle
-    $$
-
-    **Connection to Quantum Advantage:**  
-    This exponential growth in the **actively occupied** state space (not merely the potential space) is the foundation of quantum parallelism. Quantum algorithms exploit this by performing computations on all $2^N$ amplitudes in parallel through unitary evolution, then using interference to concentrate probability into the desired solution state upon measurement.
-
-```
+    **Q:** Explain the difference in **state space** growth between a classical computer and a quantum computer, and how this relates to the idea of **superposition**.
+    
+    ???+ info "Answer Strategy"
+        **Classical State Space:**  
+        A classical system with $N$ bits has an exponentially large configuration space of $2^N$ possible states, but can only occupy **one** state at any moment. Information processing occurs by transitioning sequentially through this space, exploring one configuration at a time.
+    
+        **Quantum State Space (Superposition):**  
+        A quantum system with $N$ qubits inhabits a $2^N$-dimensional Hilbert space and can exist in a **superposition** of all $2^N$ basis states simultaneously. For example, 10 qubits can represent a coherent linear combination of 1024 states at once:
+        
+        $$
+        |\Psi\rangle = \sum_{x=0}^{1023} \alpha_x |x\rangle
+        $$
+    
+        **Connection to Quantum Advantage:**  
+        This exponential growth in the **actively occupied** state space (not merely the potential space) is the foundation of quantum parallelism. Quantum algorithms exploit this by performing computations on all $2^N$ amplitudes in parallel through unitary evolution, then using interference to concentrate probability into the desired solution state upon measurement.
+    
 ---
 
 ## **1.2 The Qubit and the Bloch Sphere** {.heading-with-pill}
@@ -197,82 +189,74 @@ States closer to the North Pole have higher probability of measuring $|0\rangle$
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. According to the postulates of quantum mechanics, a closed quantum system must evolve via which type of mathematical operation?**
-
-- A. A complex number multiplication  
-- B. A unitary transformation  
-- C. A Hermitian operation  
-- D. A measurement and collapse
-
+    **1. According to the postulates of quantum mechanics, a closed quantum system must evolve via which type of mathematical operation?**
+    
+    - A. A complex number multiplication  
+    - B. A unitary transformation  
+    - C. A Hermitian operation  
+    - D. A measurement and collapse
+    
 ??? info "See Answer"
-    **Correct: B**
-
-    The evolution of a closed quantum system is governed by the Schrödinger equation, which requires **unitary operators** $U$ satisfying $U^\dagger U = I$. Unitarity preserves the normalization of quantum states and ensures reversibility of quantum operations.
-
-```
+        **Correct: B**
+    
+        The evolution of a closed quantum system is governed by the Schrödinger equation, which requires **unitary operators** $U$ satisfying $U^\dagger U = I$. Unitarity preserves the normalization of quantum states and ensures reversibility of quantum operations.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. On the Bloch Sphere, where is the state $|1\rangle$ located?**
-
-- A. At the North Pole  
-- B. At the Equator  
-- C. At the South Pole  
-- D. At the center of the sphere
-
+    **2. On the Bloch Sphere, where is the state $|1\rangle$ located?**
+    
+    - A. At the North Pole  
+    - B. At the Equator  
+    - C. At the South Pole  
+    - D. At the center of the sphere
+    
 ??? info "See Answer"
-    **Correct: C**
-
-    The computational basis state $|1\rangle$ corresponds to $\theta = \pi$ in the Bloch sphere parameterization, placing it at the South Pole. The state $|0\rangle$ occupies the North Pole ($\theta = 0$).
-
-```
+        **Correct: C**
+    
+        The computational basis state $|1\rangle$ corresponds to $\theta = \pi$ in the Bloch sphere parameterization, placing it at the South Pole. The state $|0\rangle$ occupies the North Pole ($\theta = 0$).
+    
 ---
 
 !!! note "Quiz"
-```
-**3. Which quantum gate performs a rotation that transforms $|0\rangle$ into the equal superposition state $|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$?**
-
-- A. Pauli-X gate  
-- B. Pauli-Z gate  
-- C. Hadamard gate  
-- D. Phase gate
-
+    **3. Which quantum gate performs a rotation that transforms $|0\rangle$ into the equal superposition state $|+\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$?**
+    
+    - A. Pauli-X gate  
+    - B. Pauli-Z gate  
+    - C. Hadamard gate  
+    - D. Phase gate
+    
 ??? info "See Answer"
-    **Correct: C**
-
-    The Hadamard gate $H$ creates equal superpositions by mapping computational basis states to the $X$-basis: $H|0\rangle = |+\rangle$ and $H|1\rangle = |-\rangle$. Geometrically, this corresponds to a $\pi$ rotation about the axis $(\hat{x} + \hat{z})/\sqrt{2}$.
-
-```
+        **Correct: C**
+    
+        The Hadamard gate $H$ creates equal superpositions by mapping computational basis states to the $X$-basis: $H|0\rangle = |+\rangle$ and $H|1\rangle = |-\rangle$. Geometrically, this corresponds to a $\pi$ rotation about the axis $(\hat{x} + \hat{z})/\sqrt{2}$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Briefly define the concept of **Superposition** and the role of **Measurement** in a quantum system.
-
-???+ info "Answer Strategy"
-    **Superposition:**  
-    Superposition is the fundamental principle that a quantum system can exist in a **linear combination** of all theoretically possible basis states simultaneously until measured. Mathematically, a qubit in superposition is:
     
-    $$
-    |\psi\rangle = \alpha|0\rangle + \beta|1\rangle
-    $$
+    **Q:** Briefly define the concept of **Superposition** and the role of **Measurement** in a quantum system.
     
-    where the complex amplitudes $\alpha$ and $\beta$ encode the relative phase and magnitude of each component, satisfying $|\alpha|^2 + |\beta|^2 = 1$.
-
-    **Measurement:**  
-    Measurement is the process that **extracts classical information** from a quantum system. When a qubit is measured in the computational basis:
+    ???+ info "Answer Strategy"
+        **Superposition:**  
+        Superposition is the fundamental principle that a quantum system can exist in a **linear combination** of all theoretically possible basis states simultaneously until measured. Mathematically, a qubit in superposition is:
+        
+        $$
+        |\psi\rangle = \alpha|0\rangle + \beta|1\rangle
+        $$
+        
+        where the complex amplitudes $\alpha$ and $\beta$ encode the relative phase and magnitude of each component, satisfying $|\alpha|^2 + |\beta|^2 = 1$.
     
-    1. The superposition **collapses** irreversibly to one of the eigenstates ($|0\rangle$ or $|1\rangle$)
-    2. The outcome is **probabilistic**, occurring with probability $|\alpha|^2$ for $|0\rangle$ and $|\beta|^2$ for $|1\rangle$ (Born rule)
-    3. Post-measurement, the qubit occupies the measured eigenstate, and the original superposition is destroyed
-
-    **Physical Significance:**  
-    This measurement-induced collapse is what distinguishes quantum information from classical information and necessitates careful algorithm design to preserve quantum coherence until the final measurement extracts the desired result.
-
-```
+        **Measurement:**  
+        Measurement is the process that **extracts classical information** from a quantum system. When a qubit is measured in the computational basis:
+        
+        1. The superposition **collapses** irreversibly to one of the eigenstates ($|0\rangle$ or $|1\rangle$)
+        2. The outcome is **probabilistic**, occurring with probability $|\alpha|^2$ for $|0\rangle$ and $|\beta|^2$ for $|1\rangle$ (Born rule)
+        3. Post-measurement, the qubit occupies the measured eigenstate, and the original superposition is destroyed
+    
+        **Physical Significance:**  
+        This measurement-induced collapse is what distinguishes quantum information from classical information and necessitates careful algorithm design to preserve quantum coherence until the final measurement extracts the desired result.
+    
 ---
 
 ## **1.3 Linear Algebra and Tensor Products** {.heading-with-pill}
@@ -388,83 +372,75 @@ This equation is only satisfied if $\langle\psi|\phi\rangle \in \{0, 1\}$, meani
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which mathematical operation is used to combine the state vectors of two separate qubits into a single composite state vector?**
-
-- A. Outer product  
-- B. Matrix multiplication  
-- C. Tensor product  
-- D. Hadamard transformation
-
+    **1. Which mathematical operation is used to combine the state vectors of two separate qubits into a single composite state vector?**
+    
+    - A. Outer product  
+    - B. Matrix multiplication  
+    - C. Tensor product  
+    - D. Hadamard transformation
+    
 ??? info "See Answer"
-    **Correct: C**
-
-    The **tensor product** $\otimes$ combines individual qubit state spaces into a composite multi-qubit state space. For states $|\psi_A\rangle$ and $|\psi_B\rangle$, the combined state is $|\psi_{AB}\rangle = |\psi_A\rangle \otimes |\psi_B\rangle$.
-
-```
+        **Correct: C**
+    
+        The **tensor product** $\otimes$ combines individual qubit state spaces into a composite multi-qubit state space. For states $|\psi_A\rangle$ and $|\psi_B\rangle$, the combined state is $|\psi_{AB}\rangle = |\psi_A\rangle \otimes |\psi_B\rangle$.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. The no-cloning theorem states that it is impossible to create an exact copy of an arbitrary unknown quantum state. This theorem arises fundamentally from the property that quantum operations are:**
-
-- A. Probabilistic  
-- B. Unitary (and therefore linear) transformations  
-- C. Always Hermitian  
-- D. Entangled
-
+    **2. The no-cloning theorem states that it is impossible to create an exact copy of an arbitrary unknown quantum state. This theorem arises fundamentally from the property that quantum operations are:**
+    
+    - A. Probabilistic  
+    - B. Unitary (and therefore linear) transformations  
+    - C. Always Hermitian  
+    - D. Entangled
+    
 ??? info "See Answer"
-    **Correct: B**
-
-    The no-cloning theorem is a direct consequence of the **linearity** and **unitarity** of quantum operations. A hypothetical cloning operation would violate the preservation of inner products required by unitary transformations, except for orthogonal states.
-
-```
+        **Correct: B**
+    
+        The no-cloning theorem is a direct consequence of the **linearity** and **unitarity** of quantum operations. A hypothetical cloning operation would violate the preservation of inner products required by unitary transformations, except for orthogonal states.
+    
 ---
 
 !!! note "Quiz"
-```
-**3. What is the dimension of the Hilbert space for a system of 3 qubits?**
-
-- A. 3  
-- B. 6  
-- C. 8  
-- D. 9
-
+    **3. What is the dimension of the Hilbert space for a system of 3 qubits?**
+    
+    - A. 3  
+    - B. 6  
+    - C. 8  
+    - D. 9
+    
 ??? info "See Answer"
-    **Correct: C**
-
-    The Hilbert space dimension for $N$ qubits is $2^N$. For 3 qubits: $2^3 = 8$. The computational basis consists of 8 states: $\{|000\rangle, |001\rangle, |010\rangle, |011\rangle, |100\rangle, |101\rangle, |110\rangle, |111\rangle\}$.
-
-```
+        **Correct: C**
+    
+        The Hilbert space dimension for $N$ qubits is $2^N$. For 3 qubits: $2^3 = 8$. The computational basis consists of 8 states: $\{|000\rangle, |001\rangle, |010\rangle, |011\rangle, |100\rangle, |101\rangle, |110\rangle, |111\rangle\}$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Explain how the tensor product operation scales the computational resources required for quantum simulation on classical computers.
-
-???+ info "Answer Strategy"
-    **Exponential Scaling:**  
-    The tensor product structure of multi-qubit systems causes the Hilbert space dimension to grow **exponentially** with the number of qubits:
     
-    $$
-    \dim(\mathcal{H}_N) = 2^N
-    $$
-
-    **Classical Simulation Cost:**  
-    To classically simulate an $N$-qubit quantum state requires storing $2^N$ complex amplitudes. For example:
+    **Q:** Explain how the tensor product operation scales the computational resources required for quantum simulation on classical computers.
     
-    - 10 qubits: $2^{10} = 1024$ complex numbers (~16 KB memory)
-    - 30 qubits: $2^{30} \approx 10^9$ complex numbers (~17 GB memory)
-    - 50 qubits: $2^{50} \approx 10^{15}$ complex numbers (~18 PB memory)
-
-    **Gate Operation Complexity:**  
-    Each quantum gate application on an $N$-qubit system requires updating up to $2^N$ amplitudes. For a quantum circuit with $G$ gates, classical simulation requires $\mathcal{O}(G \cdot 2^N)$ operations.
-
-    **Quantum Advantage Threshold:**  
-    This exponential memory and computational scaling is why classical simulation becomes intractable beyond approximately 50 qubits, establishing the regime where quantum computers can demonstrate computational advantage over classical supercomputers.
-
-```
+    ???+ info "Answer Strategy"
+        **Exponential Scaling:**  
+        The tensor product structure of multi-qubit systems causes the Hilbert space dimension to grow **exponentially** with the number of qubits:
+        
+        $$
+        \dim(\mathcal{H}_N) = 2^N
+        $$
+    
+        **Classical Simulation Cost:**  
+        To classically simulate an $N$-qubit quantum state requires storing $2^N$ complex amplitudes. For example:
+        
+        - 10 qubits: $2^{10} = 1024$ complex numbers (~16 KB memory)
+        - 30 qubits: $2^{30} \approx 10^9$ complex numbers (~17 GB memory)
+        - 50 qubits: $2^{50} \approx 10^{15}$ complex numbers (~18 PB memory)
+    
+        **Gate Operation Complexity:**  
+        Each quantum gate application on an $N$-qubit system requires updating up to $2^N$ amplitudes. For a quantum circuit with $G$ gates, classical simulation requires $\mathcal{O}(G \cdot 2^N)$ operations.
+    
+        **Quantum Advantage Threshold:**  
+        This exponential memory and computational scaling is why classical simulation becomes intractable beyond approximately 50 qubits, establishing the regime where quantum computers can demonstrate computational advantage over classical supercomputers.
+    
 ---
 
 ## **1.4 Quantum Entanglement** {.heading-with-pill}
@@ -558,90 +534,82 @@ $$
 ### **Comprehension Check**
 
 !!! note "Quiz"
-```
-**1. Which of the following two-qubit states is entangled?**
-
-- A. $\frac{1}{2}|00\rangle + \frac{1}{2}|01\rangle + \frac{1}{2}|10\rangle + \frac{1}{2}|11\rangle$  
-- B. $\frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$  
-- C. $|0\rangle \otimes |+\rangle$  
-- D. $\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |0\rangle$
-
+    **1. Which of the following two-qubit states is entangled?**
+    
+    - A. $\frac{1}{2}|00\rangle + \frac{1}{2}|01\rangle + \frac{1}{2}|10\rangle + \frac{1}{2}|11\rangle$  
+    - B. $\frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$  
+    - C. $|0\rangle \otimes |+\rangle$  
+    - D. $\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle) \otimes |0\rangle$
+    
 ??? info "See Answer"
-    **Correct: B**
-
-    The state $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$ is the Bell state, which cannot be factored into a tensor product of single-qubit states. Options A, C, and D are all separable.
-
-```
+        **Correct: B**
+    
+        The state $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$ is the Bell state, which cannot be factored into a tensor product of single-qubit states. Options A, C, and D are all separable.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. What property distinguishes entangled states from separable states?**
-
-- A. Entangled states have higher energy  
-- B. Entangled states cannot be written as tensor products of individual subsystem states  
-- C. Entangled states require more qubits  
-- D. Entangled states have complex amplitudes
-
+    **2. What property distinguishes entangled states from separable states?**
+    
+    - A. Entangled states have higher energy  
+    - B. Entangled states cannot be written as tensor products of individual subsystem states  
+    - C. Entangled states require more qubits  
+    - D. Entangled states have complex amplitudes
+    
 ??? info "See Answer"
-    **Correct: B**
-
-    Entanglement is defined by the **non-separability** of the composite state: an entangled state $|\psi_{AB}\rangle$ cannot be expressed as $|\psi_A\rangle \otimes |\psi_B\rangle$ for any choice of single-qubit states.
-
-```
+        **Correct: B**
+    
+        Entanglement is defined by the **non-separability** of the composite state: an entangled state $|\psi_{AB}\rangle$ cannot be expressed as $|\psi_A\rangle \otimes |\psi_B\rangle$ for any choice of single-qubit states.
+    
 ---
 
 !!! note "Quiz"
-```
-**3. For the Bell state $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$, if the first qubit is measured and found to be in state $|1\rangle$, what is the state of the second qubit?**
-
-- A. $|0\rangle$ with certainty  
-- B. $|1\rangle$ with certainty  
-- C. $|+\rangle$ with certainty  
-- D. $|0\rangle$ or $|1\rangle$ with equal probability
-
+    **3. For the Bell state $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$, if the first qubit is measured and found to be in state $|1\rangle$, what is the state of the second qubit?**
+    
+    - A. $|0\rangle$ with certainty  
+    - B. $|1\rangle$ with certainty  
+    - C. $|+\rangle$ with certainty  
+    - D. $|0\rangle$ or $|1\rangle$ with equal probability
+    
 ??? info "See Answer"
-    **Correct: B**
-
-    The Bell state exhibits perfect correlation: measuring the first qubit as $|1\rangle$ **instantaneously** collapses the two-qubit state to $|11\rangle$, guaranteeing the second qubit is also in state $|1\rangle$.
-
-```
+        **Correct: B**
+    
+        The Bell state exhibits perfect correlation: measuring the first qubit as $|1\rangle$ **instantaneously** collapses the two-qubit state to $|11\rangle$, guaranteeing the second qubit is also in state $|1\rangle$.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Explain the concept of **entanglement** and its importance to quantum computing, using the Bell state $|\Phi^+\rangle$ as an example.
-
-???+ info "Answer Strategy"
-    **Definition:**  
-    Entanglement occurs when the quantum state of two or more qubits **cannot be written as a tensor product** of the individual qubit states. The qubits are linked such that measuring the state of one **instantaneously determines** the state of the other, regardless of spatial separation.
-
-    **Mathematical Example:**  
-    The Bell state 
     
-    $$
-    |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)
-    $$
+    **Q:** Explain the concept of **entanglement** and its importance to quantum computing, using the Bell state $|\Phi^+\rangle$ as an example.
     
-    is maximally entangled. It cannot be factored as $|\psi_A\rangle \otimes |\psi_B\rangle$ for any single-qubit states $|\psi_A\rangle$ and $|\psi_B\rangle$.
-
-    **Measurement Correlations:**  
-    - Measuring the first qubit yields $|0\rangle$ or $|1\rangle$ with equal probability (50% each)
-    - If the first qubit measures $|0\rangle$, the second **must** measure $|0\rangle$
-    - If the first qubit measures $|1\rangle$, the second **must** measure $|1\rangle$
-    - These correlations are **perfect** and **non-local**, persisting regardless of the distance between qubits
-
-    **Importance to Quantum Computing:**  
-    Entanglement is the **critical resource** that distinguishes quantum computation from classical probabilistic computation. It enables:
+    ???+ info "Answer Strategy"
+        **Definition:**  
+        Entanglement occurs when the quantum state of two or more qubits **cannot be written as a tensor product** of the individual qubit states. The qubits are linked such that measuring the state of one **instantaneously determines** the state of the other, regardless of spatial separation.
     
-    1. **Quantum Algorithms:** Shor's factoring algorithm and Grover's search algorithm exploit entanglement to achieve exponential or quadratic speedups
-    2. **Quantum Communication:** Quantum teleportation and superdense coding rely on shared entanglement
-    3. **Quantum Error Correction:** Entanglement across multiple qubits enables fault-tolerant quantum computation
-
-    Without entanglement, quantum computers would provide no computational advantage over classical computers. It is the "spooky action at a distance" that Einstein questioned, yet it is experimentally verified and forms the foundation of quantum information science.
-
-```
+        **Mathematical Example:**  
+        The Bell state 
+        
+        $$
+        |\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)
+        $$
+        
+        is maximally entangled. It cannot be factored as $|\psi_A\rangle \otimes |\psi_B\rangle$ for any single-qubit states $|\psi_A\rangle$ and $|\psi_B\rangle$.
+    
+        **Measurement Correlations:**  
+        - Measuring the first qubit yields $|0\rangle$ or $|1\rangle$ with equal probability (50% each)
+        - If the first qubit measures $|0\rangle$, the second **must** measure $|0\rangle$
+        - If the first qubit measures $|1\rangle$, the second **must** measure $|1\rangle$
+        - These correlations are **perfect** and **non-local**, persisting regardless of the distance between qubits
+    
+        **Importance to Quantum Computing:**  
+        Entanglement is the **critical resource** that distinguishes quantum computation from classical probabilistic computation. It enables:
+        
+        1. **Quantum Algorithms:** Shor's factoring algorithm and Grover's search algorithm exploit entanglement to achieve exponential or quadratic speedups
+        2. **Quantum Communication:** Quantum teleportation and superdense coding rely on shared entanglement
+        3. **Quantum Error Correction:** Entanglement across multiple qubits enables fault-tolerant quantum computation
+    
+        Without entanglement, quantum computers would provide no computational advantage over classical computers. It is the "spooky action at a distance" that Einstein questioned, yet it is experimentally verified and forms the foundation of quantum information science.
+    
 ---
 
 ## **1.5 <i class="fa-solid fa-flask"></i> Hands-On Projects**

@@ -1,4 +1,4 @@
-# **Chapter 15: Differentiable Quantum Programming () () (Codebook)**
+# **Chapter 15: Differentiable Quantum Programming (Codebook)**
 
 Differentiable quantum programming treats quantum circuits as computational graphs through which gradients can flow. This chapter implements the parameter-shift gradient rule, natural-gradient optimisation, and compares modern gradient-aware optimisers on a VQC loss surface.
 

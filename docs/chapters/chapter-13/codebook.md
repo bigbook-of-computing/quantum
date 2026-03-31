@@ -1,4 +1,4 @@
-# **Chapter 13: Quantum Reinforcement Learning () () (Codebook)**
+# **Chapter 13: Quantum Reinforcement Learning (Codebook)**
 
 Quantum Reinforcement Learning (QRL) replaces classical policy/value networks with parametric quantum circuits. This chapter builds a variational policy, approximates a Q-table with a VQC, and analyses the reward landscape geometry.
 

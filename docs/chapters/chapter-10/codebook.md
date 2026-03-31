@@ -1,4 +1,4 @@
-# **Chapter 10: Variational Quantum Circuits () () (Codebook)**
+# **Chapter 10: Variational Quantum Circuits (Codebook)**
 
 Variational Quantum Circuits (VQCs) form the backbone of near-term quantum algorithms. This chapter studies hardware-efficient ansatze, the parameter-shift rule for gradient estimation, and expressibility metrics.
 

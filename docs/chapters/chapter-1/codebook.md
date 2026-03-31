@@ -1,4 +1,4 @@
-# **Chapter 1: Introduction to Quantum Computing () () (Codebook)**
+# **Chapter 1: Introduction to Quantum Computing (Codebook)**
 
 This codebook bridges the conceptual introduction of Chapter 1 into hands-on Qiskit practice. Each project is self-contained and runnable. Build single-qubit circuits, simulate measurement statistics, and survey canonical quantum states.
 

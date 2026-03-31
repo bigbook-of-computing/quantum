@@ -30,10 +30,8 @@ We begin with **single-qubit gates** (Pauli gates, Hadamard, phase gates) that p
 Single-qubit quantum gates are the elementary $2 \times 2$ unitary matrices that act on the two-dimensional Hilbert space of a single qubit, $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$. Geometrically, these operations correspond to **rotations** or **reflections** of the qubit state vector on the Bloch sphere.
 
 !!! tip "Key Insight"
-```
-Every single-qubit gate represents a geometric transformation on the Bloch sphere—either a rotation around an axis or a reflection through a plane. This geometric visualization makes gate composition intuitive.
-
-```
+    Every single-qubit gate represents a geometric transformation on the Bloch sphere—either a rotation around an axis or a reflection through a plane. This geometric visualization makes gate composition intuitive.
+    
 ### **The Pauli Gates**
 
 The three **Pauli gates** are the most fundamental single-qubit gates. They are often referred to as $\sigma_x$, $\sigma_y$, and $\sigma_z$ in physics literature and represent $\pi$ radian rotations around the respective $x$, $y$, and $z$ axes of the Bloch sphere. All three are both **unitary** ($U^\dagger U = I$) and **Hermitian** ($M = M^\dagger$).
@@ -72,15 +70,13 @@ $$
 
 ```
 !!! example "Pauli Gate Properties"
-```
-All Pauli gates are:
-
-- **Self-inverse**: $X^2 = Y^2 = Z^2 = I$
-- **Hermitian**: $X^\dagger = X$, $Y^\dagger = Y$, $Z^\dagger = Z$
-- **Unitary**: They preserve state normalization
-- **Anticommutative**: $XY = -YX$, $YZ = -ZY$, $ZX = -XZ$
-
-```
+    All Pauli gates are:
+    
+    - **Self-inverse**: $X^2 = Y^2 = Z^2 = I$
+    - **Hermitian**: $X^\dagger = X$, $Y^\dagger = Y$, $Z^\dagger = Z$
+    - **Unitary**: They preserve state normalization
+    - **Anticommutative**: $XY = -YX$, $YZ = -ZY$, $ZX = -XZ$
+    
 ### **The Hadamard Gate**
 
 The **Hadamard ($H$) gate** is essential for creating **superposition** states from basis states. Geometrically, it performs a reflection about the plane bisecting the $X$ and $Z$ axes.
@@ -99,10 +95,8 @@ H = \frac{1}{\sqrt{2}} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}
 $$
 
 !!! tip "Key Insight"
-```
-The Hadamard gate is the **primary tool for creating superposition** from computational basis states. It's the first gate in most quantum algorithms, enabling quantum parallelism.
-
-```
+    The Hadamard gate is the **primary tool for creating superposition** from computational basis states. It's the first gate in most quantum algorithms, enabling quantum parallelism.
+    
 ### **Phase Gates**
 
 The $S$ and $T$ gates are critical for fine-tuning the **phase** of a qubit state, a capability necessary for building complex quantum algorithms like the Quantum Fourier Transform. They are specific examples of the general $R_z(\theta)$ rotation around the $Z$-axis.
@@ -126,10 +120,8 @@ The $T$ gate is non-Clifford (unlike $X, Y, Z, H, S$) and is crucial because the
 
 ```
 ??? question "Why are Clifford gates not sufficient for quantum advantage?"
-```
-Clifford gates ($X, Y, Z, H, S$, CNOT) can be efficiently simulated classically using the Gottesman-Knill theorem. Quantum advantage requires non-Clifford gates like $T$, which introduce the complexity needed to escape classical simulation.
-
-```
+    Clifford gates ($X, Y, Z, H, S$, CNOT) can be efficiently simulated classically using the Gottesman-Knill theorem. Quantum advantage requires non-Clifford gates like $T$, which introduce the complexity needed to escape classical simulation.
+    
 ---
 
 ## **3.2 Multi-Qubit Gates (CNOT, CZ, SWAP, Toffoli)**
@@ -141,10 +133,8 @@ Clifford gates ($X, Y, Z, H, S$, CNOT) can be efficiently simulated classically 
 Multi-qubit gates are fundamental to quantum computation as they facilitate **conditional logic** and, most critically, **entanglement** between qubits. These gates are represented by unitary matrices of size $2^N \times 2^N$, where $N$ is the number of qubits involved (typically $N=2$ or $N=3$).
 
 !!! tip "Key Insight"
-```
-Multi-qubit gates are essential for quantum advantage. Without them, quantum computers would be no more powerful than classical probabilistic computers—it's entanglement that provides the exponential computational speedup.
-
-```
+    Multi-qubit gates are essential for quantum advantage. Without them, quantum computers would be no more powerful than classical probabilistic computers—it's entanglement that provides the exponential computational speedup.
+    
 ### **The Controlled-NOT (CNOT) Gate**
 
 The **CNOT** (Controlled-X) gate is the workhorse of quantum computing and the most common two-qubit gate, enabling the generation of maximally entangled states like the Bell states.
@@ -164,16 +154,14 @@ $$
 $$
 
 !!! example "Creating a Bell State with CNOT"
-```
-Starting from $|00\rangle$, apply Hadamard to the first qubit then CNOT:
-
-$$H \otimes I |00\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)$$
-
-$$\text{CNOT} \left[\frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)\right] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) = |\Phi^+\rangle$$
-
-This is a maximally entangled Bell state—measuring one qubit instantly determines the other.
-
-```
+    Starting from $|00\rangle$, apply Hadamard to the first qubit then CNOT:
+    
+    $$H \otimes I |00\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)$$
+    
+    $$\text{CNOT} \left[\frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)\right] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) = |\Phi^+\rangle$$
+    
+    This is a maximally entangled Bell state—measuring one qubit instantly determines the other.
+    
 ### **Controlled-Z (CZ) Gate**
 
 The **Controlled-Z (CZ)** gate is another two-qubit conditional gate, performing a phase manipulation instead of a bit flip.
@@ -206,10 +194,8 @@ $$
 $$
 
 !!! tip "Key Insight"
-```
-SWAP gates are often not physical operations but are **synthesized** from three CNOT gates. On real hardware with limited connectivity, SWAP insertion is a major source of circuit depth increase during compilation.
-
-```
+    SWAP gates are often not physical operations but are **synthesized** from three CNOT gates. On real hardware with limited connectivity, SWAP insertion is a major source of circuit depth increase during compilation.
+    
 ### **The Toffoli (CCNOT) Gate**
 
 The **Toffoli** gate, or **Controlled-Controlled-NOT (CCNOT)**, is a three-qubit gate that introduces a higher degree of control.
@@ -219,10 +205,8 @@ The **Toffoli** gate, or **Controlled-Controlled-NOT (CCNOT)**, is a three-qubit
 * **Matrix Representation:** The Toffoli matrix is $8 \times 8$ (since $2^3 = 8$). Its action only affects the last two basis states, $|110\rangle \to |111\rangle$ and $|111\rangle \to |110\rangle$. The bottom-right $2 \times 2$ block is the Pauli $X$ matrix, while all other blocks are identity matrices.
 
 ??? question "Can we implement Toffoli gates on current hardware?"
-```
-Most quantum hardware doesn't have native three-qubit gates. Toffoli gates are decomposed into sequences of single-qubit and CNOT gates, typically requiring 6-15 CNOTs depending on the decomposition method and hardware constraints. This makes them expensive on NISQ devices.
-
-```
+    Most quantum hardware doesn't have native three-qubit gates. Toffoli gates are decomposed into sequences of single-qubit and CNOT gates, typically requiring 6-15 CNOTs depending on the decomposition method and hardware constraints. This makes them expensive on NISQ devices.
+    
 ---
 
 ## **3.3 Parameterized Gates**
@@ -232,10 +216,8 @@ Most quantum hardware doesn't have native three-qubit gates. Toffoli gates are d
 Parameterized gates are essential for modern quantum computation, particularly in the Noisy Intermediate-Scale Quantum (NISQ) era, as they introduce **tunable, continuous parameters** ($\theta$) into quantum circuits. Unlike fixed gates (like $X$ or $H$), these gates enable **arbitrary state preparation** and form the basis of hybrid classical-quantum optimization algorithms.
 
 !!! tip "Key Insight"
-```
-Parameterized gates transform quantum circuits from fixed algorithms into **trainable ansätze**, enabling hybrid quantum-classical optimization where classical optimizers tune gate parameters to minimize cost functions.
-
-```
+    Parameterized gates transform quantum circuits from fixed algorithms into **trainable ansätze**, enabling hybrid quantum-classical optimization where classical optimizers tune gate parameters to minimize cost functions.
+    
 ### **General Rotation Gates**
 
 The most common parameterized gates are single-qubit rotation gates: $R_x(\theta)$, $R_y(\theta)$, and $R_z(\theta)$. These perform rotations of angle $\theta$ around the corresponding axis on the Bloch sphere and are derived by exponentiating the Pauli matrices.
@@ -289,14 +271,12 @@ $$
 these three parameterized rotations are sufficient to implement any single-qubit operation.
 
 !!! example "Arbitrary Single-Qubit Decomposition"
-```
-Any unitary $U \in U(2)$ can be written as three rotations. For example, to prepare $|\psi\rangle = \cos(\theta/2)|0\rangle + e^{i\phi}\sin(\theta/2)|1\rangle$:
-
-$$|\psi\rangle = R_z(\phi) R_y(\theta) |0\rangle$$
-
-This uses only two parameterized rotations, making it efficient for variational circuits.
-
-```
+    Any unitary $U \in U(2)$ can be written as three rotations. For example, to prepare $|\psi\rangle = \cos(\theta/2)|0\rangle + e^{i\phi}\sin(\theta/2)|1\rangle$:
+    
+    $$|\psi\rangle = R_z(\phi) R_y(\theta) |0\rangle$$
+    
+    This uses only two parameterized rotations, making it efficient for variational circuits.
+    
 ### **Role in Hybrid Classical-Quantum Algorithms**
 
 Parameterized gates are fundamental to **Variational Quantum Circuits (VQCs)**, which power hybrid algorithms such as:
@@ -338,10 +318,8 @@ These gates are particularly useful when the hardware natively supports paramete
 Parameterized two-qubit gates allow finer control over entanglement and are often used in advanced ansätze for optimization or quantum machine learning.
 
 ??? question "How do we choose good parameter values?"
-```
-Initial parameters are often randomized or set heuristically. Classical optimizers (gradient descent, COBYLA, Adam) then iteratively refine them. Gradient-based methods can use techniques like parameter-shift rules to compute gradients on quantum hardware without needing to differentiate the quantum circuit analytically.
-
-```
+    Initial parameters are often randomized or set heuristically. Classical optimizers (gradient descent, COBYLA, Adam) then iteratively refine them. Gradient-based methods can use techniques like parameter-shift rules to compute gradients on quantum hardware without needing to differentiate the quantum circuit analytically.
+    
 ---
 
 ## **3.4 Universal Gate Sets**
@@ -351,10 +329,8 @@ Initial parameters are often randomized or set heuristically. Classical optimize
 A **universal gate set** is a minimal collection of quantum gates that is sufficient to construct, or **approximate to arbitrary precision**, any possible arbitrary unitary operation on any number of qubits. The existence of such a set is critical because it means that powerful quantum algorithms don't require an infinite, complex library of gates; they only require a few basic physical operations, which simplifies the engineering challenge of building hardware.
 
 !!! tip "Key Insight"
-```
-Universality means you don't need infinitely many gates—just a small set of elementary operations can be composed to approximate any quantum computation to arbitrary accuracy.
-
-```
+    Universality means you don't need infinitely many gates—just a small set of elementary operations can be composed to approximate any quantum computation to arbitrary accuracy.
+    
 ### **Conditions for Universality**
 
 For a set of quantum gates $\mathcal{G} = \{G_1, G_2, \ldots\}$ to be universal, it must meet two essential requirements, related to the structure of the unitary group $U(2^N)$:
@@ -376,10 +352,8 @@ The two requirements are typically combined into minimal sets, which form the ba
     * This set is often used in **Variational Quantum Circuits (VQC)** (see Section 3.3) because it allows the continuous parameter optimization necessary for VQE and QAOA.
 
 !!! example "Solovay-Kitaev Theorem"
-```
-The Solovay-Kitaev theorem guarantees that any single-qubit unitary can be approximated to precision $\epsilon$ using $O(\log^c(1/\epsilon))$ gates from a discrete universal set like $\{H, T\}$ (where $c \approx 2$). This means approximation is efficient—not exponentially costly.
-
-```
+    The Solovay-Kitaev theorem guarantees that any single-qubit unitary can be approximated to precision $\epsilon$ using $O(\log^c(1/\epsilon))$ gates from a discrete universal set like $\{H, T\}$ (where $c \approx 2$). This means approximation is efficient—not exponentially costly.
+    
 ### **The Role of Universality in Compilation**
 
 The concept of universality simplifies the physical implementation of algorithms:
@@ -388,10 +362,8 @@ The concept of universality simplifies the physical implementation of algorithms
 2.  **Approximation:** Since the non-parameterized universal sets (like $\{H, T, \text{CNOT}\}$) are used for approximation, any desired operation can be achieved at the cost of increasing the **Circuit Depth** (the number of gates required in the sequence).
 
 ??? question "Why can't we just use more gate types in hardware?"
-```
-Each additional native gate type increases hardware complexity, calibration requirements, and error rates. It's more practical to implement a small universal set with high fidelity and synthesize other gates through decomposition, even if it increases circuit depth.
-
-```
+    Each additional native gate type increases hardware complexity, calibration requirements, and error rates. It's more practical to implement a small universal set with high fidelity and synthesize other gates through decomposition, even if it increases circuit depth.
+    
 ---
 
 ## **3.5 Quantum Circuit Design and Compilation**
@@ -401,10 +373,8 @@ Each additional native gate type increases hardware complexity, calibration requ
 Quantum computation involves specifying a sequence of unitary operations, or **quantum gates**, applied to qubits over time, which is represented visually by a **quantum circuit**. This abstraction is necessary because physical quantum hardware has constraints, meaning the conceptual algorithm must undergo a complex translation process called **compilation** before execution.
 
 !!! tip "Key Insight"
-```
-Quantum circuits are the "assembly language" of quantum computing—they bridge the gap between high-level algorithms (like Shor's algorithm) and low-level hardware instructions (native gates on specific devices).
-
-```
+    Quantum circuits are the "assembly language" of quantum computing—they bridge the gap between high-level algorithms (like Shor's algorithm) and low-level hardware instructions (native gates on specific devices).
+    
 ### **Quantum Circuit Design**
 
 A quantum circuit is a linear representation of a computation, where time flows from left to right, and horizontal lines represent individual qubits.
@@ -429,10 +399,8 @@ A quantum circuit is a linear representation of a computation, where time flows 
 The insertion of SWAP gates significantly increases the total gate count and, critically, the **Circuit Depth**.
 
 !!! example "Compilation Overhead"
-```
-A logical circuit with 50 gates might compile to 200+ gates after basis translation and SWAP insertion on a device with limited connectivity. This 4× overhead is typical for NISQ devices and directly impacts error rates.
-
-```
+    A logical circuit with 50 gates might compile to 200+ gates after basis translation and SWAP insertion on a device with limited connectivity. This 4× overhead is typical for NISQ devices and directly impacts error rates.
+    
 ### **Circuit Optimization for NISQ Devices**
 
 Circuit optimization is aimed at minimizing errors and execution time, a necessity given the limitations of **Noisy Intermediate-Scale Quantum (NISQ) devices**.
@@ -442,10 +410,8 @@ Circuit optimization is aimed at minimizing errors and execution time, a necessi
 * **Hardware-Aware Optimization:** Compilation must consider the specific **fidelity** (error rate) of each physical gate on the device. For example, a compiler might choose a less optimal logical path if it uses a sequence of physical CNOTs that are known to have lower error rates on that particular pair of physical qubits.
 
 ??? question "Can we parallelize quantum gates to reduce depth?"
-```
-Yes! Gates acting on independent qubits can execute in parallel (same layer). Modern compilers automatically identify commuting gates and schedule them in parallel layers to minimize depth while respecting hardware constraints.
-
-```
+    Yes! Gates acting on independent qubits can execute in parallel (same layer). Modern compilers automatically identify commuting gates and schedule them in parallel layers to minimize depth while respecting hardware constraints.
+    
 ---
 
 ## **3.6 Quantum Circuit Depth and Width**
@@ -455,10 +421,8 @@ Yes! Gates acting on independent qubits can execute in parallel (same layer). Mo
 The **depth** and **width** of a quantum circuit are fundamental metrics that quantify the computational resources required for a quantum algorithm. These two dimensions have distinct physical interpretations and directly affect how feasible it is to execute a quantum algorithm on a given quantum device.
 
 !!! tip "Key Insight"
-```
-Circuit depth is the limiting factor for NISQ devices due to decoherence—circuits must finish before qubits lose their quantum state. Circuit width determines how many physical qubits are needed, limiting which devices can run the algorithm.
-
-```
+    Circuit depth is the limiting factor for NISQ devices due to decoherence—circuits must finish before qubits lose their quantum state. Circuit width determines how many physical qubits are needed, limiting which devices can run the algorithm.
+    
 ### **Circuit Depth**
 
 **Circuit Depth** is the number of sequential layers of gates in the circuit, where gates in the same layer act on disjoint sets of qubits and can be executed simultaneously (in parallel).
@@ -495,18 +459,14 @@ In quantum algorithm design, there is often an inherent **trade-off** between de
     * Examples: Variational Quantum Eigensolver (VQE), Quantum Approximate Optimization Algorithm (QAOA).
 
 !!! example "Depth-Width Trade-off in Practice"
-```
-Consider implementing a quantum Fourier transform (QFT) on $n$ qubits:
-- Standard implementation: $O(n^2)$ depth, $n$ width
-- Approximate QFT: $O(n \log n)$ depth by truncating gates
-- Parallel QFT: $O(n)$ depth but requires $O(n^2)$ ancilla qubits (width)
-
-```
+    Consider implementing a quantum Fourier transform (QFT) on $n$ qubits:
+    - Standard implementation: $O(n^2)$ depth, $n$ width
+    - Approximate QFT: $O(n \log n)$ depth by truncating gates
+    - Parallel QFT: $O(n)$ depth but requires $O(n^2)$ ancilla qubits (width)
+    
 ??? question "How do we choose between depth and width optimization?"
-```
-It depends on your hardware platform! Ion trap systems typically have excellent coherence (favor deeper circuits) but limited qubits. Superconducting systems have more qubits but shorter coherence times (favor shallow, wide circuits). Algorithm design must match the platform's strengths.
-
-```
+    It depends on your hardware platform! Ion trap systems typically have excellent coherence (favor deeper circuits) but limited qubits. Superconducting systems have more qubits but shorter coherence times (favor shallow, wide circuits). Algorithm design must match the platform's strengths.
+    
 ### **Implications for NISQ Devices**
 
 For current **Noisy Intermediate-Scale Quantum (NISQ) devices**, the relationship between depth and system fidelity is the **dominant constraint** on algorithm feasibility.

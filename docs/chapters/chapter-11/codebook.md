@@ -1,4 +1,4 @@
-# **Chapter 11: Quantum Supervised Learning () () (Codebook)**
+# **Chapter 11: Quantum Supervised Learning (Codebook)**
 
 Supervised quantum learning trains a parametric circuit to minimise a classification or regression loss. This chapter implements a variational binary classifier, a quantum kernel SVM, and a loss-landscape diagnostic.
 

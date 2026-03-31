@@ -1,4 +1,4 @@
-# **Chapter 9: Quantum Data Encoding Techniques () () (Codebook)**
+# **Chapter 9: Quantum Data Encoding Techniques (Codebook)**
 
 Choosing an encoding is the first design decision in any QML pipeline. This chapter surveys the main strategies — basis encoding, amplitude encoding, and angle/IQP encoding — and evaluates their scaling, expressibility, and fidelity properties.
 

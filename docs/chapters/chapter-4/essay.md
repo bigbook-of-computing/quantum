@@ -29,10 +29,8 @@ This chapter explores the foundational quantum algorithms that demonstrate the c
 The Deutsch and Deutsch-Jozsa (DJ) algorithms are historically significant, serving as the first concrete demonstrations that quantum computers can outperform their classical counterparts, even if only for highly specific, contrived problems. They introduce the fundamental concepts of **quantum oracle queries** and the use of **interference** to extract global properties of a function in a single query.
 
 !!! tip "Key Insight"
-```
-The Deutsch-Jozsa algorithm was the first to prove quantum computers could solve certain problems exponentially faster than classical computers, demonstrating that quantum computing is not just a theoretical curiosity but offers genuine computational advantages.
-
-```
+    The Deutsch-Jozsa algorithm was the first to prove quantum computers could solve certain problems exponentially faster than classical computers, demonstrating that quantum computing is not just a theoretical curiosity but offers genuine computational advantages.
+    
 ### **Deutsch’s Problem and the Query Advantage**
 
 **Deutsch's Problem** addresses the simplest version of the **promise problem**: given a function $f: \{0,1\} \to \{0,1\}$, determine whether $f$ is **constant** ($f(0) = f(1)$) or **balanced** ($f(0) \neq f(1)$).
@@ -75,15 +73,11 @@ This encodes the global behavior of $f(x)$ into the phase of the superposition.
 The ability of the algorithm to use interference to collapse the exponentially large superposition onto a single result that reveals a global property of the function is the core of the quantum speedup.
 
 !!! example "Interference Pattern"
-```
-For a constant function, all $2^n$ amplitudes pick up the same phase (either all $+1$ or all $-1$), so when Hadamard gates are reapplied, they interfere constructively to recreate $|0\rangle^{\otimes n}$. For a balanced function, exactly half the amplitudes are positive and half negative, causing destructive interference at $|0\rangle^{\otimes n}$.
-
-```
+    For a constant function, all $2^n$ amplitudes pick up the same phase (either all $+1$ or all $-1$), so when Hadamard gates are reapplied, they interfere constructively to recreate $|0\rangle^{\otimes n}$. For a balanced function, exactly half the amplitudes are positive and half negative, causing destructive interference at $|0\rangle^{\otimes n}$.
+    
 ??? question "Is the Deutsch-Jozsa algorithm practical?"
-```
-While it demonstrates exponential speedup, the algorithm solves an artificial promise problem with limited real-world applications. However, it established crucial proof-of-concept for quantum advantage and introduced techniques (phase kickback, interference) used in practical algorithms like Shor's.
-
-```
+    While it demonstrates exponential speedup, the algorithm solves an artificial promise problem with limited real-world applications. However, it established crucial proof-of-concept for quantum advantage and introduced techniques (phase kickback, interference) used in practical algorithms like Shor's.
+    
 ---
 
 ## **4.2 Bernstein-Vazirani Algorithm**
@@ -93,14 +87,12 @@ While it demonstrates exponential speedup, the algorithm solves an artificial pr
 The Bernstein-Vazirani (BV) algorithm is a key demonstration of the power of **quantum parallelism** and **phase estimation**. It solves a promise problem with an **exponential speedup** over the classical deterministic approach, making it a stronger showcase of quantum advantage than the Deutsch-Jozsa algorithm.
 
 !!! tip "Key Insight"
-
+    
 ### **Problem Statement and Classical Complexity**
 
 !!! tip "Key Insight"
-```
-Bernstein-Vazirani showcases quantum parallelism at its finest: extracting an entire n-bit hidden string in a single query by simultaneously evaluating the oracle on all $2^n$ possible inputs and using the QFT to decode the result.
-
-```
+    Bernstein-Vazirani showcases quantum parallelism at its finest: extracting an entire n-bit hidden string in a single query by simultaneously evaluating the oracle on all $2^n$ possible inputs and using the QFT to decode the result.
+    
 ### **Problem Statement and Classical Complexity**
 
 The BV algorithm aims to find a hidden binary string $s$ of length $n$, where $s \in \{0,1\}^n$.
@@ -141,19 +133,15 @@ $$
 5.  **Measurement:** Measuring the first $n$ qubits yields the hidden string $|s\rangle$ with probability 1.
 
 !!! example "Quantum Parallelism in Action"
-```
-Instead of querying with $n$ different basis vectors classically ($|100...0\rangle$, $|010...0\rangle$, etc.), the quantum algorithm queries with the superposition of all $2^n$ basis vectors simultaneously, encodes the entire dot product pattern in phases, then uses the inverse QFT (Hadamard) to extract the hidden string.
-
-```
+    Instead of querying with $n$ different basis vectors classically ($|100...0\rangle$, $|010...0\rangle$, etc.), the quantum algorithm queries with the superposition of all $2^n$ basis vectors simultaneously, encodes the entire dot product pattern in phases, then uses the inverse QFT (Hadamard) to extract the hidden string.
+    
 ### **Demonstration of Quantum Parallelism**
 
 The Bernstein-Vazirani algorithm provides the clearest conceptual demonstration of how a quantum computer retrieves an entire $n$-bit string of information in one query, exploiting the $2^n$-dimensional amplitude space to store the results of all possible inputs. The final Hadamard transformation effectively performs an inverse QFT, isolating the hidden pattern $s$ that was encoded in the phase of the superposition.
 
 ??? question "Why doesn't this violate the holographic bound?"
-```
-While we encode $2^n$ function evaluations in the quantum state, we only extract $n$ bits of classical information (the string $s$). The exponential quantum state space collapses to linear classical output—no violation of information bounds occurs.
-
-```
+    While we encode $2^n$ function evaluations in the quantum state, we only extract $n$ bits of classical information (the string $s$). The exponential quantum state space collapses to linear classical output—no violation of information bounds occurs.
+    
 ---
 
 ## **4.3 Simon's Algorithm**
@@ -165,10 +153,8 @@ While we encode $2^n$ function evaluations in the quantum state, we only extract
 Simon's algorithm is mathematically significant because it was the first quantum algorithm to provide a clear **exponential speedup** over the best known classical algorithm for a non-trivial problem, predating Shor's algorithm in this regard. It highlights how quantum mechanics can solve problems involving hidden global structure, particularly **periodicity**, which forms the conceptual foundation for Shor's factoring routine.
 
 !!! tip "Key Insight"
-```
-Simon's algorithm is the direct predecessor to Shor's factoring algorithm—both use the same core technique of encoding hidden periodicity into quantum phases and extracting it via the quantum Fourier transform. Understanding Simon's algorithm is essential for understanding Shor's.
-
-```
+    Simon's algorithm is the direct predecessor to Shor's factoring algorithm—both use the same core technique of encoding hidden periodicity into quantum phases and extracting it via the quantum Fourier transform. Understanding Simon's algorithm is essential for understanding Shor's.
+    
 ### **Problem Statement and Classical Complexity**
 
 **Simon's Problem** involves an oracle function $f: \{0,1\}^n \to \{0,1\}^n$ with a hidden structure defined by a non-zero secret string $s \in \{0,1\}^n$.
@@ -216,10 +202,8 @@ This is a linear equation relating the unknown bits of $s$ to the measured bits 
 
 ```
 !!! example "Building the Linear System"
-```
-Each run of Simon's algorithm produces one linear equation: $y_1 \cdot s = 0$, $y_2 \cdot s = 0$, etc. After $n-1$ independent equations, we can solve the system using Gaussian elimination to find the unique $n$-bit string $s$.
-
-```
+    Each run of Simon's algorithm produces one linear equation: $y_1 \cdot s = 0$, $y_2 \cdot s = 0$, etc. After $n-1$ independent equations, we can solve the system using Gaussian elimination to find the unique $n$-bit string $s$.
+    
 ### **Solution and Link to Shor's Algorithm**
 
 Since one run yields only one equation, the entire procedure must be repeated $n-1$ times to gather enough linearly independent equations to solve for the $n$ bits of the hidden string $s$ using classical linear algebra.
@@ -227,10 +211,8 @@ Since one run yields only one equation, the entire procedure must be repeated $n
 The significance of Simon's algorithm is that the core mechanism—creating a superposition over an input register, querying a periodic oracle, and using a final Hadamard (QFT) transformation to measure a string $y$ in the frequency domain that reveals the hidden period $s$—is precisely the routine used for the **period-finding** component of **Shor's factoring algorithm**. Thus, Simon's algorithm serves as the conceptual blueprint for the most powerful known quantum algorithm.
 
 ??? question "Why is periodicity so important in quantum algorithms?"
-```
-Periodic functions create regular interference patterns in quantum superpositions. The QFT is specifically designed to detect these patterns, making periodicity the "sweet spot" where quantum algorithms achieve exponential speedups. This property underlies both Simon's and Shor's algorithms.
-
-```
+    Periodic functions create regular interference patterns in quantum superpositions. The QFT is specifically designed to detect these patterns, making periodicity the "sweet spot" where quantum algorithms achieve exponential speedups. This property underlies both Simon's and Shor's algorithms.
+    
 ---
 
 ## **4.4 Grover's Search Algorithm**
@@ -242,10 +224,8 @@ Periodic functions create regular interference patterns in quantum superposition
 Grover's algorithm is a celebrated quantum algorithm that provides a **quadratic speedup** for searching an unstructured database, outperforming the best possible classical search methods. It is a foundational example of **quantum amplitude amplification**.
 
 !!! tip "Key Insight"
-```
-Unlike algorithms that achieve exponential speedups through periodicity, Grover's algorithm achieves a quadratic speedup through amplitude amplification—a completely different quantum mechanism. This makes it broadly applicable to optimization and search problems across many domains.
-
-```
+    Unlike algorithms that achieve exponential speedups through periodicity, Grover's algorithm achieves a quadratic speedup through amplitude amplification—a completely different quantum mechanism. This makes it broadly applicable to optimization and search problems across many domains.
+    
 ### **Problem Statement and Classical Complexity**
 
 * **Problem:** Given an unsorted database or list of size $N = 2^n$ items, find the unique input $x$ that satisfies the condition $f(x)=1$, where $f: \{0,1\}^n \to \{0,1\}$ is an oracle function that marks the solution.
@@ -259,10 +239,8 @@ Grover's algorithm achieves a **quadratic speedup**, finding the solution in $O(
 * **Significance:** While this is a polynomial (quadratic) speedup, not an exponential one like Shor's or Simon's algorithms, its applicability is extremely broad, extending to many optimization and database search problems.
 
 !!! example "Quadratic Speedup in Practice"
-```
-For a database with 1 million items ($N = 10^6$), classical search requires up to 1 million queries, while Grover's algorithm finds the solution in approximately 1,000 queries—a 1,000× speedup. For $N = 2^{40}$ items, classical needs ~1 trillion queries; Grover needs only ~1 million.
-
-```
+    For a database with 1 million items ($N = 10^6$), classical search requires up to 1 million queries, while Grover's algorithm finds the solution in approximately 1,000 queries—a 1,000× speedup. For $N = 2^{40}$ items, classical needs ~1 trillion queries; Grover needs only ~1 million.
+    
 ### **The Grover Iteration: Oracle and Diffusion**
 
 Grover's algorithm is an iterative process that repeatedly amplifies the probability amplitude of the desired state while suppressing the amplitudes of all incorrect states. Each **Grover iteration** consists of two main unitary components: the oracle and the diffusion operator.
@@ -290,10 +268,8 @@ $$
 The **Grover iteration** $G = D \cdot O_f$ is applied $k \approx \frac{\pi}{4}\sqrt{N}$ times. Each iteration rotates the state vector closer to the target state $|w\rangle$, increasing its probability amplitude until it approaches 1.
 
 ??? question "What happens if we apply too many Grover iterations?"
-```
-The algorithm is sensitive to the number of iterations! Too many iterations cause the amplitude to "overshoot" the target and decrease again. The optimal number is $\approx \frac{\pi}{4}\sqrt{N}$. This sensitivity is one practical challenge when the number of solutions is unknown.
-
-```
+    The algorithm is sensitive to the number of iterations! Too many iterations cause the amplitude to "overshoot" the target and decrease again. The optimal number is $\approx \frac{\pi}{4}\sqrt{N}$. This sensitivity is one practical challenge when the number of solutions is unknown.
+    
 ### **Generalization: Quantum Amplitude Amplification**
 
 Grover's algorithm is a specific application of the general technique known as **Quantum Amplitude Amplification**.
@@ -313,10 +289,8 @@ This generalization is highly valuable as it provides a standardized method for 
 Shor's algorithm is arguably the most famous and impactful quantum algorithm, achieving a decisive **exponential speedup** over the best known classical methods for factoring large integers. This capability poses a fundamental threat to modern cryptography, particularly the **RSA encryption** system, which relies on the classical difficulty of factoring large numbers.
 
 !!! tip "Key Insight"
-```
-Shor's algorithm demonstrates that quantum computers can break widely-used public-key cryptography (RSA), making it perhaps the most practically significant quantum algorithm discovered. It transforms an intractable classical problem into a tractable quantum one through period finding.
-
-```
+    Shor's algorithm demonstrates that quantum computers can break widely-used public-key cryptography (RSA), making it perhaps the most practically significant quantum algorithm discovered. It transforms an intractable classical problem into a tractable quantum one through period finding.
+    
 ### **Problem and Exponential Speedup**
 
 * **Problem:** The goal is to factor a large composite integer $N$.
@@ -349,10 +323,8 @@ The $\gcd$ calculation is performed efficiently using the classical Euclidean al
 
 ```
 !!! example "Factoring 15 with Shor's Algorithm"
-```
-To factor $N=15$, choose $a=7$. The function $f(x) = 7^x \pmod{15}$ has period $r=4$ (since $7^4 = 2401 \equiv 1 \pmod{15}$). Then $7^{r/2} = 7^2 = 49 \equiv 4 \pmod{15}$. Computing $\gcd(4-1, 15) = \gcd(3, 15) = 3$ and $\gcd(4+1, 15) = \gcd(5, 15) = 5$ reveals the factors: 3 and 5.
-
-```
+    To factor $N=15$, choose $a=7$. The function $f(x) = 7^x \pmod{15}$ has period $r=4$ (since $7^4 = 2401 \equiv 1 \pmod{15}$). Then $7^{r/2} = 7^2 = 49 \equiv 4 \pmod{15}$. Computing $\gcd(4-1, 15) = \gcd(3, 15) = 3$ and $\gcd(4+1, 15) = \gcd(5, 15) = 5$ reveals the factors: 3 and 5.
+    
 ### **The Quantum Circuit Structure**
 
 The exponential speedup stems from the efficiency of the **quantum period-finding subroutine**. The circuit relies on:
@@ -364,10 +336,8 @@ The exponential speedup stems from the efficiency of the **quantum period-findin
 The ability of the QFT to efficiently extract the global periodicity pattern from the quantum state is the central mathematical insight that grants the exponential speedup.
 
 ??? question "When will quantum computers actually break RSA?"
-```
-While Shor's algorithm is polynomial-time, implementing it requires fault-tolerant quantum computers with thousands of logical qubits. Current estimates suggest breaking RSA-2048 requires millions of physical qubits with error correction. This is likely decades away, but has already spurred development of post-quantum cryptography standards.
-
-```
+    While Shor's algorithm is polynomial-time, implementing it requires fault-tolerant quantum computers with thousands of logical qubits. Current estimates suggest breaking RSA-2048 requires millions of physical qubits with error correction. This is likely decades away, but has already spurred development of post-quantum cryptography standards.
+    
 ---
 
 ## **4.6 Quantum Random Walks**
@@ -377,10 +347,8 @@ While Shor's algorithm is polynomial-time, implementing it requires fault-tolera
 **Quantum Random Walks (QRWs)** are the quantum mechanical generalization of the classical random walk (CRW). They leverage quantum phenomena—specifically **superposition** and **interference**—to achieve distinct advantages over CRWs, particularly in terms of search efficiency and mixing rates in graph problems.
 
 !!! tip "Key Insight"
-```
-Quantum random walks replace classical probabilistic hopping with quantum superposition and interference. This allows them to explore graph structures quadratically faster than classical walks, making them powerful tools for graph algorithms and search problems.
-
-```
+    Quantum random walks replace classical probabilistic hopping with quantum superposition and interference. This allows them to explore graph structures quadratically faster than classical walks, making them powerful tools for graph algorithms and search problems.
+    
 ### **Classical vs. Quantum Random Walks**
 
 In a classical random walk, the walker occupies a single node (state) at any given time, and movement between nodes is governed by classical probability distributions. The walker's path is definite, even if unknown.
@@ -392,10 +360,8 @@ In contrast, a quantum random walk:
 * **Interference:** The complex probability amplitudes of the paths interfere. This is the source of the speedup, as desired paths can be amplified (constructive interference) while redundant or dead-end paths are suppressed (destructive interference).
 
 !!! example "Quantum Walk on a Line"
-```
-On a 1D line, a classical random walk spreads with variance $\propto t$ after $t$ steps (standard deviation $\propto \sqrt{t}$). A quantum walk spreads linearly with variance $\propto t^2$ (standard deviation $\propto t$), exploring the space much faster due to quantum interference patterns.
-
-```
+    On a 1D line, a classical random walk spreads with variance $\propto t$ after $t$ steps (standard deviation $\propto \sqrt{t}$). A quantum walk spreads linearly with variance $\propto t^2$ (standard deviation $\propto t$), exploring the space much faster due to quantum interference patterns.
+    
 ### **Key Advantages and Applications**
 
 The primary advantage of a QRW is its ability to achieve **faster mixing and hitting times** on various graphs compared to classical walks.
@@ -419,10 +385,8 @@ There are two main formulations of the quantum random walk, each suited for diff
 Both DTQRW and CTQRW are powerful tools used to design algorithms that achieve speedups for specific classes of graph problems where classical methods are inefficient.
 
 ??? question "Are quantum walks used in practical quantum algorithms?"
-```
-Yes! Quantum walk frameworks have been used to develop algorithms for spatial search, graph connectivity, and formula evaluation. They also provide alternative constructions for Grover's search and other amplitude amplification tasks, offering different trade-offs in circuit depth and qubit requirements.
-
-```
+    Yes! Quantum walk frameworks have been used to develop algorithms for spatial search, graph connectivity, and formula evaluation. They also provide alternative constructions for Grover's search and other amplitude amplification tasks, offering different trade-offs in circuit depth and qubit requirements.
+    
 ---
 
 ## **4.7 Quantum Amplitude Amplification**
@@ -432,10 +396,8 @@ Yes! Quantum walk frameworks have been used to develop algorithms for spatial se
 Quantum Amplitude Amplification (QAA) is a powerful, general technique that forms the algebraic backbone of many quantum speedup algorithms, including Grover's search. It generalizes the iterative process of boosting the probability of a desired outcome from any initial quantum state.
 
 !!! tip "Key Insight"
-```
-Quantum Amplitude Amplification is the generalization of Grover's search—it can boost the success probability of any quantum algorithm from a small value $a$ to near-certainty in just $O(1/\sqrt{a})$ iterations. This makes it a universal speedup technique applicable across many quantum algorithms.
-
-```
+    Quantum Amplitude Amplification is the generalization of Grover's search—it can boost the success probability of any quantum algorithm from a small value $a$ to near-certainty in just $O(1/\sqrt{a})$ iterations. This makes it a universal speedup technique applicable across many quantum algorithms.
+    
 ### **Core Concept and Mechanism**
 
 QAA addresses the problem of enhancing the success probability of obtaining a desired state $|w\rangle$ from an initial quantum state $|\psi\rangle$ generated by some preparation circuit.
@@ -451,10 +413,8 @@ where $a = \langle w|\psi\rangle^2$ is the initial probability of success.
 2.  **Amplification:** QAA boosts this initial success probability $a$ to near unity (probability $\approx 1$) in a number of iterations proportional to $O(1/\sqrt{a})$.
 
 !!! example "Amplifying Low Success Probabilities"
-```
-Suppose a quantum algorithm produces the desired outcome with only 1% probability ($a = 0.01$). Classically, you'd need to run it ~100 times to likely see success. With QAA, you can boost this to >99% success in just $O(1/\sqrt{0.01}) = O(10)$ iterations—a 10× speedup.
-
-```
+    Suppose a quantum algorithm produces the desired outcome with only 1% probability ($a = 0.01$). Classically, you'd need to run it ~100 times to likely see success. With QAA, you can boost this to >99% success in just $O(1/\sqrt{0.01}) = O(10)$ iterations—a 10× speedup.
+    
 ### **The Iterative Operator**
 
 The QAA process works by iteratively applying the **Grover iteration** operator, $G$, which serves as the core amplification step. The operator $G$ is composed of two reflections:
@@ -479,10 +439,8 @@ Grover's search algorithm is the canonical example of Quantum Amplitude Amplific
 QAA is vital because it can be used to accelerate a vast array of algorithms beyond simple database search, providing a universal framework for obtaining quadratic speedups in many quantum computations where the problem can be phrased as finding a marked state within a superposition.
 
 ??? question "Can QAA be combined with other quantum techniques?"
-```
-Yes! QAA is often combined with quantum phase estimation, quantum walks, and variational algorithms to boost their success rates. It's a modular technique that can be "plugged in" to many quantum algorithms to enhance their performance.
-
-```
+    Yes! QAA is often combined with quantum phase estimation, quantum walks, and variational algorithms to boost their success rates. It's a modular technique that can be "plugged in" to many quantum algorithms to enhance their performance.
+    
 ---
 
 ## **Summary Tables**

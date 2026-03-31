@@ -1,4 +1,4 @@
-# **Chapter 11: Quantum Supervised Learning () () (Workbook)**
+# **Chapter 11: Quantum Supervised Learning (Workbook)**
 
 ---
 
@@ -204,31 +204,27 @@ Current evidence suggests advantage in specialized problems (e.g., certain geome
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  The primary function of a Quantum Kernel $K(\mathbf{x}, \mathbf{x}')$ is to:
-```
-    - A. Calculate the gradient of the loss function.
-    - B. Measure the overlap (similarity) between two amplitude-encoded quantum states.
-    - C. Define the parameterized unitary $U(\vec{\theta})$.
-
+    
+        1.  The primary function of a Quantum Kernel $K(\mathbf{x}, \mathbf{x}')$ is to:
+        - A. Calculate the gradient of the loss function.
+        - B. Measure the overlap (similarity) between two amplitude-encoded quantum states.
+        - C. Define the parameterized unitary $U(\vec{\theta})$.
+    
 ??? info "See Answer"
-    **Correct: B**. The kernel quantifies the similarity of data points in the quantum feature space.
-
-```
+        **Correct: B**. The kernel quantifies the similarity of data points in the quantum feature space.
+    
 !!! abstract "Interview-Style Question"
-
-```
-The QSVM decision function, $\sum_i \alpha_i y_i K(\mathbf{x}_i, \mathbf{x}) + b$, is trained classically. If the training is classical, where does the potential for quantum advantage come from?
-
-???+ info "Answer Strategy"
-    The potential for quantum advantage in a QSVM does not come from the training process itself, but from the **computation of the kernel matrix**.
-
-    1.  **Classically Intractable Kernels:** A quantum computer can potentially compute kernels that are intractable for classical computers. The quantum feature map projects the classical data into a Hilbert space that is exponentially large. Calculating the inner products between all pairs of data points in this vast space is often impossible for a classical machine.
-    2.  **Superior Expressive Power:** By accessing these complex, high-dimensional feature spaces, a QSVM may be able to find non-linear decision boundaries that are invisible to classical kernel methods. This could lead to higher accuracy on certain complex datasets.
-
-    In essence, the quantum computer provides a more powerful "lens" through which to view the data's similarity, even though the final step of drawing the separating line is done classically.
-
-```
+    
+    The QSVM decision function, $\sum_i \alpha_i y_i K(\mathbf{x}_i, \mathbf{x}) + b$, is trained classically. If the training is classical, where does the potential for quantum advantage come from?
+    
+    ???+ info "Answer Strategy"
+        The potential for quantum advantage in a QSVM does not come from the training process itself, but from the **computation of the kernel matrix**.
+    
+        1.  **Classically Intractable Kernels:** A quantum computer can potentially compute kernels that are intractable for classical computers. The quantum feature map projects the classical data into a Hilbert space that is exponentially large. Calculating the inner products between all pairs of data points in this vast space is often impossible for a classical machine.
+        2.  **Superior Expressive Power:** By accessing these complex, high-dimensional feature spaces, a QSVM may be able to find non-linear decision boundaries that are invisible to classical kernel methods. This could lead to higher accuracy on certain complex datasets.
+    
+        In essence, the quantum computer provides a more powerful "lens" through which to view the data's similarity, even though the final step of drawing the separating line is done classically.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -517,36 +513,32 @@ Quantum advantage requires:
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  How is the distance between two data points primarily defined in the QkNN algorithm?
-```
-    - A. The $\ell_2$ norm of the classical feature vectors.
-    - B. A function of the fidelity (overlap) between their quantum state vectors.
-    - C. The Euclidean distance in the Bloch sphere.
-
+    
+        1.  How is the distance between two data points primarily defined in the QkNN algorithm?
+        - A. The $\ell_2$ norm of the classical feature vectors.
+        - B. A function of the fidelity (overlap) between their quantum state vectors.
+        - C. The Euclidean distance in the Bloch sphere.
+    
 ??? info "See Answer"
-    **Correct: B**. The distance is derived from the quantum state overlap, which measures similarity in the Hilbert space.
-
-```
+        **Correct: B**. The distance is derived from the quantum state overlap, which measures similarity in the Hilbert space.
+    
 !!! abstract "Interview-Style Question"
-
-```
-What is the key difference in the computational task performed by the quantum computer in QSVM versus QkNN?
-
-???+ info "Answer Strategy"
-    The key difference lies in the **scope and timing** of the quantum computation.
-
-    1.  **QSVM (Batch Processing):**
-        *   **Task:** The quantum computer's job is to compute the **entire $N \times N$ kernel matrix** for the training data, where $N$ is the number of training samples.
-        *   **Timing:** This is a large, one-time, offline computation. Once the kernel is computed, the quantum computer is no longer needed for training or inference.
-
-    2.  **QkNN (Real-time Inference):**
-        *   **Task:** To classify a *new*, unseen data point, the quantum computer must compute the **$N$ distances** between that new point and every point in the training set.
-        *   **Timing:** This is a smaller, online computation that must be performed for every single prediction.
-
-    In short, QSVM uses the quantum computer for a heavy, upfront batch job on the training set, while QkNN uses it for a lighter, repeated job during inference.
-
-```
+    
+    What is the key difference in the computational task performed by the quantum computer in QSVM versus QkNN?
+    
+    ???+ info "Answer Strategy"
+        The key difference lies in the **scope and timing** of the quantum computation.
+    
+        1.  **QSVM (Batch Processing):**
+            *   **Task:** The quantum computer's job is to compute the **entire $N \times N$ kernel matrix** for the training data, where $N$ is the number of training samples.
+            *   **Timing:** This is a large, one-time, offline computation. Once the kernel is computed, the quantum computer is no longer needed for training or inference.
+    
+        2.  **QkNN (Real-time Inference):**
+            *   **Task:** To classify a *new*, unseen data point, the quantum computer must compute the **$N$ distances** between that new point and every point in the training set.
+            *   **Timing:** This is a smaller, online computation that must be performed for every single prediction.
+    
+        In short, QSVM uses the quantum computer for a heavy, upfront batch job on the training set, while QkNN uses it for a lighter, repeated job during inference.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**
@@ -853,32 +845,28 @@ Pérez-Salinas et al. proved QNNs with polynomial depth and periodic data re-upl
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  Which challenge, also faced by VQE, poses a significant risk to the effective training of deep QNNs?
-```
-    - A. The data loading bottleneck.
-    - B. Risk of barren plateaus.
-    - C. The No-cloning theorem.
-
+    
+        1.  Which challenge, also faced by VQE, poses a significant risk to the effective training of deep QNNs?
+        - A. The data loading bottleneck.
+        - B. Risk of barren plateaus.
+        - C. The No-cloning theorem.
+    
 ??? info "See Answer"
-    **Correct: B**. Barren plateaus cause gradients to vanish, stalling the optimization process.
-
-```
+        **Correct: B**. Barren plateaus cause gradients to vanish, stalling the optimization process.
+    
 !!! abstract "Interview-Style Question"
-
-```
-What is the primary motivation for using a Quantum Neural Network (QNN) over a classical neural network?
-
-???+ info "Answer Strategy"
-    The primary motivation for using a Quantum Neural Network (QNN) is to leverage the **vast and complex Hilbert space** to create more powerful and expressive models than classical neural networks can achieve.
-
-    1.  **Larger State Space:** A classical bit has 2 states, while a qubit exists in a superposition of 2 states. An $n$-qubit system has a state space of $2^n$ complex dimensions, which grows exponentially. This allows QNNs to represent and process information in ways that are classically intractable.
-    2.  **Entanglement for Complex Correlations:** Entanglement allows a QNN to capture intricate, non-local correlations between features in the data that classical networks might miss or require many more parameters to learn.
-    3.  **Potential for Better Generalization:** By exploring a much larger function space, QNNs may be able to find solutions that generalize better to new data, especially for problems with inherent quantum-like structures.
-
-    In essence, the goal is to use the unique properties of quantum mechanics to perform computations and learn patterns that are beyond the reach of classical models.
-
-```
+    
+    What is the primary motivation for using a Quantum Neural Network (QNN) over a classical neural network?
+    
+    ???+ info "Answer Strategy"
+        The primary motivation for using a Quantum Neural Network (QNN) is to leverage the **vast and complex Hilbert space** to create more powerful and expressive models than classical neural networks can achieve.
+    
+        1.  **Larger State Space:** A classical bit has 2 states, while a qubit exists in a superposition of 2 states. An $n$-qubit system has a state space of $2^n$ complex dimensions, which grows exponentially. This allows QNNs to represent and process information in ways that are classically intractable.
+        2.  **Entanglement for Complex Correlations:** Entanglement allows a QNN to capture intricate, non-local correlations between features in the data that classical networks might miss or require many more parameters to learn.
+        3.  **Potential for Better Generalization:** By exploring a much larger function space, QNNs may be able to find solutions that generalize better to new data, especially for problems with inherent quantum-like structures.
+    
+        In essence, the goal is to use the unique properties of quantum mechanics to perform computations and learn patterns that are beyond the reach of classical models.
+    
 ---
 
 ### **<i class="fa-solid fa-flask"></i> Hands-On Projects**

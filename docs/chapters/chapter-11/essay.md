@@ -31,10 +31,8 @@ Understanding these algorithms requires grasping how quantum feature maps transf
 The **Quantum Support Vector Machine (QSVM)** is a foundational supervised learning model that adapts the classical Support Vector Machine (SVM) algorithm to leverage the immense feature-mapping power of quantum mechanics. The core innovation of QSVM lies in replacing the classical kernel function with a **Quantum Kernel**.
 
 !!! tip "QSVM's Quantum Advantage"
-```
-QSVM doesn't change the SVM optimization—it remains classical. The quantum advantage comes entirely from the kernel: quantum feature maps can create correlations via entanglement that would require exponentially many classical basis functions to represent [3].
-
-```
+    QSVM doesn't change the SVM optimization—it remains classical. The quantum advantage comes entirely from the kernel: quantum feature maps can create correlations via entanglement that would require exponentially many classical basis functions to represent [3].
+    
 ### **Classical SVM Review**
 
 ---
@@ -96,19 +94,17 @@ The quantum feature map can create correlations and non-linearities via **entang
 By implicitly mapping the data into this vast, high-dimensional space, QSVM may achieve better classification performance or generalization by finding complex, **non-linearly separable problems** that are difficult for classical kernels.
 
 !!! example "QSVM Workflow"
-```
-For dataset $\{(x_1, y_1), \ldots, (x_M, y_M)\}$ with labels $y_i \in \{-1, +1\}$:
-
-1. **Compute quantum kernel matrix:** For all pairs $(i,j)$, calculate $K_{ij} = |\langle\phi(x_i)|\phi(x_j)\rangle|^2$ using quantum circuits
-2. **Train classical SVM:** Solve quadratic program to find $\alpha_i, b$:
-   
-   $$
-   \max_{\alpha} \sum_i \alpha_i - \frac{1}{2}\sum_{i,j} \alpha_i \alpha_j y_i y_j K_{ij}
-   $$
-
-3. **Classify new point $x$:** Compute $f(x) = \text{sign}\left(\sum_i \alpha_i y_i K(x_i, x) + b\right)$
-
-```
+    For dataset $\{(x_1, y_1), \ldots, (x_M, y_M)\}$ with labels $y_i \in \{-1, +1\}$:
+    
+    1. **Compute quantum kernel matrix:** For all pairs $(i,j)$, calculate $K_{ij} = |\langle\phi(x_i)|\phi(x_j)\rangle|^2$ using quantum circuits
+    2. **Train classical SVM:** Solve quadratic program to find $\alpha_i, b$:
+       
+       $$
+       \max_{\alpha} \sum_i \alpha_i - \frac{1}{2}\sum_{i,j} \alpha_i \alpha_j y_i y_j K_{ij}
+       $$
+    
+    3. **Classify new point $x$:** Compute $f(x) = \text{sign}\left(\sum_i \alpha_i y_i K(x_i, x) + b\right)$
+    
 ---
 
 ### **Practical Implementation**
@@ -161,10 +157,8 @@ QSVM_Prediction(x_new, alpha, b, training_data, training_labels):
 **Quantum kernels** are the core innovation underpinning Quantum Support Vector Machines (QSVMs) and related supervised learning models. They define the similarity between two data points ($x$ and $x'$) by measuring the **overlap (fidelity)** between their corresponding quantum feature states, $|\phi(x)\rangle$ and $|\phi(x')\rangle$, in the exponentially large Hilbert space.
 
 !!! tip "The Kernel Trick Goes Quantum"
-```
-Classical kernels compute inner products in high-dimensional spaces without explicitly constructing features. Quantum kernels take this to the extreme: the feature space has dimension $2^n$ (exponential in qubit count), making explicit classical computation impossible [4].
-
-```
+    Classical kernels compute inner products in high-dimensional spaces without explicitly constructing features. Quantum kernels take this to the extreme: the feature space has dimension $2^n$ (exponential in qubit count), making explicit classical computation impossible [4].
+    
 ### **Mathematical Definition**
 
 ---
@@ -256,10 +250,8 @@ Overlap_Estimation_Direct(state1_circuit, state2_circuit):
 ```
 
 ??? question "Why is the Swap Test necessary instead of just measuring both states?"
-```
-Quantum states cannot be copied (no-cloning theorem), and measuring a state destroys it. The Swap Test cleverly uses an ancilla qubit and controlled operations to extract the overlap information without requiring state tomography, which would be exponentially expensive.
-
-```
+    Quantum states cannot be copied (no-cloning theorem), and measuring a state destroys it. The Swap Test cleverly uses an ancilla qubit and controlled operations to extract the overlap information without requiring state tomography, which would be exponentially expensive.
+    
 ---
 
 ### **Applications and Challenges**
@@ -289,10 +281,8 @@ Kernel estimation can be **noisy** due to limited shot counts and hardware infid
 **Quantum Decision Trees (QDTs)** are a concept under active research aiming to adapt the hierarchical structure and conditional logic of classical decision trees to leverage quantum mechanics, specifically **superposition** and **interference**.
 
 !!! tip "Quantum Parallelism in Tree Traversal"
-```
-Classical decision trees traverse one path at a time. Quantum decision trees can explore multiple branches simultaneously through superposition, with interference amplifying the probability of the correct classification path [5].
-
-```
+    Classical decision trees traverse one path at a time. Quantum decision trees can explore multiple branches simultaneously through superposition, with interference amplifying the probability of the correct classification path [5].
+    
 ### **Classical Decision Tree Review**
 
 ---
@@ -394,10 +384,8 @@ Quantum_Decision_Tree_Inference(x, tree_structure, num_qubits):
 The **Quantum k-Nearest Neighbors (QkNN)** algorithm is a supervised learning model that adapts the classical $k$-NN classification rule—assigning a label based on the majority vote of the $k$ closest neighbors—to the quantum domain. The quantum advantage is achieved by using efficient quantum subroutines to compute the **distance** or **similarity** between data points.
 
 !!! tip "Quantum Speedup in Distance Calculation"
-```
-Classical k-NN requires $O(D)$ time to compute Euclidean distance in $D$ dimensions. QkNN can potentially achieve $O(\log D)$ distance calculation using quantum overlap, assuming efficient amplitude encoding [6].
-
-```
+    Classical k-NN requires $O(D)$ time to compute Euclidean distance in $D$ dimensions. QkNN can potentially achieve $O(\log D)$ distance calculation using quantum overlap, assuming efficient amplitude encoding [6].
+    
 ### **Distance Calculation via Quantum Overlap**
 
 ---
@@ -475,15 +463,13 @@ QkNN_Classification(x_test, training_data, training_labels, k):
 ```
 
 !!! example "QkNN Speedup Analysis"
-```
-For dataset with $M$ training points in $D$ dimensions:
-
-- **Classical k-NN:** $O(M \cdot D)$ distance calculations
-- **Quantum k-NN:** $O(M \cdot \log D)$ assuming efficient amplitude encoding
-
-**Caveat:** The amplitude encoding itself requires $O(D)$ operations, potentially negating the speedup unless data has special structure enabling poly-logarithmic state preparation.
-
-```
+    For dataset with $M$ training points in $D$ dimensions:
+    
+    - **Classical k-NN:** $O(M \cdot D)$ distance calculations
+    - **Quantum k-NN:** $O(M \cdot \log D)$ assuming efficient amplitude encoding
+    
+    **Caveat:** The amplitude encoding itself requires $O(D)$ operations, potentially negating the speedup unless data has special structure enabling poly-logarithmic state preparation.
+    
 ---
 
 ### **Quantum Advantage**
@@ -493,10 +479,8 @@ For dataset with $M$ training points in $D$ dimensions:
 QkNN offers a potential **polynomial speedup** over classical $k$-NN, particularly in scenarios where the data dimension ($D$) is large. While the classical distance calculation takes time proportional to $O(D)$, the quantum overlap can potentially be estimated in $O(\log D)$ time, provided the data is efficiently loaded. This acceleration in the distance computation step is the primary source of the quantum advantage in QkNN.
 
 ??? question "What is the main bottleneck preventing QkNN from achieving practical speedup?"
-```
-The **data loading bottleneck**: amplitude encoding $D$-dimensional data into $\log_2 D$ qubits typically requires $O(D)$ gates for arbitrary data, negating the $O(\log D)$ overlap computation speedup. QkNN only achieves advantage when data has structure enabling efficient (poly-logarithmic) state preparation.
-
-```
+    The **data loading bottleneck**: amplitude encoding $D$-dimensional data into $\log_2 D$ qubits typically requires $O(D)$ gates for arbitrary data, negating the $O(\log D)$ overlap computation speedup. QkNN only achieves advantage when data has structure enabling efficient (poly-logarithmic) state preparation.
+    
 ---
 
 ## **11.5 Quantum Neural Networks (QNN)**
@@ -506,10 +490,8 @@ The **data loading bottleneck**: amplitude encoding $D$-dimensional data into $\
 **Quantum Neural Networks (QNNs)** represent the quantum computing analogue of classical neural networks, utilizing **Parameterized Quantum Circuits (VQCs)** as the trainable model core for supervised learning tasks. QNNs are fundamentally **variational models**, trained within the hybrid quantum-classical paradigm to minimize a cost function.
 
 !!! tip "QNNs Are VQCs for Supervised Learning"
-```
-QNNs are essentially VQCs (Chapter 10) applied to supervised learning problems. The architecture, training loop, and optimization challenges are identical—what distinguishes QNNs is their specific use for classification/regression tasks [7].
-
-```
+    QNNs are essentially VQCs (Chapter 10) applied to supervised learning problems. The architecture, training loop, and optimization challenges are identical—what distinguishes QNNs is their specific use for classification/regression tasks [7].
+    
 ### **Architecture and Operation**
 
 ---

@@ -59,10 +59,8 @@ $$
 $$
 
 !!! tip "Why Do X Errors and Z Errors Require Separate Codes?"
-```
-X errors (bit flips: $|0\rangle \leftrightarrow |1\rangle$) and Z errors (phase flips: $|+\rangle \leftrightarrow |-\rangle$) live in **dual bases**: X errors are detectable by Z measurements; Z errors are detectable by X measurements. The Shor code combines a bit-flip code (in the X basis) and a phase-flip code (in the Z basis) to protect against both, at the cost of using 9 physical qubits.
-
-```
+    X errors (bit flips: $|0\rangle \leftrightarrow |1\rangle$) and Z errors (phase flips: $|+\rangle \leftrightarrow |-\rangle$) live in **dual bases**: X errors are detectable by Z measurements; Z errors are detectable by X measurements. The Shor code combines a bit-flip code (in the X basis) and a phase-flip code (in the Z basis) to protect against both, at the cost of using 9 physical qubits.
+    
 ### **The No-Cloning Theorem**
 
 ---
@@ -76,12 +74,10 @@ $$
 This does not prevent **redundant encoding**: we can spread information across an entangled multi-qubit state $|\bar{\psi}\rangle$ that is not a simple product of copies. The information is distributed non-locally in the entangled state, making it immune to local errors.
 
 !!! example "Why the Classical Repetition Code Fails Directly"
-```
-Attempting to "copy" $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$ via three CNOTs gives:
-$$(\alpha|0\rangle + \beta|1\rangle)|00\rangle \to \alpha|000\rangle + \beta|111\rangle$$
-This is an **entangled** state (the 3-qubit GHZ state), not three independent copies. Majority-vote measurement of individual qubits collapses $|\psi\rangle$ — but **indirect syndrome measurement** preserves it, as we see next.
-
-```
+    Attempting to "copy" $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$ via three CNOTs gives:
+    $$(\alpha|0\rangle + \beta|1\rangle)|00\rangle \to \alpha|000\rangle + \beta|111\rangle$$
+    This is an **entangled** state (the 3-qubit GHZ state), not three independent copies. Majority-vote measurement of individual qubits collapses $|\psi\rangle$ — but **indirect syndrome measurement** preserves it, as we see next.
+    
 ---
 
 ## **20.2 3-Qubit Repetition Codes**
@@ -119,10 +115,8 @@ An arbitrary logical state $|\bar{\psi}\rangle = \alpha|000\rangle + \beta|111\r
 The syndrome measurement eigenvalues $\pm 1$ identify the error **without** revealing the logical state — the key property that distinguishes QEC from classical error detection.
 
 !!! tip "Syndromes Are Not Direct State Measurements"
-```
-A syndrome measurement measures multi-qubit **Pauli products** ($Z_1Z_2$, etc.), which commute with the logical operators $\bar{X} = X_1X_2X_3$ and $\bar{Z} = Z_1Z_2Z_3$. This preserves the logical information $(\alpha, \beta)$ while uniquely identifying single-qubit errors — the fundamental mechanism of all stabilizer QEC codes.
-
-```
+    A syndrome measurement measures multi-qubit **Pauli products** ($Z_1Z_2$, etc.), which commute with the logical operators $\bar{X} = X_1X_2X_3$ and $\bar{Z} = Z_1Z_2Z_3$. This preserves the logical information $(\alpha, \beta)$ while uniquely identifying single-qubit errors — the fundamental mechanism of all stabilizer QEC codes.
+    
 ### **The Phase-Flip Code**
 
 ---
@@ -138,20 +132,16 @@ where $|\pm\rangle = (|0\rangle \pm |1\rangle)/\sqrt{2}$. Encoding applies Hadam
 The phase-flip code detects **Z errors** via $X_1X_2$ and $X_2X_3$ syndrome measurements. Together, bit-flip and phase-flip codes protect against their respective single-qubit error types on 3 physical qubits each.
 
 !!! example "Phase-Flip Syndrome Table"
-```
-| Error | $X_1X_2$ | $X_2X_3$ | Correction |
-|:---|:---|:---|:---|
-| None | $+1$ | $+1$ | $I$ |
-| $Z_1$ | $-1$ | $+1$ | $Z_1$ |
-| $Z_2$ | $-1$ | $-1$ | $Z_2$ |
-| $Z_3$ | $+1$ | $-1$ | $Z_3$ |
-
-```
+    | Error | $X_1X_2$ | $X_2X_3$ | Correction |
+    |:---|:---|:---|:---|
+    | None | $+1$ | $+1$ | $I$ |
+    | $Z_1$ | $-1$ | $+1$ | $Z_1$ |
+    | $Z_2$ | $-1$ | $-1$ | $Z_2$ |
+    | $Z_3$ | $+1$ | $-1$ | $Z_3$ |
+    
 ??? question "Does the 3-qubit bit-flip code protect against phase-flip errors?"
-```
-No. The 3-qubit bit-flip code uses Z-stabilisers ($Z_1Z_2$, $Z_2Z_3$) that commute with X errors but do not detect Z errors. A Z error on any qubit changes the phases of $|\bar{0}\rangle$ and $|\bar{1}\rangle$ but maps to the trivial syndrome $(+1, +1)$, making it undetectable. This is why Shor's 9-qubit code (and CSS codes generally) combine both codes.
-
-```
+    No. The 3-qubit bit-flip code uses Z-stabilisers ($Z_1Z_2$, $Z_2Z_3$) that commute with X errors but do not detect Z errors. A Z error on any qubit changes the phases of $|\bar{0}\rangle$ and $|\bar{1}\rangle$ but maps to the trivial syndrome $(+1, +1)$, making it undetectable. This is why Shor's 9-qubit code (and CSS codes generally) combine both codes.
+    
 ---
 
 ## **20.3 Stabilizer Formalism and CSS Codes**
@@ -187,10 +177,8 @@ The CSS construction guarantees:
 3. Logical Clifford gates have simple implementations
 
 !!! tip "CSS Code Example: Steane Code"
-```
-The Steane $[[7, 1, 3]]$ code (Section 20.4) is a CSS code built from the $[7, 4, 3]$ Hamming code. Its 6 stabiliser generators ($3$ X-type, $3$ Z-type) protect one logical qubit against any single-qubit error across 7 physical qubits.
-
-```
+    The Steane $[[7, 1, 3]]$ code (Section 20.4) is a CSS code built from the $[7, 4, 3]$ Hamming code. Its 6 stabiliser generators ($3$ X-type, $3$ Z-type) protect one logical qubit against any single-qubit error across 7 physical qubits.
+    
 ---
 
 ## **20.4 The Steane Code and Surface Code**
@@ -221,10 +209,8 @@ Z stabilisers:   Z₁Z₂Z₃Z₄,  Z₁Z₂Z₅Z₆,  Z₁Z₃Z₅Z₇
 Each syndrome is a 3-bit binary string, giving $2^3 - 1 = 7$ non-trivial error patterns — exactly enough to identify any of the 7 physical qubit positions as the error site.
 
 !!! example "Steane Code Error Correction"
-```
-If qubit 3 suffers an X error: the Z syndromes evaluate to the binary string `101` = 5 in decimal → identifies error at qubit 5 in standard labelling (off by one in some conventions). Apply $X_5$ to correct. Total circuit for one QEC cycle: 7 data qubits + 6 ancilla qubits + ~35 CNOT gates for syndrome extraction.
-
-```
+    If qubit 3 suffers an X error: the Z syndromes evaluate to the binary string `101` = 5 in decimal → identifies error at qubit 5 in standard labelling (off by one in some conventions). Apply $X_5$ to correct. Total circuit for one QEC cycle: 7 data qubits + 6 ancilla qubits + ~35 CNOT gates for syndrome extraction.
+    
 ### **The Surface Code**
 
 ---
@@ -264,20 +250,14 @@ graph TD
 ```
 
 !!! tip "Surface Code Physical Qubit Overhead"
-```
-To achieve logical error rates of $10^{-10}$ needed for practical fault-tolerant Shor's algorithm: with physical error rate $p = 0.1\%$ and threshold $p_\text{th} = 1\%$, code distance $d \approx 25$ suffices. This requires $d^2 \approx 625$ physical qubits per logical qubit — plus ancillas, roughly 1000–2000 physical qubits per logical qubit. A 1000-logical-qubit fault-tolerant computer thus needs ~1–2 million physical qubits.
-
-```
+    To achieve logical error rates of $10^{-10}$ needed for practical fault-tolerant Shor's algorithm: with physical error rate $p = 0.1\%$ and threshold $p_\text{th} = 1\%$, code distance $d \approx 25$ suffices. This requires $d^2 \approx 625$ physical qubits per logical qubit — plus ancillas, roughly 1000–2000 physical qubits per logical qubit. A 1000-logical-qubit fault-tolerant computer thus needs ~1–2 million physical qubits.
+    
 !!! example "Surface Code QEC Cycle"
-```
-Each QEC cycle (round of syndrome extraction) on a distance-$d$ surface code takes $d$ rounds of measurement (to achieve fault-tolerant syndrome extraction), with each round requiring a depth-4 circuit of Hadamard and CNOT gates on all ancilla-data pairs. On superconducting hardware at ~350 ns/gate and 4-layer circuits: one QEC cycle ≈ $4 \times 350 = 1.4$ μs, much shorter than $T_1 \approx 100$ μs, allowing ~70 QEC rounds per $T_1$.
-
-```
+    Each QEC cycle (round of syndrome extraction) on a distance-$d$ surface code takes $d$ rounds of measurement (to achieve fault-tolerant syndrome extraction), with each round requiring a depth-4 circuit of Hadamard and CNOT gates on all ancilla-data pairs. On superconducting hardware at ~350 ns/gate and 4-layer circuits: one QEC cycle ≈ $4 \times 350 = 1.4$ μs, much shorter than $T_1 \approx 100$ μs, allowing ~70 QEC rounds per $T_1$.
+    
 ??? question "What is magic state distillation and why does the surface code need it?"
-```
-Clifford gates (H, CNOT, X, Z, S) can be implemented fault-tolerantly with transversal operations on the surface code. However, a quantum computer with only Clifford gates is **efficiently simulable classically** (Gottesman-Knill theorem) and cannot achieve universal quantum computation. The non-Clifford **T gate** ($\pi/8$ phase gate) completes the gate set for universality. Since T is not transversal on the surface code, it is implemented via **magic state distillation**: consume multiple noisy $|T\rangle$ states, purify them into a single high-fidelity magic state via Clifford circuits, then inject into the computation via gate teleportation. Distillation is the dominant resource overhead (~99%) of fault-tolerant quantum computing.
-
-```
+    Clifford gates (H, CNOT, X, Z, S) can be implemented fault-tolerantly with transversal operations on the surface code. However, a quantum computer with only Clifford gates is **efficiently simulable classically** (Gottesman-Knill theorem) and cannot achieve universal quantum computation. The non-Clifford **T gate** ($\pi/8$ phase gate) completes the gate set for universality. Since T is not transversal on the surface code, it is implemented via **magic state distillation**: consume multiple noisy $|T\rangle$ states, purify them into a single high-fidelity magic state via Clifford circuits, then inject into the computation via gate teleportation. Distillation is the dominant resource overhead (~99%) of fault-tolerant quantum computing.
+    
 ---
 
 ## **References**

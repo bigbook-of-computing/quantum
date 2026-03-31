@@ -1,4 +1,4 @@
-# **Chapter 7: 7.1 Qiskit: The Universal Quantum Compiler {.heading-with-pill} () () (Workbook)**
+# **Chapter 7: 7.1 Qiskit: The Universal Quantum Compiler {.heading-with-pill} (Workbook)**
 
 > **Concept:** Circuit-Based Quantum Programming • **Difficulty:** ★★☆☆☆
 > **Summary:** Qiskit is an open-source SDK for working with quantum computers at the level of circuits, pulses, and algorithms. It provides tools for creating and manipulating quantum programs and running them on prototype quantum devices on IBM Quantum Experience or on simulators on a local computer.
@@ -25,53 +25,47 @@ A typical Qiskit workflow involves:
 ### Comprehension Check
 
 !!! note "Quiz"
-```
-**1. Which core Qiskit component is primarily used to run realistic simulations, including those that incorporate noise models?**
-
-- A. `qiskit.QuantumCircuit`.
-- B. `qiskit.Terra`.
-- C. **`qiskit.Aer`**.
-- D. `qiskit.Ignis`.
-
+    **1. Which core Qiskit component is primarily used to run realistic simulations, including those that incorporate noise models?**
+    
+    - A. `qiskit.QuantumCircuit`.
+    - B. `qiskit.Terra`.
+    - C. **`qiskit.Aer`**.
+    - D. `qiskit.Ignis`.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    `qiskit.Aer` is the high-performance simulator framework for Qiskit.
-
-```
+        **Correct: C**  
+        `qiskit.Aer` is the high-performance simulator framework for Qiskit.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. The `qiskit.IBMQ` provider allows users to interface directly with which type of physical quantum hardware?**
-
-- A. Trapped Ions.
-- B. Photonic Quantum Devices.
-- C. **Superconducting Qubits**.
-- D. Neutral Atom Devices.
-
+    **2. The `qiskit.IBMQ` provider allows users to interface directly with which type of physical quantum hardware?**
+    
+    - A. Trapped Ions.
+    - B. Photonic Quantum Devices.
+    - C. **Superconducting Qubits**.
+    - D. Neutral Atom Devices.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    IBM's quantum devices are based on superconducting transmon qubits.
-
-```
+        **Correct: C**  
+        IBM's quantum devices are based on superconducting transmon qubits.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Qiskit separates its functionality into modules like `Terra` and `Aer`. Explain the distinct purpose of these two modules in a typical workflow.
-
-???+ info "Answer Strategy"
-    **Terra: The Compiler**  
-    Terra provides the `QuantumCircuit` object for algorithm construction and crucially transpiles abstract circuits into optimized versions mapped to specific backend gate sets and qubit connectivity (simulator or hardware). It's the orchestrator transforming high-level descriptions into executable instructions.
-
-    **Aer: The Simulator**  
-    Aer offers high-performance local execution environments for testing. After Terra builds and transpiles circuits, Aer runs them with ideal or noisy simulation, producing measurement outcomes without consuming hardware credits. It's the testing ground before expensive quantum device access.
-
-    **Workflow Integration**  
-    Terra handles circuit definition and compilation; Aer handles execution and result generation. This separation enables algorithm development and debugging via fast local simulation before deployment to real quantum processors.
-
-```
+    
+    **Q:** Qiskit separates its functionality into modules like `Terra` and `Aer`. Explain the distinct purpose of these two modules in a typical workflow.
+    
+    ???+ info "Answer Strategy"
+        **Terra: The Compiler**  
+        Terra provides the `QuantumCircuit` object for algorithm construction and crucially transpiles abstract circuits into optimized versions mapped to specific backend gate sets and qubit connectivity (simulator or hardware). It's the orchestrator transforming high-level descriptions into executable instructions.
+    
+        **Aer: The Simulator**  
+        Aer offers high-performance local execution environments for testing. After Terra builds and transpiles circuits, Aer runs them with ideal or noisy simulation, producing measurement outcomes without consuming hardware credits. It's the testing ground before expensive quantum device access.
+    
+        **Workflow Integration**  
+        Terra handles circuit definition and compilation; Aer handles execution and result generation. This separation enables algorithm development and debugging via fast local simulation before deployment to real quantum processors.
+    
 ---
 
 ### <i class="fa-solid fa-flask"></i> Hands-On Project
@@ -132,35 +126,31 @@ This makes TFQ a powerful tool for research in Quantum Machine Learning (QML), p
 ### Comprehension Check
 
 !!! note "Quiz"
-```
-**1. The primary utility of TensorFlow Quantum (TFQ) lies in its ability to combine quantum circuits with which part of the classical machine learning infrastructure?**
-
-- A. Classical optimizers only.
-- B. **The TensorFlow dataflow graph for hybrid model training**.
-- C. Quantum Error Correction modules.
-- D. Quantum key distribution protocols.
-
+    **1. The primary utility of TensorFlow Quantum (TFQ) lies in its ability to combine quantum circuits with which part of the classical machine learning infrastructure?**
+    
+    - A. Classical optimizers only.
+    - B. **The TensorFlow dataflow graph for hybrid model training**.
+    - C. Quantum Error Correction modules.
+    - D. Quantum key distribution protocols.
+    
 ??? info "See Answer"
-    **Correct: B**  
-    TFQ allows quantum circuits to become part of the TensorFlow computational graph, enabling end-to-end training of hybrid models.
-
-```
+        **Correct: B**  
+        TFQ allows quantum circuits to become part of the TensorFlow computational graph, enabling end-to-end training of hybrid models.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. Cirq's circuit definition method emphasizes what feature of the physical quantum device?**
-
-- A. Error correction thresholds.
-- B. **Qubit placement on hardware topology**.
-- C. Hamiltonian decomposition.
-- D. Post-selection measurement.
-
+    **2. Cirq's circuit definition method emphasizes what feature of the physical quantum device?**
+    
+    - A. Error correction thresholds.
+    - B. **Qubit placement on hardware topology**.
+    - C. Hamiltonian decomposition.
+    - D. Post-selection measurement.
+    
 ??? info "See Answer"
-    **Correct: B**  
-    Cirq is designed to be hardware-aware, encouraging users to define qubits based on their physical location on a device.
-
-```
+        **Correct: B**  
+        Cirq is designed to be hardware-aware, encouraging users to define qubits based on their physical location on a device.
+    
 ---
 
 ### <i class="fa-solid fa-flask"></i> Hands-On Project
@@ -215,35 +205,31 @@ This makes PennyLane the ideal tool for developing and experimenting with **Vari
 ### Comprehension Check
 
 !!! note "Quiz"
-```
-**1. Which unique feature of PennyLane simplifies the training and optimization process for variational quantum algorithms?**
-
-- A. Direct access to superconducting qubits.
-- B. Hardware-native qubit addressing.
-- C. **Automatic differentiation**.
-- D. Classical simulation using the Lindblad equation.
-
+    **1. Which unique feature of PennyLane simplifies the training and optimization process for variational quantum algorithms?**
+    
+    - A. Direct access to superconducting qubits.
+    - B. Hardware-native qubit addressing.
+    - C. **Automatic differentiation**.
+    - D. Classical simulation using the Lindblad equation.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    PennyLane's ability to automatically compute gradients of quantum circuits is its defining feature for QML.
-
-```
+        **Correct: C**  
+        PennyLane's ability to automatically compute gradients of quantum circuits is its defining feature for QML.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. A PennyLane `qnode` is designed to return the estimated value of a quantum observable, such as the expectation value of $\langle \sigma_z \rangle$. This makes PennyLane inherently suited for which class of algorithms?**
-
-- A. Shor's algorithm.
-- B. Simon's algorithm.
-- C. **Variational quantum algorithms (VQAs)**.
-- D. Quantum Phase Estimation.
-
+    **2. A PennyLane `qnode` is designed to return the estimated value of a quantum observable, such as the expectation value of $\langle \sigma_z \rangle$. This makes PennyLane inherently suited for which class of algorithms?**
+    
+    - A. Shor's algorithm.
+    - B. Simon's algorithm.
+    - C. **Variational quantum algorithms (VQAs)**.
+    - D. Quantum Phase Estimation.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    VQAs are based on optimizing a parameterized circuit to minimize the expectation value of an observable, which is exactly what a `qnode` provides.
-
-```
+        **Correct: C**  
+        VQAs are based on optimizing a parameterized circuit to minimize the expectation value of an observable, which is exactly what a `qnode` provides.
+    
 ---
 
 ### <i class="fa-solid fa-flask"></i> Hands-On Project
@@ -301,53 +287,47 @@ These platforms represent a crucial step towards making quantum computing a more
 ### Comprehension Check
 
 !!! note "Quiz"
-```
-**1. QuTiP is primarily distinguished from frameworks like Qiskit and Cirq by its specialization in simulating systems governed by which type of physical equation?**
-
-- A. Schrödinger equation only.
-- B. Hamiltonian evolution only.
-- C. **Lindblad and master equations (for open systems)**.
-- D. The Black-Scholes SDE.
-
+    **1. QuTiP is primarily distinguished from frameworks like Qiskit and Cirq by its specialization in simulating systems governed by which type of physical equation?**
+    
+    - A. Schrödinger equation only.
+    - B. Hamiltonian evolution only.
+    - C. **Lindblad and master equations (for open systems)**.
+    - D. The Black-Scholes SDE.
+    
 ??? info "See Answer"
-    **Correct: C**  
-    QuTiP's main strength is simulating the dynamics of open quantum systems, which requires master equations.
-
-```
+        **Correct: C**  
+        QuTiP's main strength is simulating the dynamics of open quantum systems, which requires master equations.
+    
 ---
 
 !!! note "Quiz"
-```
-**2. What is the key advantage Amazon Braket offers users interested in running quantum circuits compared to a single-vendor platform like IBM Quantum?**
-
-- A. Use of the Q# programming language.
-- B. **A unified interface for accessing multiple types of quantum hardware (IonQ, Rigetti, etc.)**.
-- C. Exclusive focus on superconducting qubits.
-- D. Integrated resource estimation tools.
-
+    **2. What is the key advantage Amazon Braket offers users interested in running quantum circuits compared to a single-vendor platform like IBM Quantum?**
+    
+    - A. Use of the Q# programming language.
+    - B. **A unified interface for accessing multiple types of quantum hardware (IonQ, Rigetti, etc.)**.
+    - C. Exclusive focus on superconducting qubits.
+    - D. Integrated resource estimation tools.
+    
 ??? info "See Answer"
-    **Correct: B**  
-    Braket is a "hardware-agnostic" platform, providing access to different quantum computing technologies through one service.
-
-```
+        **Correct: B**  
+        Braket is a "hardware-agnostic" platform, providing access to different quantum computing technologies through one service.
+    
 ---
 
 !!! abstract "Interview-Style Question"
-
-```
-**Q:** Compare the primary use case for **Qiskit/Cirq** with the primary use case for **QuTiP**.
-
-???+ info "Answer Strategy"
-    **Circuit-Level Frameworks (Qiskit/Cirq)**  
-    These target algorithm developers building discrete gate-based quantum algorithms. The fundamental unit is the `QuantumCircuit` for compiling and executing algorithms like VQE or Grover's on simulators or real hardware. Use when implementing quantum algorithms with gates.
-
-    **Dynamics-Level Toolkit (QuTiP)**  
-    This serves quantum physicists studying continuous-time evolution of quantum systems with environmental effects (decoherence). The fundamental unit is the `Qobj` (quantum object) representing states and operators. Use when simulating physical phenomena like qubit decay rates via Lindblad master equations, not algorithm execution.
-
-    **Key Distinction**  
-    Qiskit/Cirq operate at the algorithm abstraction level (discrete gates, circuits); QuTiP operates at the physics abstraction level (continuous Hamiltonian evolution, open system dynamics). Algorithm developers choose circuit frameworks; physics researchers choose dynamics simulators.
-
-```
+    
+    **Q:** Compare the primary use case for **Qiskit/Cirq** with the primary use case for **QuTiP**.
+    
+    ???+ info "Answer Strategy"
+        **Circuit-Level Frameworks (Qiskit/Cirq)**  
+        These target algorithm developers building discrete gate-based quantum algorithms. The fundamental unit is the `QuantumCircuit` for compiling and executing algorithms like VQE or Grover's on simulators or real hardware. Use when implementing quantum algorithms with gates.
+    
+        **Dynamics-Level Toolkit (QuTiP)**  
+        This serves quantum physicists studying continuous-time evolution of quantum systems with environmental effects (decoherence). The fundamental unit is the `Qobj` (quantum object) representing states and operators. Use when simulating physical phenomena like qubit decay rates via Lindblad master equations, not algorithm execution.
+    
+        **Key Distinction**  
+        Qiskit/Cirq operate at the algorithm abstraction level (discrete gates, circuits); QuTiP operates at the physics abstraction level (continuous Hamiltonian evolution, open system dynamics). Algorithm developers choose circuit frameworks; physics researchers choose dynamics simulators.
+    
 ---
 
 ### <i class="fa-solid fa-flask"></i> Hands-On Project

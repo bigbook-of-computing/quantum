@@ -1,4 +1,4 @@
-# **Chapter 14: Quantum Optimization (QUBO-Family) () () (Workbook)**
+# **Chapter 14: Quantum Optimization (QUBO-Family) (Workbook)**
 
 ---
 
@@ -61,32 +61,28 @@ This mapping is crucial because many real-world problems are naturally expressed
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  The mapping $z_i = 2x_i - 1$ is used to convert a QUBO problem into an equivalent Ising model. This changes the domain of the variables from binary ($x_i \in \{0, 1\}$) to:
-```
-    - A. Real numbers $z_i \in [0, 1]$.
-    - B. Spin variables $z_i \in \{-1, 1\}$.
-    - C. Continuous angles $z_i \in [0, 2\pi]$.
-
+    
+        1.  The mapping $z_i = 2x_i - 1$ is used to convert a QUBO problem into an equivalent Ising model. This changes the domain of the variables from binary ($x_i \in \{0, 1\}$) to:
+        - A. Real numbers $z_i \in [0, 1]$.
+        - B. Spin variables $z_i \in \{-1, 1\}$.
+        - C. Continuous angles $z_i \in [0, 2\pi]$.
+    
 ??? info "See Answer"
-    **Correct: B**. The transformation maps binary variables to spin variables.
-
-```
+        **Correct: B**. The transformation maps binary variables to spin variables.
+    
 !!! abstract "Interview-Style Question"
-
-```
-Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware.
-
-???+ info "Answer Strategy"
-    The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them.
-
-    1.  **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, "Should we include this asset in the portfolio or not?"
-
-    2.  **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model.
-
-    3.  **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
-
-```
+    
+    Explain the practical necessity of the mathematical equivalence between QUBO and the Ising Model in the context of commercial quantum hardware.
+    
+    ???+ info "Answer Strategy"
+        The equivalence is a crucial bridge between how we formulate problems and how quantum hardware solves them.
+    
+        1.  **Problem Formulation (QUBO):** Many real-world optimization problems in business, logistics, and finance are most naturally expressed using binary variables ($x_i \in \{0, 1\}$), which is the language of QUBO. For example, "Should we include this asset in the portfolio or not?"
+    
+        2.  **Hardware Operation (Ising):** Quantum hardware, especially quantum annealers, is physically built to find the lowest energy state of a system of interacting spins ($z_i \in \{-1, 1\}$). This is the language of the Ising model.
+    
+        3.  **The Necessary Translator:** The mathematical equivalence acts as a compiler. It translates the problem from its natural binary language (QUBO) into the spin-based language (Ising) that the quantum hardware physically understands. Without this bridge, we could not solve practical business problems on these specialized quantum devices.
+    
 ---
 
 ## **14.2 Adiabatic and Variational Optimization** {.heading-with-pill}
@@ -134,35 +130,31 @@ QAOA is a hybrid, variational algorithm designed for NISQ-era devices. It approx
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  In the QAOA circuit, the two alternating unitaries $U_C(\gamma)$ and $U_B(\beta)$ correspond to the effects of which two Hamiltonians from the adiabatic process?
-```
-    - A. The Entanglement Hamiltonian and the Phase Hamiltonian.
-    - B. The Problem Hamiltonian ($H_P$) and the Initial Hamiltonian ($H_0$).
-    - C. The Identity and the X gate.
-
+    
+        1.  In the QAOA circuit, the two alternating unitaries $U_C(\gamma)$ and $U_B(\beta)$ correspond to the effects of which two Hamiltonians from the adiabatic process?
+        - A. The Entanglement Hamiltonian and the Phase Hamiltonian.
+        - B. The Problem Hamiltonian ($H_P$) and the Initial Hamiltonian ($H_0$).
+        - C. The Identity and the X gate.
+    
 ??? info "See Answer"
-    **Correct: B**. $U_C$ evolves under the problem Hamiltonian, and $U_B$ evolves under the initial/mixer Hamiltonian.
-
-```
+        **Correct: B**. $U_C$ evolves under the problem Hamiltonian, and $U_B$ evolves under the initial/mixer Hamiltonian.
+    
 !!! abstract "Interview-Style Question"
-
-```
-Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization.
-
-???+ info "Answer Strategy"
-    Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements.
-
-    | Feature | Quantum Annealing (QA) | QAOA |
-    | :--- | :--- | :--- |
-    | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. |
-    | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). |
-    | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It's largely a "fire-and-forget" process. | **Complex & Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. |
-    | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. |
-
-    **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
-
-```
+    
+    Compare and contrast Quantum Annealing and QAOA as approaches to quantum optimization.
+    
+    ???+ info "Answer Strategy"
+        Both are leading methods for quantum optimization, but they differ fundamentally in their approach and hardware requirements.
+    
+        | Feature | Quantum Annealing (QA) | QAOA |
+        | :--- | :--- | :--- |
+        | **Process** | **Analog:** A continuous, physical process that slowly morphs a simple energy landscape into the complex problem landscape. | **Digital:** A gate-based, discrete approximation of an adiabatic evolution, broken into steps. |
+        | **Hardware** | **Specialized:** Runs on quantum annealers (e.g., D-Wave). | **Universal:** Runs on general-purpose, gate-based quantum computers (e.g., IBM, Google). |
+        | **Control** | **Simple:** The main control knob is the total annealing (evolution) time. It's largely a "fire-and-forget" process. | **Complex & Variational:** Requires a classical optimization loop to tune a set of $2p$ circuit parameters $(\vec{\gamma}, \vec{\beta})$. |
+        | **Guarantees** | **Theoretical:** The Adiabatic Theorem guarantees finding the ground state if the evolution is infinitely slow (barring thermal noise and small energy gaps). | **Heuristic:** Performance depends heavily on the circuit depth ($p$) and the success of the classical optimizer. There is no guarantee of finding the optimal solution. |
+    
+        **In short:** Annealing is an analog, hardware-specific approach with strong theoretical backing, while QAOA is a digital, flexible, and hardware-agnostic variational algorithm designed for the NISQ era.
+    
 ---
 
 ## **14.3 Application: Portfolio Optimization** {.heading-with-pill}
@@ -197,32 +189,28 @@ Here, $q$ is a risk-aversion parameter that balances the trade-off. This express
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  In the quantum formulation of Portfolio Optimization, the risk of the portfolio is primarily encoded by which component?
-```
-    - A. The expected return vector $\mathbf{\mu}$.
-    - B. The selection vector $\mathbf{x}$.
-    - C. The covariance matrix $\mathbf{\Sigma}$.
-
+    
+        1.  In the quantum formulation of Portfolio Optimization, the risk of the portfolio is primarily encoded by which component?
+        - A. The expected return vector $\mathbf{\mu}$.
+        - B. The selection vector $\mathbf{x}$.
+        - C. The covariance matrix $\mathbf{\Sigma}$.
+    
 ??? info "See Answer"
-    **Correct: C**. The covariance matrix defines the risk arising from assets moving together.
-
-```
+        **Correct: C**. The covariance matrix defines the risk arising from assets moving together.
+    
 !!! abstract "Interview-Style Question"
-
-```
-A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight?
-
-???+ info "Answer Strategy"
-    The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer.
-
-    1.  **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio.
-
-    2.  **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods.
-
-    3.  **The Important Caveat:** It's crucial to be transparent that this is a **future-facing advantage**. Today's NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
-
-```
+    
+    A portfolio manager asks you why they should consider a quantum approach for portfolio optimization over classical solvers. What is the potential, long-term advantage you would highlight?
+    
+    ???+ info "Answer Strategy"
+        The key long-term advantage is the potential to handle the **combinatorial explosion** inherent in portfolio selection more effectively than any classical computer.
+    
+        1.  **The Scaling Problem:** With $N$ assets, there are $2^N$ possible portfolios. As the number of available assets grows, this search space becomes astronomically large, making it impossible for classical computers to check every combination. Classical solvers must rely on heuristics and approximations that may miss the true optimal portfolio.
+    
+        2.  **The Quantum Promise:** Quantum optimization algorithms (like QAOA or Quantum Annealing) are designed to navigate these massive combinatorial spaces. By using principles like superposition and entanglement, they can explore a vast number of possibilities simultaneously. This offers the potential to find higher-quality portfolios (i.e., better risk/return profiles) that are inaccessible to classical methods.
+    
+        3.  **The Important Caveat:** It's crucial to be transparent that this is a **future-facing advantage**. Today's NISQ-era quantum computers are not yet large or robust enough to outperform state-of-the-art classical solvers on this problem. The advantage is predicated on the future development of larger, fault-tolerant quantum hardware.
+    
 ---
 
 ## **14.4 Constraint Encoding with Penalty Terms** {.heading-with-pill}
@@ -262,34 +250,30 @@ This term is zero if and only if the constraint is met. Expanding this quadratic
 ### **Comprehension Check**
 
 !!! note "Quiz"
-
-    1.  The most common method for handling a budget constraint in a QUBO formulation is to:
-```
-    - A. Use a continuous variable solver.
-    - B. Add a penalty term to the cost function.
-    - C. Enforce the constraint with the $H_0$ Hamiltonian.
-
+    
+        1.  The most common method for handling a budget constraint in a QUBO formulation is to:
+        - A. Use a continuous variable solver.
+        - B. Add a penalty term to the cost function.
+        - C. Enforce the constraint with the $H_0$ Hamiltonian.
+    
 ??? info "See Answer"
-    **Correct: B**. A penalty term makes invalid solutions have a very high cost.
-
-```
+        **Correct: B**. A penalty term makes invalid solutions have a very high cost.
+    
 !!! abstract "Interview-Style Question"
-
-```
-What is the main challenge in choosing the penalty factor $\lambda$? What happens if it's too small or too large?
-
-???+ info "Answer Strategy"
-    The main challenge is the "Goldilocks problem": the penalty factor $\lambda$ must be finely tuned to be "just right." It needs to be strong enough to enforce the constraint without overwhelming the original problem.
-
-    *   **If $\lambda$ is too small:**
-        *   **Effect:** The penalty for violating the constraint is insignificant.
-        *   **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule.
-
-    *   **If $\lambda$ is too large:**
-        *   **Effect:** The penalty term dominates the entire cost function, "drowning out" the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls.
-        *   **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
-
-```
+    
+    What is the main challenge in choosing the penalty factor $\lambda$? What happens if it's too small or too large?
+    
+    ???+ info "Answer Strategy"
+        The main challenge is the "Goldilocks problem": the penalty factor $\lambda$ must be finely tuned to be "just right." It needs to be strong enough to enforce the constraint without overwhelming the original problem.
+    
+        *   **If $\lambda$ is too small:**
+            *   **Effect:** The penalty for violating the constraint is insignificant.
+            *   **Result:** The optimizer may find a solution that has a great objective score but is **invalid** because it breaks the rule (e.g., a portfolio that is over budget). The constraint is treated as a weak suggestion, not a hard rule.
+    
+        *   **If $\lambda$ is too large:**
+            *   **Effect:** The penalty term dominates the entire cost function, "drowning out" the original objective. The energy landscape becomes a flat plain of valid solutions surrounded by massive penalty walls.
+            *   **Result:** The optimizer will certainly find a **valid** solution, but it will likely not be the **optimal** one. The subtle variations in the original cost function that guide the search for the best solution are lost in the noise of the huge penalty values. This can also make the problem numerically unstable and harder for the solver to handle.
+    
 ---
 
 ## **14.5 From Theory to Practice: QUBO Projects** {.heading-with-pill}

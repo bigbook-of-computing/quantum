@@ -28,10 +28,8 @@ Quantum Machine Learning (QML) represents a convergence of two transformative co
 The field of **Quantum Machine Learning (QML)** is motivated by the prospect of harnessing unique quantum mechanical resources—namely **superposition** and **entanglement**—to overcome fundamental limitations in classical machine learning (ML). These motivations fall into three key categories: computational speedups, representational power, and the nature of the data itself.
 
 !!! tip "The Quantum ML Promise"
-```
-QML doesn't just make classical ML faster—it fundamentally changes what problems are tractable by operating in an exponentially larger computational space where $n$ qubits access $2^n$ dimensional feature spaces [3].
-
-```
+    QML doesn't just make classical ML faster—it fundamentally changes what problems are tractable by operating in an exponentially larger computational space where $n$ qubits access $2^n$ dimensional feature spaces [3].
+    
 ### **Computational Speedups**
 
 ---
@@ -51,10 +49,8 @@ Quantum computing can offer superior methods for generating samples or estimatin
 Algorithms like **Grover's search** provide a quadratic speedup in optimization and search settings, which can be applied to feature selection or model training.
 
 !!! example "HHL Speedup in Linear Regression"
-```
-For a linear regression problem with $N$ data points and $d$ features, solving the normal equations requires inverting a $d \times d$ matrix classically in $O(d^3)$ time. The HHL algorithm can solve this in $O(\log(N) \cdot \text{poly}(\kappa))$ time, where $\kappa$ is the condition number—an exponential speedup when $N$ is large.
-
-```
+    For a linear regression problem with $N$ data points and $d$ features, solving the normal equations requires inverting a $d \times d$ matrix classically in $O(d^3)$ time. The HHL algorithm can solve this in $O(\log(N) \cdot \text{poly}(\kappa))$ time, where $\kappa$ is the condition number—an exponential speedup when $N$ is large.
+    
 ---
 
 ### **Representational Advantage and High-Dimensional Space**
@@ -108,10 +104,8 @@ Certain physical systems naturally produce quantum data (e.g., quantum chemistry
 Classical ML is intractable when trying to simulate or model complex quantum systems. QML offers the potential to use the quantum computer itself as the simulator and learning engine to model these difficult physical problems.
 
 ??? question "Why can't we just use classical ML on quantum simulation data?"
-```
-Classical simulation of even 50-qubit quantum systems requires storing $2^{50} \approx 10^{15}$ complex amplitudes—far exceeding available memory. QML operates directly on quantum states, bypassing this exponential memory requirement entirely.
-
-```
+    Classical simulation of even 50-qubit quantum systems requires storing $2^{50} \approx 10^{15}$ complex amplitudes—far exceeding available memory. QML operates directly on quantum states, bypassing this exponential memory requirement entirely.
+    
 ---
 
 ## **8.2 Bottlenecks in Classical Machine Learning**
@@ -121,10 +115,8 @@ Classical simulation of even 50-qubit quantum systems requires storing $2^{50} \
 Despite the extraordinary success of classical machine learning (ML) across numerous domains, the paradigm encounters fundamental scaling limitations when dealing with extremely large datasets, high-dimensional feature spaces, and intrinsically quantum phenomena. These bottlenecks serve as the core motivation for developing Quantum Machine Learning (QML) models.
 
 !!! tip "Classical Walls"
-```
-Classical ML hits three fundamental walls: exponential growth of feature space volume (curse of dimensionality), exponential cost of quantum system simulation, and polynomial-to-exponential complexity of matrix operations in high dimensions [4].
-
-```
+    Classical ML hits three fundamental walls: exponential growth of feature space volume (curse of dimensionality), exponential cost of quantum system simulation, and polynomial-to-exponential complexity of matrix operations in high dimensions [4].
+    
 ### **The Curse of Dimensionality**
 
 ---
@@ -172,10 +164,8 @@ A classical computer simulating a quantum system must explicitly store and manip
 Furthermore, the training of deep classical models on large datasets is often **computationally expensive**. Tasks such as optimizing the kernel matrix in high dimensions—a core operation in Support Vector Machines—can be prohibitively slow, motivating the development of algorithms like the **Quantum Support Vector Machine (QSVM)** to handle these matrix operations more efficiently.
 
 !!! example "Classical Simulation Limits"
-```
-A 60-qubit quantum system requires $2^{60} \approx 10^{18}$ complex numbers (16 bytes each) = 16 exabytes of memory just to store the state vector. The world's fastest supercomputers have ~1 petabyte of RAM—three orders of magnitude too small.
-
-```
+    A 60-qubit quantum system requires $2^{60} \approx 10^{18}$ complex numbers (16 bytes each) = 16 exabytes of memory just to store the state vector. The world's fastest supercomputers have ~1 petabyte of RAM—three orders of magnitude too small.
+    
 ---
 
 ### **Motivation for the Quantum Paradigm**
@@ -196,10 +186,8 @@ The failure of classical methods to scale efficiently in high dimensions and the
 Quantum Machine Learning (QML) fundamentally differs from classical ML by replacing core computational components and paradigms with quantum mechanical analogues, resulting in a unique algorithmic structure operating over an exponentially large state space. The distinctions lie primarily in the nature of the data representation, the mathematical operations performed, and the resources leveraged.
 
 !!! tip "Paradigm Shift"
-```
-QML isn't classical ML with quantum acceleration—it's a fundamentally different computational model where probability amplitudes replace probabilities, unitary matrices replace activation functions, and entanglement replaces feature correlations [5].
-
-```
+    QML isn't classical ML with quantum acceleration—it's a fundamentally different computational model where probability amplitudes replace probabilities, unitary matrices replace activation functions, and entanglement replaces feature correlations [5].
+    
 ### **Shift in Mathematical and Representational Basis**
 
 ---
@@ -246,10 +234,8 @@ QML models can represent and perform computations across all $2^n$ possible inpu
 Where classical ML models manipulate **probability distributions** (e.g., in Boltzmann Machines), QML models manipulate **amplitude distributions**. The interference effects resulting from amplitude manipulation are essential for finding and amplifying optimal solutions.
 
 !!! example "Superposition Advantage"
-```
-A classical 10-bit feature vector requires processing $2^{10} = 1024$ separate computations to evaluate a function on all possible inputs. A 10-qubit quantum state exists in superposition over all 1024 basis states simultaneously, enabling parallel evaluation in a single quantum operation.
-
-```
+    A classical 10-bit feature vector requires processing $2^{10} = 1024$ separate computations to evaluate a function on all possible inputs. A 10-qubit quantum state exists in superposition over all 1024 basis states simultaneously, enabling parallel evaluation in a single quantum operation.
+    
 ---
 
 ### **Hybrid Nature and Training**
@@ -295,12 +281,10 @@ Hybrid_QML_Training(data, labels, VQC, optimizer):
 ```
 
 ??? question "Why use classical optimization instead of quantum optimization?"
-```
-Current NISQ devices have limited circuit depth and high noise levels. Classical optimizers can perform thousands of gradient descent steps reliably, while implementing optimization entirely on quantum hardware would require deep circuits that exceed NISQ capabilities. The hybrid approach exploits the best of both worlds.
-
-```
-The combination of the exponential Hilbert space and the utilization of quantum phenomena like entanglement and interference defines the distinct identity and potential power of Quantum Machine Learning.
-
+    Current NISQ devices have limited circuit depth and high noise levels. Classical optimizers can perform thousands of gradient descent steps reliably, while implementing optimization entirely on quantum hardware would require deep circuits that exceed NISQ capabilities. The hybrid approach exploits the best of both worlds.
+    
+    The combination of the exponential Hilbert space and the utilization of quantum phenomena like entanglement and interference defines the distinct identity and potential power of Quantum Machine Learning.
+    
 ---
 
 ## **8.4 Quantum Learning Paradigms**
@@ -310,10 +294,8 @@ The combination of the exponential Hilbert space and the utilization of quantum 
 Quantum Machine Learning (QML), much like its classical counterpart, is categorized into different **learning paradigms** based on the nature of the data and the objective of the learning process. These paradigms guide the design of QML algorithms, which are often structured as **hybrid quantum-classical models** in the current NISQ era.
 
 !!! tip "Quantum Paradigm Parallels"
-```
-QML mirrors classical ML's taxonomy—supervised, unsupervised, and reinforcement learning—but each paradigm operates in exponentially larger spaces and leverages quantum resources like entanglement for enhanced expressivity [6].
-
-```
+    QML mirrors classical ML's taxonomy—supervised, unsupervised, and reinforcement learning—but each paradigm operates in exponentially larger spaces and leverages quantum resources like entanglement for enhanced expressivity [6].
+    
 ### **Supervised Quantum Learning**
 
 ---
@@ -360,10 +342,8 @@ Dimensionality reduction, clustering, or density estimation.
 * **Quantum Boltzmann Machines (QBM):** These are quantum analogs of classical generative models used for probabilistic modeling and learning complex data distributions.
 
 !!! example "Quantum PCA Advantage"
-```
-For a dataset with $N = 2^{20}$ samples and $d = 1000$ features, classical PCA requires $O(Nd^2 + d^3) \approx 10^{15}$ operations. Quantum PCA (qPCA) using QPE can reduce this to $O(\text{poly}(d) \cdot \log N) \approx 10^9$ operations—a million-fold speedup.
-
-```
+    For a dataset with $N = 2^{20}$ samples and $d = 1000$ features, classical PCA requires $O(Nd^2 + d^3) \approx 10^{15}$ operations. Quantum PCA (qPCA) using QPE can reduce this to $O(\text{poly}(d) \cdot \log N) \approx 10^9$ operations—a million-fold speedup.
+    
 ---
 
 ### **Quantum Reinforcement Learning (QRL)**
@@ -405,10 +385,8 @@ This paradigm effectively manages the limitations of current quantum hardware by
 The adoption of Quantum Machine Learning (QML) is driven by the potential for two distinct categories of advantages over classical methods: **provable speedups**, which are mathematically guaranteed, and **heuristic advantages**, which stem from the unique representational power of quantum mechanics.
 
 !!! tip "Two Types of Advantage"
-```
-Provable advantages (HHL, qPCA, Grover) come with rigorous complexity proofs but often require idealized conditions. Heuristic advantages (quantum kernels, VQC expressivity) lack formal guarantees but show empirical promise on NISQ hardware [7].
-
-```
+    Provable advantages (HHL, qPCA, Grover) come with rigorous complexity proofs but often require idealized conditions. Heuristic advantages (quantum kernels, VQC expressivity) lack formal guarantees but show empirical promise on NISQ hardware [7].
+    
 ### **Provable Quantum Speedups**
 
 ---
@@ -492,12 +470,10 @@ where $|\phi(x)\rangle = U(x)|0\rangle$ is the quantum feature map.
 The use of **entanglement** introduces non-classical correlations, which some research suggests can lead to QML models with enhanced ability to generalize from limited training data.
 
 ??? question "Why aren't heuristic advantages formally proven?"
-```
-Heuristic advantages depend on problem-specific properties (data distribution, feature correlations) that vary across applications. Unlike provable speedups based on computational complexity theory, heuristic benefits emerge from quantum mechanical properties (entanglement, interference) whose impact on generalization and expressivity is difficult to formalize for arbitrary datasets.
-
-```
-While not mathematically guaranteed to be exponentially faster for all inputs, these heuristic advantages are the primary reason for experimenting with hybrid QML models on current NISQ hardware.
-
+    Heuristic advantages depend on problem-specific properties (data distribution, feature correlations) that vary across applications. Unlike provable speedups based on computational complexity theory, heuristic benefits emerge from quantum mechanical properties (entanglement, interference) whose impact on generalization and expressivity is difficult to formalize for arbitrary datasets.
+    
+    While not mathematically guaranteed to be exponentially faster for all inputs, these heuristic advantages are the primary reason for experimenting with hybrid QML models on current NISQ hardware.
+    
 ---
 
 ## **8.6 Practical Considerations**
@@ -507,10 +483,8 @@ While not mathematically guaranteed to be exponentially faster for all inputs, t
 While the theoretical promise of Quantum Machine Learning (QML) is immense, the field operates today under significant constraints imposed by current hardware technology. These **practical considerations** govern which QML models are feasible and why the hybrid quantum-classical paradigm is currently dominant.
 
 !!! tip "NISQ Reality Check"
-```
-The gap between theoretical QML promises and practical implementation is dominated by three factors: limited qubit counts (~100s), shallow circuit depths (~10-100 gates), and the data loading bottleneck that can negate exponential speedups [8].
-
-```
+    The gap between theoretical QML promises and practical implementation is dominated by three factors: limited qubit counts (~100s), shallow circuit depths (~10-100 gates), and the data loading bottleneck that can negate exponential speedups [8].
+    
 ### **Constraints of NISQ Devices**
 
 ---
@@ -555,10 +529,8 @@ The classical complexity of preparing an arbitrary quantum state from scratch is
 To achieve a true end-to-end quantum advantage, this data loading step must also be performed efficiently, often relying on structured data that can be loaded with $\text{poly}(n)$ gates.
 
 !!! example "Data Loading Reality"
-```
-To load a general 20-qubit quantum state (1,048,576 complex amplitudes) requires at least $O(2^{20})$ operations classically. Even if HHL solves a linear system in $O(20^2) = 400$ quantum operations, the initial loading dominates the total runtime, negating the quantum advantage.
-
-```
+    To load a general 20-qubit quantum state (1,048,576 complex amplitudes) requires at least $O(2^{20})$ operations classically. Even if HHL solves a linear system in $O(20^2) = 400$ quantum operations, the initial loading dominates the total runtime, negating the quantum advantage.
+    
 ---
 
 ### **Dominance of Hybrid Models**

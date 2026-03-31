@@ -58,10 +58,8 @@ The `diff_method` argument selects the gradient computation strategy:
 | `adjoint` | Adjoint differentiation (simulator) | ❌ No |
 
 !!! tip "Choose `parameter-shift` for Hardware Runs"
-```
-Only `parameter-shift` and `finite-diff` work on real quantum backends, since they only require standard circuit measurements. `backprop` and `adjoint` require access to the simulator's internal state vector.
-
-```
+    Only `parameter-shift` and `finite-diff` work on real quantum backends, since they only require standard circuit measurements. `backprop` and `adjoint` require access to the simulator's internal state vector.
+    
 ### **Gradient Transforms and Higher-Order Derivatives**
 
 ---
@@ -75,22 +73,19 @@ $$
 where $\theta_{ij}^{++}$ shifts both $\theta_i$ and $\theta_j$ by $+\pi/2$. Higher-order derivatives scale as $4^k$ circuit evaluations for $k$-th order, so they are used sparingly.
 
 !!! example "Gradient Descent on a VQC with PennyLane"
-    ```python
-    # 4-parameter VQC trained to maximise ZZ correlation
-    params = np.random.uniform(-np.pi, np.pi, 4)
-    opt = qml.AdamOptimizer(stepsize=0.1)
+        ```python
+        # 4-parameter VQC trained to maximise ZZ correlation
+        params = np.random.uniform(-np.pi, np.pi, 4)
+        opt = qml.AdamOptimizer(stepsize=0.1)
+        
+        for step in range(100):
+            params, cost = opt.step_and_cost(lambda p: -vqc(p), params)
+            if step % 20 == 0:
+                print(f"Step {step}: cost = {-cost:.4f}")
     
-    for step in range(100):
-        params, cost = opt.step_and_cost(lambda p: -vqc(p), params)
-        if step % 20 == 0:
-            print(f"Step {step}: cost = {-cost:.4f}")
-    ```
-
 ??? question "Why does PennyLane support JAX as a backend?"
-```
-JAX provides JIT compilation (via XLA) and GPU/TPU acceleration. PennyLane QNodes declared with `interface='jax'` can be JIT-compiled with `jax.jit`, batched with `jax.vmap`, and differentiated with `jax.grad` — enabling quantum circuits to run with the same efficiency as classical JAX models on accelerators.
-
-```
+    JAX provides JIT compilation (via XLA) and GPU/TPU acceleration. PennyLane QNodes declared with `interface='jax'` can be JIT-compiled with `jax.jit`, batched with `jax.vmap`, and differentiated with `jax.grad` — enabling quantum circuits to run with the same efficiency as classical JAX models on accelerators.
+    
 ---
 
 ## **15.2 TFQ and Qiskit Machine Learning**
@@ -129,10 +124,8 @@ model = tf.keras.Sequential([
 TFQ also provides `tfq.layers.Expectation` and `tfq.layers.Sample` for flexible measurement strategies, and `tfq.layers.ControlledPQC` for data re-uploading architectures.
 
 !!! tip "Data Re-Uploading in TFQ"
-```
-In the **data re-uploading** model, classical input features $\vec{x}$ are injected into the circuit multiple times as gate rotation angles — interleaved with trainable parameters. TFQ's `ControlledPQC` layer enables this pattern natively, allowing the circuit to act as a universal classifier even with a single qubit.
-
-```
+    In the **data re-uploading** model, classical input features $\vec{x}$ are injected into the circuit multiple times as gate rotation angles — interleaved with trainable parameters. TFQ's `ControlledPQC` layer enables this pattern natively, allowing the circuit to act as a universal classifier even with a single qubit.
+    
 ### **Qiskit Machine Learning**
 
 ---
@@ -157,15 +150,11 @@ vqc.fit(X_train, y_train)
 ```
 
 !!! example "VQC Binary Classifier with Qiskit ML"
-```
-Training a 2-qubit VQC with `ZZFeatureMap` encoding and `RealAmplitudes` ansatz on the Iris dataset (2 classes, 2 features): typical training converges in 80–150 COBYLA iterations, achieving 90–95% test accuracy depending on random seed and circuit depth.
-
-```
+    Training a 2-qubit VQC with `ZZFeatureMap` encoding and `RealAmplitudes` ansatz on the Iris dataset (2 classes, 2 features): typical training converges in 80–150 COBYLA iterations, achieving 90–95% test accuracy depending on random seed and circuit depth.
+    
 ??? question "When should you use EstimatorQNN vs SamplerQNN?"
-```
-Use `EstimatorQNN` when your target output is an expectation value of an observable (e.g., $\langle Z \rangle$ for binary classification). Use `SamplerQNN` when you need the full measurement distribution (e.g., multi-class classification where each basis state corresponds to one class label).
-
-```
+    Use `EstimatorQNN` when your target output is an expectation value of an observable (e.g., $\langle Z \rangle$ for binary classification). Use `SamplerQNN` when you need the full measurement distribution (e.g., multi-class classification where each basis state corresponds to one class label).
+    
 ---
 
 ## **15.3 Training Strategies and Barren Plateaus**
@@ -185,16 +174,14 @@ $$
 where $n$ is the number of qubits and $F(n)$ is a polynomial function. In practice, for $n > 20$ qubits, gradients become numerically indistinguishable from zero, rendering gradient-based optimization useless.
 
 !!! tip "Diagnosing Barren Plateaus"
-```
-Plot the **gradient variance** as a function of qubit count for your ansatz. If the variance decays exponentially, you have a barren plateau. A polynomial decay indicates a trainable landscape. BPs are more severe for global cost functions ($C = \langle \text{all qubits} \rangle$) than local ones ($C = \sum_k \langle Z_k \rangle$).
-
-```
-**Known causes of barren plateaus:**
-1. **Hardware-efficient ansätze** with random gate structure — the circuit forms an approximate 2-design, randomizing the parameter landscape
-2. **Global cost functions** — measuring an observable spanning all qubits
-3. **Entanglement saturation** — excessive entanglement makes the quantum state indistinguishable from a Haar-random state
-4. **Classical shadows noise** — noise itself induces BP-like gradient flatness
-
+    Plot the **gradient variance** as a function of qubit count for your ansatz. If the variance decays exponentially, you have a barren plateau. A polynomial decay indicates a trainable landscape. BPs are more severe for global cost functions ($C = \langle \text{all qubits} \rangle$) than local ones ($C = \sum_k \langle Z_k \rangle$).
+    
+    **Known causes of barren plateaus:**
+    1. **Hardware-efficient ansätze** with random gate structure — the circuit forms an approximate 2-design, randomizing the parameter landscape
+    2. **Global cost functions** — measuring an observable spanning all qubits
+    3. **Entanglement saturation** — excessive entanglement makes the quantum state indistinguishable from a Haar-random state
+    4. **Classical shadows noise** — noise itself induces BP-like gradient flatness
+    
 ### **Mitigation Strategies**
 
 ---
@@ -243,15 +230,11 @@ where $g_{ij} = \text{Re}\left(\langle \partial_i \psi | \partial_j \psi \rangle
 The natural gradient adapts step sizes to the local curvature of the quantum state space, converging faster than vanilla gradient descent on ill-conditioned loss landscapes — often requiring 2–5× fewer iterations.
 
 !!! example "Natural Gradient vs Vanilla Gradient"
-```
-On a 4-qubit VQE with 16 parameters, natural gradient descent with the quantum geometric tensor converges to chemical accuracy in ~60 iterations vs ~200 for vanilla gradient descent with the same step size, at the cost of $O(p^2)$ additional circuit evaluations per step ($p$ = number of parameters).
-
-```
+    On a 4-qubit VQE with 16 parameters, natural gradient descent with the quantum geometric tensor converges to chemical accuracy in ~60 iterations vs ~200 for vanilla gradient descent with the same step size, at the cost of $O(p^2)$ additional circuit evaluations per step ($p$ = number of parameters).
+    
 ??? question "Is natural gradient always preferred over vanilla gradient?"
-```
-Not always. Computing $g^{-1}$ requires $O(p^2)$ circuit evaluations ($p$ = number of parameters) plus matrix inversion. For large circuits with hundreds of parameters, this overhead dominates training time. Practical approximations like the **diagonal QGT** (keeping only $g_{ii}$ terms) restore scalability while retaining much of the convergence benefit.
-
-```
+    Not always. Computing $g^{-1}$ requires $O(p^2)$ circuit evaluations ($p$ = number of parameters) plus matrix inversion. For large circuits with hundreds of parameters, this overhead dominates training time. Practical approximations like the **diagonal QGT** (keeping only $g_{ii}$ terms) restore scalability while retaining much of the convergence benefit.
+    
 ---
 
 ## **References**

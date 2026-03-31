@@ -29,10 +29,8 @@ We begin with the elegant **Dirac notation** (bra-ket formalism) that provides t
 The foundation of quantum computing lies in the rigorous mathematical description of state and operation using linear algebra over complex numbers. The standard language for this description is the **Dirac notation**, also known as the bra-ket notation, which elegantly captures the concepts of vectors, their duals, and products in a Hilbert space.
 
 !!! tip "Key Insight"
-```
-Dirac notation provides a compact, powerful formalism that unifies state representation, operations, and measurements into a single coherent mathematical language.
-
-```
+    Dirac notation provides a compact, powerful formalism that unifies state representation, operations, and measurements into a single coherent mathematical language.
+    
 ### **The Ket Vector and the State**
 
 The state of a closed quantum system is represented by a vector, $|\psi\rangle$, residing in a complex **Hilbert space** $\mathcal{H}$ (Postulate I). This is known as the **ket vector**.
@@ -65,14 +63,12 @@ The **inner product** $\langle\phi|\psi\rangle$ is the standard dot product betw
 * **Probability:** The inner product is central to the **Born Rule** (Postulate III); the probability of measuring state $|\psi\rangle$ in the basis state $|0\rangle$ is $P(0) = |\langle 0|\psi\rangle|^2$.
 
 !!! example "Inner Product Calculation"
-```
-For $|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ and $|\phi\rangle = |0\rangle$:
-
-$$\langle\phi|\psi\rangle = \langle 0|\left(\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\right) = \frac{1}{\sqrt{2}}$$
-
-The probability of measuring $|0\rangle$ is $P(0) = |\langle 0|\psi\rangle|^2 = \frac{1}{2}$.
-
-```
+    For $|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ and $|\phi\rangle = |0\rangle$:
+    
+    $$\langle\phi|\psi\rangle = \langle 0|\left(\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)\right) = \frac{1}{\sqrt{2}}$$
+    
+    The probability of measuring $|0\rangle$ is $P(0) = |\langle 0|\psi\rangle|^2 = \frac{1}{2}$.
+    
 ### **The Outer Product and Operators**
 
 The **outer product** $|\psi\rangle\langle\phi|$ is the product of the column vector $|\psi\rangle$ and the row vector $\langle\phi|$.
@@ -88,10 +84,8 @@ $$
 
 ```
 !!! tip "Key Insight"
-```
-Outer products convert states into operators. This is how measurement projectors and density matrices are constructed from state vectors.
-
-```
+    Outer products convert states into operators. This is how measurement projectors and density matrices are constructed from state vectors.
+    
 ### **Multi-Qubit Systems and Basis States**
 
 For a system of $N$ qubits, the state space is the tensor product of $N$ copies of $\mathcal{H}^2$ (Postulate IV).
@@ -120,10 +114,8 @@ A quantum system is in a **pure state** if it is described by a single, normaliz
 - **Mixed State:** A mixed state is a statistical ensemble $\mathcal{E}$ of quantum states, where the system is in state $|\psi_i\rangle$ with classical probability $p_i$, and $\sum_i p_i = 1$. Since this ensemble cannot be represented by a single state vector $|\Psi\rangle$ (which would imply a superposition), the density matrix is required to incorporate these classical probabilities.
 
 !!! tip "Key Insight"
-```
-The density matrix is essential for describing **open quantum systems** that interact with an environment, or subsystems of entangled states where classical uncertainty is unavoidable.
-
-```
+    The density matrix is essential for describing **open quantum systems** that interact with an environment, or subsystems of entangled states where classical uncertainty is unavoidable.
+    
 ### **Formal Definition and Properties**
 
 The **density matrix** $\rho$ for a general mixed state (statistical ensemble) is defined by the convex combination of the outer products of its constituent pure states:
@@ -141,14 +133,12 @@ The density matrix $\rho$ is a fundamental object in the Hilbert space that must
 3. **Unit Trace:** The sum of the diagonal elements (the trace) must be unity: $\mathrm{Tr}(\rho) = 1$. This property reflects the overall normalization condition that the total probability of finding the system in *any* state must be 1.
 
 !!! example "Maximally Mixed State"
-```
-For a single qubit, the maximally mixed state represents complete classical uncertainty:
-
-$$\rho_{\text{mixed}} = \frac{1}{2}|0\rangle\langle 0| + \frac{1}{2}|1\rangle\langle 1| = \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \frac{I}{2}$$
-
-This state has equal probability of being $|0\rangle$ or $|1\rangle$, and measurement yields each outcome with 50% probability.
-
-```
+    For a single qubit, the maximally mixed state represents complete classical uncertainty:
+    
+    $$\rho_{\text{mixed}} = \frac{1}{2}|0\rangle\langle 0| + \frac{1}{2}|1\rangle\langle 1| = \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \frac{I}{2}$$
+    
+    This state has equal probability of being $|0\rangle$ or $|1\rangle$, and measurement yields each outcome with 50% probability.
+    
 ### **Distinguishing Pure and Mixed States**
 
 The density matrix formalism provides a single, unified mathematical object to describe both pure and mixed states. They are distinguished by the condition of **idempotence** ($\rho^2 = \rho$):
@@ -180,12 +170,10 @@ The density matrix formalism provides a single, unified mathematical object to d
   $$
 
 ??? question "How does the density matrix describe entangled subsystems?"
-```
-When tracing out part of an entangled system, the remaining subsystem's density matrix is typically mixed, even if the total system is in a pure state. This is why density matrices are essential for quantum information theory.
-
-```
-The density matrix is thus a powerful and essential tool, particularly when dealing with **open quantum systems** (systems interacting with an environment) or when describing subsystems of an entangled state, where the state of the subsystem is invariably mixed.
-
+    When tracing out part of an entangled system, the remaining subsystem's density matrix is typically mixed, even if the total system is in a pure state. This is why density matrices are essential for quantum information theory.
+    
+    The density matrix is thus a powerful and essential tool, particularly when dealing with **open quantum systems** (systems interacting with an environment) or when describing subsystems of an entangled state, where the state of the subsystem is invariably mixed.
+    
 ---
 
 ## **2.3 Unitary Operators and Evolution**
@@ -195,10 +183,8 @@ The density matrix is thus a powerful and essential tool, particularly when deal
 The evolution of a **closed quantum system** is fundamentally governed by the second postulate of quantum mechanics, which states that any such change must be achieved via a **unitary transformation**. These transformations are the building blocks of quantum computation, represented mathematically by **unitary operators** or **quantum gates**.
 
 !!! tip "Key Insight"
-```
-Unitary evolution is the only physically allowed transformation of a closed quantum system. All quantum gates must be unitary, ensuring reversibility and probability conservation.
-
-```
+    Unitary evolution is the only physically allowed transformation of a closed quantum system. All quantum gates must be unitary, ensuring reversibility and probability conservation.
+    
 ### **Definition and Properties of Unitary Operators**
 
 An operator (matrix) $U$ acting on a state vector $|\psi\rangle$ is **unitary** if it satisfies the condition:
@@ -222,14 +208,12 @@ The unitary condition $U^\dagger U = I$ guarantees two crucial physical properti
 - **Reversibility:** Every unitary operation is inherently **reversible**. Because $U^\dagger U = I$, the inverse of the transformation is simply $U^{-1} = U^\dagger$. This means the original state $|\psi\rangle$ can always be perfectly recovered from the final state $|\psi'\rangle$ by applying the inverse operation $U^\dagger$.
 
 !!! example "Verifying Unitarity: Pauli X Gate"
-```
-The Pauli X gate (quantum NOT) is:
-
-$$X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$$
-
-We verify: $X^\dagger X = X \cdot X = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I$. Also, $X^2 = I$, so X is its own inverse.
-
-```
+    The Pauli X gate (quantum NOT) is:
+    
+    $$X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$$
+    
+    We verify: $X^\dagger X = X \cdot X = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I$. Also, $X^2 = I$, so X is its own inverse.
+    
 ### **Time Evolution and the Hamiltonian**
 
 In continuous time, the unitary evolution of a system is generated by its **Hamiltonian** ($H$) (Postulate II). Since the Hamiltonian is an observable associated with the system's energy, it must be a **Hermitian operator** ($H = H^\dagger$).
@@ -259,10 +243,8 @@ Unitary operators form the gates of a quantum circuit. Common examples include:
 - **Rotation Gates:** General single-qubit rotations about the coordinate axes, $R_x(\theta)$, $R_y(\theta)$, and $R_z(\theta)$.
 
 ??? question "Why must quantum gates be reversible?"
-```
-Unitarity ensures reversibility because $U^{-1} = U^\dagger$ always exists. This is required by fundamental physics—information cannot be destroyed in a closed quantum system, only transformed. Irreversible gates would violate probability conservation and energy conservation.
-
-```
+    Unitarity ensures reversibility because $U^{-1} = U^\dagger$ always exists. This is required by fundamental physics—information cannot be destroyed in a closed quantum system, only transformed. Irreversible gates would violate probability conservation and energy conservation.
+    
 ---
 
 ## **2.4 Measurement and Collapse**
@@ -272,10 +254,8 @@ Unitarity ensures reversibility because $U^{-1} = U^\dagger$ always exists. This
 Quantum evolution is smooth and unitary, but the act of observing the system—the **measurement**—is an irreversible, non-unitary process that yields a classical outcome. This process is governed by Postulate III, known as the **Measurement Postulate** or the **Born Rule**.
 
 !!! tip "Key Insight"
-```
-Measurement is the bridge between the quantum and classical worlds. It irreversibly extracts classical information from quantum superposition, collapsing the state in the process.
-
-```
+    Measurement is the bridge between the quantum and classical worlds. It irreversibly extracts classical information from quantum superposition, collapsing the state in the process.
+    
 ### **Probabilistic Outcomes (The Born Rule)**
 
 When a measurement is performed on a quantum state, the outcome is **probabilistic**.
@@ -307,15 +287,13 @@ $$
 due to the state normalization.
 
 !!! example "Measurement Probability Calculation"
-```
-For the state $|\psi\rangle = \frac{1}{2}|0\rangle + \frac{\sqrt{3}}{2}|1\rangle$:
-
-- Probability of measuring $|0\rangle$: $P(0) = |\frac{1}{2}|^2 = \frac{1}{4} = 25\%$
-- Probability of measuring $|1\rangle$: $P(1) = |\frac{\sqrt{3}}{2}|^2 = \frac{3}{4} = 75\%$
-
-After measurement, the superposition is destroyed and the state becomes either $|0\rangle$ or $|1\rangle$ with these probabilities.
-
-```
+    For the state $|\psi\rangle = \frac{1}{2}|0\rangle + \frac{\sqrt{3}}{2}|1\rangle$:
+    
+    - Probability of measuring $|0\rangle$: $P(0) = |\frac{1}{2}|^2 = \frac{1}{4} = 25\%$
+    - Probability of measuring $|1\rangle$: $P(1) = |\frac{\sqrt{3}}{2}|^2 = \frac{3}{4} = 75\%$
+    
+    After measurement, the superposition is destroyed and the state becomes either $|0\rangle$ or $|1\rangle$ with these probabilities.
+    
 ### **State Collapse and Operators**
 
 The general framework for measurement involves **measurement operators** $M_i$ associated with the $i$-th possible outcome.
@@ -341,10 +319,8 @@ M_0 = |0\rangle\langle 0|, \quad M_1 = |1\rangle\langle 1|
 $$
 
 ??? question "Is measurement collapse instantaneous everywhere?"
-```
-The collapse is instantaneous in the mathematical formalism, but this doesn't allow faster-than-light communication. The collapse affects correlated measurement statistics but cannot transmit information without a classical channel to compare results.
-
-```
+    The collapse is instantaneous in the mathematical formalism, but this doesn't allow faster-than-light communication. The collapse affects correlated measurement statistics but cannot transmit information without a classical channel to compare results.
+    
 ---
 
 ## **2.5 No-Cloning Theorem**
@@ -354,10 +330,8 @@ The collapse is instantaneous in the mathematical formalism, but this doesn't al
 The **No-cloning theorem** is a fundamental constraint in quantum information that distinguishes it sharply from classical information.
 
 !!! tip "Key Insight"
-```
-The no-cloning theorem is not a technological limitation—it's a fundamental law of quantum mechanics arising from the linearity of unitary evolution. You cannot copy what you don't know.
-
-```
+    The no-cloning theorem is not a technological limitation—it's a fundamental law of quantum mechanics arising from the linearity of unitary evolution. You cannot copy what you don't know.
+    
 ### **Statement and Proof Sketch**
 
 **Statement:** It is impossible to construct a universal quantum operation that can create an identical copy of an **arbitrary unknown quantum state**.
@@ -391,14 +365,12 @@ $$
 This equality holds *only* if $\langle \psi | \phi \rangle = 0$ (orthogonal states) or $\langle \psi | \phi \rangle = 1$ (identical states). Since quantum states can have arbitrary overlaps, the assumption that a universal $U$ exists leads to a contradiction. Therefore, no such universal cloning unitary exists.
 
 !!! example "Why Classical Copying Works"
-```
-Classical bits can be copied because they are in definite states (0 or 1). A classical COPY operation:
-
-$$\text{COPY}(0, 0) = (0, 0) \quad \text{and} \quad \text{COPY}(1, 0) = (1, 1)$$
-
-works perfectly because there's no superposition to preserve. Quantum superpositions $\alpha|0\rangle + \beta|1\rangle$ contain information in the complex amplitudes that cannot be extracted without measurement (which destroys the superposition).
-
-```
+    Classical bits can be copied because they are in definite states (0 or 1). A classical COPY operation:
+    
+    $$\text{COPY}(0, 0) = (0, 0) \quad \text{and} \quad \text{COPY}(1, 0) = (1, 1)$$
+    
+    works perfectly because there's no superposition to preserve. Quantum superpositions $\alpha|0\rangle + \beta|1\rangle$ contain information in the complex amplitudes that cannot be extracted without measurement (which destroys the superposition).
+    
 ### **Practical Implications**
 
 The theorem is a consequence of the **linearity (unitary nature)** of quantum operators and has profound implications:
@@ -408,8 +380,6 @@ The theorem is a consequence of the **linearity (unitary nature)** of quantum op
 - **Information Flow:** It ensures that the complex probability amplitudes contained within a superposition state cannot be fully extracted or replicated without perturbing or collapsing the state.
 
 ??? question "Can we clone known quantum states?"
-```
-Yes! If you know the exact state (e.g., $|0\rangle$ or $|+\rangle$), you can prepare as many copies as you want. The no-cloning theorem only forbids copying *arbitrary unknown* states. This is why quantum key distribution protocols like BB84 are secure—eavesdroppers cannot copy unknown quantum states without detection.
-
-```
+    Yes! If you know the exact state (e.g., $|0\rangle$ or $|+\rangle$), you can prepare as many copies as you want. The no-cloning theorem only forbids copying *arbitrary unknown* states. This is why quantum key distribution protocols like BB84 are secure—eavesdroppers cannot copy unknown quantum states without detection.
+    
 ---

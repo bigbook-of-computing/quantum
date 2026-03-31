@@ -30,10 +30,8 @@ This chapter surveys the core quantum unsupervised learning paradigms, examining
 **Quantum Principal Component Analysis (qPCA)** is an unsupervised learning algorithm that applies quantum computation to the critical task of **dimensionality reduction**. It aims to find the dominant modes (principal components) of a dataset with a potential exponential speedup over classical PCA.
 
 !!! tip "qPCA's Exponential Advantage"
-```
-Classical PCA requires $O(N^3)$ operations to diagonalize an $N \times N$ covariance matrix. qPCA achieves the same result in $O(\text{poly}(\log N))$ time using Quantum Phase Estimation—an exponential speedup that could revolutionize large-scale data analysis [3].
-
-```
+    Classical PCA requires $O(N^3)$ operations to diagonalize an $N \times N$ covariance matrix. qPCA achieves the same result in $O(\text{poly}(\log N))$ time using Quantum Phase Estimation—an exponential speedup that could revolutionize large-scale data analysis [3].
+    
 ### **Classical PCA Bottleneck**
 
 ---
@@ -96,15 +94,13 @@ flowchart LR
 ```
 
 !!! example "qPCA Workflow"
-```
-For a dataset with $N = 2^{20} \approx 1$ million points:
-
-- **Classical PCA:** $O(N^3) = O(10^{18})$ operations → impractical
-- **Quantum PCA:** $O(\text{poly}(\log N)) = O(\text{poly}(20))$ → polynomial in logarithm
-
-The exponential gap grows dramatically as dataset size increases.
-
-```
+    For a dataset with $N = 2^{20} \approx 1$ million points:
+    
+    - **Classical PCA:** $O(N^3) = O(10^{18})$ operations → impractical
+    - **Quantum PCA:** $O(\text{poly}(\log N)) = O(\text{poly}(20))$ → polynomial in logarithm
+    
+    The exponential gap grows dramatically as dataset size increases.
+    
 ---
 
 ### **Output and Challenges**
@@ -163,10 +159,8 @@ qPCA_Algorithm(data_matrix, num_components):
 ```
 
 ??? question "Why does qPCA require multiple copies of the density matrix $\rho$?"
-```
-QPE requires repeated applications of the unitary $U = e^{-i\rho t}$ with increasing powers. Since measuring a quantum state destroys it (no-cloning theorem), fresh copies of $\rho$ must be prepared for each QPE iteration. This requirement poses a significant practical challenge.
-
-```
+    QPE requires repeated applications of the unitary $U = e^{-i\rho t}$ with increasing powers. Since measuring a quantum state destroys it (no-cloning theorem), fresh copies of $\rho$ must be prepared for each QPE iteration. This requirement poses a significant practical challenge.
+    
 ---
 
 ## **12.2 Quantum k-Means Clustering**
@@ -176,10 +170,8 @@ QPE requires repeated applications of the unitary $U = e^{-i\rho t}$ with increa
 **Quantum $k$-means (QkMC)** is an unsupervised learning algorithm that adapts the popular classical $k$-means clustering algorithm to the quantum domain. It seeks to partition data points into $k$ clusters by minimizing the sum of squared distances to the cluster centroids, leveraging quantum mechanics to perform the crucial **distance estimation** step more efficiently.
 
 !!! tip "Quantum Parallelism in Distance Calculation"
-```
-Classical $k$-means requires $O(Nkd)$ distance calculations per iteration ($N$ points, $k$ clusters, $d$ dimensions). Quantum overlap estimation can potentially reduce the $O(d)$ per-distance cost to $O(\log d)$, achieving polynomial speedup [4].
-
-```
+    Classical $k$-means requires $O(Nkd)$ distance calculations per iteration ($N$ points, $k$ clusters, $d$ dimensions). Quantum overlap estimation can potentially reduce the $O(d)$ per-distance cost to $O(\log d)$, achieving polynomial speedup [4].
+    
 ### **Quantum Enhancement to Distance Calculation**
 
 ---
@@ -303,10 +295,8 @@ QkMC can also be implemented using **variational circuits** that are optimized c
 **Quantum Boltzmann Machines (QBMs)** are a class of **generative models** that serve as the quantum mechanical analogue of classical Boltzmann Machines (BMs). Their primary goal is to learn the underlying probability distribution of complex data, leveraging quantum entanglement to naturally model intricate correlations.
 
 !!! tip "Entanglement as Correlation Engine"
-```
-Classical Boltzmann Machines use stochastic sampling to model correlations, but struggle with exponentially complex distributions. QBMs exploit quantum entanglement to natively represent correlations that would require exponentially many classical parameters [5].
-
-```
+    Classical Boltzmann Machines use stochastic sampling to model correlations, but struggle with exponentially complex distributions. QBMs exploit quantum entanglement to natively represent correlations that would require exponentially many classical parameters [5].
+    
 ### **Foundation in the Parameterized Hamiltonian**
 
 ---
@@ -354,15 +344,13 @@ Unlike classical BMs, which rely on local probabilistic couplings, QBMs inherent
 As a generative model, the QBM, after training, can be used to sample new data points that accurately reflect the intricate dependencies and correlations learned from the training data.
 
 !!! example "QBM for Image Generation"
-```
-Training a QBM on handwritten digit images:
-
-1. **Encode training data:** Map pixel values to qubit states
-2. **Learn Hamiltonian:** Optimize $H(\vec{\theta})$ to match data distribution
-3. **Generate new samples:** Prepare thermal state $\exp(-H/T)$ and measure
-4. **Result:** New digit images with learned correlations (stroke patterns, topology)
-
-```
+    Training a QBM on handwritten digit images:
+    
+    1. **Encode training data:** Map pixel values to qubit states
+    2. **Learn Hamiltonian:** Optimize $H(\vec{\theta})$ to match data distribution
+    3. **Generate new samples:** Prepare thermal state $\exp(-H/T)$ and measure
+    4. **Result:** New digit images with learned correlations (stroke patterns, topology)
+    
 ---
 
 ### **Training and Variants**
@@ -439,10 +427,8 @@ QBM_Training(training_data, initial_theta, max_iterations):
 **Quantum Clustering Algorithms** focus on leveraging quantum computational primitives to solve the unsupervised task of grouping data points based on similarity. While **Quantum $k$-means** (Section 12.2) is the canonical approach, other methods, particularly those involving **variational optimization** and discrete search, are also employed to enhance clustering performance.
 
 !!! tip "Clustering as Optimization"
-```
-All clustering algorithms solve the same fundamental problem: minimize intra-cluster variance while maximizing inter-cluster separation. Quantum methods offer different optimization strategies—variational, QAOA-based, or annealing—each suited to different problem structures [6].
-
-```
+    All clustering algorithms solve the same fundamental problem: minimize intra-cluster variance while maximizing inter-cluster separation. Quantum methods offer different optimization strategies—variational, QAOA-based, or annealing—each suited to different problem structures [6].
+    
 ### **Variational Quantum Clustering (VQC)**
 
 ---
@@ -524,10 +510,8 @@ QAOA_Clustering(data, k, num_layers):
 ```
 
 ??? question "When is QAOA clustering preferable to quantum $k$-means?"
-```
-QAOA excels when the clustering objective has discrete constraints or graph-based structure (e.g., community detection, constrained clustering). Quantum $k$-means is better for standard Euclidean clustering with continuous optimization. Choose based on problem structure.
-
-```
+    QAOA excels when the clustering objective has discrete constraints or graph-based structure (e.g., community detection, constrained clustering). Quantum $k$-means is better for standard Euclidean clustering with continuous optimization. Choose based on problem structure.
+    
 ---
 
 ### **Quantum Annealing and Adiabatic Methods**
